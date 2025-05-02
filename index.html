@@ -20,11 +20,20 @@
       background: #0e0c1c;
     }
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 50px;
-      text-shadow: 2px 2px 4px #000;
-    }
+   h1 {
+  font-size: 3rem;
+  margin-bottom: 50px;
+  text-shadow: 2px 2px 4px #000;
+}
+
+/* Ajoute ceci juste après */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+    padding: 0 1rem;
+  }
+}
 
     .button-container {
       display: flex;
