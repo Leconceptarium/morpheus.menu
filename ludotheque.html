@@ -12,6 +12,18 @@
       margin: 0;
       padding: 2rem;
     }
+    #google_translate_element {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 999;
+      background: rgba(27, 21, 48, 0.8);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #e0b76e;
+    }
     h1 {
       text-align: center;
       margin-bottom: 2rem;
@@ -72,6 +84,8 @@
   </style>
 </head>
 <body>
+  <div id="google_translate_element"></div>
+
   <h1>Notre Ludothèque</h1>
   <input type="text" id="searchBar" placeholder="Rechercher un jeu...">
   <div class="grid" id="gameList"></div>
@@ -109,5 +123,15 @@
     searchBar.addEventListener("input", e => renderGames(e.target.value));
     renderGames();
   </script>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'fr,en,de',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
