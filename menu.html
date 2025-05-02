@@ -6,23 +6,29 @@
   <title>Menu - Morpheus</title>
   <link href="https://fonts.googleapis.com/css2?family=Unica+One&family=Inter&display=swap" rel="stylesheet">
   <style>
-   body {
-  margin: 0;
-  background: #0e0c1c;
-  color: #f0e6d2;
-  font-family: 'Inter', sans-serif;
-  padding: 2rem;
-}
-
-h1, h2, h3 {
-  font-family: 'Unica One', sans-serif;
-  text-align: center;
-  margin-top: 3rem;
-}
+    body {
+      margin: 0;
+      background: #0e0c1c;
+      color: #f0e6d2;
+      font-family: 'Inter', sans-serif;
+      padding: 2rem;
+    }
+    h1, h2, h3 {
+      font-family: 'Unica One', sans-serif;
+      text-align: center;
+      margin-top: 3rem;
+    }
     .section {
       max-width: 1000px;
       margin: 0 auto 4rem auto;
       padding: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .grid {
       display: grid;
@@ -32,6 +38,11 @@ h1, h2, h3 {
     }
     .grid strong {
       font-weight: bold;
+    }
+    .grid small {
+      display: block;
+      font-size: 0.85rem;
+      opacity: 0.7;
     }
     .highlight {
       text-align: center;
@@ -72,17 +83,16 @@ h1, h2, h3 {
 <body>
   <h1>Menu du Dreamer's Bar</h1>
 
-  
-<div class="section">
-  <h2>Cocktails sans alcool</h2>
-  <div class="grid">
-    <div><strong>Space Dream</strong> <small>Ginger beer épicée, citron vert — 25 cl</small></div><div>6,00€</div>
+  <div class="section">
+    <h2>Cocktails sans alcool</h2>
+    <div class="grid">
+      <div><strong>Space Dream</strong> <small>Ginger beer épicée, citron vert — 25 cl</small></div><div>6,00€</div>
+    </div>
+    <div class="grid">
+      <div><strong>Sweet Dream</strong> <small>Framboise, grenade, baies de genévrier — 25 cl</small></div><div>6,00€</div>
+    </div>
   </div>
-  <div class="grid">
-    <div><strong>Sweet Dream</strong> <small>Framboise, grenade, baies de genévrier — 25 cl</small></div><div>6,00€</div>
-  </div>
-</div>
-  
+
   <div class="section">
     <h2>Sans Alcool</h2>
     <div class="grid"><div>Elsass Cola (ou Zero) 33cl</div><div>3,50€</div></div>
@@ -91,53 +101,52 @@ h1, h2, h3 {
     <div class="grid"><div>Red Bull 25cl</div><div>4,00€</div></div>
   </div>
 
-<div class="section">
-  <h2>Cocktails avec alcool</h2>
-  <div class="grid">
-    <div><strong>Expresso Matinal</strong> <small>Vodka 42BELOW, espresso — 12,5 cl — 14,9 % vol</small></div><div>7,00€</div>
+  <div class="section">
+    <h2>Cocktails avec alcool</h2>
+    <div class="grid">
+      <div><strong>Expresso Matinal</strong> <small>Vodka 42BELOW, espresso — 12,5 cl — 14,9 % vol</small></div><div>7,00€</div>
+    </div>
+    <div class="grid">
+      <div><strong>Oneiroi</strong> <small>Fruit de la passion, vodka 42BELOW, vanille — 12,5 cl — 14,9 % vol</small></div><div>8,00€</div>
+    </div>
+    <div class="grid">
+      <div><strong>Piero la Lune</strong> <small>Gin Bombay Sapphire, citron vert, fleur de sureau — 12,5 cl — 14,9 % vol</small></div><div>8,00€</div>
+    </div>
+    <div class="grid">
+      <div><strong>Baba Yaga</strong> <small>Rhum Bacardí Carta Blanca, citron vert, sucre — 12,5 cl — 14,9 % vol</small></div><div>8,00€</div>
+    </div>
+    <div class="grid">
+      <div><strong>La Succube</strong> <small>Vodka 42BELOW, liqueur framboise, cranberry, citron vert — 12,5 cl — 14,9 % vol</small></div><div>9,00€</div>
+    </div>
   </div>
-  <div class="grid">
-    <div><strong>Oneiroi</strong> <small>Fruit de la passion, vodka 42BELOW, vanille — 12,5 cl — 14,9 % vol</small></div><div>8,00€</div>
-  </div>
-  <div class="grid">
-    <div><strong>Piero la Lune</strong> <small>Gin Bombay Sapphire, citron vert, fleur de sureau — 12,5 cl — 14,9 % vol</small></div><div>8,00€</div>
-  </div>
-  <div class="grid">
-    <div><strong>Baba Yaga</strong> <small>Rhum Bacardí Carta Blanca, citron vert, sucre — 12,5 cl — 14,9 % vol</small></div><div>8,00€</div>
-  </div>
-  <div class="grid">
-    <div><strong>La Succube</strong> <small>Vodka 42BELOW, liqueur framboise, cranberry, citron vert — 12,5 cl — 14,9 % vol</small></div><div>9,00€</div>
-  </div>
-</div>
-  
+
   <div class="section">
     <h2>Avec Alcool</h2>
-      <div class="grid"><div>Bierre pression 25cl ou 50cl</div><div>4,50€ - 6,00€</div></div>
-    <div class="grid"><div>Panaché 25cl ou 50cl </div><div>3,50€ - 5,00€</div></div>    
-    <div class="grid"><div>Monaco 25cl ou 50cl </div><div>4,50€ - 6,00€</div></div>     
+    <div class="grid"><div>Bière pression 25cl ou 50cl</div><div>4,50€ - 6,00€</div></div>
+    <div class="grid"><div>Panaché 25cl ou 50cl</div><div>3,50€ - 5,00€</div></div>
+    <div class="grid"><div>Monaco 25cl ou 50cl</div><div>4,50€ - 6,00€</div></div>
   </div>
 
   <div class="section">
     <h2>Chaud</h2>
     <div class="grid"><div>Espresso</div><div>2,00€</div></div>
-    <div class="grid"><div>Double Espresso</div><div>3,00€</div></div>      
+    <div class="grid"><div>Double Espresso</div><div>3,00€</div></div>
     <div class="grid"><div>Café allongé</div><div>2,50€</div></div>
     <div class="grid"><div>Cappuccino</div><div>4,00€</div></div>
-    <div class="grid"><div>Café au lait</div><div>3,00€</div></div>  
-    <div class="grid"><div>Affogato</div><div>4,00€</div></div>    
+    <div class="grid"><div>Café au lait</div><div>3,00€</div></div>
+    <div class="grid"><div>Affogato</div><div>4,00€</div></div>
     <div class="grid"><div>Chocolat chaud</div><div>3,50€</div></div>
     <div class="grid"><div>Chaï Latte</div><div>3,50€</div></div>
     <div class="grid"><div>Thés Dammann</div><div>3,00€</div></div>
-    
   </div>
 
   <div class="section">
     <h2>À Grignoter</h2>
     <div class="grid"><div>Cookie</div><div>2,00€</div></div>
-    <div class="grid"><div>Fondant au chocolat</div><div>5,00€</div></div> 
+    <div class="grid"><div>Fondant au chocolat</div><div>5,00€</div></div>
     <div class="grid"><div>Pancake sirop d’érable</div><div>5,00€</div></div>
     <div class="grid"><div>Saucisson & accompagnements</div><div>7,00€</div></div>
-    <div class="grid"><div>Bretzel </div><div>3,00€</div></div>
+    <div class="grid"><div>Bretzel</div><div>3,00€</div></div>
     <div class="grid"><div>Nachos sauce salsa ou guacamole</div><div>5,00€</div></div>
     <div class="grid"><div>Tarte flambée gratinée / forestière</div><div>10,00€</div></div>
   </div>
@@ -146,7 +155,7 @@ h1, h2, h3 {
     Sélection du moment disponible au comptoir
   </div>
 
-    <div class="section highlight">
+  <div class="section highlight">
     Envie de vivre l’expérience complète ? <a href="https://www.morpheusexperience.com" style="color:#e0b76e;">Découvrez nos aventures immersives</a>
   </div>
 
@@ -162,5 +171,15 @@ h1, h2, h3 {
   <div class="section" style="text-align:center; font-size: 0.9rem; opacity: 0.6;">
     666 rue des Dalias noir, 67333 Schiltigheim — <a href="https://www.morpheusexperience.com" style="color:#e0b76e; text-decoration: none;">morpheusexperience.com</a>
   </div>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    });
+    sections.forEach(sec => observer.observe(sec));
+  </script>
 </body>
 </html>
