@@ -88,6 +88,29 @@
 
     searchBar.addEventListener("input", e => renderGames(e.target.value));
     renderGames();
+
+<a href="index.html" class="return-button">← Retour à l'accueil</a>
+
+<style>
+  .return-button {
+    display: block;
+    margin: 1rem auto 3rem auto;
+    background: #1b1530;
+    border: 2px solid #e0b76e;
+    color: #e0b76e;
+    padding: 12px 30px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    width: fit-content;
+    transition: all 0.3s ease;
+  }
+  .return-button:hover {
+    background: #e0b76e;
+    color: #1b1530;
+  }
+</style>    
   </script>
 </body>
 </html>
