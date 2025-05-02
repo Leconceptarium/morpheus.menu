@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ludothèque</title>
+  <style>
+    body {
+      background-color: #0e0c1c;
+      color: #fff;
+      font-family: 'Unica One', sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    #searchBar {
+      display: block;
+      margin: 0 auto 2rem auto;
+      padding: 1rem;
+      width: 80%;
+      max-width: 600px;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      border: none;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: #1a1a2e;
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      max-width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .card h2 {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Notre Ludothèque</h1>
+  <input type="text" id="searchBar" placeholder="Rechercher un jeu...">
+  <div class="grid" id="gameList"></div>
 
+  <script>
+    const jeux = [
+      { nom: "Attrape Rêves", image: "attrape-reves.jpg", lien: "attrape-reves.html" },
+      { nom: "La Chasse aux Monstres", image: "chasse-monstres.jpg", lien: "chasse-monstres.html" },
+      { nom: "Story Box Rêves et Cauchemars", image: "story-box.jpg", lien: "story-box.html" },
+      { nom: "Sweet Dream", image: "sweet-dream.jpg", lien: "sweet-dream.html" },
+      { nom: "When I Dream", image: "when-i-dream.jpg", lien: "when-i-dream.html" }
+    ];
+
+    const gameList = document.getElementById("gameList");
+    const searchBar = document.getElementById("searchBar");
+
+    function renderGames(filter = "") {
+      gameList.innerHTML = "";
+      jeux
+        .filter(jeu => jeu.nom.toLowerCase().includes(filter.toLowerCase()))
+        .sort((a, b) => a.nom.localeCompare(b.nom))
+        .forEach(jeu => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <a href="${jeu.lien}"><img src="${jeu.image}" alt="${jeu.nom}"></a>
+            <h2 onclick="location.href='${jeu.lien}'">${jeu.nom}</h2>
+          `;
+          gameList.appendChild(card);
+        });
+    }
+
+    searchBar.addEventListener("input", e => renderGames(e.target.value));
+    renderGames();
+  </script>
+</body>
+</html>
