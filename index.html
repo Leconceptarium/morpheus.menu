@@ -20,20 +20,19 @@
       background: #0e0c1c;
     }
 
-   h1 {
-  font-size: 3rem;
-  margin-bottom: 50px;
-  text-shadow: 2px 2px 4px #000;
-}
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 50px;
+      text-shadow: 2px 2px 4px #000;
+    }
 
-/* Ajoute ceci juste après */
-@media (max-width: 600px) {
-  h1 {
-    font-size: 2rem;
-    text-align: center;
-    padding: 0 1rem;
-  }
-}
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        padding: 0 1rem;
+      }
+    }
 
     .button-container {
       display: flex;
@@ -43,18 +42,18 @@
     }
 
     .btn {
-  font-family: 'Inter', sans-serif;
-  background: #1b1530;
-  border: 2px solid #e0b76e;
-  color: #e0b76e;
-  padding: 15px 40px;
-  font-size: 1.5rem;
-  letter-spacing: 0.5px;
-  border-radius: 10px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  text-align: center;
-}
+      font-family: 'Inter', sans-serif;
+      background: #1b1530;
+      border: 2px solid #e0b76e;
+      color: #e0b76e;
+      padding: 15px 40px;
+      font-size: 1.4rem;
+      letter-spacing: 0.3px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
 
     .btn:hover {
       background: #e0b76e;
@@ -80,11 +79,23 @@
 </head>
 <body>
   <div class="background-animation"></div>
+  <div id="google_translate_element" style="position: absolute; top: 20px; right: 20px;"></div>
   <h1>Bienvenue dans l'univers</h1>
   <div class="button-container">
     <a href="./ludotheque.html" class="btn">Ludothèque</a>
     <a href="./menu.html" class="btn">Menu</a>
     <a href="#" class="btn" target="_blank">Réserver</a>
   </div>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'fr,en,de',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
