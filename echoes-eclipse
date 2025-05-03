@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echoes : L’Éclipse</title>
+  <style>/* même CSS que le modèle, raccourci ici */</style>
+</head>
+<body>
+  <div class="container">
+    <img src="echoes-l-eclipse.jpg" alt="Echoes : L’Éclipse">
+    <h1>Echoes : L’Éclipse</h1>
+    <div class="intro">Un jeu audio-narratif coopératif où chaque son vous rapproche de la vérité.</div>
+
+    <div class="info-icons">
+      <div><img src="duration.svg"><span>45 min</span></div>
+      <div><img src="meeple-circle.svg"><span>1 à 6 joueurs</span></div>
+      <div><img src="three-friends.svg"><span>14 ans et +</span></div>
+    </div>
+
+    <p>
+      Dans Echoes : L’Éclipse, les joueurs écoutent des enregistrements mystérieux à l’aide d’une application et doivent reconstituer les événements d’une station lunaire en reliant cartes et fragments sonores.
+    </p>
+    <p>
+      Ce jeu mêle réflexion, intuition et ambiance sonore immersive. Une expérience unique à vivre en équipe ou en solo.
+    </p>
+
+    <a href="ludotheque.html" class="btn">← Retour à la Ludothèque</a>
+  </div>
+</body>
+</html>
