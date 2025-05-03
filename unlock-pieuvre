@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>... (même entête et style)</head>
+<body>
+  <div class="container">
+    <img src="unlock-short-adventures-les-secrets-de-la-pieuvre.webp" alt="Unlock! Les Secrets de la Pieuvre">
+    <h1>Unlock! Les Secrets de la Pieuvre</h1>
+    <div class="intro">Une aventure courte mais intense dans l’univers des escape games.</div>
+
+    <div class="info-icons">
+      <div><img src="duration.svg"><span>30 min</span></div>
+      <div><img src="meeple-circle.svg"><span>1 à 6 joueurs</span></div>
+      <div><img src="three-friends.svg"><span>10 ans et +</span></div>
+    </div>
+
+    <p>
+      Cette aventure Unlock! vous plonge au cœur d’une énigme maritime où secrets, mécanismes et mystères s’entremêlent. Utilisez les cartes, l’application mobile et votre logique pour résoudre chaque étape.
+    </p>
+    <p>
+      Idéal pour découvrir ou prolonger l’expérience des escape games chez soi.
+    </p>
+
+    <a href="ludotheque.html" class="btn">← Retour à la Ludothèque</a>
+  </div>
+</body>
+</html>
