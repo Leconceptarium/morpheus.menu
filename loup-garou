@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>... (même entête et style)</head>
+<body>
+  <div class="container">
+    <img src="loup-garou.jpg.avif" alt="Loup-Garou">
+    <h1>Loup-Garou</h1>
+    <div class="intro">Un jeu d'ambiance où bluff et intuition font la loi.</div>
+
+    <div class="info-icons">
+      <div><img src="duration.svg"><span>30 min</span></div>
+      <div><img src="meeple-circle.svg"><span>8 à 20 joueurs</span></div>
+      <div><img src="three-friends.svg"><span>10 ans et +</span></div>
+    </div>
+
+    <p>
+      Dans Loup-Garou, les villageois tentent de démasquer les loups-garous cachés parmi eux. Les joueurs doivent voter, s’observer, et parfois mentir pour survivre ou gagner.
+    </p>
+    <p>
+      C’est le jeu parfait pour de grands groupes et des soirées pleines de suspens et de rebondissements.
+    </p>
+
+    <a href="ludotheque.html" class="btn">← Retour à la Ludothèque</a>
+  </div>
+</body>
+</html>
