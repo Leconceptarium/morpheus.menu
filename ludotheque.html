@@ -65,10 +65,10 @@
     }
     .return-button {
       display: block;
-      margin: 3rem auto 1rem auto;
-      background: #1b1530;
-      border: 2px solid #e0b76e;
-      color: #e0b76e;
+      margin: 1rem auto 2rem auto;
+      background: #113322;
+      border: 2px solid #a6ff9e;
+      color: #a6ff9e;
       padding: 12px 30px;
       text-align: center;
       border-radius: 8px;
@@ -78,25 +78,25 @@
       transition: all 0.3s ease;
     }
     .return-button:hover {
-      background: #e0b76e;
-      color: #1b1530;
+      background: #a6ff9e;
+      color: #113322;
     }
   </style>
 </head>
 <body>
   <div id="google_translate_element"></div>
 
+  <a href="index.html" class="return-button">← Retour à l'accueil</a>
+
   <h1>Notre Ludothèque</h1>
   <input type="text" id="searchBar" placeholder="Rechercher un jeu...">
   <div class="grid" id="gameList"></div>
-
-  <a href="index.html" class="return-button">← Retour à l'accueil</a>
 
   <script>
     const jeux = [
       { nom: "Attrape Rêves", image: "attrape-reves-275611_910x910.jpg.webp", lien: "attrape-reves.html" },
       { nom: "Echoes : L'Éclipse", image: "echoes-l-eclipse.jpg", lien: "echoes-eclipse.html" },
-      { nom: "Fluxx", image: "Design sans titre-5.png", lien: "fluxx.html" },
+      { nom: "Fluxx", image: "fluxx.png", lien: "fluxx.html" },
       { nom: "La Chasse aux Monstres", image: "jeu-la-chasse-aux-monstres-370416_910x910.jpg.webp", lien: "chasse-monstres.html" },
       { nom: "Loup-Garou", image: "loup-garou.jpg.avif", lien: "loup-garou.html" },
       { nom: "Story Box - Rêves et Cauchemars", image: "story-box-reves-et-cauchemars.jpg", lien: "story-box.html" },
@@ -139,3 +139,4 @@
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+
