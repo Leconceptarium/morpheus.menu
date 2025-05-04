@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cabinet de Curiosités</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0e0c1c;
+      color: #f0e6d2;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .cabinet {
+      position: relative;
+      background: url('fond-cabinet.jpg') center/cover no-repeat;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .curio {
+      position: absolute;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .curio:hover {
+      transform: scale(1.05);
+    }
+
+    .curio1 { top: 20%; left: 25%; width: 60px; height: 60px; }
+    .curio2 { top: 40%; left: 45%; width: 60px; height: 60px; }
+    .curio3 { top: 60%; left: 35%; width: 60px; height: 60px; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #1a1a2e;
+      padding: 2rem;
+      max-width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      color: #e0b76e;
+    }
+
+    .close {
+      margin-top: 1rem;
+      display: inline-block;
+      background: none;
+      border: 1px solid #e0b76e;
+      padding: 8px 20px;
+      color: #e0b76e;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      background: #e0b76e;
+      color: #1a1a2e;
+    }
+
+    .return-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: #1b1530;
+      border: 2px solid #e0b76e;
+      color: #e0b76e;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .return-button:hover {
+      background: #e0b76e;
+      color: #1b1530;
+    }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="return-button">← Retour à l'accueil</a>
+
+  <div class="cabinet">
+    <div class="curio curio1" onclick="showModal('Fiole de Rêves', 'Cette fiole contient les fragments liquides d\'un rêve oublié, capturé lors d\'une pleine lune.');"></div>
+    <div class="curio curio2" onclick="showModal('Plume de cauchemar', 'Trouvée dans les ruines mentales d\'un rêveur tourmenté. Elle vibre encore.');"></div>
+    <div class="curio curio3" onclick="showModal('Fragment de lanterne', 'Un éclat de lumière éternelle, jadis suspendu à la lanterne de Monsieur Morpheus.');"></div>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2 id="modal-title"></h2>
+      <p id="modal-text"></p>
+      <button class="close" onclick="hideModal()">Fermer</button>
+    </div>
+  </div>
+
+  <script>
+    function showModal(title, text) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-text').innerText = text;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function hideModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
