@@ -15,7 +15,7 @@
 
     .cabinet {
       position: relative;
-      background: url('fond-cabinet.jpg') center/cover no-repeat;
+      background: url('A_digital_painting_depicts_a_wooden_curiosity_cabi.png') center/cover no-repeat;
       width: 100vw;
       height: 100vh;
     }
@@ -23,12 +23,16 @@
     .curio {
       position: absolute;
       cursor: pointer;
-      border-radius: 8px;
+      border-radius: 50%;
+      background: rgba(224, 183, 110, 0.3);
+      backdrop-filter: blur(3px);
       transition: transform 0.3s ease;
+      border: 1px solid #e0b76e;
     }
 
     .curio:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
+      background: rgba(224, 183, 110, 0.6);
     }
 
     .curio1 { top: 20%; left: 25%; width: 60px; height: 60px; }
@@ -97,8 +101,8 @@
 
   <div class="cabinet">
     <div class="curio curio1" onclick="showModal('Fiole de Rêves', 'Cette fiole contient les fragments liquides d\'un rêve oublié, capturé lors d\'une pleine lune.');"></div>
-    <div class="curio curio2" onclick="showModal('Plume de cauchemar', 'Trouvée dans les ruines mentales d\'un rêveur tourmenté. Elle vibre encore.');"></div>
-    <div class="curio curio3" onclick="showModal('Fragment de lanterne', 'Un éclat de lumière éternelle, jadis suspendu à la lanterne de Monsieur Morpheus.');"></div>
+    <div class="curio curio2" onclick="showModal('Plume de Cauchemar', 'Trouvée dans les ruines mentales d\'un rêveur tourmenté. Elle vibre encore.');"></div>
+    <div class="curio curio3" onclick="showModal('Fragment de Lanterne', 'Un éclat de lumière éternelle, jadis suspendu à la lanterne de Monsieur Morpheus.');"></div>
   </div>
 
   <div class="modal" id="modal">
