@@ -86,6 +86,25 @@
       z-index: 0;
     }
 
+    .curiosite-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: transparent;
+      color: #e0b76e;
+      font-size: 0.9rem;
+      text-decoration: underline;
+      font-family: 'Inter', sans-serif;
+      z-index: 10;
+      cursor: pointer;
+      border: none;
+    }
+
+    .curiosite-btn:hover {
+      text-decoration: none;
+      color: #fff4d5;
+    }
+
     @keyframes fadeBG {
       0% { background-position: 0% 50%; }
       100% { background-position: 100% 50%; }
@@ -102,6 +121,9 @@
     <a href="#" class="btn" target="_blank">Réserver</a>
   </div>
 
+  <!-- Bouton discret vers le cabinet -->
+  <a href="cabinet.html" class="curiosite-btn">Cabinet de curiosités</a>
+
   <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
@@ -114,3 +136,4 @@
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+
