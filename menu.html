@@ -47,6 +47,10 @@
       grid-template-columns: 1fr auto;
       gap: 1rem;
       margin: 0.5rem 0;
+      width: 100%;
+    }
+    .grid > div {
+      word-wrap: break-word;
     }
     .grid strong {
       font-weight: bold;
@@ -84,10 +88,20 @@
       background: #e0b76e;
       color: #1b1530;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      h1, h2, h3 {
+        font-size: 1.5rem;
+      }
       .grid {
         grid-template-columns: 1fr;
-        text-align: center;
+        text-align: left;
+      }
+      .return-button {
+        font-size: 1rem;
+        padding: 10px 20px;
       }
     }
   </style>
@@ -95,21 +109,15 @@
 <body>
   <div id="google_translate_element"></div>
 
-    <a href="index.html" class="return-button">← Retour à l'accueil</a>
+  <a href="index.html" class="return-button">← Retour à l'accueil</a>
   
   <h1>Menu du Dreamer's Bar</h1>
 
   <div class="section">
     <h2>Mocktails</h2>
-    <div class="grid">
-      <div><strong>Ginger Dream</strong> <small>Ginger beer épicée, citron vert — 20 cl</small></div><div>6,20€</div>
-    </div> 
-    <div class="grid">
-      <div><strong>Mojo Dream</strong> <small>Menthe verte, citron vert, eau gazeuse, sucre de canne et sirop saveur rhum — 20 cl</small></div><div>6,20€</div>
-    </div>
-    <div class="grid">
-      <div><strong>Pink Dream</strong> <small>Framboise, grenade, baies de genévrier — 20 cl</small></div><div>6,20€</div>
-    </div>
+    <div class="grid"><div><strong>Ginger Dream</strong> <small>Ginger beer épicée, citron vert — 20 cl</small></div><div>6,20€</div></div> 
+    <div class="grid"><div><strong>Mojo Dream</strong> <small>Menthe verte, citron vert, eau gazeuse, sucre de canne et sirop saveur rhum — 20 cl</small></div><div>6,20€</div></div>
+    <div class="grid"><div><strong>Pink Dream</strong> <small>Framboise, grenade, baies de genévrier — 20 cl</small></div><div>6,20€</div></div>
   </div>
 
   <div class="section">
@@ -126,24 +134,12 @@
 
   <div class="section">
     <h2>Cocktails</h2>
-    <div class="grid">
-      <div><strong>Expresso Matinal</strong> <small>Vodka 42BELOW, espresso — 12,5 cl — 14,9 % vol</small></div><div>7,90€</div>
-    </div>
-    <div class="grid">
-      <div><strong>Oneiroi</strong> <small>Fruit de la passion, vodka 42BELOW et une touche de vanille — 12,5 cl — 14,9 % vol</small></div><div>8,90€</div>
-    </div>
-    <div class="grid">
-      <div><strong>Piero la Lune</strong> <small>Gin Bombay Sapphire, citron vert et liqueur de fleurs de sureau — 12,5 cl — 14,9 % vol</small></div><div>8,90€</div>
-    </div>
-    <div class="grid">
-      <div><strong>Baba Yaga</strong> <small>Rhum Bacardí Carta Blanca, citron vert et sucre de canne — 12,5 cl — 14,9 % vol</small></div><div>8,90€</div>
-    </div>
-    <div class="grid">
-      <div><strong>La Succube</strong> <small>Vodka 42BELOW, liqueur de framboise,jus de cranberry et citron vert — 12,5 cl — 14,9 % vol</small></div><div>9,90€</div>
-    </div>
-    <div class="grid">
-      <div><strong>Le Sprits New Moon</strong> <small>Spritz Miel et Violette, Proseco et eau pétillante — 25 cl — 12 % vol</small></div><div>9,90€</div>
-    </div>
+    <div class="grid"><div><strong>Expresso Matinal</strong> <small>Vodka 42BELOW, espresso — 12,5 cl — 14,9 % vol</small></div><div>7,90€</div></div>
+    <div class="grid"><div><strong>Oneiroi</strong> <small>Fruit de la passion, vodka 42BELOW et une touche de vanille — 12,5 cl — 14,9 % vol</small></div><div>8,90€</div></div>
+    <div class="grid"><div><strong>Piero la Lune</strong> <small>Gin Bombay Sapphire, citron vert et liqueur de fleurs de sureau — 12,5 cl — 14,9 % vol</small></div><div>8,90€</div></div>
+    <div class="grid"><div><strong>Baba Yaga</strong> <small>Rhum Bacardí Carta Blanca, citron vert et sucre de canne — 12,5 cl — 14,9 % vol</small></div><div>8,90€</div></div>
+    <div class="grid"><div><strong>La Succube</strong> <small>Vodka 42BELOW, liqueur de framboise, jus de cranberry et citron vert — 12,5 cl — 14,9 % vol</small></div><div>9,90€</div></div>
+    <div class="grid"><div><strong>Le Sprits New Moon</strong> <small>Spritz Miel et Violette, Prosecco et eau pétillante — 25 cl — 12 % vol</small></div><div>9,90€</div></div>
   </div>
 
   <div class="section">
@@ -153,14 +149,14 @@
     <div class="grid"><div>Monaco 25cl ou 50cl</div><div>3,70€ - 5,20€</div></div>
     <div class="grid"><div>Picon 25cl ou 50cl</div><div>4,20€ - 6,60€</div></div> 
   </div>
-  
+
   <div class="section">
     <h2>Bières bouteilles</h2>
     <div class="grid"><div>Desperados 33cl — 5,9 % vol</div><div>5,20€</div></div>
     <div class="grid"><div>Bière du sorcier 33cl — 5 % vol</div><div>5,20€</div></div>
-    <div class="grid"><div>Kasteel rouge 33cl  — 8 % vol</div><div>5,20€</div></div>
+    <div class="grid"><div>Kasteel rouge 33cl — 8 % vol</div><div>5,20€</div></div>
   </div>
-  
+
   <div class="section">
     <h2>Chaud</h2>
     <div class="grid"><div>Espresso</div><div>2,00€</div></div>
@@ -172,38 +168,33 @@
     <div class="grid"><div>Chocolat chaud</div><div>3,50€</div></div>
     <div class="grid"><div>Chaï Latte</div><div>3,90€</div></div>
     <div class="grid"><div>Thés Dammann</div><div>3,50€</div></div>
-    <div class="grid"><div><small>Nos sirops en suplement: Noisette/Pumpkin Spice/Vanille</small></div><div>0,50€</div></div>
-    <div class="grid"><div><small>Lait d'amande possible sur demande</small></div>
+    <div class="grid"><div><small>Nos sirops en supplément : Noisette / Pumpkin Spice / Vanille</small></div><div>0,50€</div></div>
+    <div class="grid"><div><small>Lait d'amande possible sur demande</small></div><div></div></div>
   </div>
 
   <div class="section">
     <h2>À Grignoter</h2>
-   <div class="grid">
-      <div><strong>Cookie</strong></div><div>2,40€</div>
-    </div>
-  <div class="grid">
-      <div><strong>Fondant au chocolat</strong> <small>et une boule de glace pistache</small></div><div>5,20€</div>
-    </div>
- <div class="grid">
-      <div><strong>Panckes</strong> <small> avec sirop d'érable et une boule de glace vanille </small></div><div>5,20€</div>
-    </div>
+    <div class="grid"><div><strong>Cookie</strong></div><div>2,40€</div></div>
+    <div class="grid"><div><strong>Fondant au chocolat</strong> <small>et une boule de glace pistache</small></div><div>5,20€</div></div>
+    <div class="grid"><div><strong>Pancakes</strong> <small>avec sirop d'érable et une boule de glace vanille</small></div><div>5,20€</div></div>
     <div class="grid"><div>Saucisson & accompagnements</div><div>6,20€</div></div>
     <div class="grid"><div>Bretzel</div><div>3,00€</div></div>
     <div class="grid"><div>Nachos sauce salsa ou guacamole</div><div>5,00€</div></div>
-   <div class="grid">
-      <div><strong>Planchette du rêveur </strong> <small>Sélection de fromages et de charcuteries servis avec des accompagnements </small></div><div>14,00€</div>
-    </div>
+    <div class="grid"><div><strong>Planchette du rêveur</strong> <small>Sélection de fromages et de charcuteries servis avec des accompagnements</small></div><div>14,00€</div></div>
+  </div>
 
   <div class="section highlight">
     Sélection du moment disponible au comptoir
   </div>
 
   <div class="section highlight">
-<small>Les tarifs indiqués incluent toutes les taxes. (TTC) 
-  Prix service compris
-  Liste des allergènes disponible sur demande.
-Certains desserts sont élaborés à partir de produits surgelés ou décongelés</small>
-</div>
+    <small>
+      Les tarifs indiqués incluent toutes les taxes (TTC).<br>
+      Prix service compris.<br>
+      Liste des allergènes disponible sur demande.<br>
+      Certains desserts sont élaborés à partir de produits surgelés ou décongelés.
+    </small>
+  </div>
 
   <div class="section highlight">
     Envie de vivre l’expérience complète ? <a href="https://www.morpheus-experience.com" style="color:#e0b76e;">Découvrez nos aventures immersives</a>
@@ -211,18 +202,18 @@ Certains desserts sont élaborés à partir de produits surgelés ou décongelé
 
   <div class="section">
     <h2>Horaires d’ouverture</h2>
-    <div class="grid"><div>Lundi - Jeudi</div><div>13h30 - 22h</div></div>
-    <div class="grid"><div>Vendredi - Samedi</div><div>10h - 00h30</div></div>
-    <div class="grid"><div>Dimanche</div><div>10h - 21h</div></div>
+    <div class="grid"><div>Lundi - Jeudi</div><div>14h00 - 21h30</div></div>
+    <div class="grid"><div>Vendredi - Samedi</div><div>9h30 - 00h00</div></div>
+    <div class="grid"><div>Dimanche</div><div>10h - 21h30</div></div>
   </div>
 
   <a href="index.html" class="return-button">← Retour à l'accueil</a>
 
   <div class="section" style="text-align:center; font-size: 0.9rem; opacity: 0.6;">
-    42 rue des Dalias noir, 67333 Schiltigheim — <a href="https://www.morpheus-experience.com" style="color:#e0b76e; text-decoration: none;">www.morpheus-experience.com</a>
+    42 Boulevard du président Wilson, 67000 Strasbourg — <a href="https://www.morpheus-experience.com" style="color:#e0b76e; text-decoration: none;">www.morpheus-experience.com</a>
   </div>
 
- <script>
+  <script>
     const sections = document.querySelectorAll('.section');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
