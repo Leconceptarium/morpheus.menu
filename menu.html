@@ -916,11 +916,12 @@ function revealBtn(e,btn){e.stopPropagation();toggle(btn.closest('.card'));}
 /* LANG TOGGLE */
 let currentLang='fr';
 function toggleLang(){
-  currentLang=currentLang==='fr'?'de':'fr';
+  currentLang=currentLang==='fr'?'de':'fr':'en';
   const toggle=document.getElementById('lang-toggle');
-  toggle.textContent=currentLang==='fr'?'DE':'FR';
+  toggle.textContent=currentLang==='fr'?'DE':'FR':'EN';
   toggle.className=currentLang==='de'?'de':'';
-
+  toggle.className=currentLang==='en'?'en':'';
+  
   document.querySelectorAll('[data-fr]').forEach(el=>{
     const txt=el.getAttribute('data-'+currentLang)||el.getAttribute('data-fr');
     if(el.tagName==='INPUT'||el.tagName==='TEXTAREA') el.value=txt;
