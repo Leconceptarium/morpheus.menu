@@ -1,237 +1,995 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu - Morpheus</title>
-  <link rel="icon" type="image/png" href="logo.png">
-  <link href="https://fonts.googleapis.com/css2?family=Unica+One&family=Inter&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      background: #0e0c1c;
-      color: #f0e6d2;
-      font-family: 'Inter', sans-serif;
-      padding: 2rem;
-    }
-    #google_translate_element {
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      z-index: 999;
-      background: rgba(27, 21, 48, 0.8);
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      color: #e0b76e;
-    }
-    h1, h2, h3 {
-      font-family: 'Unica One', sans-serif;
-      text-align: center;
-      margin-top: 3rem;
-    }
-    .section {
-      max-width: 1000px;
-      margin: 0 auto 4rem auto;
-      padding: 1rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1rem;
-      margin: 0.5rem 0;
-      width: 100%;
-    }
-    .grid > div {
-      word-wrap: break-word;
-    }
-    .grid strong {
-      font-weight: bold;
-    }
-    .grid small {
-      display: block;
-      font-size: 0.85rem;
-      opacity: 0.7;
-    }
-    .highlight {
-      text-align: center;
-      margin-top: 2rem;
-      font-style: italic;
-      opacity: 0.8;
-    }
-    .underline {
-      border-bottom: 1px solid #444;
-      margin: 1.5rem 0;
-    }
-    .return-button {
-      display: block;
-      margin: 4rem auto 1rem auto;
-      background: #1b1530;
-      border: 2px solid #e0b76e;
-      color: #e0b76e;
-      padding: 12px 30px;
-      text-align: center;
-      border-radius: 8px;
-      font-size: 1.2rem;
-      text-decoration: none;
-      width: fit-content;
-      transition: all 0.3s ease;
-    }
-    .return-button:hover {
-      background: #e0b76e;
-      color: #1b1530;
-    }
-   @media (max-width: 768px) {
-  body {
-    padding: 1rem;
-  }
-  h1, h2, h3 {
-    font-size: 1.5rem;
-  }
-  .return-button {
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morpheus — Grimoire du Bar</title>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #070609;
+  --parch:   #110f16;
+  --parch2:  #1a1720;
+  --sepia:   #c8a96e;
+  --sepia2:  #a07840;
+  --sepia3:  #5a4020;
+  --dream:   #8b7fdc;
+  --dreaml:  #c4baff;
+  --night:   #c03838;
+  --nightl:  #ffaaaa;
+  --gold:    #d4a017;
+  --goldl:   #f5e6a3;
+  --ash:     #8a7f98;
+  --pale:    #e8dfc8;
+  --faint:   #3a3048;
 }
-  </style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body {
+  background: var(--ink);
+  color: var(--pale);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  cursor: crosshair;
+}
+
+body::before {
+  content:'';
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.04;
+}
+
+.wax-l,.wax-r{position:fixed;top:0;width:22px;height:100vh;z-index:1;pointer-events:none;}
+.wax-l{left:0;background:linear-gradient(180deg,transparent,rgba(192,56,56,.1) 40%,rgba(192,56,56,.05) 70%,transparent);border-right:1px solid rgba(192,56,56,.08);}
+.wax-r{right:0;background:linear-gradient(180deg,transparent,rgba(139,127,220,.1) 40%,rgba(139,127,220,.05) 70%,transparent);border-left:1px solid rgba(139,127,220,.08);}
+
+#cvs{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;}
+
+.page{position:relative;z-index:2;max-width:740px;margin:0 auto;padding:0 28px 100px;}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:52px 0 44px;
+  position:relative;
+}
+.hero::after{
+  content:'';display:block;
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--sepia3),var(--sepia),var(--sepia3),transparent);
+  margin-top:44px;
+}
+
+.sigil-wrap{
+  width:130px;height:130px;
+  margin:0 auto 28px;
+  position:relative;
+}
+.sigil-wrap svg{width:100%;height:100%;}
+
+.title-frak{
+  font-family:'UnifrakturMaguntia',serif;
+  font-size:clamp(40px,10vw,72px);
+  color:var(--sepia);
+  letter-spacing:.07em;
+  line-height:1;
+  animation:flicker 7s ease-in-out infinite;
+  margin-bottom:10px;
+}
+@keyframes flicker{
+  0%,100%{text-shadow:0 0 40px rgba(200,169,110,.2);}
+  45%{text-shadow:0 0 80px rgba(200,169,110,.5),0 0 140px rgba(200,169,110,.15),0 2px 0 rgba(0,0,0,.8);}
+  47%{text-shadow:none;}
+  49%{text-shadow:0 0 80px rgba(200,169,110,.5);}
+}
+
+.hero-sub{
+  font-family:'Cormorant SC',serif;
+  font-size:11px;letter-spacing:.55em;
+  color:var(--ash);text-transform:uppercase;
+}
+.hero-verse{
+  font-style:italic;font-size:14px;
+  color:var(--sepia3);margin-top:12px;
+  line-height:1.7;
+}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(7,6,9,.96);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--faint);
+  padding:10px 0;
+  display:flex;justify-content:center;flex-wrap:wrap;gap:0;
+}
+.nav-btn{
+  background:none;border:none;
+  font-family:'Cormorant SC',serif;
+  font-size:10.5px;letter-spacing:.28em;
+  color:var(--ash);cursor:pointer;
+  padding:7px 13px;transition:color .2s;
+  position:relative;
+}
+.nav-btn::after{content:'·';position:absolute;right:0;top:50%;transform:translateY(-50%);color:var(--faint);}
+.nav-btn:last-child::after{display:none;}
+.nav-btn:hover,.nav-btn.on{color:var(--sepia);}
+
+/* CHAPTERS */
+.chap{display:none;padding-top:44px;animation:pageIn .45s ease;}
+.chap.on{display:block;}
+@keyframes pageIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+.chap-head{text-align:center;margin-bottom:38px;}
+.chap-ornament{font-family:'Cormorant SC',serif;font-size:10px;letter-spacing:.5em;color:var(--sepia3);display:block;margin-bottom:8px;}
+.chap-title{font-family:'UnifrakturMaguntia',serif;font-size:clamp(26px,6vw,44px);color:var(--sepia);}
+.rule{display:flex;align-items:center;gap:10px;margin:12px 0 4px;}
+.rule::before,.rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--sepia3));}
+.rule::after{background:linear-gradient(90deg,var(--sepia3),transparent);}
+.rule span{font-size:15px;color:var(--sepia3);}
+.chap-verse{font-style:italic;font-size:13.5px;color:var(--ash);margin-top:6px;}
+
+/* REALM DIVIDER */
+.realm{display:flex;align-items:center;gap:14px;margin:38px 0 22px;}
+.realm::before,.realm::after{content:'';flex:1;height:1px;}
+.realm.dr::before{background:linear-gradient(90deg,transparent,var(--dream));}
+.realm.dr::after{background:linear-gradient(90deg,var(--dream),transparent);}
+.realm.nm::before{background:linear-gradient(90deg,transparent,var(--night));}
+.realm.nm::after{background:linear-gradient(90deg,var(--night),transparent);}
+.realm.gd::before{background:linear-gradient(90deg,transparent,var(--gold));}
+.realm.gd::after{background:linear-gradient(90deg,var(--gold),transparent);}
+.realm-tag{
+  font-family:'Cormorant SC',serif;
+  font-size:9.5px;letter-spacing:.4em;
+  padding:3px 14px;border-radius:1px;white-space:nowrap;
+}
+.dr .realm-tag{color:var(--dreaml);border:1px solid rgba(139,127,220,.5);background:rgba(139,127,220,.07);}
+.nm .realm-tag{color:var(--nightl);border:1px solid rgba(192,56,56,.5);background:rgba(192,56,56,.07);}
+.gd .realm-tag{color:var(--goldl);border:1px solid rgba(212,160,23,.4);background:rgba(212,160,23,.06);}
+
+/* SIGNATURE */
+.sig-block{
+  margin-bottom:40px;padding:30px 26px;text-align:center;
+  border:1px solid rgba(212,160,23,.35);border-radius:3px;
+  background:linear-gradient(135deg,rgba(212,160,23,.05),rgba(139,127,220,.05));
+  position:relative;overflow:hidden;
+}
+.sig-block::before{content:'❧';position:absolute;top:12px;left:20px;font-size:20px;color:rgba(212,160,23,.18);}
+.sig-block::after{content:'❧';position:absolute;bottom:12px;right:20px;font-size:20px;color:rgba(212,160,23,.18);transform:rotate(180deg);}
+.sig-name{font-family:'UnifrakturMaguntia',serif;font-size:clamp(20px,5vw,34px);color:var(--sepia);margin-bottom:10px;}
+.sig-desc{font-size:13.5px;font-style:italic;color:var(--ash);line-height:1.75;margin-bottom:16px;}
+.sig-price{font-family:'Cormorant SC',serif;font-size:22px;color:var(--sepia2);}
+
+/* CARD */
+.card{
+  border-radius:3px;margin-bottom:12px;
+  overflow:hidden;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.card:hover{transform:translateY(-2px);}
+.card.dr{border:1px solid rgba(139,127,220,.28);background:rgba(139,127,220,.04);}
+.card.nm{border:1px solid rgba(192,56,56,.28);background:rgba(192,56,56,.04);}
+.card.gd{border:1px solid rgba(212,160,23,.28);background:rgba(212,160,23,.04);}
+.card.taste{border:1px solid rgba(200,169,110,.2);background:rgba(200,169,110,.03);}
+.card.dr:hover{box-shadow:0 6px 36px rgba(139,127,220,.18);}
+.card.nm:hover{box-shadow:0 6px 36px rgba(192,56,56,.18);}
+.card.gd:hover{box-shadow:0 6px 36px rgba(212,160,23,.18);}
+.card.taste:hover{box-shadow:0 6px 36px rgba(200,169,110,.12);}
+
+.card-top{padding:16px 18px 10px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.card-left{flex:1;}
+.card-name{
+  font-family:'Cormorant SC',serif;font-weight:600;
+  font-size:clamp(15px,3.5vw,20px);letter-spacing:.06em;margin-bottom:4px;
+}
+.dr .card-name{color:#c8c5ff;}
+.nm .card-name{color:#ffb8b8;}
+.gd .card-name,.taste .card-name{color:var(--sepia);}
+
+.card-teaser{font-size:13px;font-style:italic;color:var(--ash);line-height:1.5;}
+.card-bot{padding:0 18px 14px;display:flex;justify-content:space-between;align-items:center;}
+.card-price{font-family:'Cormorant SC',serif;font-size:17px;font-weight:600;}
+.dr .card-price{color:#a09de0;}
+.nm .card-price{color:#c07070;}
+.gd .card-price,.taste .card-price{color:var(--sepia2);}
+
+/* REVEAL */
+.reveal-btn{
+  display:block;width:calc(100% - 36px);margin:0 18px 14px;
+  background:transparent;cursor:pointer;
+  font-family:'Cormorant SC',serif;
+  font-size:10px;letter-spacing:.35em;
+  padding:9px 14px;border-radius:2px;
+  transition:all .25s;
+  text-align:center;
+}
+.dr .reveal-btn{color:rgba(139,127,220,.7);border:1px dashed rgba(139,127,220,.3);}
+.nm .reveal-btn{color:rgba(192,56,56,.7);border:1px dashed rgba(192,56,56,.3);}
+.gd .reveal-btn,.taste .reveal-btn{color:rgba(212,160,23,.7);border:1px dashed rgba(212,160,23,.3);}
+.reveal-btn:hover{background:rgba(255,255,255,.03);}
+
+.scroll{max-height:0;overflow:hidden;transition:max-height .45s ease;}
+.scroll.on{max-height:600px;}
+.scroll-in{
+  margin:0 18px 16px;padding:14px 16px;border-radius:2px;
+  border-top:1px dashed var(--faint);
+}
+.dr .scroll-in{background:rgba(139,127,220,.06);border-color:rgba(139,127,220,.2);}
+.nm .scroll-in{background:rgba(192,56,56,.06);border-color:rgba(192,56,56,.2);}
+.gd .scroll-in,.taste .scroll-in{background:rgba(212,160,23,.06);border-color:rgba(212,160,23,.2);}
+
+.scroll-lbl{font-family:'Cormorant SC',serif;font-size:9px;letter-spacing:.45em;color:var(--sepia3);margin-bottom:8px;}
+.scroll-ing{font-size:13px;color:var(--ash);line-height:1.9;margin-bottom:10px;}
+.scroll-wow{font-size:12.5px;font-style:italic;padding:10px 12px;border-radius:2px;line-height:1.65;}
+.dr .scroll-wow{color:var(--dreaml);background:rgba(139,127,220,.08);border-left:2px solid rgba(139,127,220,.5);}
+.nm .scroll-wow{color:var(--nightl);background:rgba(192,56,56,.08);border-left:2px solid rgba(192,56,56,.5);}
+.gd .scroll-wow,.taste .scroll-wow{color:var(--goldl);background:rgba(212,160,23,.08);border-left:2px solid rgba(212,160,23,.5);}
+
+/* TASTE BADGE */
+.taste-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Cormorant SC',serif;font-size:9px;letter-spacing:.3em;
+  padding:3px 10px;border-radius:1px;margin-bottom:5px;
+}
+
+/* TABLE */
+.ledger{border-collapse:collapse;width:100%;}
+.ledger tr{border-bottom:1px solid rgba(58,48,72,.5);}
+.ledger tr:last-child{border-bottom:none;}
+.ledger td{padding:9px 4px;font-size:13.5px;vertical-align:top;}
+.ledger td:first-child{color:var(--pale);padding-right:12px;}
+.ledger td:nth-child(2){color:var(--ash);font-style:italic;font-size:12px;}
+.ledger td:last-child{color:var(--sepia2);font-family:'Cormorant SC',serif;text-align:right;white-space:nowrap;padding-left:12px;font-size:14px;}
+
+.sub-head{font-family:'Cormorant SC',serif;font-size:10px;letter-spacing:.45em;color:var(--sepia3);margin:26px 0 12px;display:flex;align-items:center;gap:10px;}
+.sub-head::after{content:'';flex:1;height:1px;background:var(--faint);}
+
+/* FOOD */
+.viands{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.viand{border:1px solid var(--faint);border-radius:3px;padding:14px;transition:border-color .2s;background:var(--parch);}
+.viand:hover{border-color:var(--sepia3);}
+.viand-name{font-family:'Cormorant SC',serif;font-size:13px;color:var(--sepia);margin-bottom:4px;}
+.viand-desc{font-size:12px;color:var(--ash);font-style:italic;line-height:1.5;margin-bottom:8px;}
+.viand-price{font-family:'Cormorant SC',serif;font-size:14px;color:var(--sepia2);}
+
+/* PACK */
+.pack{margin-top:24px;padding:18px 20px;border:1px dashed rgba(212,160,23,.3);border-radius:3px;text-align:center;background:rgba(212,160,23,.02);}
+.pack-t{font-family:'Cormorant SC',serif;font-size:11px;letter-spacing:.35em;color:var(--sepia);margin-bottom:6px;}
+.pack-d{font-size:13px;font-style:italic;color:var(--ash);margin-bottom:8px;}
+.pack-p{font-family:'Cormorant SC',serif;font-size:18px;color:var(--sepia2);}
+
+/* TEA TABLE */
+.tea-table{width:100%;border-collapse:collapse;}
+.tea-table tr{border-bottom:1px solid rgba(58,48,72,.4);}
+.tea-table tr:last-child{border-bottom:none;}
+.tea-table td{padding:10px 6px;font-size:13px;vertical-align:top;}
+.tea-table td:first-child{color:var(--pale);font-family:'Cormorant SC',serif;font-size:12.5px;letter-spacing:.05em;width:35%;padding-right:10px;}
+.tea-table td:nth-child(2){color:var(--sepia3);font-size:11px;font-style:italic;width:20%;white-space:nowrap;}
+.tea-table td:last-child{color:var(--ash);font-style:italic;font-size:12px;line-height:1.5;}
+
+/* FOOTER */
+.colophon{text-align:center;padding:48px 0 24px;border-top:1px solid var(--faint);margin-top:48px;}
+.colophon-mark{font-family:'UnifrakturMaguntia',serif;font-size:24px;color:var(--sepia3);display:block;margin-bottom:14px;}
+.colophon p{font-size:11px;color:var(--faint);line-height:2.1;}
+.colophon a{color:var(--sepia3);text-decoration:none;}
+
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--ink);}
+::-webkit-scrollbar-thumb{background:var(--faint);border-radius:2px;}
+
+@media(max-width:480px){
+  .page{padding:0 14px 70px;}
+  .viands{grid-template-columns:1fr 1fr;}
+  .nav-btn{font-size:9px;padding:6px 8px;letter-spacing:.15em;}
+}
+</style>
 </head>
 <body>
-  <div id="google_translate_element"></div>
 
-  <a href="index.html" class="return-button">← Retour à l'accueil</a>
-  
-  <h1>Menu du Dreamer's Bar</h1>
+<div class="wax-l"></div>
+<div class="wax-r"></div>
+<canvas id="cvs"></canvas>
 
-  <div class="section">
-    <h2>Mocktails</h2>
-<p style="text-align:center; font-size: 0.9rem; font-style:italic; margin-top:-1rem; opacity: 0.8;">
-  Cocktails sans alcool
-</p>
-    <div class="grid"><div><strong>Ginger Dream</strong> <small>Ginger beer épicée, citron vert — 20 cl</small></div><div>6,20€</div></div> 
-    <div class="grid"><div><strong>Mojo Dream</strong> <small>Menthe verte, citron vert, eau gazeuse, sucre de canne et sirop saveur rhum — 20 cl</small></div><div>6,20€</div></div>
-    <div class="grid"><div><strong>Pink Dream</strong> <small>Framboise, grenade, baies de genévrier — 20 cl</small></div><div>6,20€</div></div>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="sigil-wrap">
+    <svg viewBox="0 0 130 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="spin1">
+        <circle cx="65" cy="65" r="62" stroke="#c8a96e" stroke-width=".7" stroke-dasharray="5 4" opacity=".45"/>
+        <circle cx="65" cy="65" r="50" stroke="#c8a96e" stroke-width=".4" opacity=".2"/>
+        <text x="61" y="5" font-size="8" fill="#c8a96e" opacity=".5" font-family="serif">☽</text>
+        <text x="61" y="128" font-size="8" fill="#c8a96e" opacity=".5" font-family="serif">☀</text>
+        <text x="2" y="68" font-size="8" fill="#c8a96e" opacity=".5" font-family="serif">♄</text>
+        <text x="119" y="68" font-size="8" fill="#c8a96e" opacity=".5" font-family="serif">♃</text>
+        <animateTransform attributeName="transform" type="rotate" from="0 65 65" to="360 65 65" dur="55s" repeatCount="indefinite"/>
+      </g>
+      <polygon points="65,18 102,82 28,82" stroke="#8b7fdc" stroke-width=".9" fill="rgba(139,127,220,.04)" opacity=".7"/>
+      <polygon points="65,112 28,48 102,48" stroke="#c03838" stroke-width=".9" fill="rgba(192,56,56,.04)" opacity=".7"/>
+      <g id="spin2">
+        <ellipse cx="65" cy="65" rx="13" ry="8" stroke="#c8a96e" stroke-width=".8" fill="none" opacity=".8"/>
+        <circle cx="65" cy="65" r="3.5" fill="#c8a96e" opacity=".7"/>
+        <ellipse cx="65" cy="65" rx="6" ry="3.5" stroke="#c8a96e" stroke-width=".4" fill="none" opacity=".4"/>
+        <animateTransform attributeName="transform" type="rotate" from="0 65 65" to="-360 65 65" dur="30s" repeatCount="indefinite"/>
+      </g>
+      <line x1="65" y1="3" x2="65" y2="12" stroke="#c8a96e" stroke-width=".8" opacity=".3"/>
+      <line x1="65" y1="118" x2="65" y2="127" stroke="#c8a96e" stroke-width=".8" opacity=".3"/>
+      <line x1="3" y1="65" x2="12" y2="65" stroke="#c8a96e" stroke-width=".8" opacity=".3"/>
+      <line x1="118" y1="65" x2="127" y2="65" stroke="#c8a96e" stroke-width=".8" opacity=".3"/>
+    </svg>
   </div>
-
-  <div class="section">
-    <h2>Cocktails</h2>
-    <div class="grid"><div><strong>Expresso Matinal</strong> <small>Vodka 42BELOW, espresso — 12,5 cl — 14,9 % vol</small></div><div>7,90€</div></div>
-    <div class="grid"><div><strong>Oneiroi</strong> <small>Fruit de la passion, vodka 42BELOW et une touche de vanille — 12,5 cl — 14,9 % vol</small></div><div>8,90€</div></div>
-    <div class="grid"><div><strong>Piero la Lune</strong> <small>Gin Bombay Sapphire, citron vert et liqueur de fleurs de sureau — 12,5 cl — 14,9 % vol</small></div><div>8,90€</div></div>
-    <div class="grid"><div><strong>Baba Yaga</strong> <small>Rhum Bacardí Carta Blanca, citron vert et sucre de canne — 12,5 cl — 14,9 % vol</small></div><div>8,90€</div></div>
-    <div class="grid"><div><strong>La Succube</strong> <small>Vodka 42BELOW, liqueur de framboise, jus de cranberry et citron vert — 12,5 cl — 14,9 % vol</small></div><div>9,90€</div></div>
-    <div class="grid"><div><strong>Le Sprits New Moon</strong> <small>Spritz Miel et Violette, Prosecco et eau pétillante — 25 cl — 12 % vol</small></div><div>9,90€</div></div>
+  <div class="title-frak">Morpheus</div>
+  <div class="hero-sub">Grimoire du Bar &nbsp;·&nbsp; Strasbourg</div>
+  <div class="hero-verse">
+    <em>« Dans le sommeil, les portes s'ouvrent.<br>Choisis ton côté. »</em>
   </div>
-  
-  <div class="section">
-    <h2>Softs</h2>
-    <div class="grid"><div>Coca cola/Zero/Cherry 33cl</div><div>3,50€</div></div>
-    <div class="grid"><div>T'Glacé, Diabolo, Limonade 33cl</div><div>3,50€</div></div>
-    <div class="grid"><div>Orangina 33cl</div><div>3,50€</div></div>
-    <div class="grid"><div>Oasis 33cl</div><div>3,50€</div></div> 
-    <div class="grid"><div>Iced Coffee / Iced Latte</div><div>4,00€</div></div>
-    <div class="grid"><div>Red Bull 25cl</div><div>4,00€</div></div>
-    <div class="grid"><div>Eau plate ou pétillante 25cl</div><div>2,00€</div></div>
-    <div><small>Nos sirops: Grenadine/Violette/Menthe/Pêche/Citron</small></div>
-  </div>
-  
-  <div class="section">
-    <h2>Bières pression </h2>
-    <div class="grid"><div>Bière pression 25cl ou 50cl</div><div>4,00€ - 6,40€</div></div>
-    <div class="grid"><div>Panaché 25cl ou 50cl</div><div>3,50€ - 5,00€</div></div>
-    <div class="grid"><div>Monaco 25cl ou 50cl</div><div>3,70€ - 5,20€</div></div>
-    <div class="grid"><div>Picon 25cl ou 50cl</div><div>4,20€ - 6,60€</div></div> 
-  </div>
-
-  <div class="section">
-    <h2>Bières bouteilles</h2>
-    <div class="grid"><div>Desperados 33cl — 5,9 % vol</div><div>5,20€</div></div>
-    <div class="grid"><div>Bière du sorcier 33cl — 5 % vol</div><div>5,20€</div></div>
-    <div class="grid"><div>Kasteel rouge 33cl — 8 % vol</div><div>5,20€</div></div>
-  </div>
-
-  <div class="section">
-    <h2>Boissons chaudes </h2>
-    <div class="grid"><div>Espresso</div><div>2,00€</div></div>
-    <div class="grid"><div>Double Espresso</div><div>3,30€</div></div>
-    <div class="grid"><div>Café allongé</div><div>2,50€</div></div>
-    <div class="grid"><div>Cappuccino</div><div>3,50€</div></div>
-    <div class="grid"><div>Café au lait</div><div>3,40€</div></div>
-    <div class="grid"><div>Affogato</div><div>4,20€</div></div>
-    <div class="grid"><div>Chocolat chaud</div><div>3,50€</div></div>
-    <div class="grid"><div>Chaï Latte</div><div>3,90€</div></div>
-    <div class="grid"><div>Thés Dammann</div><div>3,50€</div></div>
-    <div class="grid"><div><small>Nos sirops en supplément : Noisette / Pumpkin Spice / Vanille</small></div><div>0,50€</div></div>
-    <div class="grid"><div><small>Lait d'amande possible sur demande</small></div><div></div></div>
-  </div>
-
-  <div class="section">
-    <h2>À Grignoter</h2>
-    <div class="grid"><div><strong>Cookie</strong></div><div>2,40€</div></div>
-    <div class="grid"><div><strong>Fondant au chocolat</strong> <small>et une boule de glace pistache</small></div><div>5,20€</div></div>
-    <div class="grid"><div><strong>Pancakes</strong> <small>avec sirop d'érable et une boule de glace vanille</small></div><div>5,20€</div></div>
-    <div class="grid"><div>Saucisson & accompagnements</div><div>6,20€</div></div>
-    <div class="grid"><div>Bretzel</div><div>3,00€</div></div>
-    <div class="grid"><div>Nachos sauce salsa ou guacamole</div><div>5,00€</div></div>
-    <div class="grid"><div><strong>Planchette du rêveur</strong> <small>Sélection de fromages et de charcuteries servis avec des accompagnements</small></div><div>14,00€</div></div>
-  </div>
-
-  <div class="section highlight">
-    Sélection du moment disponible au comptoir
-  </div>
-
-  <div class="section highlight">
-    <small>
-      Les tarifs indiqués incluent toutes les taxes (TTC).<br>
-      Prix service compris.<br>
-      Liste des allergènes disponible sur demande.<br>
-      Certains desserts sont élaborés à partir de produits surgelés ou décongelés.
-    </small>
-  </div>
-
-  <div class="section highlight">
-    Envie de vivre l’expérience complète ? <a href="https://www.morpheus-experience.com" style="color:#e0b76e;">Découvrez nos aventures immersives</a>
-  </div>
-
-  <div class="section">
-    <h2>Horaires d’ouverture</h2>
-    <div class="grid"><div>Lundi - Jeudi</div><div>14h00 - 21h30</div></div>
-    <div class="grid"><div>Vendredi - Samedi</div><div>9h30 - 00h00</div></div>
-    <div class="grid"><div>Dimanche</div><div>10h - 21h30</div></div>
-  </div>
-
-  <a href="index.html" class="return-button">← Retour à l'accueil</a>
-
-<div class="section" style="text-align:center; font-size: 0.9rem; opacity: 0.6;">
-  42 Boulevard du président Wilson, 67000 Strasbourg<br>
-  <a href="https://www.morpheus-experience.com" style="color:#e0b76e; text-decoration: none;">www.morpheus-experience.com</a>
 </div>
 
-  <script>
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    });
-    sections.forEach(sec => observer.observe(sec));
-  </script>
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'fr',
-        includedLanguages: 'fr,en,de',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn on" onclick="show('cocktails',this)">Élixirs</button>
+  <button class="nav-btn" onclick="show('gouts',this)">Les Cinq Goûts</button>
+  <button class="nav-btn" onclick="show('mocktails',this)">Sans Alcool</button>
+  <button class="nav-btn" onclick="show('fioles',this)">Fioles</button>
+  <button class="nav-btn" onclick="show('bieres',this)">Bières</button>
+  <button class="nav-btn" onclick="show('softs',this)">Softs & Chauds</button>
+  <button class="nav-btn" onclick="show('thes',this)">Thés</button>
+  <button class="nav-btn" onclick="show('food',this)">Restauration</button>
+</nav>
+
+<!-- ══════ CHAPITRE I — ÉLIXIRS ══════ -->
+<div id="cocktails" class="chap on">
+  <div class="chap-head">
+    <span class="chap-ornament">Chapitre Premier</span>
+    <div class="chap-title">Les Élixirs</div>
+    <div class="rule"><span>⁕</span></div>
+    <p class="chap-verse"><em>Chaque verre est un sort. Rêve ou Cauchemar —<br>vous choisissez ce qui entre en vous ce soir.</em></p>
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="sig-block">
+    <div class="sig-name">Le Don de Morpheus</div>
+    <p class="sig-desc">
+      Notre élixir signature.<br>
+      Le serveur apporte un dé. Pair — <em>Rêve</em>. Impair — <em>Cauchemar</em>.<br>
+      Le sort est jeté. Vous ne saurez qu'au premier instant.
+    </p>
+    <p style="font-size:12px;color:var(--sepia3);font-style:italic;margin-bottom:14px;">Révélé par un trait de citron versé devant vous</p>
+    <div class="sig-price">11,90 €</div>
+  </div>
+
+  <!-- RÊVES -->
+  <div class="realm dr"><span class="realm-tag">Royaume des Rêves</span></div>
+
+  <div class="card dr" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-name">Lucide</div>
+        <div class="card-teaser">Doux, floral, avec un secret que le citron révèle.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price">8,90 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Gin 4 cl · Thé fleur de pois bleu 6 cl · Eau de rose 1 cl · Lait de coco 3 cl · Sirop de canne 1,5 cl · Citron frais (versé devant vous)</div>
+      <div class="scroll-wow">Le thé de pois bleu vire naturellement du bleu profond au violet lilas au contact de l'acide. Purement naturel — aucun colorant.</div>
+    </div></div>
+  </div>
+
+  <div class="card dr" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-name">Somnambule</div>
+        <div class="card-teaser">Aérien, légèrement acidulé. Une mousse qui persiste.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price">9,50 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Vodka 5 cl · Sirop de lavande 2 cl · Lemon curd 2 cl · Jus de citron 2 cl · Blanc d'œuf 3 cl · Prosecco 4 cl</div>
+      <div class="scroll-wow">Le dry shake sans glace crée une mousse lilas dense et persistante. Un pétale de lavande séchée y flotte sans jamais couler.</div>
+    </div></div>
+  </div>
+
+  <div class="card dr" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-name">Oneiroi</div>
+        <div class="card-teaser">Tropical, solaire. La passion dans toute sa fraîcheur.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price">8,90 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Vodka 5 cl · Purée fruit de la passion 4 cl · Sirop vanille 1,5 cl · Jus de citron 2 cl · Eau gazeuse 3 cl</div>
+      <div class="scroll-wow">Une demi-passion fraîche posée en garniture — comestible, parfumée, et visuellement parfaite dans la pénombre.</div>
+    </div></div>
+  </div>
+
+  <div class="card dr" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-name">Piero la Lune</div>
+        <div class="card-teaser">Botanique, vif. Quelque chose de brûlé dans l'air.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price">8,90 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Gin 5 cl · Liqueur de fleurs de sureau 2 cl · Jus de citron vert 3 cl · Sirop de canne 1,5 cl · Eau gazeuse 4 cl</div>
+      <div class="scroll-wow">Une branche de romarin brûlée à la flamme est posée sur le verre. La fumée aromatique s'en échappe et parfume chaque gorgée.</div>
+    </div></div>
+  </div>
+
+  <div class="card dr" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-name">New Moon Spritz</div>
+        <div class="card-teaser">Pétillant, floral, avec une profondeur qui surprend.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price">9,90 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Liqueur de miel et violette 6 cl · Prosecco 9 cl · Eau pétillante 3 cl · Zeste d'orange</div>
+      <div class="scroll-wow">Grand ballon, glaçon sphérique. La violette donne une profondeur florale inattendue sous les bulles.</div>
+    </div></div>
+  </div>
+
+  <!-- CAUCHEMARS -->
+  <div class="realm nm"><span class="realm-tag">Royaume des Cauchemars</span></div>
+
+  <div class="card nm" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-name">La Succube</div>
+        <div class="card-teaser">Acidulé, séducteur. Rouge profond, bord givré au sel noir.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price">9,90 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Vodka 5 cl · Liqueur de framboise 2 cl · Jus de cranberry 6 cl · Citron vert 2 cl · Sel noir pour givrer</div>
+      <div class="scroll-wow">Le bord givré au sel noir tranche avec brutalité sur le rouge profond. Acide, fruité, séducteur. L'effet graphique est immédiat dans le noir.</div>
+    </div></div>
+  </div>
+
+  <div class="card nm" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-name">Baba Yaga</div>
+        <div class="card-teaser">Herbacé, festif. Le mojito que tu n'attendais pas.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price">8,90 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Rhum 5 cl · Citron vert 3 cl · Sucre de canne 2 cl · Menthe fraîche · Vodka noire 1 cl (touche finale) · Eau gazeuse 6 cl</div>
+      <div class="scroll-wow">Quelques gouttes de vodka noire tourbillonnent dans le vert de menthe. Servi avec une baguette en bambou pour remuer soi-même — la couleur se dévoile lentement.</div>
+    </div></div>
+  </div>
+
+  <div class="card nm" onclick="toggle(this)">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-name">Réveil Amer</div>
+        <div class="card-teaser">Intense, café, légèrement torréfié. Cauchemar ou éveil ?</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price">9,50 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Vodka 5 cl · Double espresso froid 4 cl · Liqueur de café 2 cl · Amaro 1,5 cl · Sirop de canne 1 cl</div>
+      <div class="scroll-wow">L'amaro ajoute une amertume botanique que le café seul ne donne pas — une profondeur inattendue qui s'installe progressivement. Mousse dense en surface, trois grains.</div>
+    </div></div>
+  </div>
+
+  <p style="text-align:center;font-size:11.5px;color:var(--faint);font-style:italic;margin-top:20px;">Touchez un élixir pour en révéler les arcanes</p>
+</div>
+
+<!-- ══════ CHAPITRE II — LES CINQ GOÛTS ══════ -->
+<div id="gouts" class="chap">
+  <div class="chap-head">
+    <span class="chap-ornament">Chapitre Second</span>
+    <div class="chap-title">Les Cinq Goûts</div>
+    <div class="rule"><span>⁕</span></div>
+    <p class="chap-verse"><em>Cinq sens. Cinq portes. Chaque élixir réveille<br>une sensation que vous n'attendiez pas.</em></p>
+  </div>
+
+  <!-- AMER -->
+  <div class="card taste" onclick="toggle(this)" style="border-color:rgba(46,139,87,.35);background:rgba(46,139,87,.04);">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="taste-badge" style="color:#90c8a0;border:1px solid rgba(46,139,87,.4);background:rgba(46,139,87,.07);">AMER</div>
+        <div class="card-name" style="color:#b8e8c8;">Spritz Aperol Fumé</div>
+        <div class="card-teaser">Amer rafraîchissant, avec un souffle de jardin brûlé.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price" style="color:#90c8a0;">8,50 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(46,139,87,.7);border:1px dashed rgba(46,139,87,.3);">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in" style="background:rgba(46,139,87,.06);border-color:rgba(46,139,87,.2);">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Aperol 6 cl · Prosecco 9 cl · San Pellegrino 3 cl · Demi-tranche d'orange · Romarin</div>
+      <div class="scroll-wow" style="color:#b8e8c8;background:rgba(46,139,87,.08);border-left:2px solid rgba(46,139,87,.5);">Versez dans l'ordre Prosecco → Aperol → eau : le dégradé se forme seul. Ne jamais remuer. Brûler le romarin à la flamme et poser dessus — la fumée fait tout.</div>
+    </div></div>
+  </div>
+
+  <!-- ACIDE -->
+  <div class="card taste" onclick="toggle(this)" style="border-color:rgba(200,180,0,.35);background:rgba(200,180,0,.03);">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="taste-badge" style="color:#f0e060;border:1px solid rgba(200,180,0,.4);background:rgba(200,180,0,.07);">ACIDE</div>
+        <div class="card-name" style="color:#f5e880;">Gimlet Gingembre Électrique</div>
+        <div class="card-teaser">Tranchant, vivifiant. La piqûre qui réveille.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price" style="color:#d4c040;">8,90 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(200,180,0,.7);border:1px dashed rgba(200,180,0,.3);">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in" style="background:rgba(200,180,0,.05);border-color:rgba(200,180,0,.2);">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Gin 5 cl · Citron vert frais 3 cl · Sirop de gingembre 2 cl · Eau gazeuse 4 cl · 3 rondelles de concombre</div>
+      <div class="scroll-wow" style="color:#f5e880;background:rgba(200,180,0,.07);border-left:2px solid rgba(200,180,0,.5);">Verre passé 5 min au congélateur avant service — il givre à l'air libre. La double acidité gin + gingembre réveille instantanément.</div>
+    </div></div>
+  </div>
+
+  <!-- SUCRÉ -->
+  <div class="card taste" onclick="toggle(this)" style="border-color:rgba(200,80,140,.35);background:rgba(200,80,140,.03);">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="taste-badge" style="color:#ffb8e0;border:1px solid rgba(200,80,140,.4);background:rgba(200,80,140,.07);">SUCRE</div>
+        <div class="card-name" style="color:#ffc8e8;">Lychee Rose Bubble</div>
+        <div class="card-teaser">Délicat, presque sucré-salé. Champagne et litchi en coupe.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price" style="color:#d080b0;">9,50 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(200,80,140,.7);border:1px dashed rgba(200,80,140,.3);">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in" style="background:rgba(200,80,140,.06);border-color:rgba(200,80,140,.2);">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Vodka 5 cl · Jus de litchi 4 cl · Sirop de rose 2 cl · Jus de citron 1 cl · Champagne ou Crémant 6 cl · Pétale de rose comestible</div>
+      <div class="scroll-wow" style="color:#ffc8e8;background:rgba(200,80,140,.08);border-left:2px solid rgba(200,80,140,.5);">Un pétale de rose comestible flottant dans une coupe rose pâle — 100% de succès garanti dans la pénombre.</div>
+    </div></div>
+  </div>
+
+  <!-- SALÉ -->
+  <div class="card taste" onclick="toggle(this)" style="border-color:rgba(40,140,200,.35);background:rgba(40,140,200,.03);">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="taste-badge" style="color:#a8d8f8;border:1px solid rgba(40,140,200,.4);background:rgba(40,140,200,.07);">SALE</div>
+        <div class="card-name" style="color:#c0e8ff;">Bloody Caesar Choc</div>
+        <div class="card-teaser">Iodé, épicé, presque un repas. Le cocktail qui dérange.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price" style="color:#5090c0;">9,90 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(40,140,200,.7);border:1px dashed rgba(40,140,200,.3);">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in" style="background:rgba(40,140,200,.06);border-color:rgba(40,140,200,.2);">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Vodka 5 cl · Clamato 12 cl · Tabasco 4 traits · Worcestershire 3 traits · Citron vert 1 cl · Sel de céleri + poivre noir pour givrer</div>
+      <div class="scroll-wow" style="color:#c0e8ff;background:rgba(40,140,200,.08);border-left:2px solid rgba(40,140,200,.5);">Bord givré sel fumé. Tour comestible : céleri + olive + cornichon plantés comme un décor. Le seul cocktail qui peut remplacer un repas.</div>
+    </div></div>
+  </div>
+
+  <!-- UMAMI -->
+  <div class="card taste" onclick="toggle(this)" style="border-color:rgba(160,80,220,.35);background:rgba(160,80,220,.03);">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="taste-badge" style="color:#d8a8ff;border:1px solid rgba(160,80,220,.4);background:rgba(160,80,220,.07);">UMAMI</div>
+        <div class="card-name" style="color:#e8c8ff;">Dirty Butterfly</div>
+        <div class="card-teaser">Floral en surface, profond en dessous. La couleur change devant vous.</div>
+      </div>
+    </div>
+    <div class="card-bot"><div class="card-price" style="color:#a060d0;">9,90 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(160,80,220,.7);border:1px dashed rgba(160,80,220,.3);">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in" style="background:rgba(160,80,220,.06);border-color:rgba(160,80,220,.2);">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Gin 5 cl · Thé fleur de pois bleu 15 cl (5 min d'infusion) · Sirop de canne 1,5 cl · Sauce soja light 0,5 cl · Citron 2 cl (versé devant vous)</div>
+      <div class="scroll-wow" style="color:#e8c8ff;background:rgba(160,80,220,.08);border-left:2px solid rgba(160,80,220,.5);">La réaction acide-anthocyane du thé de pois bleu est purement naturelle : le bleu vire au violet/rose en 3 secondes. La sauce soja ajoute une profondeur umami unique que rien d'autre ne réplique.</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══════ CHAPITRE III — SANS ALCOOL ══════ -->
+<div id="mocktails" class="chap">
+  <div class="chap-head">
+    <span class="chap-ornament">Chapitre Troisième</span>
+    <div class="chap-title">Élixirs Purs</div>
+    <div class="rule"><span>⁕</span></div>
+    <p class="chap-verse"><em>Toute la cérémonie. Sans la spirale.</em></p>
+  </div>
+
+  <div class="realm dr"><span class="realm-tag">Côté Rêve</span></div>
+
+  <div class="card dr" onclick="toggle(this)">
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Jardin de Minuit</div>
+      <div class="card-teaser">Concombre, basilic, citron vert. Frais comme un souffle nocturne.</div>
+    </div></div>
+    <div class="card-bot"><div class="card-price">6,20 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Eau gazeuse 15 cl · Concombre muddlé 4 tranches · Basilic frais · Citron vert 3 cl · Sirop de canne 2 cl · Eau de fleur d'oranger 0,5 cl</div>
+      <div class="scroll-wow">Muddler le concombre et le basilic libère des arômes végétaux intenses. L'eau de fleur d'oranger ajoute une note florale qui surprend à chaque gorgée.</div>
+    </div></div>
+  </div>
+
+  <div class="card dr" onclick="toggle(this)">
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Ginger Dream</div>
+      <div class="card-teaser">Piquant, pétillant, vivifiant. La chaleur sans l'alcool.</div>
+    </div></div>
+    <div class="card-bot"><div class="card-price">6,20 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Ginger beer 15 cl · Citron vert 3 cl · Sirop de canne 1,5 cl · Menthe fraîche · Glaçon sphérique</div>
+      <div class="scroll-wow">Verre givré au sucre coloré. Paille en bambou. La chaleur du gingembre monte progressivement — le seul cocktail sans alcool qui réchauffe de l'intérieur.</div>
+    </div></div>
+  </div>
+
+  <div class="realm nm"><span class="realm-tag">Côté Cauchemar</span></div>
+
+  <div class="card nm" onclick="toggle(this)">
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Veuve Noire</div>
+      <div class="card-teaser">Sombre, fruité-acidulé. Grenade et hibiscus dans le noir.</div>
+    </div></div>
+    <div class="card-bot"><div class="card-price">6,20 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Infusion hibiscus 12 cl (froide) · Jus de grenade 4 cl · Citron vert 2 cl · Sirop de canne 1,5 cl · Eau gazeuse 3 cl · Sel noir pour givrer</div>
+      <div class="scroll-wow">L'hibiscus donne naturellement une couleur rouge sang profonde et une acidité florale. Le bord givré au sel noir crée le même effet graphique que la Succube — sans une goutte d'alcool.</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══════ CHAPITRE IV — FIOLES ══════ -->
+<div id="fioles" class="chap">
+  <div class="chap-head">
+    <span class="chap-ornament">Chapitre Quatrième</span>
+    <div class="chap-title">Fioles & Petits Sorts</div>
+    <div class="rule"><span>⁕</span></div>
+    <p class="chap-verse"><em>Quatre centilitres. Un sort concentré.<br>Scellé — servi en apothicaire.</em></p>
+  </div>
+
+  <div class="realm dr"><span class="realm-tag">Fioles des Rêves</span></div>
+
+  <div class="card dr" onclick="toggle(this)">
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Sérum de Lune</div>
+      <div class="card-teaser">Doux, floral. Un pétale flottant dans la fiole.</div>
+    </div></div>
+    <div class="card-bot"><div class="card-price">4,50 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Vodka 3 cl · Liqueur de litchi 0,5 cl · Sirop de rose 0,5 cl · Citron · Pétale de rose comestible</div>
+      <div class="scroll-wow">Fiole bouchée. Pétale flottant à l'intérieur. À boire d'un trait ou à verser dans un cocktail pour l'amplifier.</div>
+    </div></div>
+  </div>
+
+  <div class="card dr" onclick="toggle(this)">
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Brume Violette</div>
+      <div class="card-teaser">La couleur change dans votre main. Botanique, fin.</div>
+    </div></div>
+    <div class="card-bot"><div class="card-price">4,50 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Gin 3 cl · Thé fleur de pois bleu 0,8 cl · Sirop violette 0,5 cl · Citron (pipette fournie)</div>
+      <div class="scroll-wow">Pipette de citron fournie. Le client verse lui-même — la fiole change de couleur dans sa main en direct.</div>
+    </div></div>
+  </div>
+
+  <div class="realm nm"><span class="realm-tag">Fioles des Cauchemars</span></div>
+
+  <div class="card nm" onclick="toggle(this)">
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Venin Noir</div>
+      <div class="card-teaser">Opaque. Inconnu. On boit dans le noir.</div>
+    </div></div>
+    <div class="card-bot"><div class="card-price">4,50 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Tequila Blanco 3 cl · Vodka noire 0,5 cl · Citron vert 0,3 cl · Sirop agave 0,2 cl</div>
+      <div class="scroll-wow">Fiole noire opaque. On ne voit absolument rien. On boit dans l'inconnu total.</div>
+    </div></div>
+  </div>
+
+  <div class="card nm" onclick="toggle(this)">
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Feu de l'Enfer</div>
+      <div class="card-teaser">La chaleur arrive. Dix secondes après.</div>
+    </div></div>
+    <div class="card-bot"><div class="card-price">4,50 €</div></div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl">Composition</div>
+      <div class="scroll-ing">Whisky 3 cl · Sirop de piment 0,5 cl · Gingembre frais · Citron 0,3 cl</div>
+      <div class="scroll-wow">Le pic de chaleur est retardé — il arrive 10 secondes après. Les gens se regardent en comprenant. Parfait en groupe.</div>
+    </div></div>
+  </div>
+
+  <div class="pack">
+    <div class="pack-t">Pack Trois Sorts</div>
+    <div class="pack-d">3 fioles au choix dont 1 surprise tirée au sort — idéal avant votre séance</div>
+    <div class="pack-p">11,00 €</div>
+  </div>
+</div>
+
+<!-- ══════ CHAPITRE V — BIÈRES ══════ -->
+<div id="bieres" class="chap">
+  <div class="chap-head">
+    <span class="chap-ornament">Chapitre Cinquième</span>
+    <div class="chap-title">Les Bières</div>
+    <div class="rule"><span>⁕</span></div>
+    <p class="chap-verse"><em>Pression ou bouteille. Selon l'humeur.</em></p>
+  </div>
+  <div class="sub-head">Pression</div>
+  <table class="ledger">
+    <tr><td>Bière pression</td><td>25 cl</td><td>4,00 €</td></tr>
+    <tr><td>Bière pression</td><td>50 cl</td><td>6,40 €</td></tr>
+    <tr><td>Panaché</td><td>25 cl / 50 cl</td><td>3,50 / 5,00 €</td></tr>
+    <tr><td>Monaco</td><td>25 cl / 50 cl</td><td>3,70 / 5,20 €</td></tr>
+    <tr><td>Picon Bière</td><td>25 cl / 50 cl</td><td>4,20 / 6,60 €</td></tr>
+  </table>
+  <div class="sub-head">Bouteilles</div>
+  <table class="ledger">
+    <tr><td>Desperados</td><td>33 cl · 5,9%</td><td>5,20 €</td></tr>
+    <tr><td>Bière du Sorcier</td><td>33 cl · 5% · Maison</td><td>5,20 €</td></tr>
+    <tr><td>Kasteel Rouge</td><td>33 cl · 8% · Cerise</td><td>5,20 €</td></tr>
+  </table>
+</div>
+
+<!-- ══════ CHAPITRE VI — SOFTS ══════ -->
+<div id="softs" class="chap">
+  <div class="chap-head">
+    <span class="chap-ornament">Chapitre Sixième</span>
+    <div class="chap-title">Softs & Boissons Chaudes</div>
+    <div class="rule"><span>⁕</span></div>
+    <p class="chap-verse"><em>Pour veiller toute la nuit ou rêver les yeux ouverts.</em></p>
+  </div>
+  <div class="sub-head">Softs</div>
+  <table class="ledger">
+    <tr><td>Coca · Zero · Cherry</td><td>33 cl</td><td>3,50 €</td></tr>
+    <tr><td>Thé glacé · Diabolo · Limonade</td><td>33 cl</td><td>3,50 €</td></tr>
+    <tr><td>Orangina</td><td>33 cl</td><td>3,50 €</td></tr>
+    <tr><td>Oasis</td><td>33 cl</td><td>3,50 €</td></tr>
+    <tr><td>Red Bull</td><td>25 cl</td><td>4,00 €</td></tr>
+    <tr><td>Iced Coffee · Iced Latte</td><td></td><td>4,00 €</td></tr>
+    <tr><td>Eau plate ou pétillante</td><td>25 cl</td><td>2,00 €</td></tr>
+    <tr><td>Sirops maison</td><td>Grenadine · Violette · Menthe · Pêche · Citron</td><td>inclus</td></tr>
+  </table>
+  <div class="sub-head">Boissons chaudes</div>
+  <table class="ledger">
+    <tr><td>Espresso</td><td></td><td>2,00 €</td></tr>
+    <tr><td>Double Espresso</td><td></td><td>3,30 €</td></tr>
+    <tr><td>Café allongé</td><td></td><td>2,50 €</td></tr>
+    <tr><td>Cappuccino</td><td></td><td>3,50 €</td></tr>
+    <tr><td>Café au lait</td><td></td><td>3,40 €</td></tr>
+    <tr><td>Affogato</td><td>Espresso · glace vanille</td><td>4,20 €</td></tr>
+    <tr><td>Chocolat chaud</td><td></td><td>3,50 €</td></tr>
+    <tr><td>Chaï Latte</td><td></td><td>3,90 €</td></tr>
+    <tr><td>Thés Dammann</td><td>Voir carte des thés</td><td>3,50 €</td></tr>
+    <tr><td>Sirops en supplément</td><td>Noisette · Pumpkin · Vanille</td><td>+0,50 €</td></tr>
+    <tr><td>Lait d'amande</td><td>sur demande</td><td>inclus</td></tr>
+  </table>
+</div>
+
+<!-- ══════ CHAPITRE VII — THÉS ══════ -->
+<div id="thes" class="chap">
+  <div class="chap-head">
+    <span class="chap-ornament">Chapitre Septième</span>
+    <div class="chap-title">La Carte des Thés</div>
+    <div class="rule"><span>⁕</span></div>
+    <p class="chap-verse"><em>Dammann Frères · Sélection de la maison</em></p>
+  </div>
+
+  <div class="sub-head">Thés Verts</div>
+  <table class="tea-table">
+    <tr>
+      <td>À la Menthe</td>
+      <td>Chine</td>
+      <td>Menthe douce et poivrée, idéal très chaud</td>
+    </tr>
+    <tr>
+      <td>Macaron Cassis Violette</td>
+      <td>Chine</td>
+      <td>Gourmand — biscuit, amande, violette, cassis</td>
+    </tr>
+    <tr>
+      <td>Miss Dammann</td>
+      <td>Asie</td>
+      <td>Fruité et épicé — gingembre, fruit de la passion, citron vert, pétales</td>
+    </tr>
+    <tr>
+      <td>Happy Green</td>
+      <td>Chine · glacé</td>
+      <td>Notes fruitées kiwi, pomme et végétales — concombre</td>
+    </tr>
+  </table>
+
+  <div class="sub-head">Thés Noirs</div>
+  <table class="tea-table">
+    <tr>
+      <td>7 Parfums</td>
+      <td>Chine</td>
+      <td>Fleuri et fruité — citron, abricot, bergamote, figue fraîche, fleurs de lotus</td>
+    </tr>
+    <tr>
+      <td>Pécan Pie</td>
+      <td></td>
+      <td>Très gourmand — noisette, noix de pécan, amande, pistache, miel, pétales</td>
+    </tr>
+    <tr>
+      <td>Goût Russe Douchka</td>
+      <td>Chine · Inde</td>
+      <td>Notes d'agrumes — bergamote, orange douce, citron</td>
+    </tr>
+    <tr>
+      <td>Jardin Bleu</td>
+      <td></td>
+      <td>Fruité — rhubarbe, fraise des bois, baies, pétales</td>
+    </tr>
+    <tr>
+      <td>Chaï</td>
+      <td>Rwanda</td>
+      <td>Épicé — gingembre, cannelle, baies roses, cardamome, clou de girofle</td>
+    </tr>
+  </table>
+
+  <div class="sub-head">Thé Blanc · Rooibos · Carcadet</div>
+  <table class="tea-table">
+    <tr>
+      <td>Passion de Fleurs</td>
+      <td>Thé blanc</td>
+      <td>Fruité — fruit de la passion, abricot, pétales, huile essentielle de rose</td>
+    </tr>
+    <tr>
+      <td>Carott Cake</td>
+      <td>Rooibos</td>
+      <td>Gourmand — cannelle, gingembre, carotte, noix de pécan, biscuit, amande</td>
+    </tr>
+    <tr>
+      <td>Passion Framboise</td>
+      <td>Carcadet</td>
+      <td>Fleur d'hibiscus, cynorrhodon, pomme, framboise, pétales — fruit de la passion</td>
+    </tr>
+  </table>
+
+  <p style="text-align:center;font-size:11.5px;color:var(--faint);font-style:italic;margin-top:30px;">Tous nos thés — 3,50 €</p>
+</div>
+
+<!-- ══════ CHAPITRE VIII — RESTAURATION ══════ -->
+<div id="food" class="chap">
+  <div class="chap-head">
+    <span class="chap-ornament">Chapitre Huitième</span>
+    <div class="chap-title">Restauration</div>
+    <div class="rule"><span>⁕</span></div>
+    <p class="chap-verse"><em>Petites faims entre deux mondes.</em></p>
+  </div>
+  <div class="viands">
+    <div class="viand"><div class="viand-name">Cookie</div><div class="viand-desc">Maison, chaud si possible</div><div class="viand-price">2,40 €</div></div>
+    <div class="viand"><div class="viand-name">Bretzel</div><div class="viand-desc">Sel de guérande</div><div class="viand-price">3,00 €</div></div>
+    <div class="viand"><div class="viand-name">Fondant Chocolat</div><div class="viand-desc">Cœur coulant · glace pistache</div><div class="viand-price">5,20 €</div></div>
+    <div class="viand"><div class="viand-name">Pancakes</div><div class="viand-desc">Sirop d'érable · glace vanille</div><div class="viand-price">5,20 €</div></div>
+    <div class="viand"><div class="viand-name">Nachos</div><div class="viand-desc">Salsa ou guacamole</div><div class="viand-price">5,00 €</div></div>
+    <div class="viand"><div class="viand-name">Saucisson</div><div class="viand-desc">Sélection & accompagnements</div><div class="viand-price">6,20 €</div></div>
+  </div>
+  <div style="margin-top:14px;">
+    <div class="viand" style="border-color:rgba(200,169,110,.4);background:linear-gradient(135deg,var(--parch),rgba(200,169,110,.04));">
+      <div class="viand-name" style="font-size:15px;">Planchette du Rêveur</div>
+      <div class="viand-desc">Fromages & charcuteries sélectionnés · accompagnements du moment</div>
+      <div class="viand-price">14,00 €</div>
+    </div>
+  </div>
+</div>
+
+<!-- COLOPHON -->
+<div class="colophon">
+  <span class="colophon-mark">Morpheus</span>
+  <p>
+    42 Boulevard du Président Wilson · 67000 Strasbourg<br>
+    <a href="https://www.morpheus-experience.com">morpheus-experience.com</a><br><br>
+    Lun–Jeu 14h–21h30 · Ven–Sam 9h30–00h00 · Dim 10h–21h30<br>
+    Prix TTC, service compris · Allergènes sur demande<br>
+    Certains desserts élaborés à partir de produits surgelés<br><br>
+    L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+  </p>
+</div>
+
+</div><!-- /page -->
+
+<script>
+/* PARTICLES */
+const cvs = document.getElementById('cvs');
+const ctx = cvs.getContext('2d');
+let W, H, pts=[];
+
+function resize(){
+  W = cvs.width = window.innerWidth;
+  H = cvs.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const COLORS = ['rgba(139,127,220,','rgba(192,56,56,','rgba(200,169,110,','rgba(255,255,255,'];
+
+for(let i=0;i<55;i++){
+  pts.push({
+    x: Math.random()*2000, y: Math.random()*2000,
+    r: .4 + Math.random()*1.2,
+    vx: (Math.random()-.5)*.18,
+    vy: -.06 - Math.random()*.22,
+    a: Math.random(), da: .003 + Math.random()*.006,
+    c: COLORS[Math.floor(Math.random()*COLORS.length)],
+    life: Math.random()*Math.PI*2
+  });
+}
+
+function drawPts(){
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{
+    p.life += p.da;
+    p.a = (.35 + .35*Math.sin(p.life));
+    p.x += p.vx; p.y += p.vy;
+    if(p.y < -10){ p.y = H+10; p.x = Math.random()*W; }
+    if(p.x < -10) p.x = W+10;
+    if(p.x > W+10) p.x = -10;
+    ctx.beginPath();
+    ctx.arc(p.x%W, p.y%H, p.r, 0, Math.PI*2);
+    ctx.fillStyle = p.c + p.a + ')';
+    ctx.fill();
+  });
+  requestAnimationFrame(drawPts);
+}
+drawPts();
+
+/* NAV */
+function show(id, btn){
+  document.querySelectorAll('.chap').forEach(c=>c.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* CARD TOGGLE */
+function toggle(card){
+  const sc = card.querySelector('.scroll');
+  const btn = card.querySelector('.reveal-btn');
+  const isOpen = sc.classList.contains('on');
+  document.querySelectorAll('.scroll.on').forEach(s=>{
+    s.classList.remove('on');
+    const b = s.closest('.card').querySelector('.reveal-btn');
+    if(b) b.textContent = 'Révéler l\'arcane';
+  });
+  if(!isOpen){
+    sc.classList.add('on');
+    if(btn) btn.textContent = 'Refermer';
+  }
+}
+
+function revealBtn(e, btn){
+  e.stopPropagation();
+  const card = btn.closest('.card');
+  toggle(card);
+}
+</script>
 </body>
 </html>
