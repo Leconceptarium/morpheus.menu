@@ -12,16 +12,16 @@
   --parch2:  #1a1720;
   --sepia:   #c8a96e;
   --sepia2:  #a07840;
-  --sepia3:  #5a4020;
+  --sepia3:  #7a5830;
   --dream:   #8b7fdc;
   --dreaml:  #c4baff;
   --night:   #c03838;
   --nightl:  #ffaaaa;
   --gold:    #d4a017;
   --goldl:   #f5e6a3;
-  --ash:     #8a7f98;
+  --ash:     #a89db8;
   --pale:    #e8dfc8;
-  --faint:   #3a3048;
+  --faint:   #5a4f6e;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -49,36 +49,39 @@ body::before {
 
 #cvs{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;}
 
+/* TRANSLATE BUTTON */
+#lang-toggle{
+  position:fixed;top:14px;right:14px;z-index:200;
+  background:rgba(7,6,9,.9);
+  border:1px solid var(--sepia3);
+  color:var(--sepia);
+  font-family:'Cormorant SC',serif;
+  font-size:10px;letter-spacing:.3em;
+  padding:7px 14px;border-radius:2px;
+  cursor:pointer;transition:all .2s;
+  backdrop-filter:blur(8px);
+}
+#lang-toggle:hover{background:rgba(200,169,110,.1);border-color:var(--sepia);}
+#lang-toggle.de{color:#a0c8f0;border-color:rgba(100,160,220,.5);}
+
 .page{position:relative;z-index:2;max-width:740px;margin:0 auto;padding:0 28px 100px;}
 
 /* HERO */
-.hero{
-  text-align:center;
-  padding:52px 0 44px;
-  position:relative;
-}
+.hero{text-align:center;padding:52px 0 44px;position:relative;}
 .hero::after{
-  content:'';display:block;
-  width:100%;height:1px;
+  content:'';display:block;width:100%;height:1px;
   background:linear-gradient(90deg,transparent,var(--sepia3),var(--sepia),var(--sepia3),transparent);
   margin-top:44px;
 }
 
-.sigil-wrap{
-  width:130px;height:130px;
-  margin:0 auto 28px;
-  position:relative;
-}
+.sigil-wrap{width:130px;height:130px;margin:0 auto 28px;position:relative;}
 .sigil-wrap svg{width:100%;height:100%;}
 
 .title-frak{
   font-family:'UnifrakturMaguntia',serif;
   font-size:clamp(40px,10vw,72px);
-  color:var(--sepia);
-  letter-spacing:.07em;
-  line-height:1;
-  animation:flicker 7s ease-in-out infinite;
-  margin-bottom:10px;
+  color:var(--sepia);letter-spacing:.07em;line-height:1;
+  animation:flicker 7s ease-in-out infinite;margin-bottom:10px;
 }
 @keyframes flicker{
   0%,100%{text-shadow:0 0 40px rgba(200,169,110,.2);}
@@ -87,33 +90,20 @@ body::before {
   49%{text-shadow:0 0 80px rgba(200,169,110,.5);}
 }
 
-.hero-sub{
-  font-family:'Cormorant SC',serif;
-  font-size:11px;letter-spacing:.55em;
-  color:var(--ash);text-transform:uppercase;
-}
-.hero-verse{
-  font-style:italic;font-size:14px;
-  color:var(--sepia3);margin-top:12px;
-  line-height:1.7;
-}
+.hero-sub{font-family:'Cormorant SC',serif;font-size:11px;letter-spacing:.55em;color:var(--ash);text-transform:uppercase;}
+.hero-verse{font-style:italic;font-size:14px;color:var(--sepia3);margin-top:12px;line-height:1.7;}
 
 /* NAV */
 .nav{
   position:sticky;top:0;z-index:50;
-  background:rgba(7,6,9,.96);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--faint);
-  padding:10px 0;
+  background:rgba(7,6,9,.96);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--faint);padding:10px 0;
   display:flex;justify-content:center;flex-wrap:wrap;gap:0;
 }
 .nav-btn{
-  background:none;border:none;
-  font-family:'Cormorant SC',serif;
-  font-size:10.5px;letter-spacing:.28em;
-  color:var(--ash);cursor:pointer;
-  padding:7px 13px;transition:color .2s;
-  position:relative;
+  background:none;border:none;font-family:'Cormorant SC',serif;
+  font-size:10.5px;letter-spacing:.28em;color:var(--ash);cursor:pointer;
+  padding:7px 13px;transition:color .2s;position:relative;
 }
 .nav-btn::after{content:'·';position:absolute;right:0;top:50%;transform:translateY(-50%);color:var(--faint);}
 .nav-btn:last-child::after{display:none;}
@@ -133,7 +123,7 @@ body::before {
 .rule span{font-size:15px;color:var(--sepia3);}
 .chap-verse{font-style:italic;font-size:13.5px;color:var(--ash);margin-top:6px;}
 
-/* REALM DIVIDER */
+/* REALM */
 .realm{display:flex;align-items:center;gap:14px;margin:38px 0 22px;}
 .realm::before,.realm::after{content:'';flex:1;height:1px;}
 .realm.dr::before{background:linear-gradient(90deg,transparent,var(--dream));}
@@ -142,11 +132,7 @@ body::before {
 .realm.nm::after{background:linear-gradient(90deg,var(--night),transparent);}
 .realm.gd::before{background:linear-gradient(90deg,transparent,var(--gold));}
 .realm.gd::after{background:linear-gradient(90deg,var(--gold),transparent);}
-.realm-tag{
-  font-family:'Cormorant SC',serif;
-  font-size:9.5px;letter-spacing:.4em;
-  padding:3px 14px;border-radius:1px;white-space:nowrap;
-}
+.realm-tag{font-family:'Cormorant SC',serif;font-size:9.5px;letter-spacing:.4em;padding:3px 14px;border-radius:1px;white-space:nowrap;}
 .dr .realm-tag{color:var(--dreaml);border:1px solid rgba(139,127,220,.5);background:rgba(139,127,220,.07);}
 .nm .realm-tag{color:var(--nightl);border:1px solid rgba(192,56,56,.5);background:rgba(192,56,56,.07);}
 .gd .realm-tag{color:var(--goldl);border:1px solid rgba(212,160,23,.4);background:rgba(212,160,23,.06);}
@@ -165,11 +151,7 @@ body::before {
 .sig-price{font-family:'Cormorant SC',serif;font-size:22px;color:var(--sepia2);}
 
 /* CARD */
-.card{
-  border-radius:3px;margin-bottom:12px;
-  overflow:hidden;cursor:pointer;
-  transition:transform .2s,box-shadow .2s;
-}
+.card{border-radius:3px;margin-bottom:12px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;}
 .card:hover{transform:translateY(-2px);}
 .card.dr{border:1px solid rgba(139,127,220,.28);background:rgba(139,127,220,.04);}
 .card.nm{border:1px solid rgba(192,56,56,.28);background:rgba(192,56,56,.04);}
@@ -180,18 +162,16 @@ body::before {
 .card.gd:hover{box-shadow:0 6px 36px rgba(212,160,23,.18);}
 .card.taste:hover{box-shadow:0 6px 36px rgba(200,169,110,.12);}
 
-.card-top{padding:16px 18px 10px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.card-top{padding:16px 18px 6px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
 .card-left{flex:1;}
-.card-name{
-  font-family:'Cormorant SC',serif;font-weight:600;
-  font-size:clamp(15px,3.5vw,20px);letter-spacing:.06em;margin-bottom:4px;
-}
+.card-name{font-family:'Cormorant SC',serif;font-weight:600;font-size:clamp(15px,3.5vw,20px);letter-spacing:.06em;margin-bottom:4px;}
 .dr .card-name{color:#c8c5ff;}
 .nm .card-name{color:#ffb8b8;}
 .gd .card-name,.taste .card-name{color:var(--sepia);}
 
 .card-teaser{font-size:13px;font-style:italic;color:var(--ash);line-height:1.5;}
-.card-bot{padding:0 18px 14px;display:flex;justify-content:space-between;align-items:center;}
+.card-bot{padding:8px 18px 14px;display:flex;justify-content:space-between;align-items:center;}
+.card-vol{font-family:'Cormorant SC',serif;font-size:11px;letter-spacing:.2em;color:var(--faint);}
 .card-price{font-family:'Cormorant SC',serif;font-size:17px;font-weight:600;}
 .dr .card-price{color:#a09de0;}
 .nm .card-price{color:#c07070;}
@@ -201,23 +181,17 @@ body::before {
 .reveal-btn{
   display:block;width:calc(100% - 36px);margin:0 18px 14px;
   background:transparent;cursor:pointer;
-  font-family:'Cormorant SC',serif;
-  font-size:10px;letter-spacing:.35em;
-  padding:9px 14px;border-radius:2px;
-  transition:all .25s;
-  text-align:center;
+  font-family:'Cormorant SC',serif;font-size:10px;letter-spacing:.35em;
+  padding:9px 14px;border-radius:2px;transition:all .25s;text-align:center;
 }
-.dr .reveal-btn{color:rgba(139,127,220,.7);border:1px dashed rgba(139,127,220,.3);}
-.nm .reveal-btn{color:rgba(192,56,56,.7);border:1px dashed rgba(192,56,56,.3);}
-.gd .reveal-btn,.taste .reveal-btn{color:rgba(212,160,23,.7);border:1px dashed rgba(212,160,23,.3);}
+.dr .reveal-btn{color:rgba(139,127,220,.8);border:1px dashed rgba(139,127,220,.4);}
+.nm .reveal-btn{color:rgba(192,56,56,.8);border:1px dashed rgba(192,56,56,.4);}
+.gd .reveal-btn,.taste .reveal-btn{color:rgba(212,160,23,.8);border:1px dashed rgba(212,160,23,.4);}
 .reveal-btn:hover{background:rgba(255,255,255,.03);}
 
 .scroll{max-height:0;overflow:hidden;transition:max-height .45s ease;}
 .scroll.on{max-height:600px;}
-.scroll-in{
-  margin:0 18px 16px;padding:14px 16px;border-radius:2px;
-  border-top:1px dashed var(--faint);
-}
+.scroll-in{margin:0 18px 16px;padding:14px 16px;border-radius:2px;border-top:1px dashed var(--faint);}
 .dr .scroll-in{background:rgba(139,127,220,.06);border-color:rgba(139,127,220,.2);}
 .nm .scroll-in{background:rgba(192,56,56,.06);border-color:rgba(192,56,56,.2);}
 .gd .scroll-in,.taste .scroll-in{background:rgba(212,160,23,.06);border-color:rgba(212,160,23,.2);}
@@ -230,15 +204,11 @@ body::before {
 .gd .scroll-wow,.taste .scroll-wow{color:var(--goldl);background:rgba(212,160,23,.08);border-left:2px solid rgba(212,160,23,.5);}
 
 /* TASTE BADGE */
-.taste-badge{
-  display:inline-flex;align-items:center;gap:6px;
-  font-family:'Cormorant SC',serif;font-size:9px;letter-spacing:.3em;
-  padding:3px 10px;border-radius:1px;margin-bottom:5px;
-}
+.taste-badge{display:inline-flex;align-items:center;gap:6px;font-family:'Cormorant SC',serif;font-size:9px;letter-spacing:.3em;padding:3px 10px;border-radius:1px;margin-bottom:5px;}
 
 /* TABLE */
 .ledger{border-collapse:collapse;width:100%;}
-.ledger tr{border-bottom:1px solid rgba(58,48,72,.5);}
+.ledger tr{border-bottom:1px solid rgba(80,65,100,.6);}
 .ledger tr:last-child{border-bottom:none;}
 .ledger td{padding:9px 4px;font-size:13.5px;vertical-align:top;}
 .ledger td:first-child{color:var(--pale);padding-right:12px;}
@@ -264,7 +234,7 @@ body::before {
 
 /* TEA TABLE */
 .tea-table{width:100%;border-collapse:collapse;}
-.tea-table tr{border-bottom:1px solid rgba(58,48,72,.4);}
+.tea-table tr{border-bottom:1px solid rgba(80,65,100,.5);}
 .tea-table tr:last-child{border-bottom:none;}
 .tea-table td{padding:10px 6px;font-size:13px;vertical-align:top;}
 .tea-table td:first-child{color:var(--pale);font-family:'Cormorant SC',serif;font-size:12.5px;letter-spacing:.05em;width:35%;padding-right:10px;}
@@ -285,6 +255,7 @@ body::before {
   .page{padding:0 14px 70px;}
   .viands{grid-template-columns:1fr 1fr;}
   .nav-btn{font-size:9px;padding:6px 8px;letter-spacing:.15em;}
+  #lang-toggle{font-size:9px;padding:5px 10px;}
 }
 </style>
 </head>
@@ -293,6 +264,8 @@ body::before {
 <div class="wax-l"></div>
 <div class="wax-r"></div>
 <canvas id="cvs"></canvas>
+
+<button id="lang-toggle" onclick="toggleLang()">DE</button>
 
 <div class="page">
 
@@ -324,278 +297,281 @@ body::before {
     </svg>
   </div>
   <div class="title-frak">Morpheus</div>
-  <div class="hero-sub">Grimoire du Bar &nbsp;·&nbsp; Strasbourg</div>
+  <div class="hero-sub" data-fr="Grimoire du Bar · Strasbourg" data-de="Das Buch der Tränke · Straßburg">Grimoire du Bar · Strasbourg</div>
   <div class="hero-verse">
-    <em>« Dans le sommeil, les portes s'ouvrent.<br>Choisis ton côté. »</em>
+    <em data-fr="« Dans le sommeil, les portes s'ouvrent.<br>Choisis ton côté. »" data-de="« Im Schlaf öffnen sich die Türen.<br>Wähle deine Seite. »">« Dans le sommeil, les portes s'ouvrent.<br>Choisis ton côté. »</em>
   </div>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
-  <button class="nav-btn on" onclick="show('cocktails',this)">Élixirs</button>
-  <button class="nav-btn" onclick="show('gouts',this)">Les Cinq Goûts</button>
-  <button class="nav-btn" onclick="show('mocktails',this)">Sans Alcool</button>
-  <button class="nav-btn" onclick="show('fioles',this)">Fioles</button>
-  <button class="nav-btn" onclick="show('bieres',this)">Bières</button>
-  <button class="nav-btn" onclick="show('softs',this)">Softs & Chauds</button>
-  <button class="nav-btn" onclick="show('thes',this)">Thés</button>
-  <button class="nav-btn" onclick="show('food',this)">Restauration</button>
+  <button class="nav-btn on" onclick="show('cocktails',this)" data-fr="Élixirs" data-de="Elixiere">Élixirs</button>
+  <button class="nav-btn" onclick="show('gouts',this)" data-fr="Les Cinq Goûts" data-de="Fünf Sinne">Les Cinq Goûts</button>
+  <button class="nav-btn" onclick="show('mocktails',this)" data-fr="Sans Alcool" data-de="Alkoholfrei">Sans Alcool</button>
+  <button class="nav-btn" onclick="show('fioles',this)" data-fr="Fioles" data-de="Fläschchen">Fioles</button>
+  <button class="nav-btn" onclick="show('bieres',this)" data-fr="Bières" data-de="Biere">Bières</button>
+  <button class="nav-btn" onclick="show('softs',this)" data-fr="Softs & Chauds" data-de="Softdrinks & Heiß">Softs & Chauds</button>
+  <button class="nav-btn" onclick="show('thes',this)" data-fr="Thés" data-de="Tees">Thés</button>
+  <button class="nav-btn" onclick="show('food',this)" data-fr="Restauration" data-de="Speisen">Restauration</button>
 </nav>
 
 <!-- ══════ CHAPITRE I — ÉLIXIRS ══════ -->
 <div id="cocktails" class="chap on">
   <div class="chap-head">
-    <span class="chap-ornament">Chapitre Premier</span>
-    <div class="chap-title">Les Élixirs</div>
+    <span class="chap-ornament" data-fr="Chapitre Premier" data-de="Erstes Kapitel">Chapitre Premier</span>
+    <div class="chap-title" data-fr="Les Élixirs" data-de="Die Elixiere">Les Élixirs</div>
     <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em>Chaque verre est un sort. Rêve ou Cauchemar —<br>vous choisissez ce qui entre en vous ce soir.</em></p>
+    <p class="chap-verse"><em data-fr="Chaque verre est un sort. Rêve ou Cauchemar —<br>vous choisissez ce qui entre en vous ce soir." data-de="Jedes Glas ist ein Zauber. Traum oder Albtraum —<br>ihr wählt, was heute Nacht in euch einzieht.">Chaque verre est un sort. Rêve ou Cauchemar —<br>vous choisissez ce qui entre en vous ce soir.</em></p>
   </div>
 
-  <!-- SIGNATURE -->
   <div class="sig-block">
-    <div class="sig-name">Le Don de Morpheus</div>
+    <div class="sig-name" data-fr="Le Don de Morpheus" data-de="Das Geschenk des Morpheus">Le Don de Morpheus</div>
     <p class="sig-desc">
-      Notre élixir signature.<br>
-      Le serveur apporte un dé. Pair — <em>Rêve</em>. Impair — <em>Cauchemar</em>.<br>
-      Le sort est jeté. Vous ne saurez qu'au premier instant.
+      <span data-fr="Notre élixir signature.<br>Le serveur apporte un dé. Pair — <em>Rêve</em>. Impair — <em>Cauchemar</em>.<br>Le sort est jeté. Vous ne saurez qu'au premier instant." data-de="Unser Signature-Elixier.<br>Der Kellner bringt einen Würfel. Gerade — <em>Traum</em>. Ungerade — <em>Albtraum</em>.<br>Das Los ist gefallen. Ihr erfahrt es erst beim ersten Schluck.">Notre élixir signature.<br>Le serveur apporte un dé. Pair — <em>Rêve</em>. Impair — <em>Cauchemar</em>.<br>Le sort est jeté. Vous ne saurez qu'au premier instant.</span>
     </p>
-    <p style="font-size:12px;color:var(--sepia3);font-style:italic;margin-bottom:14px;">Révélé par un trait de citron versé devant vous</p>
+    <p style="font-size:12px;color:var(--sepia3);font-style:italic;margin-bottom:14px;" data-fr="Révélé par un trait de citron versé devant vous" data-de="Enthüllt durch einen Spritzer Zitrone — direkt vor Ihren Augen">Révélé par un trait de citron versé devant vous</p>
     <div class="sig-price">11,90 €</div>
   </div>
 
-  <!-- RÊVES -->
-  <div class="realm dr"><span class="realm-tag">Royaume des Rêves</span></div>
+  <div class="realm dr"><span class="realm-tag" data-fr="Royaume des Rêves" data-de="Reich der Träume">Royaume des Rêves</span></div>
 
   <div class="card dr" onclick="toggle(this)">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="card-name">Lucide</div>
-        <div class="card-teaser">Doux, floral, avec un secret que le citron révèle.</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Lucide</div>
+      <div class="card-teaser" data-fr="Doux, floral, avec un secret que le citron révèle." data-de="Sanft, blumig — ein Geheimnis, das die Zitrone enthüllt.">Doux, floral, avec un secret que le citron révèle.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol">15 cl</div>
+      <div class="card-price">8,90 €</div>
     </div>
-    <div class="card-bot"><div class="card-price">8,90 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Gin 4 cl · Thé fleur de pois bleu 6 cl · Eau de rose 1 cl · Lait de coco 3 cl · Sirop de canne 1,5 cl · Citron frais (versé devant vous)</div>
-      <div class="scroll-wow">Le thé de pois bleu vire naturellement du bleu profond au violet lilas au contact de l'acide. Purement naturel — aucun colorant.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Gin · Thé fleur de pois bleu · Eau de rose · Lait de coco · Sirop de canne · Citron frais (versé devant vous)</div>
+      <div class="scroll-wow" data-fr="Le thé de pois bleu vire naturellement du bleu profond au violet lilas au contact de l'acide. Purement naturel — aucun colorant." data-de="Der Schmetterlingserbsentee wechselt beim Kontakt mit Säure natürlich von tiefem Blau zu Lilaviolett. Rein natürlich — kein Farbstoff.">Le thé de pois bleu vire naturellement du bleu profond au violet lilas au contact de l'acide. Purement naturel — aucun colorant.</div>
     </div></div>
   </div>
 
   <div class="card dr" onclick="toggle(this)">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="card-name">Somnambule</div>
-        <div class="card-teaser">Aérien, légèrement acidulé. Une mousse qui persiste.</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Somnambule</div>
+      <div class="card-teaser" data-fr="Aérien, légèrement acidulé. Une mousse qui persiste." data-de="Luftig, leicht säuerlich. Ein Schaum, der bleibt.">Aérien, légèrement acidulé. Une mousse qui persiste.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol">18 cl</div>
+      <div class="card-price">9,50 €</div>
     </div>
-    <div class="card-bot"><div class="card-price">9,50 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Vodka 5 cl · Sirop de lavande 2 cl · Lemon curd 2 cl · Jus de citron 2 cl · Blanc d'œuf 3 cl · Prosecco 4 cl</div>
-      <div class="scroll-wow">Le dry shake sans glace crée une mousse lilas dense et persistante. Un pétale de lavande séchée y flotte sans jamais couler.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Vodka · Sirop de lavande · Lemon curd · Jus de citron · Blanc d'œuf · Prosecco</div>
+      <div class="scroll-wow" data-fr="Le dry shake sans glace crée une mousse lilas dense et persistante. Un pétale de lavande séchée y flotte sans jamais couler." data-de="Das Dry-Shake ohne Eis erzeugt einen dichten, anhaltenden Lilaschäum. Ein getrocknetes Lavendelblütenblatt schwebt darin — es sinkt nie.">Le dry shake sans glace crée une mousse lilas dense et persistante. Un pétale de lavande séchée y flotte sans jamais couler.</div>
     </div></div>
   </div>
 
   <div class="card dr" onclick="toggle(this)">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="card-name">Oneiroi</div>
-        <div class="card-teaser">Tropical, solaire. La passion dans toute sa fraîcheur.</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Oneiroi</div>
+      <div class="card-teaser" data-fr="Tropical, solaire. La passion dans toute sa fraîcheur." data-de="Tropisch, sonnig. Maracuja in ihrer ganzen Frische.">Tropical, solaire. La passion dans toute sa fraîcheur.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol">15 cl</div>
+      <div class="card-price">8,90 €</div>
     </div>
-    <div class="card-bot"><div class="card-price">8,90 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Vodka 5 cl · Purée fruit de la passion 4 cl · Sirop vanille 1,5 cl · Jus de citron 2 cl · Eau gazeuse 3 cl</div>
-      <div class="scroll-wow">Une demi-passion fraîche posée en garniture — comestible, parfumée, et visuellement parfaite dans la pénombre.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Vodka · Purée fruit de la passion · Sirop vanille · Jus de citron · Eau gazeuse</div>
+      <div class="scroll-wow" data-fr="Une demi-passion fraîche posée en garniture — comestible, parfumée, et visuellement parfaite dans la pénombre." data-de="Eine halbe frische Maracuja als Garnitur — essbar, duftend und optisch perfekt im Halbdunkel.">Une demi-passion fraîche posée en garniture — comestible, parfumée, et visuellement parfaite dans la pénombre.</div>
     </div></div>
   </div>
 
   <div class="card dr" onclick="toggle(this)">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="card-name">Piero la Lune</div>
-        <div class="card-teaser">Botanique, vif. Quelque chose de brûlé dans l'air.</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Piero la Lune</div>
+      <div class="card-teaser" data-fr="Botanique, vif. Quelque chose de brûlé dans l'air." data-de="Botanisch, frisch. Etwas Verbranntes in der Luft.">Botanique, vif. Quelque chose de brûlé dans l'air.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol">15 cl</div>
+      <div class="card-price">8,90 €</div>
     </div>
-    <div class="card-bot"><div class="card-price">8,90 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Gin 5 cl · Liqueur de fleurs de sureau 2 cl · Jus de citron vert 3 cl · Sirop de canne 1,5 cl · Eau gazeuse 4 cl</div>
-      <div class="scroll-wow">Une branche de romarin brûlée à la flamme est posée sur le verre. La fumée aromatique s'en échappe et parfume chaque gorgée.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Gin · Liqueur de fleurs de sureau · Jus de citron vert · Sirop de canne · Eau gazeuse</div>
+      <div class="scroll-wow" data-fr="Une branche de romarin brûlée à la flamme est posée sur le verre. La fumée aromatique s'en échappe et parfume chaque gorgée." data-de="Ein an der Flamme verbrannter Rosmarinzweig wird auf das Glas gelegt. Der aromatische Rauch entweicht und parfümiert jeden Schluck.">Une branche de romarin brûlée à la flamme est posée sur le verre. La fumée aromatique s'en échappe et parfume chaque gorgée.</div>
     </div></div>
   </div>
 
   <div class="card dr" onclick="toggle(this)">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="card-name">New Moon Spritz</div>
-        <div class="card-teaser">Pétillant, floral, avec une profondeur qui surprend.</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">New Moon Spritz</div>
+      <div class="card-teaser" data-fr="Pétillant, floral, avec une profondeur qui surprend." data-de="Prickelnd, blumig — mit einer überraschenden Tiefe.">Pétillant, floral, avec une profondeur qui surprend.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol">18 cl</div>
+      <div class="card-price">9,90 €</div>
     </div>
-    <div class="card-bot"><div class="card-price">9,90 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Liqueur de miel et violette 6 cl · Prosecco 9 cl · Eau pétillante 3 cl · Zeste d'orange</div>
-      <div class="scroll-wow">Grand ballon, glaçon sphérique. La violette donne une profondeur florale inattendue sous les bulles.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Liqueur de miel et violette · Prosecco · Eau pétillante · Zeste d'orange</div>
+      <div class="scroll-wow" data-fr="Grand ballon, glaçon sphérique. La violette donne une profondeur florale inattendue sous les bulles." data-de="Großes Weinglas, kugelförmiges Eis. Das Veilchen verleiht dem Sprudel eine unerwartete florale Tiefe.">Grand ballon, glaçon sphérique. La violette donne une profondeur florale inattendue sous les bulles.</div>
     </div></div>
   </div>
 
-  <!-- CAUCHEMARS -->
-  <div class="realm nm"><span class="realm-tag">Royaume des Cauchemars</span></div>
+  <div class="realm nm"><span class="realm-tag" data-fr="Royaume des Cauchemars" data-de="Reich der Albträume">Royaume des Cauchemars</span></div>
 
   <div class="card nm" onclick="toggle(this)">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="card-name">La Succube</div>
-        <div class="card-teaser">Acidulé, séducteur. Rouge profond, bord givré au sel noir.</div>
-      </div>
-    </div>
-    <div class="card-bot"><div class="card-price">9,90 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
-    <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Vodka 5 cl · Liqueur de framboise 2 cl · Jus de cranberry 6 cl · Citron vert 2 cl · Sel noir pour givrer</div>
-      <div class="scroll-wow">Le bord givré au sel noir tranche avec brutalité sur le rouge profond. Acide, fruité, séducteur. L'effet graphique est immédiat dans le noir.</div>
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">La Succube</div>
+      <div class="card-teaser" data-fr="Acidulé, séducteur. Rouge profond, bord givré au sel noir." data-de="Säuerlich, verführerisch. Tiefrot, schwarzsalzgereifter Rand.">Acidulé, séducteur. Rouge profond, bord givré au sel noir.</div>
     </div></div>
-  </div>
-
-  <div class="card nm" onclick="toggle(this)">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="card-name">Baba Yaga</div>
-        <div class="card-teaser">Herbacé, festif. Le mojito que tu n'attendais pas.</div>
-      </div>
+    <div class="card-bot">
+      <div class="card-vol">15 cl</div>
+      <div class="card-price">9,90 €</div>
     </div>
-    <div class="card-bot"><div class="card-price">8,90 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Rhum 5 cl · Citron vert 3 cl · Sucre de canne 2 cl · Menthe fraîche · Vodka noire 1 cl (touche finale) · Eau gazeuse 6 cl</div>
-      <div class="scroll-wow">Quelques gouttes de vodka noire tourbillonnent dans le vert de menthe. Servi avec une baguette en bambou pour remuer soi-même — la couleur se dévoile lentement.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Vodka · Liqueur de framboise · Jus de cranberry · Citron vert · Sel noir pour givrer</div>
+      <div class="scroll-wow" data-fr="Le bord givré au sel noir tranche avec brutalité sur le rouge profond. Acide, fruité, séducteur. L'effet graphique est immédiat dans le noir." data-de="Der schwarzsalzgereimte Rand kontrastiert brutal mit dem tiefen Rot. Säuerlich, fruchtig, verführerisch — die Wirkung ist im Dunkeln sofort sichtbar.">Le bord givré au sel noir tranche avec brutalité sur le rouge profond. Acide, fruité, séducteur. L'effet graphique est immédiat dans le noir.</div>
     </div></div>
   </div>
 
   <div class="card nm" onclick="toggle(this)">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="card-name">Réveil Amer</div>
-        <div class="card-teaser">Intense, café, légèrement torréfié. Cauchemar ou éveil ?</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Baba Yaga</div>
+      <div class="card-teaser" data-fr="Herbacé, festif. Le mojito que tu n'attendais pas." data-de="Kräuterig, festlich. Das Mojito, das du nicht erwartest hast.">Herbacé, festif. Le mojito que tu n'attendais pas.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol">17 cl</div>
+      <div class="card-price">8,90 €</div>
     </div>
-    <div class="card-bot"><div class="card-price">9,50 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Vodka 5 cl · Double espresso froid 4 cl · Liqueur de café 2 cl · Amaro 1,5 cl · Sirop de canne 1 cl</div>
-      <div class="scroll-wow">L'amaro ajoute une amertume botanique que le café seul ne donne pas — une profondeur inattendue qui s'installe progressivement. Mousse dense en surface, trois grains.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Rhum · Citron vert · Sucre de canne · Menthe fraîche · Vodka noire (touche finale) · Eau gazeuse</div>
+      <div class="scroll-wow" data-fr="Quelques gouttes de vodka noire tourbillonnent dans le vert de menthe. Servi avec une baguette en bambou pour remuer soi-même — la couleur se dévoile lentement." data-de="Einige Tropfen schwarzer Wodka wirbeln im Mintgrün. Mit Bambustäbchen serviert, um selbst umzurühren — die Farbe enthüllt sich langsam.">Quelques gouttes de vodka noire tourbillonnent dans le vert de menthe. Servi avec une baguette en bambou pour remuer soi-même — la couleur se dévoile lentement.</div>
     </div></div>
   </div>
 
-  <p style="text-align:center;font-size:11.5px;color:var(--faint);font-style:italic;margin-top:20px;">Touchez un élixir pour en révéler les arcanes</p>
+  <div class="card nm" onclick="toggle(this)">
+    <div class="card-top"><div class="card-left">
+      <div class="card-name">Réveil Amer</div>
+      <div class="card-teaser" data-fr="Intense, café, légèrement torréfié. Cauchemar ou éveil ?" data-de="Intensiv, kaffeeig, leicht geröstet. Albtraum oder Erwachen?">Intense, café, légèrement torréfié. Cauchemar ou éveil ?</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol">13 cl</div>
+      <div class="card-price">9,50 €</div>
+    </div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
+    <div class="scroll"><div class="scroll-in">
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Vodka · Double espresso froid · Liqueur de café · Amaro · Sirop de canne</div>
+      <div class="scroll-wow" data-fr="L'amaro ajoute une amertume botanique que le café seul ne donne pas — une profondeur inattendue qui s'installe progressivement. Mousse dense en surface, trois grains." data-de="Der Amaro fügt eine botanische Bitterkeit hinzu, die Kaffee allein nicht liefert — eine unerwartete Tiefe, die sich schrittweise entfaltet. Dichter Schaum, drei Kaffeebohnen.">L'amaro ajoute une amertume botanique que le café seul ne donne pas — une profondeur inattendue qui s'installe progressivement. Mousse dense en surface, trois grains.</div>
+    </div></div>
+  </div>
+
+  <p style="text-align:center;font-size:11.5px;color:var(--faint);font-style:italic;margin-top:20px;" data-fr="Touchez un élixir pour en révéler les arcanes" data-de="Tippen Sie auf ein Elixier, um seine Geheimnisse zu enthüllen">Touchez un élixir pour en révéler les arcanes</p>
 </div>
 
 <!-- ══════ CHAPITRE II — LES CINQ GOÛTS ══════ -->
 <div id="gouts" class="chap">
   <div class="chap-head">
-    <span class="chap-ornament">Chapitre Second</span>
-    <div class="chap-title">Les Cinq Goûts</div>
+    <span class="chap-ornament" data-fr="Chapitre Second" data-de="Zweites Kapitel">Chapitre Second</span>
+    <div class="chap-title" data-fr="Les Cinq Goûts" data-de="Die Fünf Sinne">Les Cinq Goûts</div>
     <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em>Cinq sens. Cinq portes. Chaque élixir réveille<br>une sensation que vous n'attendiez pas.</em></p>
+    <p class="chap-verse"><em data-fr="Cinq sens. Cinq portes. Chaque élixir réveille une sensation que vous n'attendiez pas." data-de="Fünf Sinne. Fünf Tore. Jedes Elixier weckt eine Empfindung, die Sie nicht erwartet hätten.">Cinq sens. Cinq portes. Chaque élixir réveille<br>une sensation que vous n'attendiez pas.</em></p>
   </div>
 
-  <!-- AMER -->
   <div class="card taste" onclick="toggle(this)" style="border-color:rgba(46,139,87,.35);background:rgba(46,139,87,.04);">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="taste-badge" style="color:#90c8a0;border:1px solid rgba(46,139,87,.4);background:rgba(46,139,87,.07);">AMER</div>
-        <div class="card-name" style="color:#b8e8c8;">Spritz Aperol Fumé</div>
-        <div class="card-teaser">Amer rafraîchissant, avec un souffle de jardin brûlé.</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="taste-badge" style="color:#90c8a0;border:1px solid rgba(46,139,87,.4);background:rgba(46,139,87,.07);" data-fr="AMER" data-de="BITTER">AMER</div>
+      <div class="card-name" style="color:#b8e8c8;">Spritz Aperol Fumé</div>
+      <div class="card-teaser" data-fr="Amer rafraîchissant, avec un souffle de jardin brûlé." data-de="Erfrischend bitter, mit einem Hauch verbranntem Garten.">Amer rafraîchissant, avec un souffle de jardin brûlé.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol" style="color:rgba(100,180,130,.5);">18 cl</div>
+      <div class="card-price" style="color:#90c8a0;">8,50 €</div>
     </div>
-    <div class="card-bot"><div class="card-price" style="color:#90c8a0;">8,50 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(46,139,87,.7);border:1px dashed rgba(46,139,87,.3);">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(46,139,87,.8);border:1px dashed rgba(46,139,87,.4);" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in" style="background:rgba(46,139,87,.06);border-color:rgba(46,139,87,.2);">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Aperol 6 cl · Prosecco 9 cl · San Pellegrino 3 cl · Demi-tranche d'orange · Romarin</div>
-      <div class="scroll-wow" style="color:#b8e8c8;background:rgba(46,139,87,.08);border-left:2px solid rgba(46,139,87,.5);">Versez dans l'ordre Prosecco → Aperol → eau : le dégradé se forme seul. Ne jamais remuer. Brûler le romarin à la flamme et poser dessus — la fumée fait tout.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Aperol · Prosecco · San Pellegrino · Demi-tranche d'orange · Romarin</div>
+      <div class="scroll-wow" style="color:#b8e8c8;background:rgba(46,139,87,.08);border-left:2px solid rgba(46,139,87,.5);" data-fr="Versez dans l'ordre Prosecco → Aperol → eau : le dégradé se forme seul. Ne jamais remuer. Brûler le romarin à la flamme et poser dessus — la fumée fait tout." data-de="In der Reihenfolge Prosecco → Aperol → Wasser einschenken: Der Farbverlauf entsteht von selbst. Niemals umrühren. Rosmarin an der Flamme verbrennen und drauflegen — der Rauch macht alles.">Versez dans l'ordre Prosecco → Aperol → eau : le dégradé se forme seul. Ne jamais remuer. Brûler le romarin à la flamme et poser dessus — la fumée fait tout.</div>
     </div></div>
   </div>
 
-  <!-- ACIDE -->
   <div class="card taste" onclick="toggle(this)" style="border-color:rgba(200,180,0,.35);background:rgba(200,180,0,.03);">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="taste-badge" style="color:#f0e060;border:1px solid rgba(200,180,0,.4);background:rgba(200,180,0,.07);">ACIDE</div>
-        <div class="card-name" style="color:#f5e880;">Gimlet Gingembre Électrique</div>
-        <div class="card-teaser">Tranchant, vivifiant. La piqûre qui réveille.</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="taste-badge" style="color:#f0e060;border:1px solid rgba(200,180,0,.4);background:rgba(200,180,0,.07);" data-fr="ACIDE" data-de="SAUER">ACIDE</div>
+      <div class="card-name" style="color:#f5e880;">Gimlet Gingembre Électrique</div>
+      <div class="card-teaser" data-fr="Tranchant, vivifiant. La piqûre qui réveille." data-de="Scharf, belebend. Der Stich, der wachrüttelt.">Tranchant, vivifiant. La piqûre qui réveille.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol" style="color:rgba(180,170,0,.4);">14 cl</div>
+      <div class="card-price" style="color:#d4c040;">8,90 €</div>
     </div>
-    <div class="card-bot"><div class="card-price" style="color:#d4c040;">8,90 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(200,180,0,.7);border:1px dashed rgba(200,180,0,.3);">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(200,180,0,.8);border:1px dashed rgba(200,180,0,.4);" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in" style="background:rgba(200,180,0,.05);border-color:rgba(200,180,0,.2);">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Gin 5 cl · Citron vert frais 3 cl · Sirop de gingembre 2 cl · Eau gazeuse 4 cl · 3 rondelles de concombre</div>
-      <div class="scroll-wow" style="color:#f5e880;background:rgba(200,180,0,.07);border-left:2px solid rgba(200,180,0,.5);">Verre passé 5 min au congélateur avant service — il givre à l'air libre. La double acidité gin + gingembre réveille instantanément.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Gin · Citron vert frais · Sirop de gingembre · Eau gazeuse · 3 rondelles de concombre</div>
+      <div class="scroll-wow" style="color:#f5e880;background:rgba(200,180,0,.07);border-left:2px solid rgba(200,180,0,.5);" data-fr="Verre passé 5 min au congélateur avant service — il givre à l'air libre. La double acidité gin + gingembre réveille instantanément." data-de="Das Glas 5 Minuten vor dem Service in den Gefrierraum — es beschlägt an der Luft. Die doppelte Säure Gin + Ingwer weckt sofort auf.">Verre passé 5 min au congélateur avant service — il givre à l'air libre. La double acidité gin + gingembre réveille instantanément.</div>
     </div></div>
   </div>
 
-  <!-- SUCRÉ -->
   <div class="card taste" onclick="toggle(this)" style="border-color:rgba(200,80,140,.35);background:rgba(200,80,140,.03);">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="taste-badge" style="color:#ffb8e0;border:1px solid rgba(200,80,140,.4);background:rgba(200,80,140,.07);">SUCRE</div>
-        <div class="card-name" style="color:#ffc8e8;">Lychee Rose Bubble</div>
-        <div class="card-teaser">Délicat, presque sucré-salé. Champagne et litchi en coupe.</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="taste-badge" style="color:#ffb8e0;border:1px solid rgba(200,80,140,.4);background:rgba(200,80,140,.07);" data-fr="SUCRE" data-de="SÜß">SUCRE</div>
+      <div class="card-name" style="color:#ffc8e8;">Lychee Rose Bubble</div>
+      <div class="card-teaser" data-fr="Délicat, presque sucré-salé. Champagne et litchi en coupe." data-de="Zart, fast süß-salzig. Champagner und Lychee in der Schale.">Délicat, presque sucré-salé. Champagne et litchi en coupe.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol" style="color:rgba(180,80,130,.4);">18 cl</div>
+      <div class="card-price" style="color:#d080b0;">9,50 €</div>
     </div>
-    <div class="card-bot"><div class="card-price" style="color:#d080b0;">9,50 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(200,80,140,.7);border:1px dashed rgba(200,80,140,.3);">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(200,80,140,.8);border:1px dashed rgba(200,80,140,.4);" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in" style="background:rgba(200,80,140,.06);border-color:rgba(200,80,140,.2);">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Vodka 5 cl · Jus de litchi 4 cl · Sirop de rose 2 cl · Jus de citron 1 cl · Champagne ou Crémant 6 cl · Pétale de rose comestible</div>
-      <div class="scroll-wow" style="color:#ffc8e8;background:rgba(200,80,140,.08);border-left:2px solid rgba(200,80,140,.5);">Un pétale de rose comestible flottant dans une coupe rose pâle — 100% de succès garanti dans la pénombre.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Vodka · Jus de litchi · Sirop de rose · Jus de citron · Champagne ou Crémant · Pétale de rose comestible</div>
+      <div class="scroll-wow" style="color:#ffc8e8;background:rgba(200,80,140,.08);border-left:2px solid rgba(200,80,140,.5);" data-fr="Un pétale de rose comestible flottant dans une coupe rose pâle — 100% de succès garanti dans la pénombre." data-de="Ein essbares Rosenblütenblatt schwebt in einer zartrosa Schale — im Halbdunkel jedes Mal ein Treffer.">Un pétale de rose comestible flottant dans une coupe rose pâle — 100% de succès garanti dans la pénombre.</div>
     </div></div>
   </div>
 
-  <!-- SALÉ -->
   <div class="card taste" onclick="toggle(this)" style="border-color:rgba(40,140,200,.35);background:rgba(40,140,200,.03);">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="taste-badge" style="color:#a8d8f8;border:1px solid rgba(40,140,200,.4);background:rgba(40,140,200,.07);">SALE</div>
-        <div class="card-name" style="color:#c0e8ff;">Bloody Caesar Choc</div>
-        <div class="card-teaser">Iodé, épicé, presque un repas. Le cocktail qui dérange.</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="taste-badge" style="color:#a8d8f8;border:1px solid rgba(40,140,200,.4);background:rgba(40,140,200,.07);" data-fr="SALE" data-de="SALZIG">SALE</div>
+      <div class="card-name" style="color:#c0e8ff;">Bloody Caesar Choc</div>
+      <div class="card-teaser" data-fr="Iodé, épicé, presque un repas. Le cocktail qui dérange." data-de="Jodhaltig, würzig, fast eine Mahlzeit. Der Cocktail, der stört.">Iodé, épicé, presque un repas. Le cocktail qui dérange.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol" style="color:rgba(40,120,180,.5);">20 cl</div>
+      <div class="card-price" style="color:#5090c0;">9,90 €</div>
     </div>
-    <div class="card-bot"><div class="card-price" style="color:#5090c0;">9,90 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(40,140,200,.7);border:1px dashed rgba(40,140,200,.3);">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(40,140,200,.8);border:1px dashed rgba(40,140,200,.4);" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in" style="background:rgba(40,140,200,.06);border-color:rgba(40,140,200,.2);">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Vodka 5 cl · Clamato 12 cl · Tabasco 4 traits · Worcestershire 3 traits · Citron vert 1 cl · Sel de céleri + poivre noir pour givrer</div>
-      <div class="scroll-wow" style="color:#c0e8ff;background:rgba(40,140,200,.08);border-left:2px solid rgba(40,140,200,.5);">Bord givré sel fumé. Tour comestible : céleri + olive + cornichon plantés comme un décor. Le seul cocktail qui peut remplacer un repas.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Vodka · Clamato · Tabasco · Worcestershire · Citron vert · Sel de céleri + poivre noir pour givrer</div>
+      <div class="scroll-wow" style="color:#c0e8ff;background:rgba(40,140,200,.08);border-left:2px solid rgba(40,140,200,.5);" data-fr="Bord givré sel fumé. Tour comestible : céleri + olive + cornichon plantés comme un décor. Le seul cocktail qui peut remplacer un repas." data-de="Geräuchertes Salzrand. Essbarer Turm: Sellerie + Olive + Gewürzgurke als Dekoration. Der einzige Cocktail, der eine Mahlzeit ersetzen kann.">Bord givré sel fumé. Tour comestible : céleri + olive + cornichon plantés comme un décor. Le seul cocktail qui peut remplacer un repas.</div>
     </div></div>
   </div>
 
-  <!-- UMAMI -->
   <div class="card taste" onclick="toggle(this)" style="border-color:rgba(160,80,220,.35);background:rgba(160,80,220,.03);">
-    <div class="card-top">
-      <div class="card-left">
-        <div class="taste-badge" style="color:#d8a8ff;border:1px solid rgba(160,80,220,.4);background:rgba(160,80,220,.07);">UMAMI</div>
-        <div class="card-name" style="color:#e8c8ff;">Dirty Butterfly</div>
-        <div class="card-teaser">Floral en surface, profond en dessous. La couleur change devant vous.</div>
-      </div>
+    <div class="card-top"><div class="card-left">
+      <div class="taste-badge" style="color:#d8a8ff;border:1px solid rgba(160,80,220,.4);background:rgba(160,80,220,.07);" data-fr="UMAMI" data-de="UMAMI">UMAMI</div>
+      <div class="card-name" style="color:#e8c8ff;">Dirty Butterfly</div>
+      <div class="card-teaser" data-fr="Floral en surface, profond en dessous. La couleur change devant vous." data-de="Blumig an der Oberfläche, tief darunter. Die Farbe wechselt vor Ihren Augen.">Floral en surface, profond en dessous. La couleur change devant vous.</div>
+    </div></div>
+    <div class="card-bot">
+      <div class="card-vol" style="color:rgba(140,80,200,.4);">22 cl</div>
+      <div class="card-price" style="color:#a060d0;">9,90 €</div>
     </div>
-    <div class="card-bot"><div class="card-price" style="color:#a060d0;">9,90 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(160,80,220,.7);border:1px dashed rgba(160,80,220,.3);">Révéler l'arcane</button>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" style="color:rgba(160,80,220,.8);border:1px dashed rgba(160,80,220,.4);" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in" style="background:rgba(160,80,220,.06);border-color:rgba(160,80,220,.2);">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Gin 5 cl · Thé fleur de pois bleu 15 cl (5 min d'infusion) · Sirop de canne 1,5 cl · Sauce soja light 0,5 cl · Citron 2 cl (versé devant vous)</div>
-      <div class="scroll-wow" style="color:#e8c8ff;background:rgba(160,80,220,.08);border-left:2px solid rgba(160,80,220,.5);">La réaction acide-anthocyane du thé de pois bleu est purement naturelle : le bleu vire au violet/rose en 3 secondes. La sauce soja ajoute une profondeur umami unique que rien d'autre ne réplique.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Gin · Thé fleur de pois bleu · Sirop de canne · Sauce soja light · Citron (versé devant vous)</div>
+      <div class="scroll-wow" style="color:#e8c8ff;background:rgba(160,80,220,.08);border-left:2px solid rgba(160,80,220,.5);" data-fr="La réaction acide-anthocyane du thé de pois bleu est purement naturelle : le bleu vire au violet/rose en 3 secondes. La sauce soja ajoute une profondeur umami unique que rien d'autre ne réplique." data-de="Die Säure-Anthocyan-Reaktion des Schmetterlingserbsentees ist rein natürlich: Das Blau wechselt in 3 Sekunden zu Violett/Rosa. Die Sojasoße fügt eine einzigartige Umami-Tiefe hinzu, die nichts anderes replizieren kann.">La réaction acide-anthocyane du thé de pois bleu est purement naturelle : le bleu vire au violet/rose en 3 secondes. La sauce soja ajoute une profondeur umami unique que rien d'autre ne réplique.</div>
     </div></div>
   </div>
 </div>
@@ -603,55 +579,64 @@ body::before {
 <!-- ══════ CHAPITRE III — SANS ALCOOL ══════ -->
 <div id="mocktails" class="chap">
   <div class="chap-head">
-    <span class="chap-ornament">Chapitre Troisième</span>
-    <div class="chap-title">Élixirs Purs</div>
+    <span class="chap-ornament" data-fr="Chapitre Troisième" data-de="Drittes Kapitel">Chapitre Troisième</span>
+    <div class="chap-title" data-fr="Élixirs Purs" data-de="Reine Elixiere">Élixirs Purs</div>
     <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em>Toute la cérémonie. Sans la spirale.</em></p>
+    <p class="chap-verse"><em data-fr="Toute la cérémonie. Sans la spirale." data-de="Die ganze Zeremonie. Ohne die Spirale.">Toute la cérémonie. Sans la spirale.</em></p>
   </div>
 
-  <div class="realm dr"><span class="realm-tag">Côté Rêve</span></div>
+  <div class="realm dr"><span class="realm-tag" data-fr="Côté Rêve" data-de="Seite des Traums">Côté Rêve</span></div>
 
   <div class="card dr" onclick="toggle(this)">
     <div class="card-top"><div class="card-left">
-      <div class="card-name">Jardin de Minuit</div>
-      <div class="card-teaser">Concombre, basilic, citron vert. Frais comme un souffle nocturne.</div>
+      <div class="card-name" data-fr="Jardin de Minuit" data-de="Mitternachtsgarten">Jardin de Minuit</div>
+      <div class="card-teaser" data-fr="Concombre, basilic, citron vert. Frais comme un souffle nocturne." data-de="Gurke, Basilikum, Limette. Frisch wie ein nächtlicher Hauch.">Concombre, basilic, citron vert. Frais comme un souffle nocturne.</div>
     </div></div>
-    <div class="card-bot"><div class="card-price">6,20 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="card-bot">
+      <div class="card-vol">20 cl</div>
+      <div class="card-price">6,20 €</div>
+    </div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Eau gazeuse 15 cl · Concombre muddlé 4 tranches · Basilic frais · Citron vert 3 cl · Sirop de canne 2 cl · Eau de fleur d'oranger 0,5 cl</div>
-      <div class="scroll-wow">Muddler le concombre et le basilic libère des arômes végétaux intenses. L'eau de fleur d'oranger ajoute une note florale qui surprend à chaque gorgée.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Eau gazeuse · Concombre muddlé · Basilic frais · Citron vert · Sirop de canne · Eau de fleur d'oranger</div>
+      <div class="scroll-wow" data-fr="Muddler le concombre et le basilic libère des arômes végétaux intenses. L'eau de fleur d'oranger ajoute une note florale qui surprend à chaque gorgée." data-de="Das Zerstampfen von Gurke und Basilikum setzt intensive pflanzliche Aromen frei. Das Orangenblütenwasser fügt eine florale Note hinzu, die bei jedem Schluck überrascht.">Muddler le concombre et le basilic libère des arômes végétaux intenses. L'eau de fleur d'oranger ajoute une note florale qui surprend à chaque gorgée.</div>
     </div></div>
   </div>
 
   <div class="card dr" onclick="toggle(this)">
     <div class="card-top"><div class="card-left">
       <div class="card-name">Ginger Dream</div>
-      <div class="card-teaser">Piquant, pétillant, vivifiant. La chaleur sans l'alcool.</div>
+      <div class="card-teaser" data-fr="Piquant, pétillant, vivifiant. La chaleur sans l'alcool." data-de="Scharf, prickelnd, belebend. Die Wärme ohne Alkohol.">Piquant, pétillant, vivifiant. La chaleur sans l'alcool.</div>
     </div></div>
-    <div class="card-bot"><div class="card-price">6,20 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="card-bot">
+      <div class="card-vol">20 cl</div>
+      <div class="card-price">6,20 €</div>
+    </div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Ginger beer 15 cl · Citron vert 3 cl · Sirop de canne 1,5 cl · Menthe fraîche · Glaçon sphérique</div>
-      <div class="scroll-wow">Verre givré au sucre coloré. Paille en bambou. La chaleur du gingembre monte progressivement — le seul cocktail sans alcool qui réchauffe de l'intérieur.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Ginger beer · Citron vert · Sirop de canne · Menthe fraîche · Glaçon sphérique</div>
+      <div class="scroll-wow" data-fr="Verre givré au sucre coloré. La chaleur du gingembre monte progressivement — le seul sans alcool qui réchauffe de l'intérieur." data-de="Glas mit farbigem Zucker bereift. Die Ingwerwärme steigt allmählich — das einzige alkoholfreie Getränk, das von innen wärmt.">Verre givré au sucre coloré. La chaleur du gingembre monte progressivement — le seul sans alcool qui réchauffe de l'intérieur.</div>
     </div></div>
   </div>
 
-  <div class="realm nm"><span class="realm-tag">Côté Cauchemar</span></div>
+  <div class="realm nm"><span class="realm-tag" data-fr="Côté Cauchemar" data-de="Seite des Albtraums">Côté Cauchemar</span></div>
 
   <div class="card nm" onclick="toggle(this)">
     <div class="card-top"><div class="card-left">
-      <div class="card-name">Veuve Noire</div>
-      <div class="card-teaser">Sombre, fruité-acidulé. Grenade et hibiscus dans le noir.</div>
+      <div class="card-name" data-fr="Veuve Noire" data-de="Schwarze Witwe">Veuve Noire</div>
+      <div class="card-teaser" data-fr="Sombre, fruité-acidulé. Grenade et hibiscus dans le noir." data-de="Dunkel, fruchtig-sauer. Granatapfel und Hibiskus im Dunkel.">Sombre, fruité-acidulé. Grenade et hibiscus dans le noir.</div>
     </div></div>
-    <div class="card-bot"><div class="card-price">6,20 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="card-bot">
+      <div class="card-vol">20 cl</div>
+      <div class="card-price">6,20 €</div>
+    </div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Infusion hibiscus 12 cl (froide) · Jus de grenade 4 cl · Citron vert 2 cl · Sirop de canne 1,5 cl · Eau gazeuse 3 cl · Sel noir pour givrer</div>
-      <div class="scroll-wow">L'hibiscus donne naturellement une couleur rouge sang profonde et une acidité florale. Le bord givré au sel noir crée le même effet graphique que la Succube — sans une goutte d'alcool.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Infusion hibiscus · Jus de grenade · Citron vert · Sirop de canne · Eau gazeuse · Sel noir pour givrer</div>
+      <div class="scroll-wow" data-fr="L'hibiscus donne naturellement une couleur rouge sang profonde et une acidité florale. Le bord givré au sel noir crée le même effet graphique que la Succube — sans une goutte d'alcool." data-de="Hibiskus verleiht natürlich eine tiefe blutrote Farbe und florale Säure. Der schwarzsalzgereimte Rand erzeugt denselben grafischen Effekt wie die Succube — ohne einen Tropfen Alkohol.">L'hibiscus donne naturellement une couleur rouge sang profonde et une acidité florale. Le bord givré au sel noir crée le même effet graphique que la Succube — sans une goutte d'alcool.</div>
     </div></div>
   </div>
 </div>
@@ -659,75 +644,87 @@ body::before {
 <!-- ══════ CHAPITRE IV — FIOLES ══════ -->
 <div id="fioles" class="chap">
   <div class="chap-head">
-    <span class="chap-ornament">Chapitre Quatrième</span>
-    <div class="chap-title">Fioles & Petits Sorts</div>
+    <span class="chap-ornament" data-fr="Chapitre Quatrième" data-de="Viertes Kapitel">Chapitre Quatrième</span>
+    <div class="chap-title" data-fr="Fioles & Petits Sorts" data-de="Fläschchen & Kleine Zauber">Fioles & Petits Sorts</div>
     <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em>Quatre centilitres. Un sort concentré.<br>Scellé — servi en apothicaire.</em></p>
+    <p class="chap-verse"><em data-fr="Quatre centilitres. Un sort concentré. Scellé — servi en apothicaire." data-de="Vier Zentiliter. Ein konzentrierter Zauber. Versiegelt — als Apotheker serviert.">Quatre centilitres. Un sort concentré.<br>Scellé — servi en apothicaire.</em></p>
   </div>
 
-  <div class="realm dr"><span class="realm-tag">Fioles des Rêves</span></div>
+  <div class="realm dr"><span class="realm-tag" data-fr="Fioles des Rêves" data-de="Fläschchen der Träume">Fioles des Rêves</span></div>
 
   <div class="card dr" onclick="toggle(this)">
     <div class="card-top"><div class="card-left">
-      <div class="card-name">Sérum de Lune</div>
-      <div class="card-teaser">Doux, floral. Un pétale flottant dans la fiole.</div>
+      <div class="card-name" data-fr="Sérum de Lune" data-de="Mondserum">Sérum de Lune</div>
+      <div class="card-teaser" data-fr="Doux, floral. Un pétale flottant dans la fiole." data-de="Sanft, blumig. Ein Blütenblatt schwebt im Fläschchen.">Doux, floral. Un pétale flottant dans la fiole.</div>
     </div></div>
-    <div class="card-bot"><div class="card-price">4,50 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="card-bot">
+      <div class="card-vol">4 cl</div>
+      <div class="card-price">4,50 €</div>
+    </div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Vodka 3 cl · Liqueur de litchi 0,5 cl · Sirop de rose 0,5 cl · Citron · Pétale de rose comestible</div>
-      <div class="scroll-wow">Fiole bouchée. Pétale flottant à l'intérieur. À boire d'un trait ou à verser dans un cocktail pour l'amplifier.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Vodka · Liqueur de litchi · Sirop de rose · Citron · Pétale de rose comestible</div>
+      <div class="scroll-wow" data-fr="Fiole bouchée. Pétale flottant à l'intérieur. À boire d'un trait ou à verser dans un cocktail pour l'amplifier." data-de="Verschlossenes Fläschchen. Blütenblatt innen schwebend. Pur trinken oder in einen Cocktail gießen, um ihn zu verstärken.">Fiole bouchée. Pétale flottant à l'intérieur. À boire d'un trait ou à verser dans un cocktail pour l'amplifier.</div>
     </div></div>
   </div>
 
   <div class="card dr" onclick="toggle(this)">
     <div class="card-top"><div class="card-left">
-      <div class="card-name">Brume Violette</div>
-      <div class="card-teaser">La couleur change dans votre main. Botanique, fin.</div>
+      <div class="card-name" data-fr="Brume Violette" data-de="Violetter Nebel">Brume Violette</div>
+      <div class="card-teaser" data-fr="La couleur change dans votre main. Botanique, fin." data-de="Die Farbe wechselt in Ihrer Hand. Botanisch, fein.">La couleur change dans votre main. Botanique, fin.</div>
     </div></div>
-    <div class="card-bot"><div class="card-price">4,50 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="card-bot">
+      <div class="card-vol">4 cl</div>
+      <div class="card-price">4,50 €</div>
+    </div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Gin 3 cl · Thé fleur de pois bleu 0,8 cl · Sirop violette 0,5 cl · Citron (pipette fournie)</div>
-      <div class="scroll-wow">Pipette de citron fournie. Le client verse lui-même — la fiole change de couleur dans sa main en direct.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Gin · Thé fleur de pois bleu · Sirop violette · Citron (pipette fournie)</div>
+      <div class="scroll-wow" data-fr="Pipette de citron fournie. Le client verse lui-même — la fiole change de couleur dans sa main en direct." data-de="Zitronenpipette mitgeliefert. Der Gast gießt selbst — das Fläschchen wechselt die Farbe live in seiner Hand.">Pipette de citron fournie. Le client verse lui-même — la fiole change de couleur dans sa main en direct.</div>
     </div></div>
   </div>
 
-  <div class="realm nm"><span class="realm-tag">Fioles des Cauchemars</span></div>
+  <div class="realm nm"><span class="realm-tag" data-fr="Fioles des Cauchemars" data-de="Fläschchen der Albträume">Fioles des Cauchemars</span></div>
 
   <div class="card nm" onclick="toggle(this)">
     <div class="card-top"><div class="card-left">
-      <div class="card-name">Venin Noir</div>
-      <div class="card-teaser">Opaque. Inconnu. On boit dans le noir.</div>
+      <div class="card-name" data-fr="Venin Noir" data-de="Schwarzes Gift">Venin Noir</div>
+      <div class="card-teaser" data-fr="Opaque. Inconnu. On boit dans le noir." data-de="Undurchsichtig. Unbekannt. Man trinkt im Dunkeln.">Opaque. Inconnu. On boit dans le noir.</div>
     </div></div>
-    <div class="card-bot"><div class="card-price">4,50 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="card-bot">
+      <div class="card-vol">4 cl</div>
+      <div class="card-price">4,50 €</div>
+    </div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Tequila Blanco 3 cl · Vodka noire 0,5 cl · Citron vert 0,3 cl · Sirop agave 0,2 cl</div>
-      <div class="scroll-wow">Fiole noire opaque. On ne voit absolument rien. On boit dans l'inconnu total.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Tequila Blanco · Vodka noire · Citron vert · Sirop agave</div>
+      <div class="scroll-wow" data-fr="Fiole noire opaque. On ne voit absolument rien. On boit dans l'inconnu total." data-de="Undurchsichtiges schwarzes Fläschchen. Man sieht absolut nichts. Man trinkt ins völlige Unbekannte.">Fiole noire opaque. On ne voit absolument rien. On boit dans l'inconnu total.</div>
     </div></div>
   </div>
 
   <div class="card nm" onclick="toggle(this)">
     <div class="card-top"><div class="card-left">
-      <div class="card-name">Feu de l'Enfer</div>
-      <div class="card-teaser">La chaleur arrive. Dix secondes après.</div>
+      <div class="card-name" data-fr="Feu de l'Enfer" data-de="Höllenfeuer">Feu de l'Enfer</div>
+      <div class="card-teaser" data-fr="La chaleur arrive. Dix secondes après." data-de="Die Hitze kommt. Zehn Sekunden später.">La chaleur arrive. Dix secondes après.</div>
     </div></div>
-    <div class="card-bot"><div class="card-price">4,50 €</div></div>
-    <button class="reveal-btn" onclick="revealBtn(event,this)">Révéler l'arcane</button>
+    <div class="card-bot">
+      <div class="card-vol">4 cl</div>
+      <div class="card-price">4,50 €</div>
+    </div>
+    <button class="reveal-btn" onclick="revealBtn(event,this)" data-fr="Révéler l'arcane" data-de="Arkanum enthüllen">Révéler l'arcane</button>
     <div class="scroll"><div class="scroll-in">
-      <div class="scroll-lbl">Composition</div>
-      <div class="scroll-ing">Whisky 3 cl · Sirop de piment 0,5 cl · Gingembre frais · Citron 0,3 cl</div>
-      <div class="scroll-wow">Le pic de chaleur est retardé — il arrive 10 secondes après. Les gens se regardent en comprenant. Parfait en groupe.</div>
+      <div class="scroll-lbl" data-fr="Composition" data-de="Zusammensetzung">Composition</div>
+      <div class="scroll-ing">Whisky · Sirop de piment · Gingembre frais · Citron</div>
+      <div class="scroll-wow" data-fr="Le pic de chaleur est retardé — il arrive 10 secondes après. Les gens se regardent en comprenant. Parfait en groupe." data-de="Der Hitzepeak ist verzögert — er kommt 10 Sekunden später. Die Leute schauen sich an, wenn sie es verstehen. Perfekt in der Gruppe.">Le pic de chaleur est retardé — il arrive 10 secondes après. Les gens se regardent en comprenant. Parfait en groupe.</div>
     </div></div>
   </div>
 
   <div class="pack">
-    <div class="pack-t">Pack Trois Sorts</div>
-    <div class="pack-d">3 fioles au choix dont 1 surprise tirée au sort — idéal avant votre séance</div>
+    <div class="pack-t" data-fr="Pack Trois Sorts" data-de="Paket Drei Zauber">Pack Trois Sorts</div>
+    <div class="pack-d" data-fr="3 fioles au choix dont 1 surprise tirée au sort — idéal avant votre séance" data-de="3 Fläschchen nach Wahl, davon 1 Überraschung per Los — ideal vor Ihrer Session">3 fioles au choix dont 1 surprise tirée au sort — idéal avant votre séance</div>
     <div class="pack-p">11,00 €</div>
   </div>
 </div>
@@ -735,166 +732,118 @@ body::before {
 <!-- ══════ CHAPITRE V — BIÈRES ══════ -->
 <div id="bieres" class="chap">
   <div class="chap-head">
-    <span class="chap-ornament">Chapitre Cinquième</span>
-    <div class="chap-title">Les Bières</div>
+    <span class="chap-ornament" data-fr="Chapitre Cinquième" data-de="Fünftes Kapitel">Chapitre Cinquième</span>
+    <div class="chap-title" data-fr="Les Bières" data-de="Die Biere">Les Bières</div>
     <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em>Pression ou bouteille. Selon l'humeur.</em></p>
+    <p class="chap-verse"><em data-fr="Pression ou bouteille. Selon l'humeur." data-de="Vom Fass oder Flasche. Je nach Stimmung.">Pression ou bouteille. Selon l'humeur.</em></p>
   </div>
-  <div class="sub-head">Pression</div>
+  <div class="sub-head" data-fr="Pression" data-de="Vom Fass">Pression</div>
   <table class="ledger">
-    <tr><td>Bière pression</td><td>25 cl</td><td>4,00 €</td></tr>
-    <tr><td>Bière pression</td><td>50 cl</td><td>6,40 €</td></tr>
+    <tr><td data-fr="Bière pression" data-de="Fassbier">Bière pression</td><td>25 cl</td><td>4,00 €</td></tr>
+    <tr><td data-fr="Bière pression" data-de="Fassbier">Bière pression</td><td>50 cl</td><td>6,40 €</td></tr>
     <tr><td>Panaché</td><td>25 cl / 50 cl</td><td>3,50 / 5,00 €</td></tr>
     <tr><td>Monaco</td><td>25 cl / 50 cl</td><td>3,70 / 5,20 €</td></tr>
     <tr><td>Picon Bière</td><td>25 cl / 50 cl</td><td>4,20 / 6,60 €</td></tr>
   </table>
-  <div class="sub-head">Bouteilles</div>
+  <div class="sub-head" data-fr="Bouteilles" data-de="Flaschen">Bouteilles</div>
   <table class="ledger">
     <tr><td>Desperados</td><td>33 cl · 5,9%</td><td>5,20 €</td></tr>
-    <tr><td>Bière du Sorcier</td><td>33 cl · 5% · Maison</td><td>5,20 €</td></tr>
-    <tr><td>Kasteel Rouge</td><td>33 cl · 8% · Cerise</td><td>5,20 €</td></tr>
+    <tr><td data-fr="Bière du Sorcier" data-de="Hexenbier">Bière du Sorcier</td><td data-fr="33 cl · 5% · Maison" data-de="33 cl · 5% · Hausbrauerei">33 cl · 5% · Maison</td><td>5,20 €</td></tr>
+    <tr><td>Kasteel Rouge</td><td data-fr="33 cl · 8% · Cerise" data-de="33 cl · 8% · Kirsche">33 cl · 8% · Cerise</td><td>5,20 €</td></tr>
   </table>
 </div>
 
 <!-- ══════ CHAPITRE VI — SOFTS ══════ -->
 <div id="softs" class="chap">
   <div class="chap-head">
-    <span class="chap-ornament">Chapitre Sixième</span>
-    <div class="chap-title">Softs & Boissons Chaudes</div>
+    <span class="chap-ornament" data-fr="Chapitre Sixième" data-de="Sechstes Kapitel">Chapitre Sixième</span>
+    <div class="chap-title" data-fr="Softs & Boissons Chaudes" data-de="Softdrinks & Heißgetränke">Softs & Boissons Chaudes</div>
     <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em>Pour veiller toute la nuit ou rêver les yeux ouverts.</em></p>
+    <p class="chap-verse"><em data-fr="Pour veiller toute la nuit ou rêver les yeux ouverts." data-de="Um die ganze Nacht zu wachen oder mit offenen Augen zu träumen.">Pour veiller toute la nuit ou rêver les yeux ouverts.</em></p>
   </div>
-  <div class="sub-head">Softs</div>
+  <div class="sub-head" data-fr="Softs" data-de="Softdrinks">Softs</div>
   <table class="ledger">
     <tr><td>Coca · Zero · Cherry</td><td>33 cl</td><td>3,50 €</td></tr>
-    <tr><td>Thé glacé · Diabolo · Limonade</td><td>33 cl</td><td>3,50 €</td></tr>
+    <tr><td data-fr="Thé glacé · Diabolo · Limonade" data-de="Eistee · Diabolo · Limonade">Thé glacé · Diabolo · Limonade</td><td>33 cl</td><td>3,50 €</td></tr>
     <tr><td>Orangina</td><td>33 cl</td><td>3,50 €</td></tr>
     <tr><td>Oasis</td><td>33 cl</td><td>3,50 €</td></tr>
     <tr><td>Red Bull</td><td>25 cl</td><td>4,00 €</td></tr>
     <tr><td>Iced Coffee · Iced Latte</td><td></td><td>4,00 €</td></tr>
-    <tr><td>Eau plate ou pétillante</td><td>25 cl</td><td>2,00 €</td></tr>
-    <tr><td>Sirops maison</td><td>Grenadine · Violette · Menthe · Pêche · Citron</td><td>inclus</td></tr>
+    <tr><td data-fr="Eau plate ou pétillante" data-de="Still- oder Sprudelwasser">Eau plate ou pétillante</td><td>25 cl</td><td>2,00 €</td></tr>
+    <tr><td data-fr="Sirops maison" data-de="Hausgemachte Sirups">Sirops maison</td><td data-fr="Grenadine · Violette · Menthe · Pêche · Citron" data-de="Grenadine · Veilchen · Minze · Pfirsich · Zitrone">Grenadine · Violette · Menthe · Pêche · Citron</td><td data-fr="inclus" data-de="inklusive">inclus</td></tr>
   </table>
-  <div class="sub-head">Boissons chaudes</div>
+  <div class="sub-head" data-fr="Boissons chaudes" data-de="Heißgetränke">Boissons chaudes</div>
   <table class="ledger">
     <tr><td>Espresso</td><td></td><td>2,00 €</td></tr>
     <tr><td>Double Espresso</td><td></td><td>3,30 €</td></tr>
-    <tr><td>Café allongé</td><td></td><td>2,50 €</td></tr>
+    <tr><td data-fr="Café allongé" data-de="Verlängerter Kaffee">Café allongé</td><td></td><td>2,50 €</td></tr>
     <tr><td>Cappuccino</td><td></td><td>3,50 €</td></tr>
-    <tr><td>Café au lait</td><td></td><td>3,40 €</td></tr>
-    <tr><td>Affogato</td><td>Espresso · glace vanille</td><td>4,20 €</td></tr>
-    <tr><td>Chocolat chaud</td><td></td><td>3,50 €</td></tr>
+    <tr><td data-fr="Café au lait" data-de="Milchkaffee">Café au lait</td><td></td><td>3,40 €</td></tr>
+    <tr><td>Affogato</td><td data-fr="Espresso · glace vanille" data-de="Espresso · Vanilleeis">Espresso · glace vanille</td><td>4,20 €</td></tr>
+    <tr><td data-fr="Chocolat chaud" data-de="Heiße Schokolade">Chocolat chaud</td><td></td><td>3,50 €</td></tr>
     <tr><td>Chaï Latte</td><td></td><td>3,90 €</td></tr>
-    <tr><td>Thés Dammann</td><td>Voir carte des thés</td><td>3,50 €</td></tr>
-    <tr><td>Sirops en supplément</td><td>Noisette · Pumpkin · Vanille</td><td>+0,50 €</td></tr>
-    <tr><td>Lait d'amande</td><td>sur demande</td><td>inclus</td></tr>
+    <tr><td data-fr="Thés Dammann" data-de="Dammann Tees">Thés Dammann</td><td data-fr="Voir carte des thés" data-de="Siehe Teekarte">Voir carte des thés</td><td>3,50 €</td></tr>
+    <tr><td data-fr="Sirops en supplément" data-de="Sirups extra">Sirops en supplément</td><td data-fr="Noisette · Pumpkin · Vanille" data-de="Haselnuss · Kürbis · Vanille">Noisette · Pumpkin · Vanille</td><td>+0,50 €</td></tr>
+    <tr><td data-fr="Lait d'amande" data-de="Mandelmilch">Lait d'amande</td><td data-fr="sur demande" data-de="auf Anfrage">sur demande</td><td data-fr="inclus" data-de="inklusive">inclus</td></tr>
   </table>
 </div>
 
 <!-- ══════ CHAPITRE VII — THÉS ══════ -->
 <div id="thes" class="chap">
   <div class="chap-head">
-    <span class="chap-ornament">Chapitre Septième</span>
-    <div class="chap-title">La Carte des Thés</div>
+    <span class="chap-ornament" data-fr="Chapitre Septième" data-de="Siebtes Kapitel">Chapitre Septième</span>
+    <div class="chap-title" data-fr="La Carte des Thés" data-de="Die Teekarte">La Carte des Thés</div>
     <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em>Dammann Frères · Sélection de la maison</em></p>
+    <p class="chap-verse"><em>Dammann Frères · <span data-fr="Sélection de la maison" data-de="Hausauswahl">Sélection de la maison</span></em></p>
   </div>
 
-  <div class="sub-head">Thés Verts</div>
+  <div class="sub-head" data-fr="Thés Verts" data-de="Grüne Tees">Thés Verts</div>
   <table class="tea-table">
-    <tr>
-      <td>À la Menthe</td>
-      <td>Chine</td>
-      <td>Menthe douce et poivrée, idéal très chaud</td>
-    </tr>
-    <tr>
-      <td>Macaron Cassis Violette</td>
-      <td>Chine</td>
-      <td>Gourmand — biscuit, amande, violette, cassis</td>
-    </tr>
-    <tr>
-      <td>Miss Dammann</td>
-      <td>Asie</td>
-      <td>Fruité et épicé — gingembre, fruit de la passion, citron vert, pétales</td>
-    </tr>
-    <tr>
-      <td>Happy Green</td>
-      <td>Chine · glacé</td>
-      <td>Notes fruitées kiwi, pomme et végétales — concombre</td>
-    </tr>
+    <tr><td data-fr="À la Menthe" data-de="Minze">À la Menthe</td><td data-fr="Chine" data-de="China">Chine</td><td data-fr="Menthe douce et poivrée, idéal très chaud" data-de="Süße und pfeffrige Minze, ideal sehr heiß">Menthe douce et poivrée, idéal très chaud</td></tr>
+    <tr><td data-fr="Macaron Cassis Violette" data-de="Macaron Cassis Violette">Macaron Cassis Violette</td><td data-fr="Chine" data-de="China">Chine</td><td data-fr="Gourmand — biscuit, amande, violette, cassis" data-de="Fein-süß — Keks, Mandel, Veilchen, Johannisbeere">Gourmand — biscuit, amande, violette, cassis</td></tr>
+    <tr><td>Miss Dammann</td><td data-fr="Asie" data-de="Asien">Asie</td><td data-fr="Fruité et épicé — gingembre, fruit de la passion, citron vert, pétales" data-de="Fruchtig und würzig — Ingwer, Maracuja, Limette, Blütenblätter">Fruité et épicé — gingembre, fruit de la passion, citron vert, pétales</td></tr>
+    <tr><td>Happy Green</td><td data-fr="Chine · glacé" data-de="China · kalt">Chine · glacé</td><td data-fr="Notes fruitées kiwi, pomme et végétales — concombre" data-de="Fruchtige Noten Kiwi, Apfel und pflanzliche — Gurke">Notes fruitées kiwi, pomme et végétales — concombre</td></tr>
   </table>
 
-  <div class="sub-head">Thés Noirs</div>
+  <div class="sub-head" data-fr="Thés Noirs" data-de="Schwarze Tees">Thés Noirs</div>
   <table class="tea-table">
-    <tr>
-      <td>7 Parfums</td>
-      <td>Chine</td>
-      <td>Fleuri et fruité — citron, abricot, bergamote, figue fraîche, fleurs de lotus</td>
-    </tr>
-    <tr>
-      <td>Pécan Pie</td>
-      <td></td>
-      <td>Très gourmand — noisette, noix de pécan, amande, pistache, miel, pétales</td>
-    </tr>
-    <tr>
-      <td>Goût Russe Douchka</td>
-      <td>Chine · Inde</td>
-      <td>Notes d'agrumes — bergamote, orange douce, citron</td>
-    </tr>
-    <tr>
-      <td>Jardin Bleu</td>
-      <td></td>
-      <td>Fruité — rhubarbe, fraise des bois, baies, pétales</td>
-    </tr>
-    <tr>
-      <td>Chaï</td>
-      <td>Rwanda</td>
-      <td>Épicé — gingembre, cannelle, baies roses, cardamome, clou de girofle</td>
-    </tr>
+    <tr><td>7 Parfums</td><td data-fr="Chine" data-de="China">Chine</td><td data-fr="Fleuri et fruité — citron, abricot, bergamote, figue fraîche, fleurs de lotus" data-de="Blumig und fruchtig — Zitrone, Aprikose, Bergamotte, frische Feige, Lotusblüten">Fleuri et fruité — citron, abricot, bergamote, figue fraîche, fleurs de lotus</td></tr>
+    <tr><td>Pécan Pie</td><td></td><td data-fr="Très gourmand — noisette, noix de pécan, amande, pistache, miel, pétales" data-de="Sehr fein-süß — Haselnuss, Pekannuss, Mandel, Pistazie, Honig, Blütenblätter">Très gourmand — noisette, noix de pécan, amande, pistache, miel, pétales</td></tr>
+    <tr><td>Goût Russe Douchka</td><td data-fr="Chine · Inde" data-de="China · Indien">Chine · Inde</td><td data-fr="Notes d'agrumes — bergamote, orange douce, citron" data-de="Zitrusfrüchte — Bergamotte, süße Orange, Zitrone">Notes d'agrumes — bergamote, orange douce, citron</td></tr>
+    <tr><td>Jardin Bleu</td><td></td><td data-fr="Fruité — rhubarbe, fraise des bois, baies, pétales" data-de="Fruchtig — Rhabarber, Walderdbeere, Beeren, Blütenblätter">Fruité — rhubarbe, fraise des bois, baies, pétales</td></tr>
+    <tr><td>Chaï</td><td>Rwanda</td><td data-fr="Épicé — gingembre, cannelle, baies roses, cardamome, clou de girofle" data-de="Würzig — Ingwer, Zimt, rosa Beeren, Kardamom, Gewürznelke">Épicé — gingembre, cannelle, baies roses, cardamome, clou de girofle</td></tr>
   </table>
 
-  <div class="sub-head">Thé Blanc · Rooibos · Carcadet</div>
+  <div class="sub-head" data-fr="Thé Blanc · Rooibos · Carcadet" data-de="Weißer Tee · Rooibos · Karkadé">Thé Blanc · Rooibos · Carcadet</div>
   <table class="tea-table">
-    <tr>
-      <td>Passion de Fleurs</td>
-      <td>Thé blanc</td>
-      <td>Fruité — fruit de la passion, abricot, pétales, huile essentielle de rose</td>
-    </tr>
-    <tr>
-      <td>Carott Cake</td>
-      <td>Rooibos</td>
-      <td>Gourmand — cannelle, gingembre, carotte, noix de pécan, biscuit, amande</td>
-    </tr>
-    <tr>
-      <td>Passion Framboise</td>
-      <td>Carcadet</td>
-      <td>Fleur d'hibiscus, cynorrhodon, pomme, framboise, pétales — fruit de la passion</td>
-    </tr>
+    <tr><td data-fr="Passion de Fleurs" data-de="Blütenpassion">Passion de Fleurs</td><td data-fr="Thé blanc" data-de="Weißer Tee">Thé blanc</td><td data-fr="Fruité — fruit de la passion, abricot, pétales, huile essentielle de rose" data-de="Fruchtig — Maracuja, Aprikose, Blütenblätter, ätherisches Rosenöl">Fruité — fruit de la passion, abricot, pétales, huile essentielle de rose</td></tr>
+    <tr><td>Carott Cake</td><td>Rooibos</td><td data-fr="Gourmand — cannelle, gingembre, carotte, noix de pécan, biscuit, amande" data-de="Fein-süß — Zimt, Ingwer, Karotte, Pekannuss, Keks, Mandel">Gourmand — cannelle, gingembre, carotte, noix de pécan, biscuit, amande</td></tr>
+    <tr><td data-fr="Passion Framboise" data-de="Himbeerpassion">Passion Framboise</td><td>Carcadet</td><td data-fr="Fleur d'hibiscus, cynorrhodon, pomme, framboise, pétales — fruit de la passion" data-de="Hibiskusblüte, Hagebutte, Apfel, Himbeere, Blütenblätter — Maracuja">Fleur d'hibiscus, cynorrhodon, pomme, framboise, pétales — fruit de la passion</td></tr>
   </table>
 
-  <p style="text-align:center;font-size:11.5px;color:var(--faint);font-style:italic;margin-top:30px;">Tous nos thés — 3,50 €</p>
+  <p style="text-align:center;font-size:12px;color:var(--ash);font-style:italic;margin-top:30px;" data-fr="Tous nos thés — 3,50 €" data-de="Alle unsere Tees — 3,50 €">Tous nos thés — 3,50 €</p>
 </div>
 
 <!-- ══════ CHAPITRE VIII — RESTAURATION ══════ -->
 <div id="food" class="chap">
   <div class="chap-head">
-    <span class="chap-ornament">Chapitre Huitième</span>
-    <div class="chap-title">Restauration</div>
+    <span class="chap-ornament" data-fr="Chapitre Huitième" data-de="Achtes Kapitel">Chapitre Huitième</span>
+    <div class="chap-title" data-fr="Restauration" data-de="Speisen">Restauration</div>
     <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em>Petites faims entre deux mondes.</em></p>
+    <p class="chap-verse"><em data-fr="Petites faims entre deux mondes." data-de="Kleiner Hunger zwischen zwei Welten.">Petites faims entre deux mondes.</em></p>
   </div>
   <div class="viands">
-    <div class="viand"><div class="viand-name">Cookie</div><div class="viand-desc">Maison, chaud si possible</div><div class="viand-price">2,40 €</div></div>
-    <div class="viand"><div class="viand-name">Bretzel</div><div class="viand-desc">Sel de guérande</div><div class="viand-price">3,00 €</div></div>
-    <div class="viand"><div class="viand-name">Fondant Chocolat</div><div class="viand-desc">Cœur coulant · glace pistache</div><div class="viand-price">5,20 €</div></div>
-    <div class="viand"><div class="viand-name">Pancakes</div><div class="viand-desc">Sirop d'érable · glace vanille</div><div class="viand-price">5,20 €</div></div>
-    <div class="viand"><div class="viand-name">Nachos</div><div class="viand-desc">Salsa ou guacamole</div><div class="viand-price">5,00 €</div></div>
-    <div class="viand"><div class="viand-name">Saucisson</div><div class="viand-desc">Sélection & accompagnements</div><div class="viand-price">6,20 €</div></div>
+    <div class="viand"><div class="viand-name" data-fr="Cookie" data-de="Cookie">Cookie</div><div class="viand-desc" data-fr="Maison, chaud si possible" data-de="Hausgemacht, warm wenn möglich">Maison, chaud si possible</div><div class="viand-price">2,40 €</div></div>
+    <div class="viand"><div class="viand-name">Bretzel</div><div class="viand-desc" data-fr="Sel de guérande" data-de="Guérande-Salz">Sel de guérande</div><div class="viand-price">3,00 €</div></div>
+    <div class="viand"><div class="viand-name" data-fr="Fondant Chocolat" data-de="Schokoladenfondant">Fondant Chocolat</div><div class="viand-desc" data-fr="Cœur coulant · glace pistache" data-de="Flüssiger Kern · Pistazieneis">Cœur coulant · glace pistache</div><div class="viand-price">5,20 €</div></div>
+    <div class="viand"><div class="viand-name">Pancakes</div><div class="viand-desc" data-fr="Sirop d'érable · glace vanille" data-de="Ahornsirup · Vanilleeis">Sirop d'érable · glace vanille</div><div class="viand-price">5,20 €</div></div>
+    <div class="viand"><div class="viand-name">Nachos</div><div class="viand-desc" data-fr="Salsa ou guacamole" data-de="Salsa oder Guacamole">Salsa ou guacamole</div><div class="viand-price">5,00 €</div></div>
+    <div class="viand"><div class="viand-name" data-fr="Saucisson" data-de="Salami">Saucisson</div><div class="viand-desc" data-fr="Sélection & accompagnements" data-de="Auswahl & Beilagen">Sélection & accompagnements</div><div class="viand-price">6,20 €</div></div>
   </div>
   <div style="margin-top:14px;">
     <div class="viand" style="border-color:rgba(200,169,110,.4);background:linear-gradient(135deg,var(--parch),rgba(200,169,110,.04));">
-      <div class="viand-name" style="font-size:15px;">Planchette du Rêveur</div>
-      <div class="viand-desc">Fromages & charcuteries sélectionnés · accompagnements du moment</div>
+      <div class="viand-name" style="font-size:15px;" data-fr="Planchette du Rêveur" data-de="Träumerbrett">Planchette du Rêveur</div>
+      <div class="viand-desc" data-fr="Fromages & charcuteries sélectionnés · accompagnements du moment" data-de="Ausgewählte Käse & Charcuterie · Beilagen des Tages">Fromages & charcuteries sélectionnés · accompagnements du moment</div>
       <div class="viand-price">14,00 €</div>
     </div>
   </div>
@@ -906,62 +855,40 @@ body::before {
   <p>
     42 Boulevard du Président Wilson · 67000 Strasbourg<br>
     <a href="https://www.morpheus-experience.com">morpheus-experience.com</a><br><br>
-    Lun–Jeu 14h–21h30 · Ven–Sam 9h30–00h00 · Dim 10h–21h30<br>
-    Prix TTC, service compris · Allergènes sur demande<br>
-    Certains desserts élaborés à partir de produits surgelés<br><br>
-    L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+    <span data-fr="Lun–Jeu 14h–21h30 · Ven–Sam 9h30–00h00 · Dim 10h–21h30" data-de="Mo–Do 14–21:30 · Fr–Sa 9:30–00:00 · So 10–21:30">Lun–Jeu 14h–21h30 · Ven–Sam 9h30–00h00 · Dim 10h–21h30</span><br>
+    <span data-fr="Prix TTC, service compris · Allergènes sur demande" data-de="Preise inkl. MwSt., Service inklusive · Allergene auf Anfrage">Prix TTC, service compris · Allergènes sur demande</span><br>
+    <span data-fr="Certains desserts élaborés à partir de produits surgelés" data-de="Einige Desserts aus Tiefkühlprodukten hergestellt">Certains desserts élaborés à partir de produits surgelés</span><br><br>
+    <span data-fr="L'abus d'alcool est dangereux pour la santé. À consommer avec modération." data-de="Übermäßiger Alkoholkonsum ist gesundheitsschädlich. In Maßen genießen.">L'abus d'alcool est dangereux pour la santé. À consommer avec modération.</span>
   </p>
 </div>
 
-</div><!-- /page -->
+</div>
 
 <script>
 /* PARTICLES */
 const cvs = document.getElementById('cvs');
 const ctx = cvs.getContext('2d');
 let W, H, pts=[];
-
-function resize(){
-  W = cvs.width = window.innerWidth;
-  H = cvs.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', resize);
-
+function resize(){ W = cvs.width = window.innerWidth; H = cvs.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
 const COLORS = ['rgba(139,127,220,','rgba(192,56,56,','rgba(200,169,110,','rgba(255,255,255,'];
-
-for(let i=0;i<55;i++){
-  pts.push({
-    x: Math.random()*2000, y: Math.random()*2000,
-    r: .4 + Math.random()*1.2,
-    vx: (Math.random()-.5)*.18,
-    vy: -.06 - Math.random()*.22,
-    a: Math.random(), da: .003 + Math.random()*.006,
-    c: COLORS[Math.floor(Math.random()*COLORS.length)],
-    life: Math.random()*Math.PI*2
-  });
-}
-
+for(let i=0;i<55;i++) pts.push({x:Math.random()*2000,y:Math.random()*2000,r:.4+Math.random()*1.2,vx:(Math.random()-.5)*.18,vy:-.06-Math.random()*.22,a:Math.random(),da:.003+Math.random()*.006,c:COLORS[Math.floor(Math.random()*COLORS.length)],life:Math.random()*Math.PI*2});
 function drawPts(){
   ctx.clearRect(0,0,W,H);
   pts.forEach(p=>{
-    p.life += p.da;
-    p.a = (.35 + .35*Math.sin(p.life));
-    p.x += p.vx; p.y += p.vy;
-    if(p.y < -10){ p.y = H+10; p.x = Math.random()*W; }
-    if(p.x < -10) p.x = W+10;
-    if(p.x > W+10) p.x = -10;
-    ctx.beginPath();
-    ctx.arc(p.x%W, p.y%H, p.r, 0, Math.PI*2);
-    ctx.fillStyle = p.c + p.a + ')';
-    ctx.fill();
+    p.life+=p.da; p.a=.35+.35*Math.sin(p.life);
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.y<-10){p.y=H+10;p.x=Math.random()*W;}
+    if(p.x<-10)p.x=W+10; if(p.x>W+10)p.x=-10;
+    ctx.beginPath(); ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);
+    ctx.fillStyle=p.c+p.a+')'; ctx.fill();
   });
   requestAnimationFrame(drawPts);
 }
 drawPts();
 
 /* NAV */
-function show(id, btn){
+function show(id,btn){
   document.querySelectorAll('.chap').forEach(c=>c.classList.remove('on'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
   document.getElementById(id).classList.add('on');
@@ -971,24 +898,48 @@ function show(id, btn){
 
 /* CARD TOGGLE */
 function toggle(card){
-  const sc = card.querySelector('.scroll');
-  const btn = card.querySelector('.reveal-btn');
-  const isOpen = sc.classList.contains('on');
+  const sc=card.querySelector('.scroll');
+  const btn=card.querySelector('.reveal-btn');
+  const isOpen=sc.classList.contains('on');
   document.querySelectorAll('.scroll.on').forEach(s=>{
     s.classList.remove('on');
-    const b = s.closest('.card').querySelector('.reveal-btn');
-    if(b) b.textContent = 'Révéler l\'arcane';
+    const b=s.closest('.card').querySelector('.reveal-btn');
+    if(b) b.textContent=b.getAttribute('data-'+currentLang)||b.getAttribute('data-fr');
   });
   if(!isOpen){
     sc.classList.add('on');
-    if(btn) btn.textContent = 'Refermer';
+    if(btn) btn.textContent=currentLang==='de'?'Schließen':'Refermer';
   }
 }
+function revealBtn(e,btn){e.stopPropagation();toggle(btn.closest('.card'));}
 
-function revealBtn(e, btn){
-  e.stopPropagation();
-  const card = btn.closest('.card');
-  toggle(card);
+/* LANG TOGGLE */
+let currentLang='fr';
+function toggleLang(){
+  currentLang=currentLang==='fr'?'de':'fr';
+  const toggle=document.getElementById('lang-toggle');
+  toggle.textContent=currentLang==='fr'?'DE':'FR';
+  toggle.className=currentLang==='de'?'de':'';
+
+  document.querySelectorAll('[data-fr]').forEach(el=>{
+    const txt=el.getAttribute('data-'+currentLang)||el.getAttribute('data-fr');
+    if(el.tagName==='INPUT'||el.tagName==='TEXTAREA') el.value=txt;
+    else el.innerHTML=txt;
+  });
+
+  // keep nav active state
+  document.querySelectorAll('.nav-btn').forEach(btn=>{
+    if(btn.classList.contains('on')){
+      btn.textContent=btn.getAttribute('data-'+currentLang)||btn.getAttribute('data-fr');
+      btn.classList.add('on');
+    }
+  });
+
+  // reset open scroll buttons
+  document.querySelectorAll('.scroll.on').forEach(s=>{
+    const b=s.closest('.card').querySelector('.reveal-btn');
+    if(b) b.textContent=currentLang==='de'?'Schließen':'Refermer';
+  });
 }
 </script>
 </body>
