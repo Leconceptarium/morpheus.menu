@@ -2,665 +2,729 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Morpheus — Grimoire du Bar</title>
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morpheus Experience — Officine du temps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   Morpheus Experience — Officine du temps
+   Ambiance : apothicaire onirique. Palette pastel, sobre.
+   ============================================================ */
 :root{
-  --ink:#070609;--parch:#110f16;
-  --sepia:#c8a96e;--sepia2:#a07840;--sepia3:#5a4020;
-  --dream:#8b7fdc;--dreaml:#c4baff;
-  --night:#c03838;--nightl:#ffaaaa;
-  --gold:#d4a017;--goldl:#f5e6a3;
-  --ash:#8a7f98;--pale:#e8dfc8;--faint:#3a3048;
+  --vellum:#F4EFE4; --vellum-2:#EFE8D8; --panel:#FBF8F1;
+  --ink:#3B3247; --ink-soft:#756B82; --ink-faint:#A79FB0;
+  --line:#DDD3C2; --line-soft:#E8E0D0; --gilt:#B08D57; --gilt-soft:#C9AE7E;
+  --radius:10px; --shadow:0 1px 2px rgba(59,50,71,.05),0 8px 24px rgba(59,50,71,.06);
+  --font-display:'Cormorant Garamond','Iowan Old Style',Georgia,serif;
+  --font-body:'Mulish',system-ui,-apple-system,'Segoe UI',sans-serif;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-html{font-size:18px;scroll-behavior:smooth;}
-body{background:var(--ink);color:var(--pale);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;overflow-x:hidden;font-size:1rem;}
-
-body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity:.04;}
-
-.wax-l,.wax-r{position:fixed;top:0;width:22px;height:100vh;z-index:1;pointer-events:none;}
-.wax-l{left:0;background:linear-gradient(180deg,transparent,rgba(192,56,56,.1) 40%,rgba(192,56,56,.05) 70%,transparent);border-right:1px solid rgba(192,56,56,.08);}
-.wax-r{right:0;background:linear-gradient(180deg,transparent,rgba(139,127,220,.1) 40%,rgba(139,127,220,.05) 70%,transparent);border-left:1px solid rgba(139,127,220,.08);}
-
-#cvs{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;}
-
-.page{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:0 28px 100px;}
-
-/* ── BACK BUTTON ── */
-.back-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:'Cormorant SC',serif;font-size:.65rem;letter-spacing:.35em;
-  color:var(--ash);text-decoration:none;
-  padding:10px 0 0;transition:color .2s;
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0; font-family:var(--font-body); color:var(--ink);
+  background-color:var(--vellum);
+  background-image:
+    radial-gradient(circle at 18% 12%,rgba(176,141,87,.05),transparent 40%),
+    radial-gradient(circle at 85% 78%,rgba(124,108,150,.05),transparent 42%);
+  line-height:1.5; font-size:15px;
 }
-.back-btn:hover{color:var(--sepia);}
-.back-btn::before{content:'←';font-size:.9rem;}
-
-/* ── HERO ── */
-.hero{text-align:center;padding:36px 0 40px;position:relative;}
-.hero::after{content:'';display:block;width:100%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--sepia3),var(--sepia),var(--sepia3),transparent);margin-top:40px;}
-.logo-wrap{width:120px;height:120px;margin:0 auto 24px;}
-.logo-wrap img{width:100%;height:100%;object-fit:contain;filter:brightness(.85) sepia(.4) hue-rotate(10deg);}
-.title-frak{font-family:'UnifrakturMaguntia',serif;font-size:clamp(44px,10vw,74px);color:var(--sepia);letter-spacing:.07em;line-height:1;
-  animation:flicker 7s ease-in-out infinite;margin-bottom:10px;}
-@keyframes flicker{0%,100%{text-shadow:0 0 40px rgba(200,169,110,.2);}45%{text-shadow:0 0 80px rgba(200,169,110,.5),0 0 140px rgba(200,169,110,.15);}47%{text-shadow:none;}49%{text-shadow:0 0 80px rgba(200,169,110,.5);}}
-.hero-sub{font-family:'Cormorant SC',serif;font-size:.62rem;letter-spacing:.55em;color:var(--ash);text-transform:uppercase;}
-.hero-verse{font-style:italic;font-size:.85rem;color:var(--sepia3);margin-top:12px;line-height:1.7;}
-
-/* ── LANG ── */
-.lang-bar{display:flex;justify-content:center;gap:6px;padding:14px 0 0;}
-.lang-btn{background:none;border:1px solid var(--faint);font-family:'Cormorant SC',serif;font-size:.6rem;
-  letter-spacing:.3em;color:var(--ash);cursor:pointer;padding:5px 14px;border-radius:2px;transition:all .2s;}
-.lang-btn:hover,.lang-btn.on{color:var(--sepia);border-color:var(--sepia);}
-
-/* ── NAV ── */
-.nav{position:sticky;top:0;z-index:50;background:rgba(7,6,9,.97);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--faint);padding:10px 0;
-  display:flex;justify-content:center;flex-wrap:wrap;}
-.nav-btn{background:none;border:none;font-family:'Cormorant SC',serif;font-size:.62rem;letter-spacing:.25em;
-  color:var(--ash);cursor:pointer;padding:7px 12px;transition:color .2s;position:relative;}
-.nav-btn::after{content:'·';position:absolute;right:0;top:50%;transform:translateY(-50%);color:var(--faint);}
-.nav-btn:last-child::after{display:none;}
-.nav-btn:hover,.nav-btn.on{color:var(--sepia);}
-
-/* ── CHAPTERS ── */
-.chap{display:none;padding-top:44px;animation:pageIn .4s ease;}
-.chap.on{display:block;}
-@keyframes pageIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-
-/* ── CHAPTER HEAD ── */
-.chap-head{text-align:center;margin-bottom:40px;}
-.chap-ornament{font-family:'Cormorant SC',serif;font-size:.62rem;letter-spacing:.5em;color:var(--sepia3);display:block;margin-bottom:10px;}
-.chap-title{font-family:'UnifrakturMaguntia',serif;font-size:clamp(36px,8vw,58px);color:var(--sepia);letter-spacing:.06em;}
-.rule{display:flex;align-items:center;gap:10px;margin:14px 0 6px;}
-.rule::before,.rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--sepia3));}
-.rule::after{background:linear-gradient(90deg,var(--sepia3),transparent);}
-.rule span{font-size:.9rem;color:var(--sepia3);}
-.chap-verse{font-style:italic;font-size:.85rem;color:var(--ash);margin-top:6px;}
-
-/* ── SPLIT PAGE (élixirs + cinq goûts) ── */
-.split-chap{display:none;padding-top:44px;animation:pageIn .4s ease;}
-.split-chap.on{display:block;}
-.split-divider{
-  display:flex;align-items:center;gap:14px;
-  margin:56px 0 40px;padding-top:40px;
-  border-top:1px solid var(--faint);
+/* masthead */
+.masthead{border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--panel),transparent);}
+.masthead-inner{max-width:1180px;margin:0 auto;padding:20px 24px 14px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.crest{width:42px;height:42px;flex:0 0 42px;color:var(--gilt);}
+.brand{display:flex;flex-direction:column;line-height:1.1;}
+.brand .name{font-family:var(--font-display);font-weight:600;font-size:1.55rem;letter-spacing:.01em;color:var(--ink);}
+.brand .tagline{font-size:.72rem;text-transform:uppercase;letter-spacing:.28em;color:var(--gilt);margin-top:2px;}
+.nav{margin-left:auto;display:flex;gap:6px;}
+.nav button{
+  font-family:var(--font-body);color:var(--ink-soft);font-weight:700;font-size:.82rem;
+  letter-spacing:.04em;padding:8px 16px;border-radius:999px;border:1px solid transparent;
+  background:transparent;cursor:pointer;transition:background .15s,color .15s,border-color .15s;
 }
-.split-divider::before,.split-divider::after{content:'';flex:1;height:1px;}
-.split-divider::before{background:linear-gradient(90deg,transparent,var(--sepia3));}
-.split-divider::after{background:linear-gradient(90deg,var(--sepia3),transparent);}
-.split-divider span{font-family:'UnifrakturMaguntia',serif;font-size:clamp(22px,5vw,34px);color:var(--sepia);white-space:nowrap;letter-spacing:.06em;}
-
-/* ── REALM DIVIDER ── */
-.realm{display:flex;align-items:center;gap:14px;margin:36px 0 18px;}
-.realm::before,.realm::after{content:'';flex:1;height:1px;}
-.realm.dr::before{background:linear-gradient(90deg,transparent,var(--dream));}
-.realm.dr::after{background:linear-gradient(90deg,var(--dream),transparent);}
-.realm.nm::before{background:linear-gradient(90deg,transparent,var(--night));}
-.realm.nm::after{background:linear-gradient(90deg,var(--night),transparent);}
-.realm-tag{font-family:'Cormorant SC',serif;font-size:.58rem;letter-spacing:.4em;padding:3px 14px;border-radius:1px;white-space:nowrap;}
-.dr .realm-tag{color:var(--dreaml);border:1px solid rgba(139,127,220,.5);background:rgba(139,127,220,.07);}
-.nm .realm-tag{color:var(--nightl);border:1px solid rgba(192,56,56,.5);background:rgba(192,56,56,.07);}
-
-/* ── SIGNATURE ── */
-.sig-block{margin-bottom:38px;padding:28px 24px;text-align:center;
-  border:1px solid rgba(212,160,23,.35);border-radius:3px;
-  background:linear-gradient(135deg,rgba(212,160,23,.05),rgba(139,127,220,.05));
-  position:relative;overflow:hidden;}
-.sig-block::before{content:'❧';position:absolute;top:12px;left:20px;font-size:1.2rem;color:rgba(212,160,23,.18);}
-.sig-block::after{content:'❧';position:absolute;bottom:12px;right:20px;font-size:1.2rem;color:rgba(212,160,23,.18);transform:rotate(180deg);}
-.sig-name{font-family:'UnifrakturMaguntia',serif;font-size:clamp(22px,5vw,36px);color:var(--sepia);margin-bottom:10px;}
-.sig-desc{font-size:.85rem;font-style:italic;color:var(--ash);line-height:1.75;margin-bottom:14px;}
-.sig-hint{font-size:.72rem;color:var(--sepia3);font-style:italic;margin-bottom:14px;}
-.sig-price{font-family:'Cormorant SC',serif;font-size:1.3rem;color:var(--sepia2);}
-
-/* ── CARD ── */
-.card{border-radius:3px;margin-bottom:12px;overflow:hidden;background:var(--parch);}
-.card.dr{border:1px solid rgba(139,127,220,.28);}
-.card.nm{border:1px solid rgba(192,56,56,.28);}
-.card.gd{border:1px solid rgba(212,160,23,.28);}
-
-.card-top{padding:16px 20px 6px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
-.card-left{flex:1;}
-.card-name{font-family:'Cormorant SC',serif;font-weight:600;font-size:clamp(18px,3.8vw,24px);letter-spacing:.07em;margin-bottom:5px;}
-.dr .card-name{color:#c8c5ff;}
-.nm .card-name{color:#ffb8b8;}
-.gd .card-name{color:var(--sepia);}
-.card-desc{font-size:.82rem;font-style:italic;color:var(--ash);line-height:1.5;}
-
-.card-price-row{padding:4px 20px 10px;display:flex;justify-content:space-between;align-items:center;}
-.card-vol{font-size:.7rem;color:var(--faint);font-style:italic;}
-.card-price{font-family:'Cormorant SC',serif;font-size:1.1rem;font-weight:600;}
-.dr .card-price{color:#a09de0;}
-.nm .card-price{color:#c07070;}
-.gd .card-price{color:var(--sepia2);}
-
-.card-ing{padding:8px 20px 16px;border-top:1px dashed var(--faint);font-size:.8rem;color:var(--ash);line-height:1.9;font-style:italic;}
-.dr .card-ing{border-color:rgba(139,127,220,.2);}
-.nm .card-ing{border-color:rgba(192,56,56,.2);}
-.gd .card-ing{border-color:rgba(212,160,23,.2);}
-
-/* ── TASTE CARDS ── */
-.taste-card{border-radius:3px;margin-bottom:12px;overflow:hidden;background:var(--parch);}
-.taste-badge{display:inline-block;font-family:'Cormorant SC',serif;font-size:.6rem;letter-spacing:.3em;padding:3px 10px;border-radius:1px;margin-bottom:5px;}
-.taste-card .card-ing{border-top:1px dashed rgba(200,169,110,.2);}
-
-/* ── LEDGER ── */
-.ledger{border-collapse:collapse;width:100%;}
-.ledger tr{border-bottom:1px solid rgba(58,48,72,.5);}
-.ledger tr:last-child{border-bottom:none;}
-.ledger td{padding:11px 4px;font-size:.88rem;vertical-align:middle;}
-.ledger td:first-child{color:var(--pale);padding-right:12px;}
-.ledger td:nth-child(2){color:var(--ash);font-style:italic;font-size:.78rem;}
-.ledger td:last-child{color:var(--sepia2);font-family:'Cormorant SC',serif;text-align:right;white-space:nowrap;padding-left:12px;font-size:.95rem;}
-
-.sub-head{font-family:'Cormorant SC',serif;font-size:.65rem;letter-spacing:.45em;color:var(--sepia3);
-  margin:26px 0 14px;display:flex;align-items:center;gap:10px;}
-.sub-head::after{content:'';flex:1;height:1px;background:var(--faint);}
-
-/* ── TEA ── */
-.tea-section{margin-bottom:28px;}
-.tea-section-title{font-family:'Cormorant SC',serif;font-size:.72rem;letter-spacing:.35em;color:var(--sepia3);margin-bottom:12px;}
-.tea-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(58,48,72,.4);gap:12px;}
-.tea-row:last-child{border-bottom:none;}
-.tea-name{font-size:.9rem;color:var(--pale);min-width:160px;}
-.tea-origin{font-size:.72rem;color:var(--sepia3);font-style:italic;white-space:nowrap;padding:0 10px;}
-.tea-desc{font-size:.78rem;color:var(--ash);font-style:italic;flex:1;}
-
-/* ── FOOD ── */
-.viands{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;}
-.viand{border:1px solid var(--faint);border-radius:3px;padding:14px;transition:border-color .2s;background:var(--parch);}
-.viand:hover{border-color:var(--sepia3);}
-.viand-name{font-family:'Cormorant SC',serif;font-size:.88rem;color:var(--sepia);margin-bottom:4px;}
-.viand-desc{font-size:.76rem;color:var(--ash);font-style:italic;line-height:1.5;margin-bottom:8px;}
-.viand-price{font-family:'Cormorant SC',serif;font-size:.95rem;color:var(--sepia2);}
-
-/* ── PACK ── */
-.pack{margin-top:22px;padding:18px 20px;border:1px dashed rgba(212,160,23,.3);border-radius:3px;text-align:center;}
-.pack-t{font-family:'Cormorant SC',serif;font-size:.7rem;letter-spacing:.35em;color:var(--sepia);margin-bottom:6px;}
-.pack-d{font-size:.8rem;font-style:italic;color:var(--ash);margin-bottom:8px;}
-.pack-p{font-family:'Cormorant SC',serif;font-size:1.1rem;color:var(--sepia2);}
-
-/* ── FOOTER ── */
-.colophon{text-align:center;padding:48px 0 24px;border-top:1px solid var(--faint);margin-top:48px;}
-.colophon-mark{font-family:'UnifrakturMaguntia',serif;font-size:1.5rem;color:var(--sepia3);display:block;margin-bottom:14px;}
-.colophon p{font-size:.65rem;color:var(--faint);line-height:2.2;}
-.colophon a{color:var(--sepia3);text-decoration:none;}
-
-::-webkit-scrollbar{width:3px;}
-::-webkit-scrollbar-track{background:var(--ink);}
-::-webkit-scrollbar-thumb{background:var(--faint);border-radius:2px;}
-
-@media(max-width:500px){
-  html{font-size:16px;}
-  .page{padding:0 14px 70px;}
-  .viands{grid-template-columns:1fr 1fr;}
-  .nav-btn{font-size:.58rem;padding:6px 8px;letter-spacing:.12em;}
-  .tea-origin{display:none;}
-}
+.nav button:hover{color:var(--ink);background:var(--vellum-2);}
+.nav button.active{color:var(--ink);background:var(--panel);border-color:var(--line);box-shadow:var(--shadow);}
+/* page */
+.page{max-width:1180px;margin:0 auto;padding:22px 24px 80px;}
+.view{display:none;}
+.view.active{display:block;}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px;}
+.page-title{font-family:var(--font-display);font-weight:600;font-size:2rem;margin:0;color:var(--ink);}
+.page-sub{color:var(--ink-soft);margin:2px 0 0;font-size:.92rem;}
+.rule{display:flex;align-items:center;gap:12px;color:var(--gilt-soft);margin:14px 0 22px;}
+.rule::before,.rule::after{content:'';height:1px;flex:1;background:linear-gradient(90deg,transparent,var(--line),transparent);}
+.rule svg{width:16px;height:16px;}
+/* toolbar */
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow);margin-bottom:22px;}
+.toolbar .spacer{flex:1;}
+.toolbar .group{display:flex;align-items:center;gap:8px;}
+.toolbar label{font-size:.78rem;color:var(--ink-soft);font-weight:700;letter-spacing:.03em;}
+.period-label{font-family:var(--font-display);font-size:1.25rem;color:var(--ink);min-width:230px;text-align:center;}
+/* boutons & champs */
+button,.btn{font-family:var(--font-body);font-size:.82rem;font-weight:700;letter-spacing:.02em;color:var(--ink);background:var(--vellum-2);border:1px solid var(--line);border-radius:8px;padding:8px 13px;cursor:pointer;transition:background .15s,border-color .15s,transform .05s;}
+button:hover,.btn:hover{background:#fff;border-color:var(--gilt-soft);}
+button:active{transform:translateY(1px);}
+button.icon{padding:8px 11px;font-size:1rem;line-height:1;}
+button.primary{background:var(--ink);color:var(--panel);border-color:var(--ink);}
+button.primary:hover{background:#4b4159;}
+button.ghost{background:transparent;border-color:transparent;color:var(--ink-soft);}
+button.ghost:hover{background:var(--vellum-2);color:var(--ink);}
+button:disabled{opacity:.5;cursor:not-allowed;}
+select,input[type="time"],input[type="date"],input[type="text"],input[type="number"]{font-family:var(--font-body);font-size:.85rem;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:6px 8px;}
+select:focus,input:focus{outline:2px solid var(--gilt-soft);outline-offset:1px;}
+.toggle-edit{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:5px 6px 5px 12px;background:var(--panel);}
+.toggle-edit .dot{width:9px;height:9px;border-radius:50%;background:var(--ink-faint);}
+body.editing .toggle-edit .dot{background:#8bbf86;}
+.toggle-edit .state{font-size:.78rem;font-weight:700;color:var(--ink-soft);}
+/* grille planning */
+.scroll-x{overflow-x:auto;border-radius:var(--radius);}
+.grid{--col-name:168px;--col-tot:116px;min-width:920px;display:grid;grid-template-columns:var(--col-name) repeat(7,minmax(108px,1fr)) var(--col-tot);background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.cell{border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+.grid .cell:nth-child(9n){border-right:none;}
+.head-cell{padding:10px 8px;background:var(--vellum-2);border-bottom:1px solid var(--line);text-align:center;}
+.head-cell .dname{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-soft);font-weight:700;}
+.head-cell .dnum{font-family:var(--font-display);font-size:1.15rem;color:var(--ink);}
+.head-cell.corner{text-align:left;padding-left:14px;}
+.head-cell.corner span{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--gilt);font-weight:700;}
+.head-cell.is-weekend{background:#ECE7DA;}
+.head-cell.is-today .dnum{color:var(--gilt);}
+.head-cell.is-today{box-shadow:inset 0 -3px 0 var(--gilt-soft);}
+.name-cell{padding:12px 14px;display:flex;flex-direction:column;gap:2px;justify-content:center;background:var(--panel);}
+.name-cell .who{font-family:var(--font-display);font-size:1.18rem;color:var(--ink);}
+.name-cell .week-h{font-size:.76rem;color:var(--ink-soft);}
+.name-cell .week-h b{color:var(--ink);font-weight:800;}
+.day-cell{padding:8px 7px;display:flex;flex-direction:column;gap:6px;min-height:118px;}
+.day-cell.is-weekend{background:rgba(221,211,194,.18);}
+.day-cell.absent{justify-content:center;align-items:center;gap:6px;background:rgba(221,211,194,.30);}
+.abs-badge{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;padding:8px 8px;border:1px solid;border-radius:8px;width:100%;}
+.abs-badge .abs-code{font-weight:800;font-size:.95rem;letter-spacing:.04em;}
+.abs-badge .abs-label{font-size:.66rem;font-weight:600;opacity:.85;line-height:1.15;}
+.role-select{width:100%;font-size:.78rem;padding:5px 6px;}
+.role-select.has-role{font-weight:700;}
+.shift{display:flex;align-items:center;gap:3px;}
+.shift input[type="time"]{flex:1;min-width:0;padding:4px 4px;font-size:.76rem;text-align:center;}
+.shift .sep{color:var(--ink-faint);font-size:.8rem;}
+.day-total{margin-top:auto;text-align:right;font-size:.78rem;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;}
+.day-total.zero{color:var(--ink-faint);font-weight:600;}
+.tot-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 8px;background:var(--vellum-2);}
+.tot-cell .label{font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-soft);}
+.tot-cell .val{font-family:var(--font-display);font-size:1.4rem;color:var(--ink);font-variant-numeric:tabular-nums;}
+.foot-cell{padding:10px 8px;text-align:center;background:#ECE7DA;border-top:1px solid var(--line);font-weight:800;font-size:.82rem;color:var(--ink);font-variant-numeric:tabular-nums;}
+.foot-cell.label{text-align:left;padding-left:14px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.7rem;color:var(--ink-soft);}
+.foot-cell.grand{background:var(--ink);color:var(--panel);font-family:var(--font-display);font-size:1.15rem;}
+body:not(.editing) .role-select,body:not(.editing) .shift input{pointer-events:none;}
+body:not(.editing) .shift.empty{display:none;}
+body:not(.editing) .role-select:not(.has-role){display:none;}
+/* récap fioles */
+.recap{margin-top:30px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px 8px;}
+.recap h2{font-family:var(--font-display);font-weight:600;font-size:1.4rem;margin:0 0 2px;}
+.recap .hint{color:var(--ink-soft);font-size:.85rem;margin:0 0 16px;}
+.vials{display:flex;gap:22px;flex-wrap:wrap;padding-bottom:14px;}
+.vial{display:flex;flex-direction:column;align-items:center;width:92px;}
+.vial .who{font-size:.82rem;font-weight:700;margin-top:8px;text-align:center;color:var(--ink);}
+.vial .h{font-family:var(--font-display);font-size:1.05rem;color:var(--ink-soft);}
+/* légende */
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 0;}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:700;padding:4px 11px;border-radius:999px;border:1px solid;}
+.chip .code{font-weight:800;letter-spacing:.03em;}
+.chip .desc{font-weight:600;color:var(--ink-soft);}
+/* grille absences */
+.abs-grid{min-width:880px;display:grid;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.abs-grid .acell{border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
+.abs-head{background:var(--vellum-2);border-bottom:1px solid var(--line);text-align:center;padding:8px 2px;font-size:.72rem;color:var(--ink-soft);font-weight:700;}
+.abs-head.dow{font-size:.58rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.04em;}
+.abs-head.is-weekend{background:#ECE7DA;}
+.abs-head.corner{text-align:left;padding-left:14px;background:var(--vellum-2);}
+.abs-head.tot{background:#ECE7DA;}
+.abs-name{display:flex;align-items:center;padding:0 14px;font-family:var(--font-display);font-size:1.12rem;color:var(--ink);background:var(--panel);}
+.abs-cell{position:relative;min-height:38px;padding:0;display:flex;align-items:stretch;}
+.abs-cell.is-weekend{background:rgba(221,211,194,.22);}
+.abs-cell select{width:100%;border:none;background:transparent;border-radius:0;text-align:center;text-align-last:center;font-size:.74rem;font-weight:800;color:var(--ink);padding:0 2px;cursor:pointer;appearance:none;-webkit-appearance:none;}
+.abs-cell select:focus{outline:2px solid var(--gilt-soft);outline-offset:-2px;}
+.abs-tot{display:flex;align-items:center;justify-content:center;background:var(--vellum-2);font-weight:800;font-size:.9rem;color:var(--ink);font-variant-numeric:tabular-nums;}
+.abs-tot.zero{color:var(--ink-faint);font-weight:600;}
+body:not(.editing) .abs-cell select{pointer-events:none;}
+/* note */
+.note{background:var(--panel);border:1px dashed var(--line);border-radius:var(--radius);padding:14px 18px;margin-top:26px;color:var(--ink-soft);font-size:.86rem;}
+.note b{color:var(--ink);}
+/* réglages */
+dialog.sheet{border:1px solid var(--line);border-radius:14px;padding:0;max-width:520px;width:calc(100% - 32px);background:var(--vellum);color:var(--ink);box-shadow:0 20px 60px rgba(59,50,71,.28);}
+dialog.sheet::backdrop{background:rgba(59,50,71,.34);}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);}
+.sheet-head h3{font-family:var(--font-display);font-weight:600;font-size:1.4rem;margin:0;}
+.sheet-body{padding:18px 20px;max-height:70vh;overflow:auto;}
+.sheet-body h4{font-size:.74rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gilt);margin:18px 0 8px;}
+.sheet-body h4:first-child{margin-top:0;}
+.row-item{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.row-item input[type="text"]{flex:1;}
+.row-item .swatch{width:18px;height:18px;border-radius:5px;border:1px solid var(--line);flex:0 0 18px;}
+.add-row{display:flex;gap:8px;margin-top:10px;}
+.add-row input{flex:1;}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--panel);padding:11px 18px;border-radius:999px;font-size:.85rem;font-weight:700;box-shadow:0 10px 30px rgba(59,50,71,.3);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+@media (max-width:640px){.brand .name{font-size:1.3rem;}.page-title{font-size:1.55rem;}.period-label{min-width:0;font-size:1.05rem;}.toolbar{gap:8px;}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;}}
+@media print{body{background:#fff;}.masthead .nav,.toolbar,.note,.toggle-edit,button{display:none !important;}.scroll-x{overflow:visible;}.grid,.abs-grid{box-shadow:none;min-width:0;}.page{padding:0;}}
 </style>
 </head>
 <body>
-<div class="wax-l"></div><div class="wax-r"></div>
-<canvas id="cvs"></canvas>
 
-<div class="page">
-
-<!-- BACK -->
-<a class="back-btn" href="https://leconceptarium.github.io/morpheus.menu/index.html" data-fr="Retour à l'accueil" data-en="Back to home" data-de="Zurück zur Startseite">Retour à l'accueil</a>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="logo-wrap">
-    <img src="https://leconceptarium.github.io/morpheus.menu/logo.png" alt="Morpheus">
-  </div>
-  <div class="title-frak">Morpheus</div>
-  <div class="hero-sub" data-fr="Grimoire du Bar · Strasbourg" data-en="Bar Grimoire · Strasbourg" data-de="Grimoire der Bar · Straßburg">Grimoire du Bar · Strasbourg</div>
-  <div class="hero-verse"><em><span data-fr="« Dans le sommeil, les portes s'ouvrent.<br>Choisis ton côté. »" data-en="« In sleep, the doors open.<br>Choose your side. »" data-de="« Im Schlaf öffnen sich die Türen.<br>Wähle deine Seite. »">« Dans le sommeil, les portes s'ouvrent.<br>Choisis ton côté. »</span></em></div>
-  <div class="lang-bar">
-    <button class="lang-btn on" onclick="setLang('fr',this)">FR</button>
-    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
-    <button class="lang-btn" onclick="setLang('de',this)">DE</button>
-  </div>
-</div>
-
-<!-- NAV — 8 sections -->
-<nav class="nav">
-  <button class="nav-btn on"  onclick="showChap('elixirs',this)"><span data-fr="Élixirs" data-en="Elixirs" data-de="Elixiere">Élixirs</span></button>
-  <button class="nav-btn" onclick="showChap('shooters',this)"><span data-fr="Shooters" data-en="Shooters" data-de="Shooter">Shooters</span></button>
-  <button class="nav-btn" onclick="showChap('sansalcool',this)"><span data-fr="Sans Alcool" data-en="Alcohol Free" data-de="Ohne Alkohol">Sans Alcool</span></button>
-  <button class="nav-btn" onclick="showChap('bieres',this)"><span data-fr="Bières" data-en="Beers" data-de="Biere">Bières</span></button>
-  <button class="nav-btn" onclick="showChap('softs',this)"><span data-fr="Softs" data-en="Softs" data-de="Softdrinks">Softs</span></button>
-  <button class="nav-btn" onclick="showChap('chauds',this)"><span data-fr="Boissons Chaudes" data-en="Hot Drinks" data-de="Heißgetränke">Boissons Chaudes</span></button>
-  <button class="nav-btn" onclick="showChap('thes',this)"><span data-fr="Thés" data-en="Teas" data-de="Tees">Thés</span></button>
-  <button class="nav-btn" onclick="showChap('food',this)"><span data-fr="Restauration" data-en="Food" data-de="Speisen">Restauration</span></button>
-</nav>
-
-<!-- ══════════════════════════════════════
-     ÉLIXIRS + CINQ GOÛTS (split page)
-══════════════════════════════════════ -->
-<div id="elixirs" class="chap on">
-
-  <!-- ÉLIXIRS head -->
-  <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Premier" data-en="First Chapter" data-de="Erstes Kapitel">Chapitre Premier</span>
-    <div class="chap-title" data-fr="Les Élixirs" data-en="The Elixirs" data-de="Die Elixiere">Les Élixirs</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Chaque verre est un sort. Rêve ou Cauchemar — vous choisissez." data-en="Each glass is a spell. Dream or Nightmare — you choose." data-de="Jedes Glas ist ein Zauber. Traum oder Alptraum — du wählst.">Chaque verre est un sort. Rêve ou Cauchemar — vous choisissez.</span></em></p>
-  </div>
-
-  <!-- Signature -->
-  <div class="sig-block">
-    <div class="sig-name">Le Don de Morpheus</div>
-    <p class="sig-desc"><span data-fr="Notre élixir signature. Le serveur apporte un dé.<br>Pair — <em>Rêve</em>. Impair — <em>Cauchemar</em>.<br>Le sort est jeté. Vous ne saurez qu'au premier instant." data-en="Our signature elixir. The server brings a die.<br>Even — <em>Dream</em>. Odd — <em>Nightmare</em>.<br>The spell is cast. You will only know at the first instant." data-de="Unser Signature-Elixier. Der Kellner bringt einen Würfel.<br>Gerade — <em>Traum</em>. Ungerade — <em>Alptraum</em>.<br>Der Zauber ist gewirkt.">Notre élixir signature. Le serveur apporte un dé.<br>Pair — <em>Rêve</em>. Impair — <em>Cauchemar</em>.<br>Le sort est jeté. Vous ne saurez qu'au premier instant.</span></p>
-    <p class="sig-hint"><span data-fr="Révélé par un trait de citron versé devant vous" data-en="Revealed by a dash of lemon poured before your eyes" data-de="Enthüllt durch einen Spritzer Zitrone vor Ihnen">Révélé par un trait de citron versé devant vous</span></p>
-    <div class="sig-price">12,90 €</div>
-  </div>
-
-  <div class="realm dr"><span class="realm-tag"><span data-fr="Royaume des Rêves" data-en="Kingdom of Dreams" data-de="Königreich der Träume">Royaume des Rêves</span></span></div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">Oneiroi</div>
-      <div class="card-desc"><span data-fr="Tropical, solaire. La passion dans toute sa fraîcheur." data-en="Tropical, sunny. Passion fruit in full freshness." data-de="Tropisch, sonnig. Passionsfrucht in voller Frische.">Tropical, solaire. La passion dans toute sa fraîcheur.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">15 cl</div><div class="card-price">9,90 €</div></div>
-    <div class="card-ing">Vodka · <span data-fr="Purée fruit de la passion" data-en="Passion fruit purée" data-de="Passionsfrüchtepüree">Purée fruit de la passion</span> · <span data-fr="Sirop vanille" data-en="Vanilla syrup" data-de="Vanillesirup">Sirop vanille</span> · <span data-fr="Jus de citron" data-en="Lemon juice" data-de="Zitronensaft">Jus de citron</span> · <span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span></div>
-  </div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">Piero la Lune</div>
-      <div class="card-desc"><span data-fr="Botanique, vif. Quelque chose de brûlé dans l'air." data-en="Botanical, lively. Something burnt in the air." data-de="Botanisch, lebhaft. Etwas Verbranntes in der Luft.">Botanique, vif. Quelque chose de brûlé dans l'air.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">15 cl</div><div class="card-price">9,90 €</div></div>
-    <div class="card-ing">Gin · <span data-fr="Liqueur de fleurs de sureau" data-en="Elderflower liqueur" data-de="Holunderblütenlikör">Liqueur de fleurs de sureau</span> · <span data-fr="Jus de citron vert" data-en="Lime juice" data-de="Limettensaft">Jus de citron vert</span> · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span> · <span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span></div>
-  </div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">New Moon Spritz</div>
-      <div class="card-desc"><span data-fr="Pétillant, floral, avec une profondeur qui surprend." data-en="Sparkling, floral, with a depth that surprises." data-de="Prickelnd, blumig, mit einer Tiefe, die überrascht.">Pétillant, floral, avec une profondeur qui surprend.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">18 cl</div><div class="card-price">10,90 €</div></div>
-    <div class="card-ing"><span data-fr="Liqueur de miel et violette" data-en="Honey & violet liqueur" data-de="Honig-Veilchen-Likör">Liqueur de miel et violette</span> · Prosecco · <span data-fr="Eau pétillante" data-en="Sparkling water" data-de="Sprudelwasser">Eau pétillante</span> · <span data-fr="Zeste d'orange" data-en="Orange zest" data-de="Orangenzeste">Zeste d'orange</span></div>
-  </div>
-
-  <div class="realm nm"><span class="realm-tag"><span data-fr="Royaume des Cauchemars" data-en="Kingdom of Nightmares" data-de="Königreich der Albträume">Royaume des Cauchemars</span></span></div>
-
-  <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">La Succube</div>
-      <div class="card-desc"><span data-fr="Acidulé, séducteur. Rouge profond, bord givré au sel noir." data-en="Tart, seductive. Deep red, black salt rim." data-de="Säuerlich, verführerisch. Tiefrot, schwarzer Salzrand.">Acidulé, séducteur. Rouge profond, bord givré au sel noir.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">15 cl</div><div class="card-price">10,90 €</div></div>
-    <div class="card-ing">Vodka · <span data-fr="Liqueur de framboise" data-en="Raspberry liqueur" data-de="Himbeerlikör">Liqueur de framboise</span> · <span data-fr="Jus de cranberry" data-en="Cranberry juice" data-de="Cranberrysaft">Jus de cranberry</span> · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sel noir" data-en="Black salt" data-de="Schwarzes Salz">Sel noir</span></div>
-  </div>
-
-  <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">Baba Yaga</div>
-      <div class="card-desc"><span data-fr="Herbacé, festif. Le mojito que tu n'attendais pas." data-en="Herbaceous, festive. The mojito you never expected." data-de="Kräuterig, festlich. Der Mojito, den du nicht erwartet hast.">Herbacé, festif. Le mojito que tu n'attendais pas.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">17 cl</div><div class="card-price">9,90 €</div></div>
-    <div class="card-ing">Rhum · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sucre de canne" data-en="Cane sugar" data-de="Rohrzucker">Sucre de canne</span> · <span data-fr="Menthe fraîche" data-en="Fresh mint" data-de="Frische Minze">Menthe fraîche</span> · <span data-fr="Vodka noire" data-en="Black vodka" data-de="Schwarze Vodka">Vodka noire</span> · <span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span></div>
-  </div>
-
-  <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">Réveil Amer</div>
-      <div class="card-desc"><span data-fr="Intense, café, légèrement torréfié. Cauchemar ou éveil ?" data-en="Intense, coffee, slightly roasted. Nightmare or awakening?" data-de="Intensiv, Kaffee, leicht geröstet. Albtraum oder Erwachen?">Intense, café, légèrement torréfié. Cauchemar ou éveil ?</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">13 cl</div><div class="card-price">10,50 €</div></div>
-    <div class="card-ing">Vodka · <span data-fr="Double espresso froid" data-en="Cold double espresso" data-de="Kalter doppelter Espresso">Double espresso froid</span> · <span data-fr="Liqueur de café" data-en="Coffee liqueur" data-de="Kaffeelikör">Liqueur de café</span> · Amaro · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span></div>
-  </div>
-
-  <!-- ── CINQ GOÛTS (même page, séparateur) ── -->
-  <div class="split-divider"><span data-fr="Les Cinq Goûts" data-en="The Five Tastes" data-de="Die Fünf Geschmäcker">Les Cinq Goûts</span></div>
-  <p style="text-align:center;font-style:italic;font-size:.82rem;color:var(--ash);margin-bottom:32px;"><span data-fr="Cinq sens. Cinq portes. Chaque élixir réveille une sensation que vous n'attendiez pas." data-en="Five senses. Five doors. Each elixir awakens a sensation you didn't expect." data-de="Fünf Sinne. Fünf Türen. Jedes Elixier weckt eine Empfindung, die Sie nicht erwartet haben.">Cinq sens. Cinq portes. Chaque élixir réveille une sensation que vous n'attendiez pas.</span></p>
-
-  <!-- AMER -->
-  <div class="taste-card" style="border:1px solid rgba(46,139,87,.35);">
-    <div class="card-top"><div class="card-left">
-      <div class="taste-badge" style="color:#90c8a0;border:1px solid rgba(46,139,87,.4);background:rgba(46,139,87,.07);"><span data-fr="AMER" data-en="BITTER" data-de="BITTER">AMER</span></div>
-      <div class="card-name" style="color:#b8e8c8;">Spritz Aperol Fumé</div>
-      <div class="card-desc"><span data-fr="Amer rafraîchissant, souffle de jardin brûlé." data-en="Refreshing bitterness, breath of burnt garden." data-de="Erfrischende Bitterkeit, Hauch von verbranntem Garten.">Amer rafraîchissant, souffle de jardin brûlé.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">18 cl</div><div class="card-price" style="color:#90c8a0;">9,50 €</div></div>
-    <div class="card-ing" style="border-top:1px dashed rgba(46,139,87,.2);">Aperol · Prosecco · San Pellegrino · <span data-fr="Demi-tranche d'orange" data-en="Half orange slice" data-de="Halbe Orangenscheibe">Demi-tranche d'orange</span> · Romarin</div>
-  </div>
-
-  <!-- ACIDE -->
-  <div class="taste-card" style="border:1px solid rgba(200,180,0,.35);">
-    <div class="card-top"><div class="card-left">
-      <div class="taste-badge" style="color:#f0e060;border:1px solid rgba(200,180,0,.4);background:rgba(200,180,0,.07);"><span data-fr="ACIDE" data-en="SOUR" data-de="SAUER">ACIDE</span></div>
-      <div class="card-name" style="color:#f5e880;">Gimlet Gingembre</div>
-      <div class="card-desc"><span data-fr="Tranchant, vivifiant. La piqûre qui réveille." data-en="Sharp, invigorating. The sting that awakens." data-de="Scharf, belebend. Der Stich, der erweckt.">Tranchant, vivifiant. La piqûre qui réveille.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">14 cl</div><div class="card-price" style="color:#d4c040;">9,90 €</div></div>
-    <div class="card-ing" style="border-top:1px dashed rgba(200,180,0,.2);">Gin · <span data-fr="Citron vert frais" data-en="Fresh lime" data-de="Frische Limette">Citron vert frais</span> · <span data-fr="Sirop de gingembre" data-en="Ginger syrup" data-de="Ingwersirup">Sirop de gingembre</span> · <span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span> · Concombre</div>
-  </div>
-
-  <!-- SUCRÉ -->
-  <div class="taste-card" style="border:1px solid rgba(200,80,140,.35);">
-    <div class="card-top"><div class="card-left">
-      <div class="taste-badge" style="color:#ffb8e0;border:1px solid rgba(200,80,140,.4);background:rgba(200,80,140,.07);"><span data-fr="SUCRÉ" data-en="SWEET" data-de="SÜSS">SUCRÉ</span></div>
-      <div class="card-name" style="color:#ffc8e8;">Lychee Rose Bubble</div>
-      <div class="card-desc"><span data-fr="Délicat, floral. Champagne et litchi en coupe." data-en="Delicate, floral. Champagne and lychee in a coupe." data-de="Delikat, blumig. Champagner und Lychee in der Coupe.">Délicat, floral. Champagne et litchi en coupe.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">18 cl</div><div class="card-price" style="color:#d080b0;">10,50 €</div></div>
-    <div class="card-ing" style="border-top:1px dashed rgba(200,80,140,.2);">Vodka · <span data-fr="Jus de litchi" data-en="Lychee juice" data-de="Litschi-Saft">Jus de litchi</span> · <span data-fr="Sirop de rose" data-en="Rose syrup" data-de="Rosensirup">Sirop de rose</span> · <span data-fr="Jus de citron" data-en="Lemon juice" data-de="Zitronensaft">Jus de citron</span> · Champagne / Crémant · <span data-fr="Pétale de rose comestible" data-en="Edible rose petal" data-de="Essbares Rosenblatt">Pétale de rose</span></div>
-  </div>
-
-  <!-- SALÉ -->
-  <div class="taste-card" style="border:1px solid rgba(40,140,200,.35);">
-    <div class="card-top"><div class="card-left">
-      <div class="taste-badge" style="color:#a8d8f8;border:1px solid rgba(40,140,200,.4);background:rgba(40,140,200,.07);"><span data-fr="SALÉ" data-en="SALTY" data-de="SALZIG">SALÉ</span></div>
-      <div class="card-name" style="color:#c0e8ff;">Bloody Caesar</div>
-      <div class="card-desc"><span data-fr="Iodé, épicé, presque un repas. Le cocktail qui dérange." data-en="Briny, spiced, almost a meal. The cocktail that unsettles." data-de="Jodhaltig, würzig, fast eine Mahlzeit.">Iodé, épicé, presque un repas. Le cocktail qui dérange.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">20 cl</div><div class="card-price" style="color:#5090c0;">10,90 €</div></div>
-    <div class="card-ing" style="border-top:1px dashed rgba(40,140,200,.2);">Vodka · Clamato · Tabasco · Worcestershire · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sel de céleri" data-en="Celery salt" data-de="Selleriesalz">Sel de céleri</span></div>
-  </div>
-
-  <!-- UMAMI -->
-  <div class="taste-card" style="border:1px solid rgba(160,80,220,.35);">
-    <div class="card-top"><div class="card-left">
-      <div class="taste-badge" style="color:#d8a8ff;border:1px solid rgba(160,80,220,.4);background:rgba(160,80,220,.07);"><span data-fr="UMAMI" data-en="UMAMI" data-de="UMAMI">UMAMI</span></div>
-      <div class="card-name" style="color:#e8c8ff;">Dirty Butterfly</div>
-      <div class="card-desc"><span data-fr="Floral en surface, profond en dessous. La couleur change devant vous." data-en="Floral on the surface, deep beneath. The colour changes before you." data-de="Blumig oben, tief darunter. Die Farbe ändert sich vor Ihnen.">Floral en surface, profond en dessous. La couleur change devant vous.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">22 cl</div><div class="card-price" style="color:#a060d0;">10,90 €</div></div>
-    <div class="card-ing" style="border-top:1px dashed rgba(160,80,220,.2);">Gin · <span data-fr="Thé fleur de pois bleu" data-en="Blue pea flower tea" data-de="Blauem Schmetterlingserbsentee">Thé fleur de pois bleu</span> · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span> · <span data-fr="Sauce soja" data-en="Soy sauce" data-de="Sojasoße">Sauce soja</span> · <span data-fr="Citron (versé devant vous)" data-en="Lemon (poured before you)" data-de="Zitrone (vor Ihnen)">Citron (versé devant vous)</span></div>
-  </div>
-
-</div><!-- /elixirs -->
-
-<!-- ══════════════════════════════════════
-     SHOOTERS (fioles)
-══════════════════════════════════════ -->
-<div id="shooters" class="chap">
-  <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Second" data-en="Second Chapter" data-de="Zweites Kapitel">Chapitre Second</span>
-    <div class="chap-title" data-fr="Shooters" data-en="Shooters" data-de="Shooter">Shooters</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Quatre centilitres. Un sort concentré. Scellé — servi en apothicaire." data-en="Four centilitres. A concentrated spell. Sealed — served apothecary style." data-de="Vier Zentiliter. Ein konzentrierter Zauber. Versiegelt.">Quatre centilitres. Un sort concentré. Scellé — servi en apothicaire.</span></em></p>
-  </div>
-
-  <div class="realm dr"><span class="realm-tag"><span data-fr="Fioles des Rêves" data-en="Dream Vials" data-de="Traumphiolen">Fioles des Rêves</span></span></div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Sérum de Lune" data-en="Moon Serum" data-de="Mondserum">Sérum de Lune</span></div>
-      <div class="card-desc"><span data-fr="Doux, floral. Un pétale flottant dans la fiole." data-en="Soft, floral. A petal floating in the vial." data-de="Sanft, blumig. Ein Blütenblatt in der Phiole.">Doux, floral. Un pétale flottant dans la fiole.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">4 cl</div><div class="card-price">5,50 €</div></div>
-    <div class="card-ing">Vodka · <span data-fr="Liqueur de litchi" data-en="Lychee liqueur" data-de="Litschi-Likör">Liqueur de litchi</span> · <span data-fr="Sirop de rose" data-en="Rose syrup" data-de="Rosensirup">Sirop de rose</span> · Citron · <span data-fr="Pétale de rose" data-en="Rose petal" data-de="Rosenblatt">Pétale de rose</span></div>
-  </div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Brume Violette" data-en="Violet Mist" data-de="Violetter Nebel">Brume Violette</span></div>
-      <div class="card-desc"><span data-fr="La couleur change dans votre main. Botanique, fin." data-en="The colour changes in your hand. Botanical, refined." data-de="Die Farbe ändert sich in deiner Hand.">La couleur change dans votre main. Botanique, fin.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">4 cl</div><div class="card-price">5,50 €</div></div>
-    <div class="card-ing">Gin · <span data-fr="Thé fleur de pois bleu" data-en="Blue pea flower tea" data-de="Schmetterlingserbsentee">Thé fleur de pois bleu</span> · <span data-fr="Sirop violette" data-en="Violet syrup" data-de="Veilchensirup">Sirop violette</span> · <span data-fr="Citron (pipette fournie)" data-en="Lemon (pipette provided)" data-de="Zitrone (Pipette inklusive)">Citron (pipette fournie)</span></div>
-  </div>
-
-  <div class="realm nm"><span class="realm-tag"><span data-fr="Fioles des Cauchemars" data-en="Nightmare Vials" data-de="Alptraumphiolen">Fioles des Cauchemars</span></span></div>
-
-  <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Venin Noir" data-en="Black Venom" data-de="Schwarzes Gift">Venin Noir</span></div>
-      <div class="card-desc"><span data-fr="Opaque. Inconnu. On boit dans le noir." data-en="Opaque. Unknown. You drink in the dark." data-de="Opak. Unbekannt. Man trinkt im Dunkeln.">Opaque. Inconnu. On boit dans le noir.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">4 cl</div><div class="card-price">5,50 €</div></div>
-    <div class="card-ing">Tequila Blanco · <span data-fr="Vodka noire" data-en="Black vodka" data-de="Schwarze Vodka">Vodka noire</span> · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sirop agave" data-en="Agave syrup" data-de="Agavensirup">Sirop agave</span></div>
-  </div>
-
-  <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Feu de l'Enfer" data-en="Hellfire" data-de="Höllenfeuer">Feu de l'Enfer</span></div>
-      <div class="card-desc"><span data-fr="La chaleur arrive. Dix secondes après." data-en="The heat arrives. Ten seconds later." data-de="Die Hitze kommt. Zehn Sekunden später.">La chaleur arrive. Dix secondes après.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">4 cl</div><div class="card-price">5,50 €</div></div>
-    <div class="card-ing">Whisky · <span data-fr="Sirop de piment" data-en="Chilli syrup" data-de="Chilisirup">Sirop de piment</span> · <span data-fr="Gingembre frais" data-en="Fresh ginger" data-de="Frischer Ingwer">Gingembre frais</span> · Citron</div>
-  </div>
-
-  <div class="pack">
-    <div class="pack-t"><span data-fr="Pack Trois Sorts" data-en="Three Spells Pack" data-de="Drei-Zauber-Paket">Pack Trois Sorts</span></div>
-    <div class="pack-d"><span data-fr="3 fioles au choix dont 1 surprise — idéal avant votre séance" data-en="3 vials of your choice including 1 surprise — ideal before your session" data-de="3 Phiolen nach Wahl, davon 1 Überraschung — ideal vor Ihrer Sitzung">3 fioles au choix dont 1 surprise — idéal avant votre séance</span></div>
-    <div class="pack-p">12,00 €</div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════
-     SANS ALCOOL
-══════════════════════════════════════ -->
-<div id="sansalcool" class="chap">
-  <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Troisième" data-en="Third Chapter" data-de="Drittes Kapitel">Chapitre Troisième</span>
-    <div class="chap-title" data-fr="Élixirs Sans Alcool" data-en="Alcohol Free Elixirs" data-de="Alkoholfreie Elixiere">Élixirs Sans Alcool</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Toute la cérémonie. Sans la spirale." data-en="The full ceremony. Without the spiral." data-de="Die gesamte Zeremonie. Ohne die Spirale.">Toute la cérémonie. Sans la spirale.</span></em></p>
-  </div>
-
-  <div class="realm dr"><span class="realm-tag"><span data-fr="Côté Rêve" data-en="Dream Side" data-de="Traumseite">Côté Rêve</span></span></div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Jardin de Minuit" data-en="Midnight Garden" data-de="Mitternachtsgarten">Jardin de Minuit</span></div>
-      <div class="card-desc"><span data-fr="Concombre, basilic, citron vert. Frais comme un souffle nocturne." data-en="Cucumber, basil, lime. Fresh as a nocturnal breath." data-de="Gurke, Basilikum, Limette. Frisch wie ein nächtlicher Hauch.">Concombre, basilic, citron vert. Frais comme un souffle nocturne.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">20 cl</div><div class="card-price">7,20 €</div></div>
-    <div class="card-ing"><span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span> · <span data-fr="Concombre muddlé" data-en="Muddled cucumber" data-de="Zerdrückte Gurke">Concombre muddlé</span> · <span data-fr="Basilic frais" data-en="Fresh basil" data-de="Frisches Basilikum">Basilic frais</span> · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span> · <span data-fr="Eau de fleur d'oranger" data-en="Orange blossom water" data-de="Orangenblütenwasser">Eau de fleur d'oranger</span></div>
-  </div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">Ginger Dream</div>
-      <div class="card-desc"><span data-fr="Piquant, pétillant. La chaleur sans l'alcool." data-en="Spicy, sparkling. The warmth without the alcohol." data-de="Scharf, prickelnd. Die Wärme ohne den Alkohol.">Piquant, pétillant. La chaleur sans l'alcool.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">20 cl</div><div class="card-price">7,20 €</div></div>
-    <div class="card-ing">Ginger beer · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span> · <span data-fr="Menthe fraîche" data-en="Fresh mint" data-de="Frische Minze">Menthe fraîche</span></div>
-  </div>
-
-  <div class="realm nm"><span class="realm-tag"><span data-fr="Côté Cauchemar" data-en="Nightmare Side" data-de="Albtraumseite">Côté Cauchemar</span></span></div>
-
-  <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Veuve Noire" data-en="Black Widow" data-de="Schwarze Witwe">Veuve Noire</span></div>
-      <div class="card-desc"><span data-fr="Sombre, fruité-acidulé. Grenade et hibiscus dans le noir." data-en="Dark, fruity-tart. Pomegranate and hibiscus in the dark." data-de="Dunkel, fruchtig-säuerlich. Granatapfel und Hibiskus.">Sombre, fruité-acidulé. Grenade et hibiscus dans le noir.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">20 cl</div><div class="card-price">7,20 €</div></div>
-    <div class="card-ing"><span data-fr="Infusion hibiscus" data-en="Hibiscus infusion" data-de="Hibiskusinfusion">Infusion hibiscus</span> · <span data-fr="Jus de grenade" data-en="Pomegranate juice" data-de="Granatapfelsaft">Jus de grenade</span> · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span> · <span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span> · <span data-fr="Sel noir" data-en="Black salt" data-de="Schwarzes Salz">Sel noir</span></div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════
-     BIÈRES
-══════════════════════════════════════ -->
-<div id="bieres" class="chap">
-  <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Quatrième" data-en="Fourth Chapter" data-de="Viertes Kapitel">Chapitre Quatrième</span>
-    <div class="chap-title" data-fr="Les Bières" data-en="The Beers" data-de="Die Biere">Les Bières</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Pression ou bouteille. Selon l'humeur." data-en="Draught or bottle. As the mood takes you." data-de="Vom Fass oder Flasche. Je nach Stimmung.">Pression ou bouteille. Selon l'humeur.</span></em></p>
-  </div>
-  <div class="sub-head"><span data-fr="Pression" data-en="Draught" data-de="Vom Fass">Pression</span></div>
-  <table class="ledger">
-    <tr><td><span data-fr="Bière pression" data-en="Draught beer" data-de="Fassbier">Bière pression</span></td><td>25 cl / 50 cl</td><td>4,00 / 6,40 €</td></tr>
-    <tr><td>Panaché</td><td>25 cl / 50 cl</td><td>3,50 / 5,00 €</td></tr>
-    <tr><td>Monaco</td><td>25 cl / 50 cl</td><td>3,70 / 5,20 €</td></tr>
-    <tr><td>Picon Bière</td><td>25 cl / 50 cl</td><td>4,20 / 6,60 €</td></tr>
-  </table>
-  <div class="sub-head"><span data-fr="Bouteilles" data-en="Bottles" data-de="Flaschen">Bouteilles</span></div>
-  <table class="ledger">
-    <tr><td>Desperados</td><td>33 cl · 5,9%</td><td>5,20 €</td></tr>
-    <tr><td><span data-fr="Bière du Sorcier" data-en="Sorcerer's Beer" data-de="Zauberer-Bier">Bière du Sorcier</span></td><td>33 cl · 5%</td><td>5,20 €</td></tr>
-    <tr><td>Kasteel Rouge</td><td>33 cl · 8% · <span data-fr="Cerise" data-en="Cherry" data-de="Kirsche">Cerise</span></td><td>5,20 €</td></tr>
-  </table>
-</div>
-
-<!-- ══════════════════════════════════════
-     SOFTS
-══════════════════════════════════════ -->
-<div id="softs" class="chap">
-  <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Cinquième" data-en="Fifth Chapter" data-de="Fünftes Kapitel">Chapitre Cinquième</span>
-    <div class="chap-title">Softs</div>
-    <div class="rule"><span>⁕</span></div>
-  </div>
-  <table class="ledger">
-    <tr><td>Coca · Zero · Cherry</td><td>33 cl</td><td>3,50 €</td></tr>
-    <tr><td><span data-fr="Thé glacé · Diabolo · Limonade" data-en="Iced tea · Diabolo · Lemonade" data-de="Eistee · Diabolo · Limonade">Thé glacé · Diabolo · Limonade</span></td><td>33 cl</td><td>3,50 €</td></tr>
-    <tr><td>Orangina</td><td>33 cl</td><td>3,50 €</td></tr>
-    <tr><td>Oasis</td><td>33 cl</td><td>3,50 €</td></tr>
-    <tr><td>Red Bull</td><td>25 cl</td><td>4,00 €</td></tr>
-    <tr><td>Iced Coffee · Iced Latte</td><td></td><td>4,00 €</td></tr>
-    <tr><td><span data-fr="Eau plate ou pétillante" data-en="Still or sparkling water" data-de="Stilles oder Sprudelwasser">Eau plate ou pétillante</span></td><td>25 cl</td><td>2,00 €</td></tr>
-    <tr><td><span data-fr="Sirops maison" data-en="House syrups" data-de="Hausgemachte Sirupe">Sirops maison</span></td><td><span data-fr="Grenadine · Violette · Menthe · Pêche · Citron" data-en="Grenadine · Violet · Mint · Peach · Lemon" data-de="Grenadine · Veilchen · Minze · Pfirsich · Zitrone">Grenadine · Violette · Menthe · Pêche · Citron</span></td><td><span data-fr="inclus" data-en="included" data-de="inklusive">inclus</span></td></tr>
-  </table>
-</div>
-
-<!-- ══════════════════════════════════════
-     BOISSONS CHAUDES
-══════════════════════════════════════ -->
-<div id="chauds" class="chap">
-  <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Sixième" data-en="Sixth Chapter" data-de="Sechstes Kapitel">Chapitre Sixième</span>
-    <div class="chap-title" data-fr="Boissons Chaudes" data-en="Hot Drinks" data-de="Heißgetränke">Boissons Chaudes</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Pour veiller toute la nuit ou rêver les yeux ouverts." data-en="To stay awake all night or dream with open eyes." data-de="Um die ganze Nacht zu wachen oder mit offenen Augen zu träumen.">Pour veiller toute la nuit ou rêver les yeux ouverts.</span></em></p>
-  </div>
-  <table class="ledger">
-    <tr><td>Espresso</td><td></td><td>2,00 €</td></tr>
-    <tr><td>Double Espresso</td><td></td><td>3,30 €</td></tr>
-    <tr><td><span data-fr="Café allongé" data-en="Long coffee" data-de="Verlängerter Kaffee">Café allongé</span></td><td></td><td>2,50 €</td></tr>
-    <tr><td>Cappuccino</td><td></td><td>3,50 €</td></tr>
-    <tr><td><span data-fr="Café au lait" data-en="Coffee with milk" data-de="Milchkaffee">Café au lait</span></td><td></td><td>3,40 €</td></tr>
-    <tr><td>Affogato</td><td><span data-fr="Espresso · glace vanille" data-en="Espresso · vanilla ice cream" data-de="Espresso · Vanilleeis">Espresso · glace vanille</span></td><td>4,20 €</td></tr>
-    <tr><td><span data-fr="Chocolat chaud" data-en="Hot chocolate" data-de="Heiße Schokolade">Chocolat chaud</span></td><td></td><td>3,50 €</td></tr>
-    <tr><td>Chaï Latte</td><td></td><td>3,90 €</td></tr>
-    <tr><td><span data-fr="Thés Dammann" data-en="Dammann Teas" data-de="Dammann Tees">Thés Dammann</span></td><td><span data-fr="Voir carte des thés" data-en="See tea menu" data-de="Siehe Teekarte">Voir carte des thés</span></td><td>3,50 €</td></tr>
-    <tr><td><span data-fr="Sirops en supplément" data-en="Extra syrups" data-de="Zusätzliche Sirupe">Sirops en supplément</span></td><td><span data-fr="Noisette · Pumpkin · Vanille" data-en="Hazelnut · Pumpkin · Vanilla" data-de="Haselnuss · Kürbis · Vanille">Noisette · Pumpkin · Vanille</span></td><td>+0,50 €</td></tr>
-    <tr><td><span data-fr="Lait d'amande" data-en="Almond milk" data-de="Mandelmilch">Lait d'amande</span></td><td><span data-fr="sur demande" data-en="on request" data-de="auf Anfrage">sur demande</span></td><td><span data-fr="inclus" data-en="included" data-de="inklusive">inclus</span></td></tr>
-  </table>
-</div>
-
-<!-- ══════════════════════════════════════
-     THÉS
-══════════════════════════════════════ -->
-<div id="thes" class="chap">
-  <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Septième" data-en="Seventh Chapter" data-de="Siebtes Kapitel">Chapitre Septième</span>
-    <div class="chap-title" data-fr="La Carte des Thés" data-en="The Tea Menu" data-de="Die Teekarte">La Carte des Thés</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em>Dammann Frères · <span data-fr="Sélection de la maison" data-en="House selection" data-de="Hausauswahl">Sélection de la maison</span></em></p>
-  </div>
-
-  <div class="tea-section">
-    <div class="tea-section-title"><span data-fr="Thés Verts" data-en="Green Teas" data-de="Grüne Tees">Thés Verts</span></div>
-    <div class="tea-row"><span class="tea-name">À la Menthe</span><span class="tea-origin">Chine</span><span class="tea-desc"><span data-fr="Menthe douce et poivrée, idéal très chaud" data-en="Sweet and peppered mint, best served very hot" data-de="Süße und pfeffrige Minze, ideal sehr heiß">Menthe douce et poivrée, idéal très chaud</span></span></div>
-    <div class="tea-row"><span class="tea-name">Macaron Cassis Violette</span><span class="tea-origin">Chine</span><span class="tea-desc"><span data-fr="Gourmand — biscuit, amande, violette, cassis" data-en="Indulgent — biscuit, almond, violet, blackcurrant" data-de="Genussvoll — Keks, Mandel, Veilchen, Johannisbeere">Gourmand — biscuit, amande, violette, cassis</span></span></div>
-    <div class="tea-row"><span class="tea-name">Miss Dammann</span><span class="tea-origin">Asie</span><span class="tea-desc"><span data-fr="Fruité et épicé — gingembre, passion, citron vert" data-en="Fruity and spiced — ginger, passion fruit, lime" data-de="Fruchtig und würzig — Ingwer, Passionsfrucht, Limette">Fruité et épicé — gingembre, passion, citron vert</span></span></div>
-    <div class="tea-row"><span class="tea-name">Happy Green</span><span class="tea-origin">Chine · glacé</span><span class="tea-desc"><span data-fr="Notes kiwi, pomme, concombre" data-en="Kiwi, apple, cucumber notes" data-de="Kiwi-, Apfel-, Gurkennoten">Notes kiwi, pomme, concombre</span></span></div>
-  </div>
-
-  <div class="tea-section">
-    <div class="tea-section-title"><span data-fr="Thés Noirs" data-en="Black Teas" data-de="Schwarze Tees">Thés Noirs</span></div>
-    <div class="tea-row"><span class="tea-name">7 Parfums</span><span class="tea-origin">Chine</span><span class="tea-desc"><span data-fr="Fleuri et fruité — citron, abricot, bergamote, figue" data-en="Floral and fruity — lemon, apricot, bergamot, fig" data-de="Blumig und fruchtig — Zitrone, Aprikose, Bergamotte, Feige">Fleuri et fruité — citron, abricot, bergamote, figue</span></span></div>
-    <div class="tea-row"><span class="tea-name">Pécan Pie</span><span class="tea-origin"></span><span class="tea-desc"><span data-fr="Gourmand — noisette, noix de pécan, amande, pistache, miel" data-en="Indulgent — hazelnut, pecan, almond, pistachio, honey" data-de="Genussvoll — Haselnuss, Pekannuss, Mandel, Pistazie, Honig">Gourmand — noisette, noix de pécan, amande, pistache, miel</span></span></div>
-    <div class="tea-row"><span class="tea-name">Goût Russe Douchka</span><span class="tea-origin">Chine · Inde</span><span class="tea-desc"><span data-fr="Notes d'agrumes — bergamote, orange, citron" data-en="Citrus notes — bergamot, orange, lemon" data-de="Zitrusnoten — Bergamotte, Orange, Zitrone">Notes d'agrumes — bergamote, orange, citron</span></span></div>
-    <div class="tea-row"><span class="tea-name">Jardin Bleu</span><span class="tea-origin"></span><span class="tea-desc"><span data-fr="Fruité — rhubarbe, fraise des bois, baies" data-en="Fruity — rhubarb, wild strawberry, berries" data-de="Fruchtig — Rhabarber, Walderdbeere, Beeren">Fruité — rhubarbe, fraise des bois, baies</span></span></div>
-    <div class="tea-row"><span class="tea-name">Chaï</span><span class="tea-origin">Rwanda</span><span class="tea-desc"><span data-fr="Épicé — gingembre, cannelle, cardamome, clou de girofle" data-en="Spiced — ginger, cinnamon, cardamom, clove" data-de="Würzig — Ingwer, Zimt, Kardamom, Nelke">Épicé — gingembre, cannelle, cardamome, clou de girofle</span></span></div>
-  </div>
-
-  <div class="tea-section">
-    <div class="tea-section-title"><span data-fr="Thé Blanc · Rooibos · Carcadet" data-en="White Tea · Rooibos · Hibiscus" data-de="Weißer Tee · Rooibos · Hibiskus">Thé Blanc · Rooibos · Carcadet</span></div>
-    <div class="tea-row"><span class="tea-name">Passion de Fleurs</span><span class="tea-origin"><span data-fr="Thé blanc" data-en="White tea" data-de="Weißer Tee">Thé blanc</span></span><span class="tea-desc"><span data-fr="Fruité — passion, abricot, pétales, rose" data-en="Fruity — passion fruit, apricot, petals, rose" data-de="Fruchtig — Passionsfrucht, Aprikose, Blütenblätter, Rose">Fruité — passion, abricot, pétales, rose</span></span></div>
-    <div class="tea-row"><span class="tea-name">Carott Cake</span><span class="tea-origin">Rooibos</span><span class="tea-desc"><span data-fr="Gourmand — cannelle, gingembre, carotte, noix de pécan" data-en="Indulgent — cinnamon, ginger, carrot, pecan" data-de="Genussvoll — Zimt, Ingwer, Möhre, Pekannuss">Gourmand — cannelle, gingembre, carotte, noix de pécan</span></span></div>
-    <div class="tea-row"><span class="tea-name">Passion Framboise</span><span class="tea-origin">Carcadet</span><span class="tea-desc"><span data-fr="Hibiscus, cynorrhodon, pomme, framboise, passion" data-en="Hibiscus, rosehip, apple, raspberry, passion fruit" data-de="Hibiskus, Hagebutte, Apfel, Himbeere, Passionsfrucht">Hibiscus, cynorrhodon, pomme, framboise, passion</span></span></div>
-  </div>
-
-  <p style="text-align:center;font-family:'Cormorant SC',serif;font-size:.8rem;color:var(--sepia2);margin-top:14px;letter-spacing:.2em;">
-    <span data-fr="Tous nos thés" data-en="All our teas" data-de="Alle unsere Tees">Tous nos thés</span> — 3,50 €
-  </p>
-</div>
-
-<!-- ══════════════════════════════════════
-     RESTAURATION
-══════════════════════════════════════ -->
-<div id="food" class="chap">
-  <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Huitième" data-en="Eighth Chapter" data-de="Achtes Kapitel">Chapitre Huitième</span>
-    <div class="chap-title" data-fr="Restauration" data-en="Food" data-de="Speisen">Restauration</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Petites faims entre deux mondes." data-en="Small hungers between two worlds." data-de="Kleiner Hunger zwischen zwei Welten.">Petites faims entre deux mondes.</span></em></p>
-  </div>
-  <div class="viands">
-    <div class="viand"><div class="viand-name">Cookie</div><div class="viand-desc"><span data-fr="Maison, chaud si possible" data-en="Homemade, warm if possible" data-de="Hausgemacht, warm wenn möglich">Maison, chaud si possible</span></div><div class="viand-price">2,40 €</div></div>
-    <div class="viand"><div class="viand-name">Bretzel</div><div class="viand-desc"><span data-fr="Sel de guérande" data-en="Guérande salt" data-de="Guérande-Salz">Sel de guérande</span></div><div class="viand-price">3,00 €</div></div>
-    <div class="viand"><div class="viand-name">Fondant Chocolat</div><div class="viand-desc"><span data-fr="Cœur coulant · glace pistache" data-en="Molten centre · pistachio ice cream" data-de="Flüssiger Kern · Pistazieneis">Cœur coulant · glace pistache</span></div><div class="viand-price">5,20 €</div></div>
-    <div class="viand"><div class="viand-name">Pancakes</div><div class="viand-desc"><span data-fr="Sirop d'érable · glace vanille" data-en="Maple syrup · vanilla ice cream" data-de="Ahornsirup · Vanilleeis">Sirop d'érable · glace vanille</span></div><div class="viand-price">5,20 €</div></div>
-    <div class="viand"><div class="viand-name">Nachos</div><div class="viand-desc"><span data-fr="Salsa ou guacamole" data-en="Salsa or guacamole" data-de="Salsa oder Guacamole">Salsa ou guacamole</span></div><div class="viand-price">5,00 €</div></div>
-    <div class="viand"><div class="viand-name">Saucisson</div><div class="viand-desc"><span data-fr="Sélection & accompagnements" data-en="Selection & accompaniments" data-de="Auswahl & Beilagen">Sélection & accompagnements</span></div><div class="viand-price">6,20 €</div></div>
-  </div>
-  <div style="margin-top:12px;">
-    <div class="viand" style="border-color:rgba(200,169,110,.4);background:linear-gradient(135deg,var(--parch),rgba(200,169,110,.04));">
-      <div class="viand-name" style="font-size:1rem;"><span data-fr="Planchette du Rêveur" data-en="Dreamer's Board" data-de="Träumer-Brett">Planchette du Rêveur</span></div>
-      <div class="viand-desc"><span data-fr="Fromages & charcuteries sélectionnés · accompagnements du moment" data-en="Selected cheeses & charcuterie · seasonal accompaniments" data-de="Ausgewählte Käse & Wurstwaren · saisonale Beilagen">Fromages & charcuteries sélectionnés · accompagnements du moment</span></div>
-      <div class="viand-price">14,00 €</div>
+<header class="masthead">
+  <div class="masthead-inner">
+    <svg class="crest" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.2" opacity=".5"/>
+      <path d="M30 14a12 12 0 1 0 0 20 9 9 0 0 1 0-20z" fill="currentColor" opacity=".85"/>
+      <circle cx="33" cy="17" r="1.4" fill="currentColor"/>
+      <circle cx="36" cy="24" r="1" fill="currentColor"/>
+      <circle cx="32" cy="30" r="1.1" fill="currentColor"/>
+    </svg>
+    <div class="brand">
+      <span class="name">Morpheus Experience</span>
+      <span class="tagline">Officine du temps</span>
     </div>
+    <nav class="nav">
+      <button data-view="planning" class="active">Planning</button>
+      <button data-view="absences">Absences</button>
+    </nav>
   </div>
-</div>
+</header>
 
-<!-- FOOTER -->
-<div class="colophon">
-  <span class="colophon-mark">Morpheus</span>
-  <p>
-    42 Boulevard du Président Wilson · 67000 Strasbourg<br>
-    <a href="https://www.morpheus-experience.com">morpheus-experience.com</a><br><br>
-    <span data-fr="Lun–Jeu 14h–21h30 · Ven–Sam 9h30–00h00 · Dim 10h–21h30" data-en="Mon–Thu 2pm–9:30pm · Fri–Sat 9:30am–midnight · Sun 10am–9:30pm" data-de="Mo–Do 14–21:30 · Fr–Sa 9:30–0:00 · So 10–21:30">Lun–Jeu 14h–21h30 · Ven–Sam 9h30–00h00 · Dim 10h–21h30</span><br>
-    <span data-fr="Prix TTC, service compris · Allergènes sur demande · Certains desserts élaborés à partir de produits surgelés" data-en="Prices incl. VAT, service included · Allergens on request · Some desserts made from frozen products" data-de="Preise inkl. MwSt., Service inklusive · Allergene auf Anfrage · Einige Desserts aus Tiefkühlprodukten">Prix TTC, service compris · Allergènes sur demande · Certains desserts élaborés à partir de produits surgelés</span><br><br>
-    <span data-fr="L'abus d'alcool est dangereux pour la santé. À consommer avec modération." data-en="Excessive alcohol consumption is harmful to health. Drink responsibly." data-de="Übermäßiger Alkoholkonsum ist gesundheitsschädlich. Bitte maßvoll genießen.">L'abus d'alcool est dangereux pour la santé. À consommer avec modération.</span>
-  </p>
-</div>
+<main class="page">
 
-</div><!-- /page -->
+  <!-- ===================== VUE PLANNING ===================== -->
+  <section class="view active" id="view-planning">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Planning de travail</h1>
+        <p class="page-sub">Les heures se calculent toutes seules. Choisis le poste de la journée, renseigne les créneaux.</p>
+      </div>
+      <div class="toggle-edit" title="Passer en édition pour modifier">
+        <button id="editToggle" class="ghost icon" aria-label="Basculer édition">✎</button>
+        <span class="dot"></span>
+        <span class="state" id="editState">Consultation</span>
+      </div>
+    </div>
+    <div class="rule">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 12h7l2-4 2 8 2-4h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="toolbar">
+      <div class="group">
+        <button id="pl-prev" class="icon" aria-label="Semaine précédente">‹</button>
+        <span class="period-label" id="pl-period"></span>
+        <button id="pl-next" class="icon" aria-label="Semaine suivante">›</button>
+      </div>
+      <button id="pl-today" class="ghost">Cette semaine</button>
+      <div class="group">
+        <label for="pl-picker">Aller au</label>
+        <input type="date" id="pl-picker">
+      </div>
+      <div class="spacer"></div>
+      <div class="group">
+        <label for="pl-filter">Afficher</label>
+        <select id="pl-filter"></select>
+      </div>
+      <button id="pl-settings" class="ghost">Équipe &amp; postes</button>
+    </div>
+    <div class="scroll-x"><div class="grid" id="pl-grid"></div></div>
+    <section class="recap">
+      <h2>Récapitulatif du mois — <span id="pl-recapMonth"></span></h2>
+      <p class="hint">Total d'heures cumulées sur le mois. Le niveau de chaque fiole est relatif à l'équipier le plus présent.</p>
+      <div class="vials" id="pl-recapVials"></div>
+    </section>
+  </section>
+
+  <!-- ===================== VUE ABSENCES ===================== -->
+  <section class="view" id="view-absences">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Registre des absences</h1>
+        <p class="page-sub">Congés, repos et maladies, mois par mois. Choisis un code dans chaque case.</p>
+      </div>
+      <div class="toggle-edit" title="Passer en édition pour modifier">
+        <button id="editToggle2" class="ghost icon" aria-label="Basculer édition">✎</button>
+        <span class="dot"></span>
+        <span class="state" id="editState2">Consultation</span>
+      </div>
+    </div>
+    <div class="rule">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l3 3M18 18l-3-3M18 6l-3 3M6 18l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+    </div>
+    <div class="toolbar">
+      <div class="group">
+        <button id="ab-prev" class="icon" aria-label="Mois précédent">‹</button>
+        <span class="period-label" id="ab-period"></span>
+        <button id="ab-next" class="icon" aria-label="Mois suivant">›</button>
+      </div>
+      <button id="ab-today" class="ghost">Ce mois-ci</button>
+      <div class="group">
+        <label for="ab-year">Année</label>
+        <input type="number" id="ab-year" min="2020" max="2099" step="1" style="width:90px">
+      </div>
+      <div class="spacer"></div>
+      <button id="ab-settings" class="ghost">Équipe &amp; codes</button>
+    </div>
+    <div class="legend" id="ab-legend" style="margin-bottom:18px"></div>
+    <div class="scroll-x"><div class="abs-grid" id="ab-grid"></div></div>
+  </section>
+
+  <!-- ===================== PUBLICATION (partagé) ===================== -->
+  <div class="toolbar" style="margin-top:26px">
+    <span style="font-size:.8rem;color:var(--ink-soft);font-weight:700">Publication&nbsp;:</span>
+    <button id="exportBtn" class="primary">Exporter (planning-data.json)</button>
+    <button id="importBtn">Importer un fichier</button>
+    <button id="loadPublishedBtn" class="ghost">Recharger le planning publié</button>
+    <input type="file" id="importInput" accept="application/json" hidden>
+  </div>
+  <div class="note">
+    <b>Comment ça marche.</b> Tes modifications sont enregistrées dans <b>ton</b> navigateur.
+    Pour que toute l'équipe voie le même planning, clique <b>Exporter</b>, puis dépose le
+    fichier <code>planning-data.json</code> à côté de cette page sur GitHub. Les équipiers
+    ouvrent le lien et consultent — l'édition se fait de ton côté.
+  </div>
+</main>
+
+<dialog class="sheet" id="settingsDialog">
+  <div class="sheet-head">
+    <h3>Équipe, postes &amp; codes</h3>
+    <button class="ghost icon sheet-close" aria-label="Fermer">✕</button>
+  </div>
+  <div class="sheet-body"></div>
+</dialog>
 
 <script>
-/* particles */
-const cvs=document.getElementById('cvs'),ctx=cvs.getContext('2d');
-let W,H,pts=[];
-function resize(){W=cvs.width=window.innerWidth;H=cvs.height=window.innerHeight;}
-resize();window.addEventListener('resize',resize);
-const COLS=['rgba(139,127,220,','rgba(192,56,56,','rgba(200,169,110,','rgba(255,255,255,'];
-for(let i=0;i<55;i++)pts.push({x:Math.random()*2000,y:Math.random()*2000,r:.4+Math.random()*1.2,vx:(Math.random()-.5)*.18,vy:-.06-Math.random()*.22,a:Math.random(),da:.003+Math.random()*.006,c:COLS[Math.floor(Math.random()*COLS.length)],life:Math.random()*Math.PI*2});
-function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.life+=p.da;p.a=.35+.35*Math.sin(p.life);p.x+=p.vx;p.y+=p.vy;if(p.y<-10){p.y=H+10;p.x=Math.random()*W;}if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);ctx.fillStyle=p.c+p.a+')';ctx.fill();});requestAnimationFrame(draw);}
-draw();
+/* ============================================================
+   DONNÉES — équipe, postes, codes, stockage, calcul d'heures
+   Aucune notion d'argent.
+   ============================================================ */
+const STORE={config:'morpheus_config_v1',planning:'morpheus_planning_v1',absences:'morpheus_absences_v1'};
+const PASTELS=[
+  {bg:'#E7DCF1',fg:'#4A3A63',br:'#CDBBE4'},
+  {bg:'#DEEBD7',fg:'#3F5436',br:'#BFD6B2'},
+  {bg:'#F4E3BE',fg:'#6B5320',br:'#E4CD93'},
+  {bg:'#D6E9E6',fg:'#2F5450',br:'#AFD4CE'},
+  {bg:'#EBD9DA',fg:'#6A4044',br:'#DBBCC0'},
+  {bg:'#DCE2EC',fg:'#3A4658',br:'#C0CAD9'},
+  {bg:'#EFE0D2',fg:'#6A4B33',br:'#E0C7AE'},
+];
+const DEFAULT_CONFIG={
+  team:'Morpheus Experience',
+  employees:[
+    {id:'maxence',name:'Maxence T'},
+    {id:'damien',name:'Damien J'},
+    {id:'yousra',name:'Yousra'},
+    {id:'johan',name:'Johan'},
+  ],
+  roles:[
+    {name:'Game master',...PASTELS[0]},
+    {name:'Soutien',...PASTELS[1]},
+    {name:'Bar',...PASTELS[2]},
+    {name:'Bar/Escape',...PASTELS[3]},
+    {name:'Repos',...PASTELS[4]},
+    {name:'Formation',...PASTELS[5]},
+  ],
+  codes:[
+    {code:'CP',label:'Congé payé',...PASTELS[1]},
+    {code:'RTT',label:'RTT',...PASTELS[0]},
+    {code:'M',label:'Maladie ou maternité',...PASTELS[4]},
+    {code:'RH',label:'Repos hebdomadaire',...PASTELS[5]},
+    {code:'RC',label:'Repos compensateur',...PASTELS[3]},
+    {code:'CEF',label:'Congé pour événement familial',...PASTELS[2]},
+    {code:'VOLO',label:'Absent',...PASTELS[6]},
+  ],
+};
+function lsGet(k,f){try{const r=localStorage.getItem(k);return r?JSON.parse(r):f;}catch(e){return f;}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function lsHas(k){try{return localStorage.getItem(k)!==null;}catch(e){return false;}}
+function deepClone(o){return JSON.parse(JSON.stringify(o));}
 
-function showChap(id,btn){
-  document.querySelectorAll('.chap').forEach(c=>c.classList.remove('on'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
-  document.getElementById(id).classList.add('on');
-  btn.classList.add('on');
-  window.scrollTo({top:0,behavior:'smooth'});
+const Data={
+  config:null,planning:null,absences:null,
+  load(){
+    this.config=lsGet(STORE.config,null)||deepClone(DEFAULT_CONFIG);
+    this.planning=lsGet(STORE.planning,null)||{};
+    this.absences=lsGet(STORE.absences,null)||{};
+    this.ensureDefaults();
+  },
+  ensureDefaults(){
+    if(this.config&&Array.isArray(this.config.roles)&&!this.config.roles.some(r=>r.name==='Formation')){
+      this.config.roles.push({name:'Formation',...PASTELS[5]});
+      this.saveConfig();
+    }
+  },
+  saveConfig(){lsSet(STORE.config,this.config);},
+  savePlanning(){lsSet(STORE.planning,this.planning);},
+  saveAbsences(){lsSet(STORE.absences,this.absences);},
+  async seedFromFileIfEmpty(){
+    const empty=!lsHas(STORE.planning)&&!lsHas(STORE.absences)&&!lsHas(STORE.config);
+    if(!empty)return;
+    try{
+      const res=await fetch('./planning-data.json',{cache:'no-store'});
+      if(!res.ok)return;
+      const json=await res.json();
+      this.applyImport(json,{silent:true});
+    }catch(e){}
+  },
+  async loadPublished(){
+    const res=await fetch('./planning-data.json',{cache:'no-store'});
+    if(!res.ok)throw new Error('Aucun planning publié trouvé.');
+    const json=await res.json();
+    this.applyImport(json);
+    return true;
+  },
+  applyImport(json){
+    if(json.config){this.config=json.config;}
+    if(json.planning){this.planning=json.planning;}
+    if(json.absences){this.absences=json.absences;}
+    this.saveConfig();this.savePlanning();this.saveAbsences();
+  },
+  exportBundle(){
+    return {_format:'morpheus-planning',_exportedAt:new Date().toISOString(),
+      config:this.config,planning:this.planning,absences:this.absences};
+  },
+  roleByName(n){return this.config.roles.find(r=>r.name===n)||null;},
+  codeByCode(c){return this.config.codes.find(x=>x.code===c)||null;},
+  nextPastel(u){return PASTELS[u%PASTELS.length];},
+};
+
+const FR_DAYS=['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
+const FR_MONTHS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+function isoDate(d){const y=d.getFullYear();const m=String(d.getMonth()+1).padStart(2,'0');const day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`;}
+function parseISO(s){const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d);}
+function mondayOf(date){const d=new Date(date);const wd=(d.getDay()+6)%7;d.setDate(d.getDate()-wd);d.setHours(0,0,0,0);return d;}
+function addDays(date,n){const d=new Date(date);d.setDate(d.getDate()+n);return d;}
+function daysInMonth(y,mi){return new Date(y,mi+1,0).getDate();}
+function timeToMin(str){if(!str)return null;const m=/^(\d{1,2}):(\d{2})$/.exec(str.trim());if(!m)return null;const h=+m[1],min=+m[2];if(h>23||min>59)return null;return h*60+min;}
+function shiftMinutes(start,end){const a=timeToMin(start),b=timeToMin(end);if(a===null||b===null)return 0;let diff=b-a;if(diff<0)diff+=24*60;return diff;}
+function dayMinutes(entry){if(!entry)return 0;return shiftMinutes(entry.s1s,entry.s1e)+shiftMinutes(entry.s2s,entry.s2e);}
+function fmtHM(minutes,dashIfZero=false){if(!minutes)return dashIfZero?'—':'0 h';const h=Math.floor(minutes/60);const m=minutes%60;if(m===0)return `${h} h`;return `${h} h ${String(m).padStart(2,'0')}`;}
+function workedDayMinutes(empId,iso){const key=`${empId}|${iso}`;if(Data.absences&&Data.absences[key])return 0;return dayMinutes(Data.planning[key]);}
+function totalMinutesForRange(empId,fromDate,toDate){let total=0;let d=new Date(fromDate);while(d<=toDate){total+=workedDayMinutes(empId,isoDate(d));d=addDays(d,1);}return total;}
+
+/* ============================================================
+   COQUILLE — notifications, édition, réglages
+   ============================================================ */
+let RERENDER=()=>{};
+function toast(msg){
+  let t=document.querySelector('.toast');
+  if(!t){t=document.createElement('div');t.className='toast';document.body.appendChild(t);}
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._timer);t._timer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+function setEditing(on){
+  document.body.classList.toggle('editing',on);
+  document.querySelectorAll('.state').forEach(s=>s.textContent=on?'Édition':'Consultation');
+  document.querySelectorAll('.grid select,.grid input,.abs-grid select').forEach(el=>{el.disabled=!on;});
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function slug(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'x';}
+
+function buildSettings(dlg){
+  const body=dlg.querySelector('.sheet-body');
+  const c=Data.config;
+  const empRows=c.employees.map((e,i)=>`
+    <div class="row-item" data-emp="${i}">
+      <input type="text" value="${escapeHtml(e.name)}" data-field="name" aria-label="Nom de l'équipier">
+      <button class="ghost icon" data-del-emp="${i}" title="Retirer">✕</button>
+    </div>`).join('');
+  const roleRows=c.roles.map((r,i)=>`
+    <div class="row-item" data-role="${i}">
+      <span class="swatch" style="background:${r.bg};border-color:${r.br}"></span>
+      <input type="text" value="${escapeHtml(r.name)}" data-field="rname" aria-label="Nom du poste">
+      <button class="ghost icon" data-del-role="${i}" title="Retirer">✕</button>
+    </div>`).join('');
+  const codeRows=c.codes.map((x,i)=>`
+    <div class="row-item" data-code="${i}">
+      <span class="swatch" style="background:${x.bg};border-color:${x.br}"></span>
+      <input type="text" value="${escapeHtml(x.code)}" data-field="ccode" style="max-width:70px" aria-label="Code">
+      <input type="text" value="${escapeHtml(x.label)}" data-field="clabel" aria-label="Libellé">
+      <button class="ghost icon" data-del-code="${i}" title="Retirer">✕</button>
+    </div>`).join('');
+  body.innerHTML=`
+    <h4>Équipe</h4><div id="empList">${empRows}</div>
+    <div class="add-row"><input type="text" id="newEmp" placeholder="Nom du nouvel équipier…"><button id="addEmp">Ajouter</button></div>
+    <h4>Postes</h4><div id="roleList">${roleRows}</div>
+    <div class="add-row"><input type="text" id="newRole" placeholder="Nouveau poste…"><button id="addRole">Ajouter</button></div>
+    <h4>Codes d'absence</h4><div id="codeList">${codeRows}</div>
+    <div class="add-row"><input type="text" id="newCode" placeholder="Code" style="max-width:80px"><input type="text" id="newCodeLabel" placeholder="Libellé…"><button id="addCode">Ajouter</button></div>`;
+  const save=()=>{Data.saveConfig();RERENDER();};
+  body.querySelectorAll('[data-emp] input').forEach(inp=>inp.addEventListener('change',e=>{
+    const i=+e.target.closest('[data-emp]').dataset.emp;
+    c.employees[i].name=e.target.value.trim()||c.employees[i].name;save();}));
+  body.querySelectorAll('[data-role] input').forEach(inp=>inp.addEventListener('change',e=>{
+    const i=+e.target.closest('[data-role]').dataset.role;
+    c.roles[i].name=e.target.value.trim()||c.roles[i].name;save();}));
+  body.querySelectorAll('[data-code] input').forEach(inp=>inp.addEventListener('change',e=>{
+    const wrap=e.target.closest('[data-code]');const i=+wrap.dataset.code;const field=e.target.dataset.field;
+    if(field==='ccode')c.codes[i].code=e.target.value.trim().toUpperCase()||c.codes[i].code;
+    else c.codes[i].label=e.target.value.trim()||c.codes[i].label;save();}));
+  body.querySelectorAll('[data-del-emp]').forEach(b=>b.addEventListener('click',()=>{c.employees.splice(+b.dataset.delEmp,1);save();buildSettings(dlg);}));
+  body.querySelectorAll('[data-del-role]').forEach(b=>b.addEventListener('click',()=>{c.roles.splice(+b.dataset.delRole,1);save();buildSettings(dlg);}));
+  body.querySelectorAll('[data-del-code]').forEach(b=>b.addEventListener('click',()=>{c.codes.splice(+b.dataset.delCode,1);save();buildSettings(dlg);}));
+  body.querySelector('#addEmp').addEventListener('click',()=>{const v=body.querySelector('#newEmp').value.trim();if(!v)return;
+    c.employees.push({id:slug(v)+'-'+Math.random().toString(36).slice(2,6),name:v});save();buildSettings(dlg);});
+  body.querySelector('#addRole').addEventListener('click',()=>{const v=body.querySelector('#newRole').value.trim();if(!v)return;
+    c.roles.push({name:v,...Data.nextPastel(c.roles.length)});save();buildSettings(dlg);});
+  body.querySelector('#addCode').addEventListener('click',()=>{const code=body.querySelector('#newCode').value.trim().toUpperCase();
+    const label=body.querySelector('#newCodeLabel').value.trim();if(!code)return;
+    c.codes.push({code,label:label||code,...Data.nextPastel(c.codes.length)});save();buildSettings(dlg);});
 }
 
-function setLang(lang,btn){
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  document.querySelectorAll('[data-fr]').forEach(el=>{
-    const val=el.getAttribute('data-'+lang);
-    if(val!==null) el.innerHTML=val;
+/* ============================================================
+   MODULE PLANNING (cloisonné)
+   ============================================================ */
+const Planning=(function(){
+  let weekStart=mondayOf(new Date());
+  let filterEmp='all';
+
+  function render(){renderToolbar();renderGrid();renderRecap();setEditing(document.body.classList.contains('editing'));}
+
+  function renderToolbar(){
+    const sel=document.getElementById('pl-filter');
+    if(sel){
+      const cur=sel.value||'all';
+      sel.innerHTML=`<option value="all">Toute l'équipe</option>`+
+        Data.config.employees.map(e=>`<option value="${e.id}">${escapeHtml(e.name)}</option>`).join('');
+      sel.value=[...sel.options].some(o=>o.value===cur)?cur:'all';
+      filterEmp=sel.value;
+    }
+    const end=addDays(weekStart,6);
+    const label=document.getElementById('pl-period');
+    if(label){
+      const sameMonth=weekStart.getMonth()===end.getMonth();
+      const left=`${weekStart.getDate()} ${sameMonth?'':FR_MONTHS[weekStart.getMonth()]+' '}`;
+      label.textContent=`${left}– ${end.getDate()} ${FR_MONTHS[end.getMonth()]} ${end.getFullYear()}`;
+    }
+    const dp=document.getElementById('pl-picker');
+    if(dp)dp.value=isoDate(weekStart);
+  }
+
+  function renderGrid(){
+    const grid=document.getElementById('pl-grid');
+    const todayISO=isoDate(new Date());
+    const employees=Data.config.employees.filter(e=>filterEmp==='all'||e.id===filterEmp);
+    const days=Array.from({length:7},(_,i)=>addDays(weekStart,i));
+    let html='';
+    html+=`<div class="cell head-cell corner"><span>Équipier</span></div>`;
+    days.forEach((d,i)=>{
+      const weekend=i>=5;const today=isoDate(d)===todayISO;
+      html+=`<div class="cell head-cell ${weekend?'is-weekend':''} ${today?'is-today':''}">
+        <div class="dname">${FR_DAYS[i].slice(0,3)}</div><div class="dnum">${d.getDate()}</div></div>`;
+    });
+    html+=`<div class="cell head-cell"><div class="dname">Total</div><div class="dname">semaine</div></div>`;
+    const roleOptions=name=>`<option value="">— poste —</option>`+
+      Data.config.roles.map(r=>`<option value="${escapeHtml(r.name)}" ${r.name===name?'selected':''}>${escapeHtml(r.name)}</option>`).join('');
+    employees.forEach(emp=>{
+      const weekMin=totalMinutesForRange(emp.id,weekStart,addDays(weekStart,6));
+      html+=`<div class="cell name-cell"><span class="who">${escapeHtml(emp.name)}</span>
+        <span class="week-h">Semaine : <b>${fmtHM(weekMin)}</b></span></div>`;
+      days.forEach((d,i)=>{
+        const key=`${emp.id}|${isoDate(d)}`;const e=Data.planning[key]||{};
+        const absCode=Data.absences[key]||'';
+        if(absCode){
+          const ac=Data.codeByCode(absCode);
+          const acStyle=ac?`style="background:${ac.bg};color:${ac.fg};border-color:${ac.br}"`:'';
+          html+=`<div class="cell day-cell absent ${i>=5?'is-weekend':''}" data-key="${key}">
+            <div class="abs-badge" ${acStyle}><span class="abs-code">${escapeHtml(absCode)}</span>${ac?`<span class="abs-label">${escapeHtml(ac.label)}</span>`:''}</div>
+            <div class="day-total zero">—</div></div>`;
+          return;
+        }
+        const dMin=dayMinutes(e);const role=Data.roleByName(e.role);
+        const roleStyle=role?`style="background:${role.bg};color:${role.fg};border-color:${role.br}"`:'';
+        html+=`<div class="cell day-cell ${i>=5?'is-weekend':''}" data-key="${key}">
+          <select class="role-select ${e.role?'has-role':''}" data-f="role" ${roleStyle}>${roleOptions(e.role||'')}</select>
+          <div class="shift ${(e.s1s||e.s1e)?'':'empty'}"><input type="time" data-f="s1s" value="${e.s1s||''}" aria-label="Début créneau 1"><span class="sep">–</span><input type="time" data-f="s1e" value="${e.s1e||''}" aria-label="Fin créneau 1"></div>
+          <div class="shift ${(e.s2s||e.s2e)?'':'empty'}"><input type="time" data-f="s2s" value="${e.s2s||''}" aria-label="Début créneau 2"><span class="sep">–</span><input type="time" data-f="s2e" value="${e.s2e||''}" aria-label="Fin créneau 2"></div>
+          <div class="day-total ${dMin?'':'zero'}">${fmtHM(dMin,true)}</div></div>`;
+      });
+      html+=`<div class="cell tot-cell"><span class="label">heures</span><span class="val">${fmtHM(weekMin)}</span></div>`;
+    });
+    html+=`<div class="cell foot-cell label">Total / jour</div>`;
+    let grand=0;
+    days.forEach(d=>{let sum=0;employees.forEach(emp=>{sum+=workedDayMinutes(emp.id,isoDate(d));});grand+=sum;
+      html+=`<div class="cell foot-cell">${fmtHM(sum,true)}</div>`;});
+    html+=`<div class="cell foot-cell grand">${fmtHM(grand)}</div>`;
+    grid.innerHTML=html;
+    grid.querySelectorAll('.day-cell').forEach(cellEl=>{
+      const key=cellEl.dataset.key;
+      cellEl.querySelectorAll('[data-f]').forEach(input=>{
+        input.addEventListener('change',()=>{
+          const entry=Data.planning[key]||{};entry[input.dataset.f]=input.value;
+          if(!entry.role&&!entry.s1s&&!entry.s1e&&!entry.s2s&&!entry.s2e){delete Data.planning[key];}
+          else{Data.planning[key]=entry;}
+          Data.savePlanning();renderGrid();renderRecap();setEditing(true);
+        });
+      });
+    });
+  }
+
+  function renderRecap(){
+    const wrap=document.getElementById('pl-recapVials');
+    const head=document.getElementById('pl-recapMonth');
+    if(!wrap)return;
+    const ref=addDays(weekStart,3);const y=ref.getFullYear(),m=ref.getMonth();
+    const first=new Date(y,m,1);const last=new Date(y,m,daysInMonth(y,m));
+    if(head)head.textContent=`${FR_MONTHS[m]} ${y}`;
+    const totals=Data.config.employees.map(emp=>({emp,min:totalMinutesForRange(emp.id,first,last)}));
+    const max=Math.max(60,...totals.map(t=>t.min));
+    wrap.innerHTML=totals.map(t=>{
+      const ratio=Math.min(1,t.min/max);
+      return `<div class="vial">${vialSVG(ratio)}<span class="who">${escapeHtml(t.emp.name)}</span><span class="h">${fmtHM(t.min)}</span></div>`;
+    }).join('');
+  }
+
+  function vialSVG(ratio){
+    const fullH=52;const h=Math.round(fullH*ratio);const y=18+(fullH-h);
+    const id='c'+Math.round(ratio*1000)+'_'+Math.random().toString(36).slice(2,6);
+    return `<svg viewBox="0 0 44 84" width="44" height="84" aria-hidden="true">
+      <defs><clipPath id="${id}"><path d="M16 6 h12 v8 l6 46 a12 12 0 0 1 -24 0 l6 -46 z"/></clipPath></defs>
+      <rect x="13" y="2" width="18" height="6" rx="2" fill="#E8E0D0" stroke="#C9AE7E"/>
+      <path d="M16 6 h12 v8 l6 46 a12 12 0 0 1 -24 0 l6 -46 z" fill="#FBF8F1" stroke="#C9AE7E" stroke-width="1.5"/>
+      <rect x="8" y="${y}" width="28" height="${h+6}" fill="#CDBBE4" clip-path="url(#${id})" opacity="0.9"/>
+      <ellipse cx="22" cy="${y+2}" rx="11" ry="2.2" fill="#E7DCF1" clip-path="url(#${id})"/></svg>`;
+  }
+
+  function wire(){
+    document.getElementById('pl-prev').addEventListener('click',()=>{weekStart=addDays(weekStart,-7);render();});
+    document.getElementById('pl-next').addEventListener('click',()=>{weekStart=addDays(weekStart,7);render();});
+    document.getElementById('pl-today').addEventListener('click',()=>{weekStart=mondayOf(new Date());render();});
+    document.getElementById('pl-picker').addEventListener('change',e=>{if(e.target.value){weekStart=mondayOf(parseISO(e.target.value));render();}});
+    document.getElementById('pl-filter').addEventListener('change',e=>{filterEmp=e.target.value;render();});
+  }
+
+  return {render,wire};
+})();
+
+/* ============================================================
+   MODULE ABSENCES (cloisonné)
+   ============================================================ */
+const Absences=(function(){
+  let viewYear=new Date().getFullYear();
+  let viewMonth=new Date().getMonth();
+
+  function render(){renderToolbar();renderLegend();renderAbsGrid();setEditing(document.body.classList.contains('editing'));}
+
+  function renderToolbar(){
+    const label=document.getElementById('ab-period');
+    if(label)label.textContent=`${FR_MONTHS[viewMonth][0].toUpperCase()}${FR_MONTHS[viewMonth].slice(1)} ${viewYear}`;
+    const yp=document.getElementById('ab-year');
+    if(yp)yp.value=viewYear;
+  }
+
+  function renderLegend(){
+    const el=document.getElementById('ab-legend');
+    if(!el)return;
+    el.innerHTML=Data.config.codes.map(c=>`<span class="chip" style="background:${c.bg};color:${c.fg};border-color:${c.br}">
+      <span class="code">${escapeHtml(c.code)}</span><span class="desc">${escapeHtml(c.label)}</span></span>`).join('');
+  }
+
+  function renderAbsGrid(){
+    const grid=document.getElementById('ab-grid');
+    const nDays=daysInMonth(viewYear,viewMonth);
+    grid.style.gridTemplateColumns=`150px repeat(${nDays},minmax(22px,1fr)) 64px`;
+    let html='';
+    html+=`<div class="acell abs-head corner">Équipier</div>`;
+    for(let d=1;d<=nDays;d++){const date=new Date(viewYear,viewMonth,d);const dow=(date.getDay()+6)%7;
+      html+=`<div class="acell abs-head ${dow>=5?'is-weekend':''}">${d}</div>`;}
+    html+=`<div class="acell abs-head tot">Jours</div>`;
+    html+=`<div class="acell abs-head corner"></div>`;
+    for(let d=1;d<=nDays;d++){const date=new Date(viewYear,viewMonth,d);const dow=(date.getDay()+6)%7;
+      html+=`<div class="acell abs-head dow ${dow>=5?'is-weekend':''}">${FR_DAYS[dow][0].toUpperCase()}</div>`;}
+    html+=`<div class="acell abs-head tot"></div>`;
+    const codeOptions=sel=>`<option value=""></option>`+
+      Data.config.codes.map(c=>`<option value="${escapeHtml(c.code)}" ${c.code===sel?'selected':''}>${escapeHtml(c.code)}</option>`).join('');
+    Data.config.employees.forEach(emp=>{
+      html+=`<div class="acell abs-name">${escapeHtml(emp.name)}</div>`;
+      let count=0;
+      for(let d=1;d<=nDays;d++){
+        const date=new Date(viewYear,viewMonth,d);const dow=(date.getDay()+6)%7;
+        const key=`${emp.id}|${isoDate(date)}`;const code=Data.absences[key]||'';
+        if(code)count++;
+        const c=Data.codeByCode(code);const style=c?`style="background:${c.bg};color:${c.fg}"`:'';
+        html+=`<div class="acell abs-cell ${dow>=5?'is-weekend':''}" ${style} data-key="${key}">
+          <select data-key="${key}" title="${c?escapeHtml(c.label):'Aucune absence'}">${codeOptions(code)}</select></div>`;
+      }
+      html+=`<div class="acell abs-tot ${count?'':'zero'}">${count||'—'}</div>`;
+    });
+    grid.innerHTML=html;
+    grid.querySelectorAll('.abs-cell select').forEach(sel=>{
+      sel.addEventListener('change',()=>{
+        const key=sel.dataset.key;
+        if(sel.value)Data.absences[key]=sel.value;else delete Data.absences[key];
+        Data.saveAbsences();renderAbsGrid();setEditing(true);
+      });
+    });
+  }
+
+  function wire(){
+    document.getElementById('ab-prev').addEventListener('click',()=>{viewMonth--;if(viewMonth<0){viewMonth=11;viewYear--;}render();});
+    document.getElementById('ab-next').addEventListener('click',()=>{viewMonth++;if(viewMonth>11){viewMonth=0;viewYear++;}render();});
+    document.getElementById('ab-today').addEventListener('click',()=>{viewYear=new Date().getFullYear();viewMonth=new Date().getMonth();render();});
+    document.getElementById('ab-year').addEventListener('change',e=>{const v=parseInt(e.target.value,10);if(!isNaN(v)){viewYear=v;render();}});
+  }
+
+  return {render,wire};
+})();
+
+/* ============================================================
+   COORDINATION — onglets, édition, publication, démarrage
+   ============================================================ */
+function renderAll(){Planning.render();Absences.render();}
+
+function switchView(name){
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
+  document.getElementById('view-planning').classList.toggle('active',name==='planning');
+  document.getElementById('view-absences').classList.toggle('active',name==='absences');
+  renderAll();
+}
+
+(async function start(){
+  Data.load();
+  await Data.seedFromFileIfEmpty();
+  Data.load();
+
+  RERENDER=renderAll;
+
+  // onglets
+  document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
+
+  // bascule édition (les deux boutons ✎)
+  document.querySelectorAll('#editToggle,#editToggle2').forEach(btn=>
+    btn.addEventListener('click',()=>setEditing(!document.body.classList.contains('editing'))));
+
+  // export
+  document.getElementById('exportBtn').addEventListener('click',()=>{
+    const blob=new Blob([JSON.stringify(Data.exportBundle(),null,2)],{type:'application/json'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='planning-data.json';a.click();
+    URL.revokeObjectURL(a.href);toast('Fichier planning-data.json téléchargé');
   });
-}
+
+  // import
+  const impInput=document.getElementById('importInput');
+  document.getElementById('importBtn').addEventListener('click',()=>impInput.click());
+  impInput.addEventListener('change',async()=>{
+    const file=impInput.files[0];if(!file)return;
+    try{const json=JSON.parse(await file.text());Data.applyImport(json);renderAll();toast('Planning importé');}
+    catch(e){toast('Fichier illisible');}
+    impInput.value='';
+  });
+
+  // recharger le publié
+  document.getElementById('loadPublishedBtn').addEventListener('click',async()=>{
+    try{await Data.loadPublished();renderAll();toast('Planning publié rechargé');}
+    catch(e){toast('Aucun planning publié trouvé');}
+  });
+
+  // réglages (deux boutons, un seul dialogue)
+  const dlg=document.getElementById('settingsDialog');
+  document.querySelectorAll('#pl-settings,#ab-settings').forEach(btn=>
+    btn.addEventListener('click',()=>{buildSettings(dlg);dlg.showModal();}));
+  dlg.querySelector('.sheet-close').addEventListener('click',()=>dlg.close());
+
+  Planning.wire();
+  Absences.wire();
+  renderAll();
+})();
 </script>
 </body>
 </html>
