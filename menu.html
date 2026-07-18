@@ -3,664 +3,2938 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Morpheus — Grimoire du Bar</title>
+
 <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
 :root{
-  --ink:#070609;--parch:#110f16;
-  --sepia:#c8a96e;--sepia2:#a07840;--sepia3:#5a4020;
-  --dream:#8b7fdc;--dreaml:#c4baff;
-  --night:#c03838;--nightl:#ffaaaa;
-  --gold:#d4a017;--goldl:#f5e6a3;
-  --ash:#8a7f98;--pale:#e8dfc8;--faint:#3a3048;
+  --ink:#070609;
+  --parch:#110f16;
+  --sepia:#c8a96e;
+  --sepia2:#a07840;
+  --sepia3:#5a4020;
+  --dream:#8b7fdc;
+  --dreaml:#c4baff;
+  --night:#c03838;
+  --nightl:#ffaaaa;
+  --gold:#d4a017;
+  --goldl:#f5e6a3;
+  --ash:#8a7f98;
+  --pale:#e8dfc8;
+  --faint:#3a3048;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-html{font-size:18px;scroll-behavior:smooth;}
-body{background:var(--ink);color:var(--pale);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;overflow-x:hidden;font-size:1rem;}
 
-body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  font-size:18px;
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--ink);
+  color:var(--pale);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  font-size:1rem;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity:.04;}
-
-.wax-l,.wax-r{position:fixed;top:0;width:22px;height:100vh;z-index:1;pointer-events:none;}
-.wax-l{left:0;background:linear-gradient(180deg,transparent,rgba(192,56,56,.1) 40%,rgba(192,56,56,.05) 70%,transparent);border-right:1px solid rgba(192,56,56,.08);}
-.wax-r{right:0;background:linear-gradient(180deg,transparent,rgba(139,127,220,.1) 40%,rgba(139,127,220,.05) 70%,transparent);border-left:1px solid rgba(139,127,220,.08);}
-
-#cvs{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;}
-
-.page{position:relative;z-index:2;max-width:760px;margin:0 auto;padding:0 28px 100px;}
-
-/* ── BACK BUTTON ── */
-.back-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:'Cormorant SC',serif;font-size:.65rem;letter-spacing:.35em;
-  color:var(--ash);text-decoration:none;
-  padding:10px 0 0;transition:color .2s;
+  opacity:.04;
 }
-.back-btn:hover{color:var(--sepia);}
-.back-btn::before{content:'←';font-size:.9rem;}
 
-/* ── HERO ── */
-.hero{text-align:center;padding:36px 0 40px;position:relative;}
-.hero::after{content:'';display:block;width:100%;height:1px;
-  background:linear-gradient(90deg,transparent,var(--sepia3),var(--sepia),var(--sepia3),transparent);margin-top:40px;}
-.logo-wrap{width:120px;height:120px;margin:0 auto 24px;}
-.logo-wrap img{width:100%;height:100%;object-fit:contain;filter:brightness(.85) sepia(.4) hue-rotate(10deg);}
-.title-frak{font-family:'UnifrakturMaguntia',serif;font-size:clamp(44px,10vw,74px);color:var(--sepia);letter-spacing:.07em;line-height:1;
-  animation:flicker 7s ease-in-out infinite;margin-bottom:10px;}
-@keyframes flicker{0%,100%{text-shadow:0 0 40px rgba(200,169,110,.2);}45%{text-shadow:0 0 80px rgba(200,169,110,.5),0 0 140px rgba(200,169,110,.15);}47%{text-shadow:none;}49%{text-shadow:0 0 80px rgba(200,169,110,.5);}}
-.hero-sub{font-family:'Cormorant SC',serif;font-size:.62rem;letter-spacing:.55em;color:var(--ash);text-transform:uppercase;}
-.hero-verse{font-style:italic;font-size:.85rem;color:var(--sepia3);margin-top:12px;line-height:1.7;}
+.wax-l,
+.wax-r{
+  position:fixed;
+  top:0;
+  width:22px;
+  height:100vh;
+  z-index:1;
+  pointer-events:none;
+}
 
-/* ── LANG ── */
-.lang-bar{display:flex;justify-content:center;gap:6px;padding:14px 0 0;}
-.lang-btn{background:none;border:1px solid var(--faint);font-family:'Cormorant SC',serif;font-size:.6rem;
-  letter-spacing:.3em;color:var(--ash);cursor:pointer;padding:5px 14px;border-radius:2px;transition:all .2s;}
-.lang-btn:hover,.lang-btn.on{color:var(--sepia);border-color:var(--sepia);}
+.wax-l{
+  left:0;
+  background:linear-gradient(
+    180deg,
+    transparent,
+    rgba(192,56,56,.1) 40%,
+    rgba(192,56,56,.05) 70%,
+    transparent
+  );
+  border-right:1px solid rgba(192,56,56,.08);
+}
 
-/* ── NAV ── */
-.nav{position:sticky;top:0;z-index:50;background:rgba(7,6,9,.97);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--faint);padding:10px 0;
-  display:flex;justify-content:center;flex-wrap:wrap;}
-.nav-btn{background:none;border:none;font-family:'Cormorant SC',serif;font-size:.62rem;letter-spacing:.25em;
-  color:var(--ash);cursor:pointer;padding:7px 12px;transition:color .2s;position:relative;}
-.nav-btn::after{content:'·';position:absolute;right:0;top:50%;transform:translateY(-50%);color:var(--faint);}
-.nav-btn:last-child::after{display:none;}
-.nav-btn:hover,.nav-btn.on{color:var(--sepia);}
+.wax-r{
+  right:0;
+  background:linear-gradient(
+    180deg,
+    transparent,
+    rgba(139,127,220,.1) 40%,
+    rgba(139,127,220,.05) 70%,
+    transparent
+  );
+  border-left:1px solid rgba(139,127,220,.08);
+}
 
-/* ── CHAPTERS ── */
-.chap{display:none;padding-top:44px;animation:pageIn .4s ease;}
-.chap.on{display:block;}
-@keyframes pageIn{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+#cvs{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.5;
+}
 
-/* ── CHAPTER HEAD ── */
-.chap-head{text-align:center;margin-bottom:40px;}
-.chap-ornament{font-family:'Cormorant SC',serif;font-size:.62rem;letter-spacing:.5em;color:var(--sepia3);display:block;margin-bottom:10px;}
-.chap-title{font-family:'UnifrakturMaguntia',serif;font-size:clamp(36px,8vw,58px);color:var(--sepia);letter-spacing:.06em;}
-.rule{display:flex;align-items:center;gap:10px;margin:14px 0 6px;}
-.rule::before,.rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--sepia3));}
-.rule::after{background:linear-gradient(90deg,var(--sepia3),transparent);}
-.rule span{font-size:.9rem;color:var(--sepia3);}
-.chap-verse{font-style:italic;font-size:.85rem;color:var(--ash);margin-top:6px;}
+.page{
+  position:relative;
+  z-index:2;
+  max-width:760px;
+  margin:0 auto;
+  padding:0 28px 100px;
+}
 
-/* ── SPLIT PAGE (élixirs + cinq goûts) ── */
-.split-chap{display:none;padding-top:44px;animation:pageIn .4s ease;}
-.split-chap.on{display:block;}
+/* RETOUR */
+
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-family:'Cormorant SC',serif;
+  font-size:.65rem;
+  letter-spacing:.35em;
+  color:var(--ash);
+  text-decoration:none;
+  padding:10px 0 0;
+  transition:color .2s;
+}
+
+.back-btn:hover{
+  color:var(--sepia);
+}
+
+.back-btn::before{
+  content:'←';
+  font-size:.9rem;
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:36px 0 40px;
+  position:relative;
+}
+
+.hero::after{
+  content:'';
+  display:block;
+  width:100%;
+  height:1px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    var(--sepia3),
+    var(--sepia),
+    var(--sepia3),
+    transparent
+  );
+  margin-top:40px;
+}
+
+.logo-wrap{
+  width:120px;
+  height:120px;
+  margin:0 auto 24px;
+}
+
+.logo-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:brightness(.85) sepia(.4) hue-rotate(10deg);
+}
+
+.title-frak{
+  font-family:'UnifrakturMaguntia',serif;
+  font-size:clamp(44px,10vw,74px);
+  color:var(--sepia);
+  letter-spacing:.07em;
+  line-height:1;
+  animation:flicker 7s ease-in-out infinite;
+  margin-bottom:10px;
+}
+
+@keyframes flicker{
+  0%,100%{
+    text-shadow:0 0 40px rgba(200,169,110,.2);
+  }
+
+  45%{
+    text-shadow:
+      0 0 80px rgba(200,169,110,.5),
+      0 0 140px rgba(200,169,110,.15);
+  }
+
+  47%{
+    text-shadow:none;
+  }
+
+  49%{
+    text-shadow:0 0 80px rgba(200,169,110,.5);
+  }
+}
+
+.hero-sub{
+  font-family:'Cormorant SC',serif;
+  font-size:.62rem;
+  letter-spacing:.55em;
+  color:var(--ash);
+  text-transform:uppercase;
+}
+
+.hero-verse{
+  font-style:italic;
+  font-size:.85rem;
+  color:var(--sepia3);
+  margin-top:12px;
+  line-height:1.7;
+}
+
+/* LANGUES */
+
+.lang-bar{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  padding:14px 0 0;
+}
+
+.lang-btn{
+  background:none;
+  border:1px solid var(--faint);
+  font-family:'Cormorant SC',serif;
+  font-size:.6rem;
+  letter-spacing:.3em;
+  color:var(--ash);
+  cursor:pointer;
+  padding:5px 14px;
+  border-radius:2px;
+  transition:all .2s;
+}
+
+.lang-btn:hover,
+.lang-btn.on{
+  color:var(--sepia);
+  border-color:var(--sepia);
+}
+
+/* NAVIGATION */
+
+.nav{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(7,6,9,.97);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--faint);
+  padding:10px 0;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.nav-btn{
+  background:none;
+  border:none;
+  font-family:'Cormorant SC',serif;
+  font-size:.62rem;
+  letter-spacing:.25em;
+  color:var(--ash);
+  cursor:pointer;
+  padding:7px 12px;
+  transition:color .2s;
+  position:relative;
+}
+
+.nav-btn::after{
+  content:'·';
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--faint);
+}
+
+.nav-btn:last-child::after{
+  display:none;
+}
+
+.nav-btn:hover,
+.nav-btn.on{
+  color:var(--sepia);
+}
+
+/* CHAPITRES */
+
+.chap{
+  display:none;
+  padding-top:44px;
+  animation:pageIn .4s ease;
+}
+
+.chap.on{
+  display:block;
+}
+
+@keyframes pageIn{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* TITRES */
+
+.chap-head{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.chap-ornament{
+  font-family:'Cormorant SC',serif;
+  font-size:.62rem;
+  letter-spacing:.5em;
+  color:var(--sepia3);
+  display:block;
+  margin-bottom:10px;
+}
+
+.chap-title{
+  font-family:'UnifrakturMaguntia',serif;
+  font-size:clamp(36px,8vw,58px);
+  color:var(--sepia);
+  letter-spacing:.06em;
+}
+
+.rule{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:14px 0 6px;
+}
+
+.rule::before,
+.rule::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--sepia3));
+}
+
+.rule::after{
+  background:linear-gradient(90deg,var(--sepia3),transparent);
+}
+
+.rule span{
+  font-size:.9rem;
+  color:var(--sepia3);
+}
+
+.chap-verse{
+  font-style:italic;
+  font-size:.85rem;
+  color:var(--ash);
+  margin-top:6px;
+}
+
+/* SÉPARATEUR CINQ GOÛTS */
+
 .split-divider{
-  display:flex;align-items:center;gap:14px;
-  margin:56px 0 40px;padding-top:40px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:56px 0 40px;
+  padding-top:40px;
   border-top:1px solid var(--faint);
 }
-.split-divider::before,.split-divider::after{content:'';flex:1;height:1px;}
-.split-divider::before{background:linear-gradient(90deg,transparent,var(--sepia3));}
-.split-divider::after{background:linear-gradient(90deg,var(--sepia3),transparent);}
-.split-divider span{font-family:'UnifrakturMaguntia',serif;font-size:clamp(22px,5vw,34px);color:var(--sepia);white-space:nowrap;letter-spacing:.06em;}
 
-/* ── REALM DIVIDER ── */
-.realm{display:flex;align-items:center;gap:14px;margin:36px 0 18px;}
-.realm::before,.realm::after{content:'';flex:1;height:1px;}
-.realm.dr::before{background:linear-gradient(90deg,transparent,var(--dream));}
-.realm.dr::after{background:linear-gradient(90deg,var(--dream),transparent);}
-.realm.nm::before{background:linear-gradient(90deg,transparent,var(--night));}
-.realm.nm::after{background:linear-gradient(90deg,var(--night),transparent);}
-.realm-tag{font-family:'Cormorant SC',serif;font-size:.58rem;letter-spacing:.4em;padding:3px 14px;border-radius:1px;white-space:nowrap;}
-.dr .realm-tag{color:var(--dreaml);border:1px solid rgba(139,127,220,.5);background:rgba(139,127,220,.07);}
-.nm .realm-tag{color:var(--nightl);border:1px solid rgba(192,56,56,.5);background:rgba(192,56,56,.07);}
+.split-divider::before,
+.split-divider::after{
+  content:'';
+  flex:1;
+  height:1px;
+}
 
-/* ── SIGNATURE ── */
-.sig-block{margin-bottom:38px;padding:28px 24px;text-align:center;
-  border:1px solid rgba(212,160,23,.35);border-radius:3px;
-  background:linear-gradient(135deg,rgba(212,160,23,.05),rgba(139,127,220,.05));
-  position:relative;overflow:hidden;}
-.sig-block::before{content:'❧';position:absolute;top:12px;left:20px;font-size:1.2rem;color:rgba(212,160,23,.18);}
-.sig-block::after{content:'❧';position:absolute;bottom:12px;right:20px;font-size:1.2rem;color:rgba(212,160,23,.18);transform:rotate(180deg);}
-.sig-name{font-family:'UnifrakturMaguntia',serif;font-size:clamp(22px,5vw,36px);color:var(--sepia);margin-bottom:10px;}
-.sig-desc{font-size:.85rem;font-style:italic;color:var(--ash);line-height:1.75;margin-bottom:14px;}
-.sig-hint{font-size:.72rem;color:var(--sepia3);font-style:italic;margin-bottom:14px;}
-.sig-price{font-family:'Cormorant SC',serif;font-size:1.3rem;color:var(--sepia2);}
+.split-divider::before{
+  background:linear-gradient(90deg,transparent,var(--sepia3));
+}
 
-/* ── CARD ── */
-.card{border-radius:3px;margin-bottom:12px;overflow:hidden;background:var(--parch);}
-.card.dr{border:1px solid rgba(139,127,220,.28);}
-.card.nm{border:1px solid rgba(192,56,56,.28);}
-.card.gd{border:1px solid rgba(212,160,23,.28);}
+.split-divider::after{
+  background:linear-gradient(90deg,var(--sepia3),transparent);
+}
 
-.card-top{padding:16px 20px 6px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
-.card-left{flex:1;}
-.card-name{font-family:'Cormorant SC',serif;font-weight:600;font-size:clamp(18px,3.8vw,24px);letter-spacing:.07em;margin-bottom:5px;}
-.dr .card-name{color:#c8c5ff;}
-.nm .card-name{color:#ffb8b8;}
-.gd .card-name{color:var(--sepia);}
-.card-desc{font-size:.82rem;font-style:italic;color:var(--ash);line-height:1.5;}
+.split-divider span{
+  font-family:'UnifrakturMaguntia',serif;
+  font-size:clamp(22px,5vw,34px);
+  color:var(--sepia);
+  white-space:nowrap;
+  letter-spacing:.06em;
+}
 
-.card-price-row{padding:4px 20px 10px;display:flex;justify-content:space-between;align-items:center;}
-.card-vol{font-size:.7rem;color:var(--faint);font-style:italic;}
-.card-price{font-family:'Cormorant SC',serif;font-size:1.1rem;font-weight:600;}
-.dr .card-price{color:#a09de0;}
-.nm .card-price{color:#c07070;}
-.gd .card-price{color:var(--sepia2);}
+/* ROYAUMES */
 
-.card-ing{padding:8px 20px 16px;border-top:1px dashed var(--faint);font-size:.8rem;color:var(--ash);line-height:1.9;font-style:italic;}
-.dr .card-ing{border-color:rgba(139,127,220,.2);}
-.nm .card-ing{border-color:rgba(192,56,56,.2);}
-.gd .card-ing{border-color:rgba(212,160,23,.2);}
+.realm{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:36px 0 18px;
+}
 
-/* ── TASTE CARDS ── */
-.taste-card{border-radius:3px;margin-bottom:12px;overflow:hidden;background:var(--parch);}
-.taste-badge{display:inline-block;font-family:'Cormorant SC',serif;font-size:.6rem;letter-spacing:.3em;padding:3px 10px;border-radius:1px;margin-bottom:5px;}
-.taste-card .card-ing{border-top:1px dashed rgba(200,169,110,.2);}
+.realm::before,
+.realm::after{
+  content:'';
+  flex:1;
+  height:1px;
+}
 
-/* ── LEDGER ── */
-.ledger{border-collapse:collapse;width:100%;}
-.ledger tr{border-bottom:1px solid rgba(58,48,72,.5);}
-.ledger tr:last-child{border-bottom:none;}
-.ledger td{padding:11px 4px;font-size:.88rem;vertical-align:middle;}
-.ledger td:first-child{color:var(--pale);padding-right:12px;}
-.ledger td:nth-child(2){color:var(--ash);font-style:italic;font-size:.78rem;}
-.ledger td:last-child{color:var(--sepia2);font-family:'Cormorant SC',serif;text-align:right;white-space:nowrap;padding-left:12px;font-size:.95rem;}
+.realm.dr::before{
+  background:linear-gradient(90deg,transparent,var(--dream));
+}
 
-.sub-head{font-family:'Cormorant SC',serif;font-size:.65rem;letter-spacing:.45em;color:var(--sepia3);
-  margin:26px 0 14px;display:flex;align-items:center;gap:10px;}
-.sub-head::after{content:'';flex:1;height:1px;background:var(--faint);}
+.realm.dr::after{
+  background:linear-gradient(90deg,var(--dream),transparent);
+}
 
-/* ── TEA ── */
-.tea-section{margin-bottom:28px;}
-.tea-section-title{font-family:'Cormorant SC',serif;font-size:.72rem;letter-spacing:.35em;color:var(--sepia3);margin-bottom:12px;}
-.tea-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(58,48,72,.4);gap:12px;}
-.tea-row:last-child{border-bottom:none;}
-.tea-name{font-size:.9rem;color:var(--pale);min-width:160px;}
-.tea-origin{font-size:.72rem;color:var(--sepia3);font-style:italic;white-space:nowrap;padding:0 10px;}
-.tea-desc{font-size:.78rem;color:var(--ash);font-style:italic;flex:1;}
+.realm.nm::before{
+  background:linear-gradient(90deg,transparent,var(--night));
+}
 
-/* ── FOOD ── */
-.viands{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;}
-.viand{border:1px solid var(--faint);border-radius:3px;padding:14px;transition:border-color .2s;background:var(--parch);}
-.viand:hover{border-color:var(--sepia3);}
-.viand-name{font-family:'Cormorant SC',serif;font-size:.88rem;color:var(--sepia);margin-bottom:4px;}
-.viand-desc{font-size:.76rem;color:var(--ash);font-style:italic;line-height:1.5;margin-bottom:8px;}
-.viand-price{font-family:'Cormorant SC',serif;font-size:.95rem;color:var(--sepia2);}
+.realm.nm::after{
+  background:linear-gradient(90deg,var(--night),transparent);
+}
 
-/* ── PACK ── */
-.pack{margin-top:22px;padding:18px 20px;border:1px dashed rgba(212,160,23,.3);border-radius:3px;text-align:center;}
-.pack-t{font-family:'Cormorant SC',serif;font-size:.7rem;letter-spacing:.35em;color:var(--sepia);margin-bottom:6px;}
-.pack-d{font-size:.8rem;font-style:italic;color:var(--ash);margin-bottom:8px;}
-.pack-p{font-family:'Cormorant SC',serif;font-size:1.1rem;color:var(--sepia2);}
+.realm-tag{
+  font-family:'Cormorant SC',serif;
+  font-size:.58rem;
+  letter-spacing:.4em;
+  padding:3px 14px;
+  border-radius:1px;
+  white-space:nowrap;
+}
 
-/* ── FOOTER ── */
-.colophon{text-align:center;padding:48px 0 24px;border-top:1px solid var(--faint);margin-top:48px;}
-.colophon-mark{font-family:'UnifrakturMaguntia',serif;font-size:1.5rem;color:var(--sepia3);display:block;margin-bottom:14px;}
-.colophon p{font-size:.65rem;color:var(--faint);line-height:2.2;}
-.colophon a{color:var(--sepia3);text-decoration:none;}
+.dr .realm-tag{
+  color:var(--dreaml);
+  border:1px solid rgba(139,127,220,.5);
+  background:rgba(139,127,220,.07);
+}
 
-::-webkit-scrollbar{width:3px;}
-::-webkit-scrollbar-track{background:var(--ink);}
-::-webkit-scrollbar-thumb{background:var(--faint);border-radius:2px;}
+.nm .realm-tag{
+  color:var(--nightl);
+  border:1px solid rgba(192,56,56,.5);
+  background:rgba(192,56,56,.07);
+}
+
+/* SIGNATURE */
+
+.sig-block{
+  margin-bottom:38px;
+  padding:28px 24px;
+  text-align:center;
+  border:1px solid rgba(212,160,23,.35);
+  border-radius:3px;
+  background:linear-gradient(
+    135deg,
+    rgba(212,160,23,.05),
+    rgba(139,127,220,.05)
+  );
+  position:relative;
+  overflow:hidden;
+}
+
+.sig-block::before{
+  content:'❧';
+  position:absolute;
+  top:12px;
+  left:20px;
+  font-size:1.2rem;
+  color:rgba(212,160,23,.18);
+}
+
+.sig-block::after{
+  content:'❧';
+  position:absolute;
+  bottom:12px;
+  right:20px;
+  font-size:1.2rem;
+  color:rgba(212,160,23,.18);
+  transform:rotate(180deg);
+}
+
+.sig-name{
+  font-family:'UnifrakturMaguntia',serif;
+  font-size:clamp(22px,5vw,36px);
+  color:var(--sepia);
+  margin-bottom:10px;
+}
+
+.sig-desc{
+  font-size:.85rem;
+  font-style:italic;
+  color:var(--ash);
+  line-height:1.75;
+  margin-bottom:14px;
+}
+
+.sig-hint{
+  font-size:.72rem;
+  color:var(--sepia3);
+  font-style:italic;
+  margin-bottom:14px;
+}
+
+.sig-price{
+  font-family:'Cormorant SC',serif;
+  font-size:1.3rem;
+  color:var(--sepia2);
+}
+
+/* CARTES */
+
+.card{
+  border-radius:3px;
+  margin-bottom:12px;
+  overflow:hidden;
+  background:var(--parch);
+}
+
+.card.dr{
+  border:1px solid rgba(139,127,220,.28);
+}
+
+.card.nm{
+  border:1px solid rgba(192,56,56,.28);
+}
+
+.card.gd{
+  border:1px solid rgba(212,160,23,.28);
+}
+
+.card-top{
+  padding:16px 20px 6px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+}
+
+.card-left{
+  flex:1;
+}
+
+.card-name{
+  font-family:'Cormorant SC',serif;
+  font-weight:600;
+  font-size:clamp(18px,3.8vw,24px);
+  letter-spacing:.07em;
+  margin-bottom:5px;
+}
+
+.dr .card-name{
+  color:#c8c5ff;
+}
+
+.nm .card-name{
+  color:#ffb8b8;
+}
+
+.gd .card-name{
+  color:var(--sepia);
+}
+
+.card-desc{
+  font-size:.82rem;
+  font-style:italic;
+  color:var(--ash);
+  line-height:1.5;
+}
+
+.card-price-row{
+  padding:4px 20px 10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.card-vol{
+  font-size:.7rem;
+  color:var(--faint);
+  font-style:italic;
+}
+
+.card-price{
+  font-family:'Cormorant SC',serif;
+  font-size:1.1rem;
+  font-weight:600;
+}
+
+.dr .card-price{
+  color:#a09de0;
+}
+
+.nm .card-price{
+  color:#c07070;
+}
+
+.gd .card-price{
+  color:var(--sepia2);
+}
+
+.card-ing{
+  padding:8px 20px 16px;
+  border-top:1px dashed var(--faint);
+  font-size:.8rem;
+  color:var(--ash);
+  line-height:1.9;
+  font-style:italic;
+}
+
+.dr .card-ing{
+  border-color:rgba(139,127,220,.2);
+}
+
+.nm .card-ing{
+  border-color:rgba(192,56,56,.2);
+}
+
+.gd .card-ing{
+  border-color:rgba(212,160,23,.2);
+}
+
+/* CINQ GOÛTS */
+
+.taste-card{
+  border-radius:3px;
+  margin-bottom:12px;
+  overflow:hidden;
+  background:var(--parch);
+}
+
+.taste-badge{
+  display:inline-block;
+  font-family:'Cormorant SC',serif;
+  font-size:.6rem;
+  letter-spacing:.3em;
+  padding:3px 10px;
+  border-radius:1px;
+  margin-bottom:5px;
+}
+
+/* TABLEAUX */
+
+.ledger{
+  border-collapse:collapse;
+  width:100%;
+}
+
+.ledger tr{
+  border-bottom:1px solid rgba(58,48,72,.5);
+}
+
+.ledger tr:last-child{
+  border-bottom:none;
+}
+
+.ledger td{
+  padding:11px 4px;
+  font-size:.88rem;
+  vertical-align:middle;
+}
+
+.ledger td:first-child{
+  color:var(--pale);
+  padding-right:12px;
+}
+
+.ledger td:nth-child(2){
+  color:var(--ash);
+  font-style:italic;
+  font-size:.78rem;
+}
+
+.ledger td:last-child{
+  color:var(--sepia2);
+  font-family:'Cormorant SC',serif;
+  text-align:right;
+  white-space:nowrap;
+  padding-left:12px;
+  font-size:.95rem;
+}
+
+.sub-head{
+  font-family:'Cormorant SC',serif;
+  font-size:.65rem;
+  letter-spacing:.45em;
+  color:var(--sepia3);
+  margin:26px 0 14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.sub-head::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:var(--faint);
+}
+
+/* THÉS */
+
+.tea-section{
+  margin-bottom:28px;
+}
+
+.tea-section-title{
+  font-family:'Cormorant SC',serif;
+  font-size:.72rem;
+  letter-spacing:.35em;
+  color:var(--sepia3);
+  margin-bottom:12px;
+}
+
+.tea-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding:10px 0;
+  border-bottom:1px solid rgba(58,48,72,.4);
+  gap:12px;
+}
+
+.tea-row:last-child{
+  border-bottom:none;
+}
+
+.tea-name{
+  font-size:.9rem;
+  color:var(--pale);
+  min-width:160px;
+}
+
+.tea-origin{
+  font-size:.72rem;
+  color:var(--sepia3);
+  font-style:italic;
+  white-space:nowrap;
+  padding:0 10px;
+}
+
+.tea-desc{
+  font-size:.78rem;
+  color:var(--ash);
+  font-style:italic;
+  flex:1;
+}
+
+/* RESTAURATION */
+
+.viands{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:10px;
+}
+
+.viand{
+  border:1px solid var(--faint);
+  border-radius:3px;
+  padding:14px;
+  transition:border-color .2s;
+  background:var(--parch);
+}
+
+.viand:hover{
+  border-color:var(--sepia3);
+}
+
+.viand-name{
+  font-family:'Cormorant SC',serif;
+  font-size:.88rem;
+  color:var(--sepia);
+  margin-bottom:4px;
+}
+
+.viand-desc{
+  font-size:.76rem;
+  color:var(--ash);
+  font-style:italic;
+  line-height:1.5;
+  margin-bottom:8px;
+}
+
+.viand-price{
+  font-family:'Cormorant SC',serif;
+  font-size:.95rem;
+  color:var(--sepia2);
+}
+
+/* OFFRES */
+
+.pack{
+  margin-top:22px;
+  padding:18px 20px;
+  border:1px dashed rgba(212,160,23,.3);
+  border-radius:3px;
+  text-align:center;
+}
+
+.pack-t{
+  font-family:'Cormorant SC',serif;
+  font-size:.7rem;
+  letter-spacing:.35em;
+  color:var(--sepia);
+  margin-bottom:6px;
+}
+
+.pack-d{
+  font-size:.8rem;
+  font-style:italic;
+  color:var(--ash);
+  margin-bottom:8px;
+}
+
+.pack-p{
+  font-family:'Cormorant SC',serif;
+  font-size:1.1rem;
+  color:var(--sepia2);
+}
+
+/* FOOTER */
+
+.colophon{
+  text-align:center;
+  padding:48px 0 24px;
+  border-top:1px solid var(--faint);
+  margin-top:48px;
+}
+
+.colophon-mark{
+  font-family:'UnifrakturMaguntia',serif;
+  font-size:1.5rem;
+  color:var(--sepia3);
+  display:block;
+  margin-bottom:14px;
+}
+
+.colophon p{
+  font-size:.65rem;
+  color:var(--faint);
+  line-height:2.2;
+}
+
+.colophon a{
+  color:var(--sepia3);
+  text-decoration:none;
+}
+
+::-webkit-scrollbar{
+  width:3px;
+}
+
+::-webkit-scrollbar-track{
+  background:var(--ink);
+}
+
+::-webkit-scrollbar-thumb{
+  background:var(--faint);
+  border-radius:2px;
+}
 
 @media(max-width:500px){
-  html{font-size:16px;}
-  .page{padding:0 14px 70px;}
-  .viands{grid-template-columns:1fr 1fr;}
-  .nav-btn{font-size:.58rem;padding:6px 8px;letter-spacing:.12em;}
-  .tea-origin{display:none;}
+  html{
+    font-size:16px;
+  }
+
+  .page{
+    padding:0 14px 70px;
+  }
+
+  .viands{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .nav-btn{
+    font-size:.58rem;
+    padding:6px 8px;
+    letter-spacing:.12em;
+  }
+
+  .tea-origin{
+    display:none;
+  }
 }
 </style>
 </head>
+
 <body>
-<div class="wax-l"></div><div class="wax-r"></div>
+
+<div class="wax-l"></div>
+<div class="wax-r"></div>
+
 <canvas id="cvs"></canvas>
 
 <div class="page">
 
-<!-- BACK -->
-<a class="back-btn" href="https://leconceptarium.github.io/morpheus.menu/index.html" data-fr="Retour à l'accueil" data-en="Back to home" data-de="Zurück zur Startseite">Retour à l'accueil</a>
+<a
+  class="back-btn"
+  href="https://leconceptarium.github.io/morpheus.menu/index.html"
+  data-fr="Retour à l'accueil"
+  data-en="Back to home"
+  data-de="Zurück zur Startseite">
+  Retour à l'accueil
+</a>
 
-<!-- HERO -->
 <div class="hero">
+
   <div class="logo-wrap">
-    <img src="https://leconceptarium.github.io/morpheus.menu/logo.png" alt="Morpheus">
+    <img
+      src="https://leconceptarium.github.io/morpheus.menu/logo.png"
+      alt="Morpheus">
   </div>
+
   <div class="title-frak">Morpheus</div>
-  <div class="hero-sub" data-fr="Grimoire du Bar · Strasbourg" data-en="Bar Grimoire · Strasbourg" data-de="Grimoire der Bar · Straßburg">Grimoire du Bar · Strasbourg</div>
-  <div class="hero-verse"><em><span data-fr="« Dans le sommeil, les portes s'ouvrent.<br>Choisis ton côté. »" data-en="« In sleep, the doors open.<br>Choose your side. »" data-de="« Im Schlaf öffnen sich die Türen.<br>Wähle deine Seite. »">« Dans le sommeil, les portes s'ouvrent.<br>Choisis ton côté. »</span></em></div>
+
+  <div
+    class="hero-sub"
+    data-fr="Grimoire du Bar · Strasbourg"
+    data-en="Bar Grimoire · Strasbourg"
+    data-de="Grimoire der Bar · Straßburg">
+    Grimoire du Bar · Strasbourg
+  </div>
+
+  <div class="hero-verse">
+    <em>
+      <span
+        data-fr="« Dans le sommeil, les portes s'ouvrent.<br>Choisis ton côté. »"
+        data-en="« In sleep, the doors open.<br>Choose your side. »"
+        data-de="« Im Schlaf öffnen sich die Türen.<br>Wähle deine Seite. »">
+        « Dans le sommeil, les portes s'ouvrent.<br>
+        Choisis ton côté. »
+      </span>
+    </em>
+  </div>
+
   <div class="lang-bar">
     <button class="lang-btn on" onclick="setLang('fr',this)">FR</button>
     <button class="lang-btn" onclick="setLang('en',this)">EN</button>
     <button class="lang-btn" onclick="setLang('de',this)">DE</button>
   </div>
+
 </div>
 
-<!-- NAV — 8 sections -->
 <nav class="nav">
-  <button class="nav-btn on"  onclick="showChap('elixirs',this)"><span data-fr="Élixirs" data-en="Elixirs" data-de="Elixiere">Élixirs</span></button>
-  <button class="nav-btn" onclick="showChap('shooters',this)"><span data-fr="Shooters" data-en="Shooters" data-de="Shooter">Shooters</span></button>
-  <button class="nav-btn" onclick="showChap('sansalcool',this)"><span data-fr="Sans Alcool" data-en="Alcohol Free" data-de="Ohne Alkohol">Sans Alcool</span></button>
-  <button class="nav-btn" onclick="showChap('bieres',this)"><span data-fr="Bières" data-en="Beers" data-de="Biere">Bières</span></button>
-  <button class="nav-btn" onclick="showChap('softs',this)"><span data-fr="Softs" data-en="Softs" data-de="Softdrinks">Softs</span></button>
-  <button class="nav-btn" onclick="showChap('chauds',this)"><span data-fr="Boissons Chaudes" data-en="Hot Drinks" data-de="Heißgetränke">Boissons Chaudes</span></button>
-  <button class="nav-btn" onclick="showChap('thes',this)"><span data-fr="Thés" data-en="Teas" data-de="Tees">Thés</span></button>
-  <button class="nav-btn" onclick="showChap('food',this)"><span data-fr="Restauration" data-en="Food" data-de="Speisen">Restauration</span></button>
+
+  <button class="nav-btn on" onclick="showChap('elixirs',this)">
+    <span data-fr="Élixirs" data-en="Elixirs" data-de="Elixiere">
+      Élixirs
+    </span>
+  </button>
+
+  <button class="nav-btn" onclick="showChap('shooters',this)">
+    <span data-fr="Shooters" data-en="Shooters" data-de="Shooter">
+      Shooters
+    </span>
+  </button>
+
+  <button class="nav-btn" onclick="showChap('bieres',this)">
+    <span data-fr="Bières" data-en="Beers" data-de="Biere">
+      Bières
+    </span>
+  </button>
+
+  <button class="nav-btn" onclick="showChap('softs',this)">
+    <span data-fr="Softs" data-en="Softs" data-de="Softdrinks">
+      Softs
+    </span>
+  </button>
+
+  <button class="nav-btn" onclick="showChap('chauds',this)">
+    <span
+      data-fr="Boissons Chaudes"
+      data-en="Hot Drinks"
+      data-de="Heißgetränke">
+      Boissons Chaudes
+    </span>
+  </button>
+
+  <button class="nav-btn" onclick="showChap('thes',this)">
+    <span data-fr="Thés" data-en="Teas" data-de="Tees">
+      Thés
+    </span>
+  </button>
+
+  <button class="nav-btn" onclick="showChap('food',this)">
+    <span data-fr="Restauration" data-en="Food" data-de="Speisen">
+      Restauration
+    </span>
+  </button>
+
 </nav>
 
-<!-- ══════════════════════════════════════
-     ÉLIXIRS + CINQ GOÛTS (split page)
-══════════════════════════════════════ -->
+<!-- ÉLIXIRS -->
+
 <div id="elixirs" class="chap on">
 
-  <!-- ÉLIXIRS head -->
   <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Premier" data-en="First Chapter" data-de="Erstes Kapitel">Chapitre Premier</span>
-    <div class="chap-title" data-fr="Les Élixirs" data-en="The Elixirs" data-de="Die Elixiere">Les Élixirs</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Chaque verre est un sort. Rêve ou Cauchemar — vous choisissez." data-en="Each glass is a spell. Dream or Nightmare — you choose." data-de="Jedes Glas ist ein Zauber. Traum oder Alptraum — du wählst.">Chaque verre est un sort. Rêve ou Cauchemar — vous choisissez.</span></em></p>
+
+    <span
+      class="chap-ornament"
+      data-fr="Chapitre Premier"
+      data-en="First Chapter"
+      data-de="Erstes Kapitel">
+      Chapitre Premier
+    </span>
+
+    <div
+      class="chap-title"
+      data-fr="Les Élixirs"
+      data-en="The Elixirs"
+      data-de="Die Elixiere">
+      Les Élixirs
+    </div>
+
+    <div class="rule">
+      <span>⁕</span>
+    </div>
+
+    <p class="chap-verse">
+      <em>
+        <span
+          data-fr="Chaque verre est un sort. Rêve ou Cauchemar — vous choisissez."
+          data-en="Each glass is a spell. Dream or Nightmare — you choose."
+          data-de="Jedes Glas ist ein Zauber. Traum oder Alptraum — du wählst.">
+          Chaque verre est un sort. Rêve ou Cauchemar — vous choisissez.
+        </span>
+      </em>
+    </p>
+
   </div>
 
-  <!-- Signature -->
+  <!-- SORT DE MORPHEUS -->
+
   <div class="sig-block">
-    <div class="sig-name">Le Don de Morpheus</div>
-    <p class="sig-desc"><span data-fr="Notre élixir signature. Le serveur apporte un dé.<br>Pair — <em>Rêve</em>. Impair — <em>Cauchemar</em>.<br>Le sort est jeté. Vous ne saurez qu'au premier instant." data-en="Our signature elixir. The server brings a die.<br>Even — <em>Dream</em>. Odd — <em>Nightmare</em>.<br>The spell is cast. You will only know at the first instant." data-de="Unser Signature-Elixier. Der Kellner bringt einen Würfel.<br>Gerade — <em>Traum</em>. Ungerade — <em>Alptraum</em>.<br>Der Zauber ist gewirkt.">Notre élixir signature. Le serveur apporte un dé.<br>Pair — <em>Rêve</em>. Impair — <em>Cauchemar</em>.<br>Le sort est jeté. Vous ne saurez qu'au premier instant.</span></p>
-    <p class="sig-hint"><span data-fr="Révélé par un trait de citron versé devant vous" data-en="Revealed by a dash of lemon poured before your eyes" data-de="Enthüllt durch einen Spritzer Zitrone vor Ihnen">Révélé par un trait de citron versé devant vous</span></p>
+
+    <div class="sig-name">Le Sort de Morpheus</div>
+
+    <p class="sig-desc">
+      <span
+        data-fr="Lancez le dé et laissez Morpheus choisir votre sort.<br>Pair — <em>Rêve</em>. Impair — <em>Cauchemar</em>."
+        data-en="Roll the die and let Morpheus choose your fate.<br>Even — <em>Dream</em>. Odd — <em>Nightmare</em>."
+        data-de="Würfeln Sie und lassen Sie Morpheus Ihr Schicksal wählen.<br>Gerade — <em>Traum</em>. Ungerade — <em>Albtraum</em>.">
+        Lancez le dé et laissez Morpheus choisir votre sort.<br>
+        Pair — <em>Rêve</em>. Impair — <em>Cauchemar</em>.
+      </span>
+    </p>
+
+    <p class="sig-hint">
+      <span
+        data-fr="Deux créations exclusives. Votre destin décidera laquelle vous sera servie."
+        data-en="Two exclusive creations. Fate will decide which one is served."
+        data-de="Zwei exklusive Kreationen. Das Schicksal entscheidet, welche serviert wird.">
+        Deux créations exclusives. Votre destin décidera laquelle vous sera servie.
+      </span>
+    </p>
+
     <div class="sig-price">12,90 €</div>
+
   </div>
 
-  <div class="realm dr"><span class="realm-tag"><span data-fr="Royaume des Rêves" data-en="Kingdom of Dreams" data-de="Königreich der Träume">Royaume des Rêves</span></span></div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">Oneiroi</div>
-      <div class="card-desc"><span data-fr="Tropical, solaire. La passion dans toute sa fraîcheur." data-en="Tropical, sunny. Passion fruit in full freshness." data-de="Tropisch, sonnig. Passionsfrucht in voller Frische.">Tropical, solaire. La passion dans toute sa fraîcheur.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">15 cl</div><div class="card-price">9,90 €</div></div>
-    <div class="card-ing">Vodka · <span data-fr="Purée fruit de la passion" data-en="Passion fruit purée" data-de="Passionsfrüchtepüree">Purée fruit de la passion</span> · <span data-fr="Sirop vanille" data-en="Vanilla syrup" data-de="Vanillesirup">Sirop vanille</span> · <span data-fr="Jus de citron" data-en="Lemon juice" data-de="Zitronensaft">Jus de citron</span> · <span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span></div>
-  </div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">Piero la Lune</div>
-      <div class="card-desc"><span data-fr="Botanique, vif. Quelque chose de brûlé dans l'air." data-en="Botanical, lively. Something burnt in the air." data-de="Botanisch, lebhaft. Etwas Verbranntes in der Luft.">Botanique, vif. Quelque chose de brûlé dans l'air.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">15 cl</div><div class="card-price">9,90 €</div></div>
-    <div class="card-ing">Gin · <span data-fr="Liqueur de fleurs de sureau" data-en="Elderflower liqueur" data-de="Holunderblütenlikör">Liqueur de fleurs de sureau</span> · <span data-fr="Jus de citron vert" data-en="Lime juice" data-de="Limettensaft">Jus de citron vert</span> · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span> · <span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span></div>
+  <div class="realm dr">
+    <span class="realm-tag">
+      <span
+        data-fr="Sort des Rêves"
+        data-en="Dream Spell"
+        data-de="Traumzauber">
+        Sort des Rêves
+      </span>
+    </span>
   </div>
 
   <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">New Moon Spritz</div>
-      <div class="card-desc"><span data-fr="Pétillant, floral, avec une profondeur qui surprend." data-en="Sparkling, floral, with a depth that surprises." data-de="Prickelnd, blumig, mit einer Tiefe, die überrascht.">Pétillant, floral, avec une profondeur qui surprend.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">18 cl</div><div class="card-price">10,90 €</div></div>
-    <div class="card-ing"><span data-fr="Liqueur de miel et violette" data-en="Honey & violet liqueur" data-de="Honig-Veilchen-Likör">Liqueur de miel et violette</span> · Prosecco · <span data-fr="Eau pétillante" data-en="Sparkling water" data-de="Sprudelwasser">Eau pétillante</span> · <span data-fr="Zeste d'orange" data-en="Orange zest" data-de="Orangenzeste">Zeste d'orange</span></div>
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div class="card-name">Jardin de Minuit</div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Pétillant, floral et délicatement mystérieux."
+            data-en="Sparkling, floral and delicately mysterious."
+            data-de="Prickelnd, blumig und geheimnisvoll.">
+            Pétillant, floral et délicatement mystérieux.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">18 cl</div>
+      <div class="card-price">12,90 €</div>
+    </div>
+
+    <div class="card-ing">
+      <span
+        data-fr="Liqueur de miel et violette"
+        data-en="Honey and violet liqueur"
+        data-de="Honig-Veilchen-Likör">
+        Liqueur de miel et violette
+      </span>
+      · Prosecco ·
+      <span
+        data-fr="Eau pétillante"
+        data-en="Sparkling water"
+        data-de="Sprudelwasser">
+        Eau pétillante
+      </span>
+      ·
+      <span
+        data-fr="Zeste d'orange"
+        data-en="Orange zest"
+        data-de="Orangenzeste">
+        Zeste d'orange
+      </span>
+    </div>
+
   </div>
 
-  <div class="realm nm"><span class="realm-tag"><span data-fr="Royaume des Cauchemars" data-en="Kingdom of Nightmares" data-de="Königreich der Albträume">Royaume des Cauchemars</span></span></div>
+  <div class="realm nm">
+    <span class="realm-tag">
+      <span
+        data-fr="Sort des Cauchemars"
+        data-en="Nightmare Spell"
+        data-de="Albtraumzauber">
+        Sort des Cauchemars
+      </span>
+    </span>
+  </div>
 
   <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">La Succube</div>
-      <div class="card-desc"><span data-fr="Acidulé, séducteur. Rouge profond, bord givré au sel noir." data-en="Tart, seductive. Deep red, black salt rim." data-de="Säuerlich, verführerisch. Tiefrot, schwarzer Salzrand.">Acidulé, séducteur. Rouge profond, bord givré au sel noir.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">15 cl</div><div class="card-price">10,90 €</div></div>
-    <div class="card-ing">Vodka · <span data-fr="Liqueur de framboise" data-en="Raspberry liqueur" data-de="Himbeerlikör">Liqueur de framboise</span> · <span data-fr="Jus de cranberry" data-en="Cranberry juice" data-de="Cranberrysaft">Jus de cranberry</span> · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sel noir" data-en="Black salt" data-de="Schwarzes Salz">Sel noir</span></div>
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div class="card-name">Le Cauchemar de Morpheus</div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Fruité, épicé et brûlant. Le cauchemar laisse une trace."
+            data-en="Fruity, spicy and fiery. The nightmare leaves its mark."
+            data-de="Fruchtig, würzig und feurig. Der Albtraum hinterlässt Spuren.">
+            Fruité, épicé et brûlant. Le cauchemar laisse une trace.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">20 cl</div>
+      <div class="card-price">12,90 €</div>
+    </div>
+
+    <div class="card-ing">
+      Rhum ·
+      <span
+        data-fr="Sirop de piment"
+        data-en="Chilli syrup"
+        data-de="Chilisirup">
+        Sirop de piment
+      </span>
+      ·
+      <span
+        data-fr="Jus d'orange"
+        data-en="Orange juice"
+        data-de="Orangensaft">
+        Jus d'orange
+      </span>
+      ·
+      <span
+        data-fr="Sirop de cannelle"
+        data-en="Cinnamon syrup"
+        data-de="Zimtsirup">
+        Sirop de cannelle
+      </span>
+      · Ginger beer
+    </div>
+
+  </div>
+
+  <!-- COCKTAILS RÊVES -->
+
+  <div class="realm dr">
+    <span class="realm-tag">
+      <span
+        data-fr="Cocktails des Rêves"
+        data-en="Dream Cocktails"
+        data-de="Traumcocktails">
+        Cocktails des Rêves
+      </span>
+    </span>
+  </div>
+
+  <div class="card dr">
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div class="card-name">Oneiroi</div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Tropical, solaire. La passion dans toute sa fraîcheur."
+            data-en="Tropical and sunny. Passion fruit in all its freshness."
+            data-de="Tropisch und sonnig. Passionsfrucht in voller Frische.">
+            Tropical, solaire. La passion dans toute sa fraîcheur.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">15 cl</div>
+      <div class="card-price">9,90 €</div>
+    </div>
+
+    <div class="card-ing">
+      Vodka ·
+      <span
+        data-fr="Purée de fruit de la passion"
+        data-en="Passion fruit purée"
+        data-de="Passionsfruchtpüree">
+        Purée de fruit de la passion
+      </span>
+      ·
+      <span
+        data-fr="Sirop de vanille"
+        data-en="Vanilla syrup"
+        data-de="Vanillesirup">
+        Sirop de vanille
+      </span>
+      ·
+      <span
+        data-fr="Jus de citron"
+        data-en="Lemon juice"
+        data-de="Zitronensaft">
+        Jus de citron
+      </span>
+      ·
+      <span
+        data-fr="Eau gazeuse"
+        data-en="Sparkling water"
+        data-de="Sprudelwasser">
+        Eau gazeuse
+      </span>
+    </div>
+
+  </div>
+
+  <!-- COCKTAILS CAUCHEMARS -->
+
+  <div class="realm nm">
+    <span class="realm-tag">
+      <span
+        data-fr="Cocktails des Cauchemars"
+        data-en="Nightmare Cocktails"
+        data-de="Albtraumcocktails">
+        Cocktails des Cauchemars
+      </span>
+    </span>
   </div>
 
   <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">Baba Yaga</div>
-      <div class="card-desc"><span data-fr="Herbacé, festif. Le mojito que tu n'attendais pas." data-en="Herbaceous, festive. The mojito you never expected." data-de="Kräuterig, festlich. Der Mojito, den du nicht erwartet hast.">Herbacé, festif. Le mojito que tu n'attendais pas.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">17 cl</div><div class="card-price">9,90 €</div></div>
-    <div class="card-ing">Rhum · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sucre de canne" data-en="Cane sugar" data-de="Rohrzucker">Sucre de canne</span> · <span data-fr="Menthe fraîche" data-en="Fresh mint" data-de="Frische Minze">Menthe fraîche</span> · <span data-fr="Vodka noire" data-en="Black vodka" data-de="Schwarze Vodka">Vodka noire</span> · <span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span></div>
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div class="card-name">L’Insomnie</div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Onctueux, intense et caféiné. Le sommeil peut attendre."
+            data-en="Creamy, intense and caffeinated. Sleep can wait."
+            data-de="Cremig, intensiv und koffeinhaltig. Der Schlaf kann warten.">
+            Onctueux, intense et caféiné. Le sommeil peut attendre.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">13 cl</div>
+      <div class="card-price">10,50 €</div>
+    </div>
+
+    <div class="card-ing">
+      Vodka · Baileys · Espresso
+    </div>
+
   </div>
 
   <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">Réveil Amer</div>
-      <div class="card-desc"><span data-fr="Intense, café, légèrement torréfié. Cauchemar ou éveil ?" data-en="Intense, coffee, slightly roasted. Nightmare or awakening?" data-de="Intensiv, Kaffee, leicht geröstet. Albtraum oder Erwachen?">Intense, café, légèrement torréfié. Cauchemar ou éveil ?</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">13 cl</div><div class="card-price">10,50 €</div></div>
-    <div class="card-ing">Vodka · <span data-fr="Double espresso froid" data-en="Cold double espresso" data-de="Kalter doppelter Espresso">Double espresso froid</span> · <span data-fr="Liqueur de café" data-en="Coffee liqueur" data-de="Kaffeelikör">Liqueur de café</span> · Amaro · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span></div>
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div class="card-name">Terreur Nocturne</div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Exotique, pétillant et dangereusement facile à boire."
+            data-en="Exotic, sparkling and dangerously easy to drink."
+            data-de="Exotisch, prickelnd und gefährlich leicht zu trinken.">
+            Exotique, pétillant et dangereusement facile à boire.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">20 cl</div>
+      <div class="card-price">10,90 €</div>
+    </div>
+
+    <div class="card-ing">
+      Vodka · Passoã ·
+      <span
+        data-fr="Jus d'ananas"
+        data-en="Pineapple juice"
+        data-de="Ananassaft">
+        Jus d'ananas
+      </span>
+      · Ginger beer
+    </div>
+
   </div>
 
-  <!-- ── CINQ GOÛTS (même page, séparateur) ── -->
-  <div class="split-divider"><span data-fr="Les Cinq Goûts" data-en="The Five Tastes" data-de="Die Fünf Geschmäcker">Les Cinq Goûts</span></div>
-  <p style="text-align:center;font-style:italic;font-size:.82rem;color:var(--ash);margin-bottom:32px;"><span data-fr="Cinq sens. Cinq portes. Chaque élixir réveille une sensation que vous n'attendiez pas." data-en="Five senses. Five doors. Each elixir awakens a sensation you didn't expect." data-de="Fünf Sinne. Fünf Türen. Jedes Elixier weckt eine Empfindung, die Sie nicht erwartet haben.">Cinq sens. Cinq portes. Chaque élixir réveille une sensation que vous n'attendiez pas.</span></p>
+  <!-- OFFRE SANS ALCOOL -->
+
+  <div class="pack">
+
+    <div class="pack-t">
+      <span
+        data-fr="Tous nos cocktails sont disponibles sans alcool"
+        data-en="All our cocktails are available alcohol-free"
+        data-de="Alle unsere Cocktails sind alkoholfrei erhältlich">
+        Tous nos cocktails sont disponibles sans alcool
+      </span>
+    </div>
+
+    <div class="pack-d">
+      <span
+        data-fr="Chaque recette est adaptée afin de conserver son caractère et son univers."
+        data-en="Each recipe is adapted to preserve its character and identity."
+        data-de="Jedes Rezept wird angepasst, um seinen Charakter zu bewahren.">
+        Chaque recette est adaptée afin de conserver son caractère et son univers.
+      </span>
+    </div>
+
+    <div class="pack-p">
+      <span
+        data-fr="2 € de moins que la version alcoolisée"
+        data-en="€2 less than the alcoholic version"
+        data-de="2 € günstiger als die alkoholische Variante">
+        2 € de moins que la version alcoolisée
+      </span>
+    </div>
+
+  </div>
+
+  <!-- CINQ GOÛTS -->
+
+  <div class="split-divider">
+    <span
+      data-fr="Les Cinq Goûts"
+      data-en="The Five Tastes"
+      data-de="Die Fünf Geschmäcker">
+      Les Cinq Goûts
+    </span>
+  </div>
+
+  <p style="text-align:center;font-style:italic;font-size:.82rem;color:var(--ash);margin-bottom:32px;">
+    <span
+      data-fr="Cinq sens. Cinq portes. Chaque élixir réveille une sensation que vous n'attendiez pas."
+      data-en="Five senses. Five doors. Each elixir awakens a sensation you didn't expect."
+      data-de="Fünf Sinne. Fünf Türen. Jedes Elixier weckt eine unerwartete Empfindung.">
+      Cinq sens. Cinq portes. Chaque élixir réveille une sensation que vous n'attendiez pas.
+    </span>
+  </p>
 
   <!-- AMER -->
-  <div class="taste-card" style="border:1px solid rgba(46,139,87,.35);">
-    <div class="card-top"><div class="card-left">
-      <div class="taste-badge" style="color:#90c8a0;border:1px solid rgba(46,139,87,.4);background:rgba(46,139,87,.07);"><span data-fr="AMER" data-en="BITTER" data-de="BITTER">AMER</span></div>
-      <div class="card-name" style="color:#b8e8c8;">Spritz Aperol Fumé</div>
-      <div class="card-desc"><span data-fr="Amer rafraîchissant, souffle de jardin brûlé." data-en="Refreshing bitterness, breath of burnt garden." data-de="Erfrischende Bitterkeit, Hauch von verbranntem Garten.">Amer rafraîchissant, souffle de jardin brûlé.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">18 cl</div><div class="card-price" style="color:#90c8a0;">9,50 €</div></div>
-    <div class="card-ing" style="border-top:1px dashed rgba(46,139,87,.2);">Aperol · Prosecco · San Pellegrino · <span data-fr="Demi-tranche d'orange" data-en="Half orange slice" data-de="Halbe Orangenscheibe">Demi-tranche d'orange</span> · Romarin</div>
+
+  <div
+    class="taste-card"
+    style="border:1px solid rgba(46,139,87,.35);">
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div
+          class="taste-badge"
+          style="color:#90c8a0;border:1px solid rgba(46,139,87,.4);background:rgba(46,139,87,.07);">
+          <span data-fr="AMER" data-en="BITTER" data-de="BITTER">
+            AMER
+          </span>
+        </div>
+
+        <div class="card-name" style="color:#b8e8c8;">
+          Spritz Aperol Fumé
+        </div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Amer et rafraîchissant, avec un souffle de jardin brûlé."
+            data-en="Refreshing bitterness with a breath of burnt garden."
+            data-de="Erfrischende Bitterkeit mit einem Hauch verbrannten Gartens.">
+            Amer et rafraîchissant, avec un souffle de jardin brûlé.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">18 cl</div>
+      <div class="card-price" style="color:#90c8a0;">9,50 €</div>
+    </div>
+
+    <div
+      class="card-ing"
+      style="border-top:1px dashed rgba(46,139,87,.2);">
+      Aperol · Prosecco · San Pellegrino ·
+      <span data-fr="Orange" data-en="Orange" data-de="Orange">
+        Orange
+      </span>
+      · Romarin
+    </div>
+
   </div>
 
   <!-- ACIDE -->
-  <div class="taste-card" style="border:1px solid rgba(200,180,0,.35);">
-    <div class="card-top"><div class="card-left">
-      <div class="taste-badge" style="color:#f0e060;border:1px solid rgba(200,180,0,.4);background:rgba(200,180,0,.07);"><span data-fr="ACIDE" data-en="SOUR" data-de="SAUER">ACIDE</span></div>
-      <div class="card-name" style="color:#f5e880;">Gimlet Gingembre</div>
-      <div class="card-desc"><span data-fr="Tranchant, vivifiant. La piqûre qui réveille." data-en="Sharp, invigorating. The sting that awakens." data-de="Scharf, belebend. Der Stich, der erweckt.">Tranchant, vivifiant. La piqûre qui réveille.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">14 cl</div><div class="card-price" style="color:#d4c040;">9,90 €</div></div>
-    <div class="card-ing" style="border-top:1px dashed rgba(200,180,0,.2);">Gin · <span data-fr="Citron vert frais" data-en="Fresh lime" data-de="Frische Limette">Citron vert frais</span> · <span data-fr="Sirop de gingembre" data-en="Ginger syrup" data-de="Ingwersirup">Sirop de gingembre</span> · <span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span> · Concombre</div>
+
+  <div
+    class="taste-card"
+    style="border:1px solid rgba(200,180,0,.35);">
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div
+          class="taste-badge"
+          style="color:#f0e060;border:1px solid rgba(200,180,0,.4);background:rgba(200,180,0,.07);">
+          <span data-fr="ACIDE" data-en="SOUR" data-de="SAUER">
+            ACIDE
+          </span>
+        </div>
+
+        <div class="card-name" style="color:#f5e880;">
+          Potion Corrosive
+        </div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Vive, florale et acidulée. Une morsure fraîche au yuzu."
+            data-en="Bright, floral and tart. A fresh yuzu bite."
+            data-de="Lebhaft, blumig und säuerlich. Ein frischer Yuzu-Biss.">
+            Vive, florale et acidulée. Une morsure fraîche au yuzu.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">16 cl</div>
+      <div class="card-price" style="color:#d4c040;">9,90 €</div>
+    </div>
+
+    <div
+      class="card-ing"
+      style="border-top:1px dashed rgba(200,180,0,.2);">
+      Gin ·
+      <span
+        data-fr="Jus de citron"
+        data-en="Lemon juice"
+        data-de="Zitronensaft">
+        Jus de citron
+      </span>
+      ·
+      <span
+        data-fr="Sirop de yuzu"
+        data-en="Yuzu syrup"
+        data-de="Yuzu-Sirup">
+        Sirop de yuzu
+      </span>
+      ·
+      <span
+        data-fr="Liqueur de fleurs de sureau"
+        data-en="Elderflower liqueur"
+        data-de="Holunderblütenlikör">
+        Liqueur de fleurs de sureau
+      </span>
+      ·
+      <span
+        data-fr="Eau gazeuse"
+        data-en="Sparkling water"
+        data-de="Sprudelwasser">
+        Eau gazeuse
+      </span>
+    </div>
+
   </div>
 
   <!-- SUCRÉ -->
-  <div class="taste-card" style="border:1px solid rgba(200,80,140,.35);">
-    <div class="card-top"><div class="card-left">
-      <div class="taste-badge" style="color:#ffb8e0;border:1px solid rgba(200,80,140,.4);background:rgba(200,80,140,.07);"><span data-fr="SUCRÉ" data-en="SWEET" data-de="SÜSS">SUCRÉ</span></div>
-      <div class="card-name" style="color:#ffc8e8;">Lychee Rose Bubble</div>
-      <div class="card-desc"><span data-fr="Délicat, floral. Champagne et litchi en coupe." data-en="Delicate, floral. Champagne and lychee in a coupe." data-de="Delikat, blumig. Champagner und Lychee in der Coupe.">Délicat, floral. Champagne et litchi en coupe.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">18 cl</div><div class="card-price" style="color:#d080b0;">10,50 €</div></div>
-    <div class="card-ing" style="border-top:1px dashed rgba(200,80,140,.2);">Vodka · <span data-fr="Jus de litchi" data-en="Lychee juice" data-de="Litschi-Saft">Jus de litchi</span> · <span data-fr="Sirop de rose" data-en="Rose syrup" data-de="Rosensirup">Sirop de rose</span> · <span data-fr="Jus de citron" data-en="Lemon juice" data-de="Zitronensaft">Jus de citron</span> · Champagne / Crémant · <span data-fr="Pétale de rose comestible" data-en="Edible rose petal" data-de="Essbares Rosenblatt">Pétale de rose</span></div>
+
+  <div
+    class="taste-card"
+    style="border:1px solid rgba(200,80,140,.35);">
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div
+          class="taste-badge"
+          style="color:#ffb8e0;border:1px solid rgba(200,80,140,.4);background:rgba(200,80,140,.07);">
+          <span data-fr="SUCRÉ" data-en="SWEET" data-de="SÜSS">
+            SUCRÉ
+          </span>
+        </div>
+
+        <div class="card-name" style="color:#ffc8e8;">
+          Candy Coaster
+        </div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Fruité, acidulé et gourmand. Une attraction sucrée aux couleurs profondes."
+            data-en="Fruity, tart and indulgent. A sweet ride with deep colours."
+            data-de="Fruchtig, säuerlich und süß. Eine süße Fahrt in tiefen Farben.">
+            Fruité, acidulé et gourmand. Une attraction sucrée aux couleurs profondes.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">15 cl</div>
+      <div class="card-price" style="color:#d080b0;">10,90 €</div>
+    </div>
+
+    <div
+      class="card-ing"
+      style="border-top:1px dashed rgba(200,80,140,.2);">
+      Vodka ·
+      <span
+        data-fr="Liqueur de framboise"
+        data-en="Raspberry liqueur"
+        data-de="Himbeerlikör">
+        Liqueur de framboise
+      </span>
+      ·
+      <span
+        data-fr="Jus de cranberry"
+        data-en="Cranberry juice"
+        data-de="Cranberrysaft">
+        Jus de cranberry
+      </span>
+      ·
+      <span
+        data-fr="Citron vert"
+        data-en="Lime"
+        data-de="Limette">
+        Citron vert
+      </span>
+      ·
+      <span
+        data-fr="Sel noir"
+        data-en="Black salt"
+        data-de="Schwarzes Salz">
+        Sel noir
+      </span>
+    </div>
+
   </div>
 
   <!-- SALÉ -->
-  <div class="taste-card" style="border:1px solid rgba(40,140,200,.35);">
-    <div class="card-top"><div class="card-left">
-      <div class="taste-badge" style="color:#a8d8f8;border:1px solid rgba(40,140,200,.4);background:rgba(40,140,200,.07);"><span data-fr="SALÉ" data-en="SALTY" data-de="SALZIG">SALÉ</span></div>
-      <div class="card-name" style="color:#c0e8ff;">Bloody Caesar</div>
-      <div class="card-desc"><span data-fr="Iodé, épicé, presque un repas. Le cocktail qui dérange." data-en="Briny, spiced, almost a meal. The cocktail that unsettles." data-de="Jodhaltig, würzig, fast eine Mahlzeit.">Iodé, épicé, presque un repas. Le cocktail qui dérange.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">20 cl</div><div class="card-price" style="color:#5090c0;">10,90 €</div></div>
-    <div class="card-ing" style="border-top:1px dashed rgba(40,140,200,.2);">Vodka · Clamato · Tabasco · Worcestershire · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sel de céleri" data-en="Celery salt" data-de="Selleriesalz">Sel de céleri</span></div>
+
+  <div
+    class="taste-card"
+    style="border:1px solid rgba(40,140,200,.35);">
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div
+          class="taste-badge"
+          style="color:#a8d8f8;border:1px solid rgba(40,140,200,.4);background:rgba(40,140,200,.07);">
+          <span data-fr="SALÉ" data-en="SALTY" data-de="SALZIG">
+            SALÉ
+          </span>
+        </div>
+
+        <div class="card-name" style="color:#c0e8ff;">
+          Bloody Caesar
+        </div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Salé, épicé et généreux. Presque un repas à lui seul."
+            data-en="Salty, spicy and generous. Almost a meal on its own."
+            data-de="Salzig, würzig und großzügig. Fast eine Mahlzeit für sich.">
+            Salé, épicé et généreux. Presque un repas à lui seul.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">20 cl</div>
+      <div class="card-price" style="color:#5090c0;">10,90 €</div>
+    </div>
+
+    <div
+      class="card-ing"
+      style="border-top:1px dashed rgba(40,140,200,.2);">
+      Vodka ·
+      <span
+        data-fr="Jus de tomate"
+        data-en="Tomato juice"
+        data-de="Tomatensaft">
+        Jus de tomate
+      </span>
+      · Tabasco ·
+      <span
+        data-fr="Citron vert"
+        data-en="Lime"
+        data-de="Limette">
+        Citron vert
+      </span>
+      ·
+      <span
+        data-fr="Sel de céleri"
+        data-en="Celery salt"
+        data-de="Selleriesalz">
+        Sel de céleri
+      </span>
+    </div>
+
   </div>
 
   <!-- UMAMI -->
-  <div class="taste-card" style="border:1px solid rgba(160,80,220,.35);">
-    <div class="card-top"><div class="card-left">
-      <div class="taste-badge" style="color:#d8a8ff;border:1px solid rgba(160,80,220,.4);background:rgba(160,80,220,.07);"><span data-fr="UMAMI" data-en="UMAMI" data-de="UMAMI">UMAMI</span></div>
-      <div class="card-name" style="color:#e8c8ff;">Dirty Butterfly</div>
-      <div class="card-desc"><span data-fr="Floral en surface, profond en dessous. La couleur change devant vous." data-en="Floral on the surface, deep beneath. The colour changes before you." data-de="Blumig oben, tief darunter. Die Farbe ändert sich vor Ihnen.">Floral en surface, profond en dessous. La couleur change devant vous.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">22 cl</div><div class="card-price" style="color:#a060d0;">10,90 €</div></div>
-    <div class="card-ing" style="border-top:1px dashed rgba(160,80,220,.2);">Gin · <span data-fr="Thé fleur de pois bleu" data-en="Blue pea flower tea" data-de="Blauem Schmetterlingserbsentee">Thé fleur de pois bleu</span> · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span> · <span data-fr="Sauce soja" data-en="Soy sauce" data-de="Sojasoße">Sauce soja</span> · <span data-fr="Citron (versé devant vous)" data-en="Lemon (poured before you)" data-de="Zitrone (vor Ihnen)">Citron (versé devant vous)</span></div>
+
+  <div
+    class="taste-card"
+    style="border:1px solid rgba(160,80,220,.35);">
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div
+          class="taste-badge"
+          style="color:#d8a8ff;border:1px solid rgba(160,80,220,.4);background:rgba(160,80,220,.07);">
+          <span data-fr="UMAMI" data-en="UMAMI" data-de="UMAMI">
+            UMAMI
+          </span>
+        </div>
+
+        <div class="card-name" style="color:#e8c8ff;">
+          Dirty Butterfly
+        </div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Boisé, surprenant et légèrement caramélisé."
+            data-en="Woody, surprising and delicately caramelised."
+            data-de="Holzig, überraschend und leicht karamellisiert.">
+            Boisé, surprenant et légèrement caramélisé.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">18 cl</div>
+      <div class="card-price" style="color:#a060d0;">10,90 €</div>
+    </div>
+
+    <div
+      class="card-ing"
+      style="border-top:1px dashed rgba(160,80,220,.2);">
+      Gin ·
+      <span
+        data-fr="Liqueur de shiitaké caramélisé"
+        data-en="Caramelised shiitake liqueur"
+        data-de="Karamellisierter Shiitake-Likör">
+        Liqueur de shiitaké caramélisé
+      </span>
+      ·
+      <span
+        data-fr="Jus de citron"
+        data-en="Lemon juice"
+        data-de="Zitronensaft">
+        Jus de citron
+      </span>
+      ·
+      <span
+        data-fr="Eau gazeuse"
+        data-en="Sparkling water"
+        data-de="Sprudelwasser">
+        Eau gazeuse
+      </span>
+    </div>
+
   </div>
 
-</div><!-- /elixirs -->
+</div>
 
-<!-- ══════════════════════════════════════
-     SHOOTERS (fioles)
-══════════════════════════════════════ -->
+<!-- SHOOTERS -->
+
 <div id="shooters" class="chap">
+
   <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Second" data-en="Second Chapter" data-de="Zweites Kapitel">Chapitre Second</span>
-    <div class="chap-title" data-fr="Shooters" data-en="Shooters" data-de="Shooter">Shooters</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Quatre centilitres. Un sort concentré. Scellé — servi en apothicaire." data-en="Four centilitres. A concentrated spell. Sealed — served apothecary style." data-de="Vier Zentiliter. Ein konzentrierter Zauber. Versiegelt.">Quatre centilitres. Un sort concentré. Scellé — servi en apothicaire.</span></em></p>
+
+    <span
+      class="chap-ornament"
+      data-fr="Chapitre Second"
+      data-en="Second Chapter"
+      data-de="Zweites Kapitel">
+      Chapitre Second
+    </span>
+
+    <div
+      class="chap-title"
+      data-fr="Shooters"
+      data-en="Shooters"
+      data-de="Shooter">
+      Shooters
+    </div>
+
+    <div class="rule">
+      <span>⁕</span>
+    </div>
+
+    <p class="chap-verse">
+      <em>
+        <span
+          data-fr="Deux fioles. Deux royaumes. À vous de choisir votre camp."
+          data-en="Two vials. Two kingdoms. Choose your side."
+          data-de="Zwei Phiolen. Zwei Königreiche. Wählen Sie Ihre Seite.">
+          Deux fioles. Deux royaumes. À vous de choisir votre camp.
+        </span>
+      </em>
+    </p>
+
   </div>
 
-  <div class="realm dr"><span class="realm-tag"><span data-fr="Fioles des Rêves" data-en="Dream Vials" data-de="Traumphiolen">Fioles des Rêves</span></span></div>
+  <div class="realm dr">
+    <span class="realm-tag">
+      <span
+        data-fr="Fiole des Rêves"
+        data-en="Dream Vial"
+        data-de="Traumphiole">
+        Fiole des Rêves
+      </span>
+    </span>
+  </div>
 
   <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Sérum de Lune" data-en="Moon Serum" data-de="Mondserum">Sérum de Lune</span></div>
-      <div class="card-desc"><span data-fr="Doux, floral. Un pétale flottant dans la fiole." data-en="Soft, floral. A petal floating in the vial." data-de="Sanft, blumig. Ein Blütenblatt in der Phiole.">Doux, floral. Un pétale flottant dans la fiole.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">4 cl</div><div class="card-price">5,50 €</div></div>
-    <div class="card-ing">Vodka · <span data-fr="Liqueur de litchi" data-en="Lychee liqueur" data-de="Litschi-Likör">Liqueur de litchi</span> · <span data-fr="Sirop de rose" data-en="Rose syrup" data-de="Rosensirup">Sirop de rose</span> · Citron · <span data-fr="Pétale de rose" data-en="Rose petal" data-de="Rosenblatt">Pétale de rose</span></div>
+
+    <div class="card-top">
+      <div class="card-left">
+
+        <div class="card-name">
+          <span
+            data-fr="Éclat d’Aurore"
+            data-en="Dawn Shard"
+            data-de="Morgenglanz">
+            Éclat d’Aurore
+          </span>
+        </div>
+
+        <div class="card-desc">
+          <span
+            data-fr="Floral, fruité et acidulé. Une lumière vive au fond de la fiole."
+            data-en="Floral, fruity and tart. A bright light inside the vial."
+            data-de="Blumig, fruchtig und säuerlich. Ein heller Schein in der Phiole.">
+            Floral, fruité et acidulé. Une lumière vive au fond de la fiole.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">4 cl</div>
+      <div class="card-price">5,00 €</div>
+    </div>
+
+    <div class="card-ing">
+      Gin ·
+      <span
+        data-fr="Sirop de yuzu"
+        data-en="Yuzu syrup"
+        data-de="Yuzu-Sirup">
+        Sirop de yuzu
+      </span>
+      ·
+      <span
+        data-fr="Liqueur de framboise"
+        data-en="Raspberry liqueur"
+        data-de="Himbeerlikör">
+        Liqueur de framboise
+      </span>
+    </div>
+
   </div>
 
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Brume Violette" data-en="Violet Mist" data-de="Violetter Nebel">Brume Violette</span></div>
-      <div class="card-desc"><span data-fr="La couleur change dans votre main. Botanique, fin." data-en="The colour changes in your hand. Botanical, refined." data-de="Die Farbe ändert sich in deiner Hand.">La couleur change dans votre main. Botanique, fin.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">4 cl</div><div class="card-price">5,50 €</div></div>
-    <div class="card-ing">Gin · <span data-fr="Thé fleur de pois bleu" data-en="Blue pea flower tea" data-de="Schmetterlingserbsentee">Thé fleur de pois bleu</span> · <span data-fr="Sirop violette" data-en="Violet syrup" data-de="Veilchensirup">Sirop violette</span> · <span data-fr="Citron (pipette fournie)" data-en="Lemon (pipette provided)" data-de="Zitrone (Pipette inklusive)">Citron (pipette fournie)</span></div>
+  <div class="realm nm">
+    <span class="realm-tag">
+      <span
+        data-fr="Fiole des Cauchemars"
+        data-en="Nightmare Vial"
+        data-de="Albtraumphiole">
+        Fiole des Cauchemars
+      </span>
+    </span>
   </div>
-
-  <div class="realm nm"><span class="realm-tag"><span data-fr="Fioles des Cauchemars" data-en="Nightmare Vials" data-de="Alptraumphiolen">Fioles des Cauchemars</span></span></div>
 
   <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Venin Noir" data-en="Black Venom" data-de="Schwarzes Gift">Venin Noir</span></div>
-      <div class="card-desc"><span data-fr="Opaque. Inconnu. On boit dans le noir." data-en="Opaque. Unknown. You drink in the dark." data-de="Opak. Unbekannt. Man trinkt im Dunkeln.">Opaque. Inconnu. On boit dans le noir.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">4 cl</div><div class="card-price">5,50 €</div></div>
-    <div class="card-ing">Tequila Blanco · <span data-fr="Vodka noire" data-en="Black vodka" data-de="Schwarze Vodka">Vodka noire</span> · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sirop agave" data-en="Agave syrup" data-de="Agavensirup">Sirop agave</span></div>
-  </div>
 
-  <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Feu de l'Enfer" data-en="Hellfire" data-de="Höllenfeuer">Feu de l'Enfer</span></div>
-      <div class="card-desc"><span data-fr="La chaleur arrive. Dix secondes après." data-en="The heat arrives. Ten seconds later." data-de="Die Hitze kommt. Zehn Sekunden später.">La chaleur arrive. Dix secondes après.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">4 cl</div><div class="card-price">5,50 €</div></div>
-    <div class="card-ing">Whisky · <span data-fr="Sirop de piment" data-en="Chilli syrup" data-de="Chilisirup">Sirop de piment</span> · <span data-fr="Gingembre frais" data-en="Fresh ginger" data-de="Frischer Ingwer">Gingembre frais</span> · Citron</div>
+    <div class="card-top">
+      <div class="card-left">
+
+        <div class="card-name">
+          <span
+            data-fr="Feu de l’Enfer"
+            data-en="Hellfire"
+            data-de="Höllenfeuer">
+            Feu de l’Enfer
+          </span>
+        </div>
+
+        <div class="card-desc">
+          <span
+            data-fr="La chaleur arrive quelques secondes après la première gorgée."
+            data-en="The heat arrives a few seconds after the first sip."
+            data-de="Die Hitze kommt wenige Sekunden nach dem ersten Schluck.">
+            La chaleur arrive quelques secondes après la première gorgée.
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-price-row">
+      <div class="card-vol">4 cl</div>
+      <div class="card-price">5,00 €</div>
+    </div>
+
+    <div class="card-ing">
+      Rhum ·
+      <span
+        data-fr="Sirop de piment"
+        data-en="Chilli syrup"
+        data-de="Chilisirup">
+        Sirop de piment
+      </span>
+      · Citron
+    </div>
+
   </div>
 
   <div class="pack">
-    <div class="pack-t"><span data-fr="Pack Trois Sorts" data-en="Three Spells Pack" data-de="Drei-Zauber-Paket">Pack Trois Sorts</span></div>
-    <div class="pack-d"><span data-fr="3 fioles au choix dont 1 surprise — idéal avant votre séance" data-en="3 vials of your choice including 1 surprise — ideal before your session" data-de="3 Phiolen nach Wahl, davon 1 Überraschung — ideal vor Ihrer Sitzung">3 fioles au choix dont 1 surprise — idéal avant votre séance</span></div>
-    <div class="pack-p">12,00 €</div>
+
+    <div class="pack-t">
+      <span
+        data-fr="Formules Shooters"
+        data-en="Shooter Offers"
+        data-de="Shooter-Angebote">
+        Formules Shooters
+      </span>
+    </div>
+
+    <div class="pack-d">
+      <span
+        data-fr="Choisissez librement entre le Rêve et le Cauchemar."
+        data-en="Choose freely between Dream and Nightmare."
+        data-de="Wählen Sie frei zwischen Traum und Albtraum.">
+        Choisissez librement entre le Rêve et le Cauchemar.
+      </span>
+    </div>
+
+    <div class="pack-p">
+      <span
+        data-fr="2 shooters — 8,00 € · 3 shooters — 12,00 €"
+        data-en="2 shooters — €8.00 · 3 shooters — €12.00"
+        data-de="2 Shooter — 8,00 € · 3 Shooter — 12,00 €">
+        2 shooters — 8,00 € · 3 shooters — 12,00 €
+      </span>
+    </div>
+
   </div>
+
 </div>
 
-<!-- ══════════════════════════════════════
-     SANS ALCOOL
-══════════════════════════════════════ -->
-<div id="sansalcool" class="chap">
-  <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Troisième" data-en="Third Chapter" data-de="Drittes Kapitel">Chapitre Troisième</span>
-    <div class="chap-title" data-fr="Élixirs Sans Alcool" data-en="Alcohol Free Elixirs" data-de="Alkoholfreie Elixiere">Élixirs Sans Alcool</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Toute la cérémonie. Sans la spirale." data-en="The full ceremony. Without the spiral." data-de="Die gesamte Zeremonie. Ohne die Spirale.">Toute la cérémonie. Sans la spirale.</span></em></p>
-  </div>
+<!-- BIÈRES -->
 
-  <div class="realm dr"><span class="realm-tag"><span data-fr="Côté Rêve" data-en="Dream Side" data-de="Traumseite">Côté Rêve</span></span></div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Jardin de Minuit" data-en="Midnight Garden" data-de="Mitternachtsgarten">Jardin de Minuit</span></div>
-      <div class="card-desc"><span data-fr="Concombre, basilic, citron vert. Frais comme un souffle nocturne." data-en="Cucumber, basil, lime. Fresh as a nocturnal breath." data-de="Gurke, Basilikum, Limette. Frisch wie ein nächtlicher Hauch.">Concombre, basilic, citron vert. Frais comme un souffle nocturne.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">20 cl</div><div class="card-price">7,20 €</div></div>
-    <div class="card-ing"><span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span> · <span data-fr="Concombre muddlé" data-en="Muddled cucumber" data-de="Zerdrückte Gurke">Concombre muddlé</span> · <span data-fr="Basilic frais" data-en="Fresh basil" data-de="Frisches Basilikum">Basilic frais</span> · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span> · <span data-fr="Eau de fleur d'oranger" data-en="Orange blossom water" data-de="Orangenblütenwasser">Eau de fleur d'oranger</span></div>
-  </div>
-
-  <div class="card dr">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name">Ginger Dream</div>
-      <div class="card-desc"><span data-fr="Piquant, pétillant. La chaleur sans l'alcool." data-en="Spicy, sparkling. The warmth without the alcohol." data-de="Scharf, prickelnd. Die Wärme ohne den Alkohol.">Piquant, pétillant. La chaleur sans l'alcool.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">20 cl</div><div class="card-price">7,20 €</div></div>
-    <div class="card-ing">Ginger beer · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span> · <span data-fr="Menthe fraîche" data-en="Fresh mint" data-de="Frische Minze">Menthe fraîche</span></div>
-  </div>
-
-  <div class="realm nm"><span class="realm-tag"><span data-fr="Côté Cauchemar" data-en="Nightmare Side" data-de="Albtraumseite">Côté Cauchemar</span></span></div>
-
-  <div class="card nm">
-    <div class="card-top"><div class="card-left">
-      <div class="card-name"><span data-fr="Veuve Noire" data-en="Black Widow" data-de="Schwarze Witwe">Veuve Noire</span></div>
-      <div class="card-desc"><span data-fr="Sombre, fruité-acidulé. Grenade et hibiscus dans le noir." data-en="Dark, fruity-tart. Pomegranate and hibiscus in the dark." data-de="Dunkel, fruchtig-säuerlich. Granatapfel und Hibiskus.">Sombre, fruité-acidulé. Grenade et hibiscus dans le noir.</span></div>
-    </div></div>
-    <div class="card-price-row"><div class="card-vol">20 cl</div><div class="card-price">7,20 €</div></div>
-    <div class="card-ing"><span data-fr="Infusion hibiscus" data-en="Hibiscus infusion" data-de="Hibiskusinfusion">Infusion hibiscus</span> · <span data-fr="Jus de grenade" data-en="Pomegranate juice" data-de="Granatapfelsaft">Jus de grenade</span> · <span data-fr="Citron vert" data-en="Lime" data-de="Limette">Citron vert</span> · <span data-fr="Sirop de canne" data-en="Cane syrup" data-de="Rohrzuckersirup">Sirop de canne</span> · <span data-fr="Eau gazeuse" data-en="Sparkling water" data-de="Sprudelwasser">Eau gazeuse</span> · <span data-fr="Sel noir" data-en="Black salt" data-de="Schwarzes Salz">Sel noir</span></div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════
-     BIÈRES
-══════════════════════════════════════ -->
 <div id="bieres" class="chap">
+
   <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Quatrième" data-en="Fourth Chapter" data-de="Viertes Kapitel">Chapitre Quatrième</span>
-    <div class="chap-title" data-fr="Les Bières" data-en="The Beers" data-de="Die Biere">Les Bières</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Pression ou bouteille. Selon l'humeur." data-en="Draught or bottle. As the mood takes you." data-de="Vom Fass oder Flasche. Je nach Stimmung.">Pression ou bouteille. Selon l'humeur.</span></em></p>
+
+    <span
+      class="chap-ornament"
+      data-fr="Chapitre Troisième"
+      data-en="Third Chapter"
+      data-de="Drittes Kapitel">
+      Chapitre Troisième
+    </span>
+
+    <div
+      class="chap-title"
+      data-fr="Les Bières"
+      data-en="The Beers"
+      data-de="Die Biere">
+      Les Bières
+    </div>
+
+    <div class="rule">
+      <span>⁕</span>
+    </div>
+
+    <p class="chap-verse">
+      <em>
+        <span
+          data-fr="Pression ou bouteille. Selon l'humeur."
+          data-en="Draught or bottle. As the mood takes you."
+          data-de="Vom Fass oder Flasche. Je nach Stimmung.">
+          Pression ou bouteille. Selon l'humeur.
+        </span>
+      </em>
+    </p>
+
   </div>
-  <div class="sub-head"><span data-fr="Pression" data-en="Draught" data-de="Vom Fass">Pression</span></div>
+
+  <div class="sub-head">
+    <span data-fr="Pression" data-en="Draught" data-de="Vom Fass">
+      Pression
+    </span>
+  </div>
+
   <table class="ledger">
-    <tr><td><span data-fr="Bière pression" data-en="Draught beer" data-de="Fassbier">Bière pression</span></td><td>25 cl / 50 cl</td><td>4,00 / 6,40 €</td></tr>
-    <tr><td>Panaché</td><td>25 cl / 50 cl</td><td>3,50 / 5,00 €</td></tr>
-    <tr><td>Monaco</td><td>25 cl / 50 cl</td><td>3,70 / 5,20 €</td></tr>
-    <tr><td>Picon Bière</td><td>25 cl / 50 cl</td><td>4,20 / 6,60 €</td></tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Bière pression"
+          data-en="Draught beer"
+          data-de="Fassbier">
+          Bière pression
+        </span>
+      </td>
+      <td>25 cl / 50 cl</td>
+      <td>4,00 / 6,40 €</td>
+    </tr>
+
+    <tr>
+      <td>Panaché</td>
+      <td>25 cl / 50 cl</td>
+      <td>3,50 / 5,00 €</td>
+    </tr>
+
+    <tr>
+      <td>Monaco</td>
+      <td>25 cl / 50 cl</td>
+      <td>3,70 / 5,20 €</td>
+    </tr>
+
+    <tr>
+      <td>Picon Bière</td>
+      <td>25 cl / 50 cl</td>
+      <td>4,20 / 6,60 €</td>
+    </tr>
+
   </table>
-  <div class="sub-head"><span data-fr="Bouteilles" data-en="Bottles" data-de="Flaschen">Bouteilles</span></div>
+
+  <div class="sub-head">
+    <span data-fr="Bouteilles" data-en="Bottles" data-de="Flaschen">
+      Bouteilles
+    </span>
+  </div>
+
   <table class="ledger">
-    <tr><td>Desperados</td><td>33 cl · 5,9%</td><td>5,20 €</td></tr>
-    <tr><td><span data-fr="Bière du Sorcier" data-en="Sorcerer's Beer" data-de="Zauberer-Bier">Bière du Sorcier</span></td><td>33 cl · 5%</td><td>5,20 €</td></tr>
-    <tr><td>Kasteel Rouge</td><td>33 cl · 8% · <span data-fr="Cerise" data-en="Cherry" data-de="Kirsche">Cerise</span></td><td>5,20 €</td></tr>
+
+    <tr>
+      <td>Desperados</td>
+      <td>33 cl · 5,9 %</td>
+      <td>5,20 €</td>
+    </tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Bière du Sorcier"
+          data-en="Sorcerer's Beer"
+          data-de="Zauberer-Bier">
+          Bière du Sorcier
+        </span>
+      </td>
+      <td>33 cl · 5 %</td>
+      <td>5,20 €</td>
+    </tr>
+
+    <tr>
+      <td>Kasteel Rouge</td>
+      <td>
+        33 cl · 8 % ·
+        <span data-fr="Cerise" data-en="Cherry" data-de="Kirsche">
+          Cerise
+        </span>
+      </td>
+      <td>5,20 €</td>
+    </tr>
+
   </table>
+
 </div>
 
-<!-- ══════════════════════════════════════
-     SOFTS
-══════════════════════════════════════ -->
+<!-- SOFTS -->
+
 <div id="softs" class="chap">
+
   <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Cinquième" data-en="Fifth Chapter" data-de="Fünftes Kapitel">Chapitre Cinquième</span>
+
+    <span
+      class="chap-ornament"
+      data-fr="Chapitre Quatrième"
+      data-en="Fourth Chapter"
+      data-de="Viertes Kapitel">
+      Chapitre Quatrième
+    </span>
+
     <div class="chap-title">Softs</div>
-    <div class="rule"><span>⁕</span></div>
+
+    <div class="rule">
+      <span>⁕</span>
+    </div>
+
   </div>
+
   <table class="ledger">
-    <tr><td>Coca · Zero · Cherry</td><td>33 cl</td><td>3,50 €</td></tr>
-    <tr><td><span data-fr="Thé glacé · Diabolo · Limonade" data-en="Iced tea · Diabolo · Lemonade" data-de="Eistee · Diabolo · Limonade">Thé glacé · Diabolo · Limonade</span></td><td>33 cl</td><td>3,50 €</td></tr>
-    <tr><td>Orangina</td><td>33 cl</td><td>3,50 €</td></tr>
-    <tr><td>Oasis</td><td>33 cl</td><td>3,50 €</td></tr>
-    <tr><td>Red Bull</td><td>25 cl</td><td>4,00 €</td></tr>
-    <tr><td>Iced Coffee · Iced Latte</td><td></td><td>4,00 €</td></tr>
-    <tr><td><span data-fr="Eau plate ou pétillante" data-en="Still or sparkling water" data-de="Stilles oder Sprudelwasser">Eau plate ou pétillante</span></td><td>25 cl</td><td>2,00 €</td></tr>
-    <tr><td><span data-fr="Sirops maison" data-en="House syrups" data-de="Hausgemachte Sirupe">Sirops maison</span></td><td><span data-fr="Grenadine · Violette · Menthe · Pêche · Citron" data-en="Grenadine · Violet · Mint · Peach · Lemon" data-de="Grenadine · Veilchen · Minze · Pfirsich · Zitrone">Grenadine · Violette · Menthe · Pêche · Citron</span></td><td><span data-fr="inclus" data-en="included" data-de="inklusive">inclus</span></td></tr>
+
+    <tr>
+      <td>Coca · Zero · Cherry</td>
+      <td>33 cl</td>
+      <td>3,50 €</td>
+    </tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Thé glacé · Diabolo · Limonade"
+          data-en="Iced tea · Diabolo · Lemonade"
+          data-de="Eistee · Diabolo · Limonade">
+          Thé glacé · Diabolo · Limonade
+        </span>
+      </td>
+      <td>33 cl</td>
+      <td>3,50 €</td>
+    </tr>
+
+    <tr>
+      <td>Orangina</td>
+      <td>33 cl</td>
+      <td>3,50 €</td>
+    </tr>
+
+    <tr>
+      <td>Oasis</td>
+      <td>33 cl</td>
+      <td>3,50 €</td>
+    </tr>
+
+    <tr>
+      <td>Red Bull</td>
+      <td>25 cl</td>
+      <td>4,00 €</td>
+    </tr>
+
+    <tr>
+      <td>Iced Coffee · Iced Latte</td>
+      <td></td>
+      <td>4,00 €</td>
+    </tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Eau plate ou pétillante"
+          data-en="Still or sparkling water"
+          data-de="Stilles oder Sprudelwasser">
+          Eau plate ou pétillante
+        </span>
+      </td>
+      <td>25 cl</td>
+      <td>2,00 €</td>
+    </tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Sirops"
+          data-en="Syrups"
+          data-de="Sirupe">
+          Sirops
+        </span>
+      </td>
+      <td>
+        <span
+          data-fr="Grenadine · Violette · Menthe · Pêche · Citron"
+          data-en="Grenadine · Violet · Mint · Peach · Lemon"
+          data-de="Grenadine · Veilchen · Minze · Pfirsich · Zitrone">
+          Grenadine · Violette · Menthe · Pêche · Citron
+        </span>
+      </td>
+      <td>
+        <span data-fr="inclus" data-en="included" data-de="inklusive">
+          inclus
+        </span>
+      </td>
+    </tr>
+
   </table>
+
 </div>
 
-<!-- ══════════════════════════════════════
-     BOISSONS CHAUDES
-══════════════════════════════════════ -->
+<!-- BOISSONS CHAUDES -->
+
 <div id="chauds" class="chap">
+
   <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Sixième" data-en="Sixth Chapter" data-de="Sechstes Kapitel">Chapitre Sixième</span>
-    <div class="chap-title" data-fr="Boissons Chaudes" data-en="Hot Drinks" data-de="Heißgetränke">Boissons Chaudes</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Pour veiller toute la nuit ou rêver les yeux ouverts." data-en="To stay awake all night or dream with open eyes." data-de="Um die ganze Nacht zu wachen oder mit offenen Augen zu träumen.">Pour veiller toute la nuit ou rêver les yeux ouverts.</span></em></p>
+
+    <span
+      class="chap-ornament"
+      data-fr="Chapitre Cinquième"
+      data-en="Fifth Chapter"
+      data-de="Fünftes Kapitel">
+      Chapitre Cinquième
+    </span>
+
+    <div
+      class="chap-title"
+      data-fr="Boissons Chaudes"
+      data-en="Hot Drinks"
+      data-de="Heißgetränke">
+      Boissons Chaudes
+    </div>
+
+    <div class="rule">
+      <span>⁕</span>
+    </div>
+
+    <p class="chap-verse">
+      <em>
+        <span
+          data-fr="Pour veiller toute la nuit ou rêver les yeux ouverts."
+          data-en="To stay awake all night or dream with open eyes."
+          data-de="Um die ganze Nacht zu wachen oder mit offenen Augen zu träumen.">
+          Pour veiller toute la nuit ou rêver les yeux ouverts.
+        </span>
+      </em>
+    </p>
+
   </div>
+
   <table class="ledger">
-    <tr><td>Espresso</td><td></td><td>2,00 €</td></tr>
-    <tr><td>Double Espresso</td><td></td><td>3,30 €</td></tr>
-    <tr><td><span data-fr="Café allongé" data-en="Long coffee" data-de="Verlängerter Kaffee">Café allongé</span></td><td></td><td>2,50 €</td></tr>
-    <tr><td>Cappuccino</td><td></td><td>3,50 €</td></tr>
-    <tr><td><span data-fr="Café au lait" data-en="Coffee with milk" data-de="Milchkaffee">Café au lait</span></td><td></td><td>3,40 €</td></tr>
-    <tr><td>Affogato</td><td><span data-fr="Espresso · glace vanille" data-en="Espresso · vanilla ice cream" data-de="Espresso · Vanilleeis">Espresso · glace vanille</span></td><td>4,20 €</td></tr>
-    <tr><td><span data-fr="Chocolat chaud" data-en="Hot chocolate" data-de="Heiße Schokolade">Chocolat chaud</span></td><td></td><td>3,50 €</td></tr>
-    <tr><td>Chaï Latte</td><td></td><td>3,90 €</td></tr>
-    <tr><td><span data-fr="Thés Dammann" data-en="Dammann Teas" data-de="Dammann Tees">Thés Dammann</span></td><td><span data-fr="Voir carte des thés" data-en="See tea menu" data-de="Siehe Teekarte">Voir carte des thés</span></td><td>3,50 €</td></tr>
-    <tr><td><span data-fr="Sirops en supplément" data-en="Extra syrups" data-de="Zusätzliche Sirupe">Sirops en supplément</span></td><td><span data-fr="Noisette · Pumpkin · Vanille" data-en="Hazelnut · Pumpkin · Vanilla" data-de="Haselnuss · Kürbis · Vanille">Noisette · Pumpkin · Vanille</span></td><td>+0,50 €</td></tr>
-    <tr><td><span data-fr="Lait d'amande" data-en="Almond milk" data-de="Mandelmilch">Lait d'amande</span></td><td><span data-fr="sur demande" data-en="on request" data-de="auf Anfrage">sur demande</span></td><td><span data-fr="inclus" data-en="included" data-de="inklusive">inclus</span></td></tr>
+
+    <tr>
+      <td>Espresso</td>
+      <td></td>
+      <td>2,00 €</td>
+    </tr>
+
+    <tr>
+      <td>Double Espresso</td>
+      <td></td>
+      <td>3,30 €</td>
+    </tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Café allongé"
+          data-en="Long coffee"
+          data-de="Verlängerter Kaffee">
+          Café allongé
+        </span>
+      </td>
+      <td></td>
+      <td>2,50 €</td>
+    </tr>
+
+    <tr>
+      <td>Cappuccino</td>
+      <td></td>
+      <td>3,50 €</td>
+    </tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Café au lait"
+          data-en="Coffee with milk"
+          data-de="Milchkaffee">
+          Café au lait
+        </span>
+      </td>
+      <td></td>
+      <td>3,40 €</td>
+    </tr>
+
+    <tr>
+      <td>Affogato</td>
+      <td>
+        <span
+          data-fr="Espresso · glace vanille"
+          data-en="Espresso · vanilla ice cream"
+          data-de="Espresso · Vanilleeis">
+          Espresso · glace vanille
+        </span>
+      </td>
+      <td>4,20 €</td>
+    </tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Chocolat chaud"
+          data-en="Hot chocolate"
+          data-de="Heiße Schokolade">
+          Chocolat chaud
+        </span>
+      </td>
+      <td></td>
+      <td>3,50 €</td>
+    </tr>
+
+    <tr>
+      <td>Chaï Latte</td>
+      <td></td>
+      <td>3,90 €</td>
+    </tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Thés Dammann"
+          data-en="Dammann Teas"
+          data-de="Dammann Tees">
+          Thés Dammann
+        </span>
+      </td>
+      <td>
+        <span
+          data-fr="Voir carte des thés"
+          data-en="See tea menu"
+          data-de="Siehe Teekarte">
+          Voir carte des thés
+        </span>
+      </td>
+      <td>3,50 €</td>
+    </tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Sirops en supplément"
+          data-en="Extra syrups"
+          data-de="Zusätzliche Sirupe">
+          Sirops en supplément
+        </span>
+      </td>
+      <td>
+        <span
+          data-fr="Noisette · Pumpkin · Vanille"
+          data-en="Hazelnut · Pumpkin · Vanilla"
+          data-de="Haselnuss · Kürbis · Vanille">
+          Noisette · Pumpkin · Vanille
+        </span>
+      </td>
+      <td>+0,50 €</td>
+    </tr>
+
+    <tr>
+      <td>
+        <span
+          data-fr="Lait d'amande"
+          data-en="Almond milk"
+          data-de="Mandelmilch">
+          Lait d'amande
+        </span>
+      </td>
+      <td>
+        <span
+          data-fr="sur demande"
+          data-en="on request"
+          data-de="auf Anfrage">
+          sur demande
+        </span>
+      </td>
+      <td>
+        <span data-fr="inclus" data-en="included" data-de="inklusive">
+          inclus
+        </span>
+      </td>
+    </tr>
+
   </table>
+
 </div>
 
-<!-- ══════════════════════════════════════
-     THÉS
-══════════════════════════════════════ -->
+<!-- THÉS -->
+
 <div id="thes" class="chap">
+
   <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Septième" data-en="Seventh Chapter" data-de="Siebtes Kapitel">Chapitre Septième</span>
-    <div class="chap-title" data-fr="La Carte des Thés" data-en="The Tea Menu" data-de="Die Teekarte">La Carte des Thés</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em>Dammann Frères · <span data-fr="Sélection de la maison" data-en="House selection" data-de="Hausauswahl">Sélection de la maison</span></em></p>
+
+    <span
+      class="chap-ornament"
+      data-fr="Chapitre Sixième"
+      data-en="Sixth Chapter"
+      data-de="Sechstes Kapitel">
+      Chapitre Sixième
+    </span>
+
+    <div
+      class="chap-title"
+      data-fr="La Carte des Thés"
+      data-en="The Tea Menu"
+      data-de="Die Teekarte">
+      La Carte des Thés
+    </div>
+
+    <div class="rule">
+      <span>⁕</span>
+    </div>
+
+    <p class="chap-verse">
+      <em>
+        Dammann Frères ·
+        <span
+          data-fr="Sélection de la maison"
+          data-en="House selection"
+          data-de="Hausauswahl">
+          Sélection de la maison
+        </span>
+      </em>
+    </p>
+
   </div>
 
   <div class="tea-section">
-    <div class="tea-section-title"><span data-fr="Thés Verts" data-en="Green Teas" data-de="Grüne Tees">Thés Verts</span></div>
-    <div class="tea-row"><span class="tea-name">À la Menthe</span><span class="tea-origin">Chine</span><span class="tea-desc"><span data-fr="Menthe douce et poivrée, idéal très chaud" data-en="Sweet and peppered mint, best served very hot" data-de="Süße und pfeffrige Minze, ideal sehr heiß">Menthe douce et poivrée, idéal très chaud</span></span></div>
-    <div class="tea-row"><span class="tea-name">Macaron Cassis Violette</span><span class="tea-origin">Chine</span><span class="tea-desc"><span data-fr="Gourmand — biscuit, amande, violette, cassis" data-en="Indulgent — biscuit, almond, violet, blackcurrant" data-de="Genussvoll — Keks, Mandel, Veilchen, Johannisbeere">Gourmand — biscuit, amande, violette, cassis</span></span></div>
-    <div class="tea-row"><span class="tea-name">Miss Dammann</span><span class="tea-origin">Asie</span><span class="tea-desc"><span data-fr="Fruité et épicé — gingembre, passion, citron vert" data-en="Fruity and spiced — ginger, passion fruit, lime" data-de="Fruchtig und würzig — Ingwer, Passionsfrucht, Limette">Fruité et épicé — gingembre, passion, citron vert</span></span></div>
-    <div class="tea-row"><span class="tea-name">Happy Green</span><span class="tea-origin">Chine · glacé</span><span class="tea-desc"><span data-fr="Notes kiwi, pomme, concombre" data-en="Kiwi, apple, cucumber notes" data-de="Kiwi-, Apfel-, Gurkennoten">Notes kiwi, pomme, concombre</span></span></div>
+
+    <div class="tea-section-title">
+      <span
+        data-fr="Thés Verts"
+        data-en="Green Teas"
+        data-de="Grüne Tees">
+        Thés Verts
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">À la Menthe</span>
+      <span class="tea-origin">Chine</span>
+      <span class="tea-desc">
+        <span
+          data-fr="Menthe douce et poivrée, idéal très chaud"
+          data-en="Sweet and peppered mint, best served very hot"
+          data-de="Süße und pfeffrige Minze, ideal sehr heiß">
+          Menthe douce et poivrée, idéal très chaud
+        </span>
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">Macaron Cassis Violette</span>
+      <span class="tea-origin">Chine</span>
+      <span class="tea-desc">
+        <span
+          data-fr="Gourmand — biscuit, amande, violette, cassis"
+          data-en="Indulgent — biscuit, almond, violet, blackcurrant"
+          data-de="Genussvoll — Keks, Mandel, Veilchen, Johannisbeere">
+          Gourmand — biscuit, amande, violette, cassis
+        </span>
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">Miss Dammann</span>
+      <span class="tea-origin">Asie</span>
+      <span class="tea-desc">
+        <span
+          data-fr="Fruité et épicé — gingembre, passion, citron vert"
+          data-en="Fruity and spiced — ginger, passion fruit, lime"
+          data-de="Fruchtig und würzig — Ingwer, Passionsfrucht, Limette">
+          Fruité et épicé — gingembre, passion, citron vert
+        </span>
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">Happy Green</span>
+      <span class="tea-origin">Chine · glacé</span>
+      <span class="tea-desc">
+        <span
+          data-fr="Notes kiwi, pomme, concombre"
+          data-en="Kiwi, apple and cucumber notes"
+          data-de="Kiwi-, Apfel- und Gurkennoten">
+          Notes kiwi, pomme, concombre
+        </span>
+      </span>
+    </div>
+
   </div>
 
   <div class="tea-section">
-    <div class="tea-section-title"><span data-fr="Thés Noirs" data-en="Black Teas" data-de="Schwarze Tees">Thés Noirs</span></div>
-    <div class="tea-row"><span class="tea-name">7 Parfums</span><span class="tea-origin">Chine</span><span class="tea-desc"><span data-fr="Fleuri et fruité — citron, abricot, bergamote, figue" data-en="Floral and fruity — lemon, apricot, bergamot, fig" data-de="Blumig und fruchtig — Zitrone, Aprikose, Bergamotte, Feige">Fleuri et fruité — citron, abricot, bergamote, figue</span></span></div>
-    <div class="tea-row"><span class="tea-name">Pécan Pie</span><span class="tea-origin"></span><span class="tea-desc"><span data-fr="Gourmand — noisette, noix de pécan, amande, pistache, miel" data-en="Indulgent — hazelnut, pecan, almond, pistachio, honey" data-de="Genussvoll — Haselnuss, Pekannuss, Mandel, Pistazie, Honig">Gourmand — noisette, noix de pécan, amande, pistache, miel</span></span></div>
-    <div class="tea-row"><span class="tea-name">Goût Russe Douchka</span><span class="tea-origin">Chine · Inde</span><span class="tea-desc"><span data-fr="Notes d'agrumes — bergamote, orange, citron" data-en="Citrus notes — bergamot, orange, lemon" data-de="Zitrusnoten — Bergamotte, Orange, Zitrone">Notes d'agrumes — bergamote, orange, citron</span></span></div>
-    <div class="tea-row"><span class="tea-name">Jardin Bleu</span><span class="tea-origin"></span><span class="tea-desc"><span data-fr="Fruité — rhubarbe, fraise des bois, baies" data-en="Fruity — rhubarb, wild strawberry, berries" data-de="Fruchtig — Rhabarber, Walderdbeere, Beeren">Fruité — rhubarbe, fraise des bois, baies</span></span></div>
-    <div class="tea-row"><span class="tea-name">Chaï</span><span class="tea-origin">Rwanda</span><span class="tea-desc"><span data-fr="Épicé — gingembre, cannelle, cardamome, clou de girofle" data-en="Spiced — ginger, cinnamon, cardamom, clove" data-de="Würzig — Ingwer, Zimt, Kardamom, Nelke">Épicé — gingembre, cannelle, cardamome, clou de girofle</span></span></div>
+
+    <div class="tea-section-title">
+      <span
+        data-fr="Thés Noirs"
+        data-en="Black Teas"
+        data-de="Schwarze Tees">
+        Thés Noirs
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">7 Parfums</span>
+      <span class="tea-origin">Chine</span>
+      <span class="tea-desc">
+        <span
+          data-fr="Fleuri et fruité — citron, abricot, bergamote, figue"
+          data-en="Floral and fruity — lemon, apricot, bergamot, fig"
+          data-de="Blumig und fruchtig — Zitrone, Aprikose, Bergamotte, Feige">
+          Fleuri et fruité — citron, abricot, bergamote, figue
+        </span>
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">Pécan Pie</span>
+      <span class="tea-origin"></span>
+      <span class="tea-desc">
+        <span
+          data-fr="Gourmand — noisette, noix de pécan, amande, pistache, miel"
+          data-en="Indulgent — hazelnut, pecan, almond, pistachio, honey"
+          data-de="Genussvoll — Haselnuss, Pekannuss, Mandel, Pistazie, Honig">
+          Gourmand — noisette, noix de pécan, amande, pistache, miel
+        </span>
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">Goût Russe Douchka</span>
+      <span class="tea-origin">Chine · Inde</span>
+      <span class="tea-desc">
+        <span
+          data-fr="Notes d'agrumes — bergamote, orange, citron"
+          data-en="Citrus notes — bergamot, orange, lemon"
+          data-de="Zitrusnoten — Bergamotte, Orange, Zitrone">
+          Notes d'agrumes — bergamote, orange, citron
+        </span>
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">Jardin Bleu</span>
+      <span class="tea-origin"></span>
+      <span class="tea-desc">
+        <span
+          data-fr="Fruité — rhubarbe, fraise des bois, baies"
+          data-en="Fruity — rhubarb, wild strawberry, berries"
+          data-de="Fruchtig — Rhabarber, Walderdbeere, Beeren">
+          Fruité — rhubarbe, fraise des bois, baies
+        </span>
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">Chaï</span>
+      <span class="tea-origin">Rwanda</span>
+      <span class="tea-desc">
+        <span
+          data-fr="Épicé — gingembre, cannelle, cardamome, clou de girofle"
+          data-en="Spiced — ginger, cinnamon, cardamom, clove"
+          data-de="Würzig — Ingwer, Zimt, Kardamom, Nelke">
+          Épicé — gingembre, cannelle, cardamome, clou de girofle
+        </span>
+      </span>
+    </div>
+
   </div>
 
   <div class="tea-section">
-    <div class="tea-section-title"><span data-fr="Thé Blanc · Rooibos · Carcadet" data-en="White Tea · Rooibos · Hibiscus" data-de="Weißer Tee · Rooibos · Hibiskus">Thé Blanc · Rooibos · Carcadet</span></div>
-    <div class="tea-row"><span class="tea-name">Passion de Fleurs</span><span class="tea-origin"><span data-fr="Thé blanc" data-en="White tea" data-de="Weißer Tee">Thé blanc</span></span><span class="tea-desc"><span data-fr="Fruité — passion, abricot, pétales, rose" data-en="Fruity — passion fruit, apricot, petals, rose" data-de="Fruchtig — Passionsfrucht, Aprikose, Blütenblätter, Rose">Fruité — passion, abricot, pétales, rose</span></span></div>
-    <div class="tea-row"><span class="tea-name">Carott Cake</span><span class="tea-origin">Rooibos</span><span class="tea-desc"><span data-fr="Gourmand — cannelle, gingembre, carotte, noix de pécan" data-en="Indulgent — cinnamon, ginger, carrot, pecan" data-de="Genussvoll — Zimt, Ingwer, Möhre, Pekannuss">Gourmand — cannelle, gingembre, carotte, noix de pécan</span></span></div>
-    <div class="tea-row"><span class="tea-name">Passion Framboise</span><span class="tea-origin">Carcadet</span><span class="tea-desc"><span data-fr="Hibiscus, cynorrhodon, pomme, framboise, passion" data-en="Hibiscus, rosehip, apple, raspberry, passion fruit" data-de="Hibiskus, Hagebutte, Apfel, Himbeere, Passionsfrucht">Hibiscus, cynorrhodon, pomme, framboise, passion</span></span></div>
+
+    <div class="tea-section-title">
+      <span
+        data-fr="Thé Blanc · Rooibos · Carcadet"
+        data-en="White Tea · Rooibos · Hibiscus"
+        data-de="Weißer Tee · Rooibos · Hibiskus">
+        Thé Blanc · Rooibos · Carcadet
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">Passion de Fleurs</span>
+      <span class="tea-origin">
+        <span
+          data-fr="Thé blanc"
+          data-en="White tea"
+          data-de="Weißer Tee">
+          Thé blanc
+        </span>
+      </span>
+      <span class="tea-desc">
+        <span
+          data-fr="Fruité — passion, abricot, pétales, rose"
+          data-en="Fruity — passion fruit, apricot, petals, rose"
+          data-de="Fruchtig — Passionsfrucht, Aprikose, Blütenblätter, Rose">
+          Fruité — passion, abricot, pétales, rose
+        </span>
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">Carrot Cake</span>
+      <span class="tea-origin">Rooibos</span>
+      <span class="tea-desc">
+        <span
+          data-fr="Gourmand — cannelle, gingembre, carotte, noix de pécan"
+          data-en="Indulgent — cinnamon, ginger, carrot, pecan"
+          data-de="Genussvoll — Zimt, Ingwer, Möhre, Pekannuss">
+          Gourmand — cannelle, gingembre, carotte, noix de pécan
+        </span>
+      </span>
+    </div>
+
+    <div class="tea-row">
+      <span class="tea-name">Passion Framboise</span>
+      <span class="tea-origin">Carcadet</span>
+      <span class="tea-desc">
+        <span
+          data-fr="Hibiscus, cynorrhodon, pomme, framboise, passion"
+          data-en="Hibiscus, rosehip, apple, raspberry, passion fruit"
+          data-de="Hibiskus, Hagebutte, Apfel, Himbeere, Passionsfrucht">
+          Hibiscus, cynorrhodon, pomme, framboise, passion
+        </span>
+      </span>
+    </div>
+
   </div>
 
   <p style="text-align:center;font-family:'Cormorant SC',serif;font-size:.8rem;color:var(--sepia2);margin-top:14px;letter-spacing:.2em;">
-    <span data-fr="Tous nos thés" data-en="All our teas" data-de="Alle unsere Tees">Tous nos thés</span> — 3,50 €
+    <span
+      data-fr="Tous nos thés"
+      data-en="All our teas"
+      data-de="Alle unsere Tees">
+      Tous nos thés
+    </span>
+    — 3,50 €
   </p>
+
 </div>
 
-<!-- ══════════════════════════════════════
-     RESTAURATION
-══════════════════════════════════════ -->
+<!-- RESTAURATION -->
+
 <div id="food" class="chap">
+
   <div class="chap-head">
-    <span class="chap-ornament" data-fr="Chapitre Huitième" data-en="Eighth Chapter" data-de="Achtes Kapitel">Chapitre Huitième</span>
-    <div class="chap-title" data-fr="Restauration" data-en="Food" data-de="Speisen">Restauration</div>
-    <div class="rule"><span>⁕</span></div>
-    <p class="chap-verse"><em><span data-fr="Petites faims entre deux mondes." data-en="Small hungers between two worlds." data-de="Kleiner Hunger zwischen zwei Welten.">Petites faims entre deux mondes.</span></em></p>
-  </div>
-  <div class="viands">
-    <div class="viand"><div class="viand-name">Cookie</div><div class="viand-desc"><span data-fr="Maison, chaud si possible" data-en="Homemade, warm if possible" data-de="Hausgemacht, warm wenn möglich">Maison, chaud si possible</span></div><div class="viand-price">2,40 €</div></div>
-    <div class="viand"><div class="viand-name">Bretzel</div><div class="viand-desc"><span data-fr="Sel de guérande" data-en="Guérande salt" data-de="Guérande-Salz">Sel de guérande</span></div><div class="viand-price">3,00 €</div></div>
-    <div class="viand"><div class="viand-name">Fondant Chocolat</div><div class="viand-desc"><span data-fr="Cœur coulant · glace pistache" data-en="Molten centre · pistachio ice cream" data-de="Flüssiger Kern · Pistazieneis">Cœur coulant · glace pistache</span></div><div class="viand-price">5,20 €</div></div>
-    <div class="viand"><div class="viand-name">Pancakes</div><div class="viand-desc"><span data-fr="Sirop d'érable · glace vanille" data-en="Maple syrup · vanilla ice cream" data-de="Ahornsirup · Vanilleeis">Sirop d'érable · glace vanille</span></div><div class="viand-price">5,20 €</div></div>
-    <div class="viand"><div class="viand-name">Nachos</div><div class="viand-desc"><span data-fr="Salsa ou guacamole" data-en="Salsa or guacamole" data-de="Salsa oder Guacamole">Salsa ou guacamole</span></div><div class="viand-price">5,00 €</div></div>
-    <div class="viand"><div class="viand-name">Saucisson</div><div class="viand-desc"><span data-fr="Sélection & accompagnements" data-en="Selection & accompaniments" data-de="Auswahl & Beilagen">Sélection & accompagnements</span></div><div class="viand-price">6,20 €</div></div>
-  </div>
-  <div style="margin-top:12px;">
-    <div class="viand" style="border-color:rgba(200,169,110,.4);background:linear-gradient(135deg,var(--parch),rgba(200,169,110,.04));">
-      <div class="viand-name" style="font-size:1rem;"><span data-fr="Planchette du Rêveur" data-en="Dreamer's Board" data-de="Träumer-Brett">Planchette du Rêveur</span></div>
-      <div class="viand-desc"><span data-fr="Fromages & charcuteries sélectionnés · accompagnements du moment" data-en="Selected cheeses & charcuterie · seasonal accompaniments" data-de="Ausgewählte Käse & Wurstwaren · saisonale Beilagen">Fromages & charcuteries sélectionnés · accompagnements du moment</span></div>
-      <div class="viand-price">14,00 €</div>
+
+    <span
+      class="chap-ornament"
+      data-fr="Chapitre Septième"
+      data-en="Seventh Chapter"
+      data-de="Siebtes Kapitel">
+      Chapitre Septième
+    </span>
+
+    <div
+      class="chap-title"
+      data-fr="Restauration"
+      data-en="Food"
+      data-de="Speisen">
+      Restauration
     </div>
+
+    <div class="rule">
+      <span>⁕</span>
+    </div>
+
+    <p class="chap-verse">
+      <em>
+        <span
+          data-fr="Petites faims entre deux mondes."
+          data-en="Small hungers between two worlds."
+          data-de="Kleiner Hunger zwischen zwei Welten.">
+          Petites faims entre deux mondes.
+        </span>
+      </em>
+    </p>
+
   </div>
+
+  <div class="viands">
+
+    <div class="viand">
+
+      <div class="viand-name">
+        <span
+          data-fr="Cookies sans gluten"
+          data-en="Gluten-free Cookies"
+          data-de="Glutenfreie Cookies">
+          Cookies sans gluten
+        </span>
+      </div>
+
+      <div class="viand-desc">
+        <span
+          data-fr="M&M’s, praline rose ou chocolat-praliné · servis chauds sur demande"
+          data-en="M&M’s, pink praline or chocolate-praline · served warm on request"
+          data-de="M&M’s, rosa Praline oder Schokolade-Praliné · auf Wunsch warm serviert">
+          M&M’s, praline rose ou chocolat-praliné · servis chauds sur demande
+        </span>
+      </div>
+
+      <div class="viand-price">
+        <span
+          data-fr="4,00 € les deux"
+          data-en="€4.00 for two"
+          data-de="4,00 € für zwei">
+          4,00 € les deux
+        </span>
+      </div>
+
+    </div>
+
+    <div class="viand">
+
+      <div class="viand-name">
+        <span
+          data-fr="Brownie Pécan"
+          data-en="Pecan Brownie"
+          data-de="Pekannuss-Brownie">
+          Brownie Pécan
+        </span>
+      </div>
+
+      <div class="viand-desc">
+        <span
+          data-fr="Sans gluten · accompagné d’une boule de glace vanille"
+          data-en="Gluten-free · served with vanilla ice cream"
+          data-de="Glutenfrei · mit Vanilleeis serviert">
+          Sans gluten · accompagné d’une boule de glace vanille
+        </span>
+      </div>
+
+      <div class="viand-price">5,20 €</div>
+
+    </div>
+
+    <div class="viand">
+
+      <div class="viand-name">Pancakes</div>
+
+      <div class="viand-desc">
+        <span
+          data-fr="Sirop d’érable · glace vanille"
+          data-en="Maple syrup · vanilla ice cream"
+          data-de="Ahornsirup · Vanilleeis">
+          Sirop d’érable · glace vanille
+        </span>
+      </div>
+
+      <div class="viand-price">4,60 €</div>
+
+    </div>
+
+    <div class="viand">
+
+      <div class="viand-name">Nachos</div>
+
+      <div class="viand-desc">
+        <span
+          data-fr="Salsa ou guacamole"
+          data-en="Salsa or guacamole"
+          data-de="Salsa oder Guacamole">
+          Salsa ou guacamole
+        </span>
+      </div>
+
+      <div class="viand-price">5,00 €</div>
+
+    </div>
+
+    <div class="viand">
+
+      <div class="viand-name">Saucisson</div>
+
+      <div class="viand-desc">
+        <span
+          data-fr="Sélection et accompagnements"
+          data-en="Selection and accompaniments"
+          data-de="Auswahl und Beilagen">
+          Sélection et accompagnements
+        </span>
+      </div>
+
+      <div class="viand-price">6,20 €</div>
+
+    </div>
+
+    <div class="viand">
+
+      <div class="viand-name">
+        <span
+          data-fr="Cake salé sans gluten"
+          data-en="Gluten-free Savoury Cake"
+          data-de="Glutenfreier herzhafter Kuchen">
+          Cake salé sans gluten
+        </span>
+      </div>
+
+      <div class="viand-desc">
+        <span
+          data-fr="Jambon-olive ou tomate-emmental · tomates cerises, trait de balsamique et gros sel"
+          data-en="Ham and olive or tomato and Emmental · cherry tomatoes, balsamic glaze and coarse salt"
+          data-de="Schinken-Olive oder Tomate-Emmentaler · Kirschtomaten, Balsamico und grobes Salz">
+          Jambon-olive ou tomate-emmental · tomates cerises, trait de balsamique et gros sel
+        </span>
+      </div>
+
+      <div class="viand-price">6,80 €</div>
+
+    </div>
+
+  </div>
+
+  <div style="margin-top:12px;">
+
+    <div
+      class="viand"
+      style="border-color:rgba(200,169,110,.4);background:linear-gradient(135deg,var(--parch),rgba(200,169,110,.04));">
+
+      <div class="viand-name" style="font-size:1rem;">
+        <span
+          data-fr="Planchette du Rêveur"
+          data-en="Dreamer’s Board"
+          data-de="Träumerplatte">
+          Planchette du Rêveur
+        </span>
+      </div>
+
+      <div class="viand-desc">
+        <span
+          data-fr="Fromages et charcuteries sélectionnés · accompagnements du moment"
+          data-en="Selected cheeses and charcuterie · seasonal accompaniments"
+          data-de="Ausgewählte Käse- und Wurstwaren · saisonale Beilagen">
+          Fromages et charcuteries sélectionnés · accompagnements du moment
+        </span>
+      </div>
+
+      <div class="viand-price">14,00 €</div>
+
+    </div>
+
+  </div>
+
 </div>
 
 <!-- FOOTER -->
+
 <div class="colophon">
+
   <span class="colophon-mark">Morpheus</span>
+
   <p>
+
     42 Boulevard du Président Wilson · 67000 Strasbourg<br>
-    <a href="https://www.morpheus-experience.com">morpheus-experience.com</a><br><br>
-    <span data-fr="Lun–Jeu 14h–21h30 · Ven–Sam 9h30–00h00 · Dim 10h–21h30" data-en="Mon–Thu 2pm–9:30pm · Fri–Sat 9:30am–midnight · Sun 10am–9:30pm" data-de="Mo–Do 14–21:30 · Fr–Sa 9:30–0:00 · So 10–21:30">Lun–Jeu 14h–21h30 · Ven–Sam 9h30–00h00 · Dim 10h–21h30</span><br>
-    <span data-fr="Prix TTC, service compris · Allergènes sur demande · Certains desserts élaborés à partir de produits surgelés" data-en="Prices incl. VAT, service included · Allergens on request · Some desserts made from frozen products" data-de="Preise inkl. MwSt., Service inklusive · Allergene auf Anfrage · Einige Desserts aus Tiefkühlprodukten">Prix TTC, service compris · Allergènes sur demande · Certains desserts élaborés à partir de produits surgelés</span><br><br>
-    <span data-fr="L'abus d'alcool est dangereux pour la santé. À consommer avec modération." data-en="Excessive alcohol consumption is harmful to health. Drink responsibly." data-de="Übermäßiger Alkoholkonsum ist gesundheitsschädlich. Bitte maßvoll genießen.">L'abus d'alcool est dangereux pour la santé. À consommer avec modération.</span>
+
+    <a href="https://www.morpheus-experience.com">
+      morpheus-experience.com
+    </a>
+
+    <br><br>
+
+    <span
+      data-fr="Lun–Jeu 14h–21h30 · Ven–Sam 10h–00h00 · Dim 10h–21h30"
+      data-en="Mon–Thu 2pm–9:30pm · Fri–Sat 10am–midnight · Sun 10am–9:30pm"
+      data-de="Mo–Do 14–21:30 · Fr–Sa 10–0:00 · So 10–21:30">
+      Lun–Jeu 14h–21h30 · Ven–Sam 10h–00h00 · Dim 10h–21h30
+    </span>
+
+    <br>
+
+    <span
+      data-fr="Prix TTC, service compris · Allergènes sur demande · Certains desserts élaborés à partir de produits surgelés"
+      data-en="Prices incl. VAT, service included · Allergens on request · Some desserts made from frozen products"
+      data-de="Preise inkl. MwSt., Service inklusive · Allergene auf Anfrage · Einige Desserts aus Tiefkühlprodukten">
+      Prix TTC, service compris · Allergènes sur demande · Certains desserts élaborés à partir de produits surgelés
+    </span>
+
+    <br><br>
+
+    <span
+      data-fr="L'abus d'alcool est dangereux pour la santé. À consommer avec modération."
+      data-en="Excessive alcohol consumption is harmful to health. Drink responsibly."
+      data-de="Übermäßiger Alkoholkonsum ist gesundheitsschädlich. Bitte maßvoll genießen.">
+      L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+    </span>
+
   </p>
+
 </div>
 
-</div><!-- /page -->
+</div>
 
 <script>
-/* particles */
-const cvs=document.getElementById('cvs'),ctx=cvs.getContext('2d');
-let W,H,pts=[];
-function resize(){W=cvs.width=window.innerWidth;H=cvs.height=window.innerHeight;}
-resize();window.addEventListener('resize',resize);
-const COLS=['rgba(139,127,220,','rgba(192,56,56,','rgba(200,169,110,','rgba(255,255,255,'];
-for(let i=0;i<55;i++)pts.push({x:Math.random()*2000,y:Math.random()*2000,r:.4+Math.random()*1.2,vx:(Math.random()-.5)*.18,vy:-.06-Math.random()*.22,a:Math.random(),da:.003+Math.random()*.006,c:COLS[Math.floor(Math.random()*COLS.length)],life:Math.random()*Math.PI*2});
-function draw(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.life+=p.da;p.a=.35+.35*Math.sin(p.life);p.x+=p.vx;p.y+=p.vy;if(p.y<-10){p.y=H+10;p.x=Math.random()*W;}if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;ctx.beginPath();ctx.arc(p.x%W,p.y%H,p.r,0,Math.PI*2);ctx.fillStyle=p.c+p.a+')';ctx.fill();});requestAnimationFrame(draw);}
+const cvs = document.getElementById('cvs');
+const ctx = cvs.getContext('2d');
+
+let W;
+let H;
+let pts = [];
+
+function resize(){
+  W = cvs.width = window.innerWidth;
+  H = cvs.height = window.innerHeight;
+}
+
+resize();
+
+window.addEventListener('resize', resize);
+
+const COLS = [
+  'rgba(139,127,220,',
+  'rgba(192,56,56,',
+  'rgba(200,169,110,',
+  'rgba(255,255,255,'
+];
+
+for(let i = 0; i < 55; i++){
+  pts.push({
+    x:Math.random() * 2000,
+    y:Math.random() * 2000,
+    r:.4 + Math.random() * 1.2,
+    vx:(Math.random() - .5) * .18,
+    vy:-.06 - Math.random() * .22,
+    a:Math.random(),
+    da:.003 + Math.random() * .006,
+    c:COLS[Math.floor(Math.random() * COLS.length)],
+    life:Math.random() * Math.PI * 2
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+
+  pts.forEach(p => {
+    p.life += p.da;
+    p.a = .35 + .35 * Math.sin(p.life);
+    p.x += p.vx;
+    p.y += p.vy;
+
+    if(p.y < -10){
+      p.y = H + 10;
+      p.x = Math.random() * W;
+    }
+
+    if(p.x < -10){
+      p.x = W + 10;
+    }
+
+    if(p.x > W + 10){
+      p.x = -10;
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x % W,p.y % H,p.r,0,Math.PI * 2);
+    ctx.fillStyle = p.c + p.a + ')';
+    ctx.fill();
+  });
+
+  requestAnimationFrame(draw);
+}
+
 draw();
 
 function showChap(id,btn){
-  document.querySelectorAll('.chap').forEach(c=>c.classList.remove('on'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.chap').forEach(chapter => {
+    chapter.classList.remove('on');
+  });
+
+  document.querySelectorAll('.nav-btn').forEach(button => {
+    button.classList.remove('on');
+  });
+
   document.getElementById(id).classList.add('on');
   btn.classList.add('on');
-  window.scrollTo({top:0,behavior:'smooth'});
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
 }
 
 function setLang(lang,btn){
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.lang-btn').forEach(button => {
+    button.classList.remove('on');
+  });
+
   btn.classList.add('on');
-  document.querySelectorAll('[data-fr]').forEach(el=>{
-    const val=el.getAttribute('data-'+lang);
-    if(val!==null) el.innerHTML=val;
+
+  document.querySelectorAll('[data-fr]').forEach(element => {
+    const value = element.getAttribute('data-' + lang);
+
+    if(value !== null){
+      element.innerHTML = value;
+    }
   });
 }
 </script>
+
 </body>
 </html>
