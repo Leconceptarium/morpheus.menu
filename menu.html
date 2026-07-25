@@ -12,1263 +12,6 @@
 :root{
   --ink:#0f0c14;
   --parch:#19141f;
-  --sepia:#d4b878;
-  --sepia2:#b28a4e;
-  --sepia3:#72532c;
-  --dream:#8b7fdc;
-  --dreaml:#d0c8ff;
-  --night:#c94c4c;
-  --nightl:#ffc0c0;
-  --gold:#d4a017;
-  --goldl:#f5e6a3;
-  --ash:#b3a8c0;
-  --pale:#f0e8d5;
-  --faint:#51445f;
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  font-size:18px;
-  scroll-behavior:smooth;
-}
-
-body{
-  background:var(--ink);
-  color:var(--pale);
-  font-family:'Cormorant Garamond',Georgia,serif;
-  min-height:100vh;
-  overflow-x:hidden;
-  font-size:1rem;
-}
-
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity:.035;
-}
-
-.wax-l,
-.wax-r{
-  position:fixed;
-  top:0;
-  width:22px;
-  height:100vh;
-  z-index:1;
-  pointer-events:none;
-}
-
-.wax-l{
-  left:0;
-  background:linear-gradient(
-    180deg,
-    transparent,
-    rgba(201,76,76,.12) 40%,
-    rgba(201,76,76,.06) 70%,
-    transparent
-  );
-  border-right:1px solid rgba(201,76,76,.1);
-}
-
-.wax-r{
-  right:0;
-  background:linear-gradient(
-    180deg,
-    transparent,
-    rgba(139,127,220,.12) 40%,
-    rgba(139,127,220,.06) 70%,
-    transparent
-  );
-  border-left:1px solid rgba(139,127,220,.1);
-}
-
-#cvs{
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.5;
-}
-
-.page{
-  position:relative;
-  z-index:2;
-  max-width:760px;
-  margin:0 auto;
-  padding:0 28px 100px;
-}
-
-/* RETOUR */
-
-.back-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-family:'Cormorant SC',serif;
-  font-size:.65rem;
-  letter-spacing:.35em;
-  color:var(--ash);
-  text-decoration:none;
-  padding:10px 0 0;
-  transition:color .2s;
-}
-
-.back-btn:hover{
-  color:var(--sepia);
-}
-
-.back-btn::before{
-  content:'←';
-  font-size:.9rem;
-}
-
-/* HERO */
-
-.hero{
-  text-align:center;
-  padding:36px 0 40px;
-  position:relative;
-}
-
-.hero::after{
-  content:'';
-  display:block;
-  width:100%;
-  height:1px;
-  background:linear-gradient(
-    90deg,
-    transparent,
-    var(--sepia3),
-    var(--sepia),
-    var(--sepia3),
-    transparent
-  );
-  margin-top:40px;
-}
-
-.logo-wrap{
-  width:120px;
-  height:120px;
-  margin:0 auto 24px;
-}
-
-.logo-wrap img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  filter:brightness(.95) sepia(.3) hue-rotate(10deg);
-}
-
-.title-frak{
-  font-family:'UnifrakturMaguntia',serif;
-  font-size:clamp(44px,10vw,74px);
-  color:var(--sepia);
-  letter-spacing:.07em;
-  line-height:1;
-  animation:flicker 7s ease-in-out infinite;
-  margin-bottom:10px;
-}
-
-@keyframes flicker{
-  0%,100%{
-    text-shadow:0 0 40px rgba(212,184,120,.2);
-  }
-
-  45%{
-    text-shadow:
-      0 0 80px rgba(212,184,120,.5),
-      0 0 140px rgba(212,184,120,.15);
-  }
-
-  47%{
-    text-shadow:none;
-  }
-
-  49%{
-    text-shadow:0 0 80px rgba(212,184,120,.5);
-  }
-}
-
-.hero-sub{
-  font-family:'Cormorant SC',serif;
-  font-size:.62rem;
-  letter-spacing:.55em;
-  color:var(--ash);
-  text-transform:uppercase;
-}
-
-.hero-verse{
-  font-style:italic;
-  font-size:.85rem;
-  color:var(--sepia2);
-  margin-top:12px;
-  line-height:1.7;
-}
-
-/* LANGUES */
-
-.lang-bar{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  padding:14px 0 0;
-}
-
-.lang-btn{
-  background:none;
-  border:1px solid var(--faint);
-  font-family:'Cormorant SC',serif;
-  font-size:.6rem;
-  letter-spacing:.3em;
-  color:var(--ash);
-  cursor:pointer;
-  padding:5px 14px;
-  border-radius:2px;
-  transition:all .2s;
-}
-
-.lang-btn:hover,
-.lang-btn.on{
-  color:var(--sepia);
-  border-color:var(--sepia);
-}
-
-/* NAVIGATION */
-
-.nav{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background:rgba(15,12,20,.97);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--faint);
-  padding:10px 0;
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-.nav-btn{
-  background:none;
-  border:none;
-  font-family:'Cormorant SC',serif;
-  font-size:.62rem;
-  letter-spacing:.25em;
-  color:var(--ash);
-  cursor:pointer;
-  padding:7px 12px;
-  transition:color .2s;
-  position:relative;
-}
-
-.nav-btn::after{
-  content:'·';
-  position:absolute;
-  right:0;
-  top:50%;
-  transform:translateY(-50%);
-  color:var(--faint);
-}
-
-.nav-btn:last-child::after{
-  display:none;
-}
-
-.nav-btn:hover,
-.nav-btn.on{
-  color:var(--sepia);
-}
-
-/* CHAPITRES */
-
-.chap{
-  display:none;
-  padding-top:44px;
-  animation:pageIn .4s ease;
-}
-
-.chap.on{
-  display:block;
-}
-
-@keyframes pageIn{
-  from{
-    opacity:0;
-    transform:translateY(12px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-/* TITRES */
-
-.chap-head{
-  text-align:center;
-  margin-bottom:40px;
-}
-
-.chap-ornament{
-  font-family:'Cormorant SC',serif;
-  font-size:.62rem;
-  letter-spacing:.5em;
-  color:var(--sepia2);
-  display:block;
-  margin-bottom:10px;
-}
-
-.chap-title{
-  font-family:'UnifrakturMaguntia',serif;
-  font-size:clamp(36px,8vw,58px);
-  color:var(--sepia);
-  letter-spacing:.06em;
-}
-
-.rule{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin:14px 0 6px;
-}
-
-.rule::before,
-.rule::after{
-  content:'';
-  flex:1;
-  height:1px;
-  background:linear-gradient(90deg,transparent,var(--sepia3));
-}
-
-.rule::after{
-  background:linear-gradient(90deg,var(--sepia3),transparent);
-}
-
-.rule span{
-  font-size:.9rem;
-  color:var(--sepia2);
-}
-
-.chap-verse{
-  font-style:italic;
-  font-size:.85rem;
-  color:var(--ash);
-  margin-top:6px;
-}
-
-/* SÉPARATEUR CINQ GOÛTS */
-
-.split-divider{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin:56px 0 40px;
-  padding-top:40px;
-  border-top:1px solid var(--faint);
-}
-
-.split-divider::before,
-.split-divider::after{
-  content:'';
-  flex:1;
-  height:1px;
-}
-
-.split-divider::before{
-  background:linear-gradient(90deg,transparent,var(--sepia3));
-}
-
-.split-divider::after{
-  background:linear-gradient(90deg,var(--sepia3),transparent);
-}
-
-.split-divider span{
-  font-family:'UnifrakturMaguntia',serif;
-  font-size:clamp(22px,5vw,34px);
-  color:var(--sepia);
-  white-space:nowrap;
-  letter-spacing:.06em;
-}
-
-/* ROYAUMES */
-
-.realm{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin:36px 0 18px;
-}
-
-.realm::before,
-.realm::after{
-  content:'';
-  flex:1;
-  height:1px;
-}
-
-.realm.dr::before{
-  background:linear-gradient(90deg,transparent,var(--dream));
-}
-
-.realm.dr::after{
-  background:linear-gradient(90deg,var(--dream),transparent);
-}
-
-.realm.nm::before{
-  background:linear-gradient(90deg,transparent,var(--night));
-}
-
-.realm.nm::after{
-  background:linear-gradient(90deg,var(--night),transparent);
-}
-
-.realm-tag{
-  font-family:'Cormorant SC',serif;
-  font-size:.58rem;
-  letter-spacing:.4em;
-  padding:3px 14px;
-  border-radius:1px;
-  white-space:nowrap;
-}
-
-.dr .realm-tag{
-  color:var(--dreaml);
-  border:1px solid rgba(139,127,220,.6);
-  background:rgba(139,127,220,.1);
-}
-
-.nm .realm-tag{
-  color:var(--nightl);
-  border:1px solid rgba(201,76,76,.6);
-  background:rgba(201,76,76,.1);
-}
-
-/* SORT DE MORPHEUS */
-
-.sig-block{
-  margin-bottom:28px;
-  padding:28px 24px;
-  text-align:center;
-  border:1px solid rgba(212,160,23,.45);
-  border-radius:3px;
-  background:linear-gradient(
-    135deg,
-    rgba(212,160,23,.08),
-    rgba(139,127,220,.08)
-  );
-  position:relative;
-  overflow:hidden;
-}
-
-.sig-block::before{
-  content:'❧';
-  position:absolute;
-  top:12px;
-  left:20px;
-  font-size:1.2rem;
-  color:rgba(212,160,23,.25);
-}
-
-.sig-block::after{
-  content:'❧';
-  position:absolute;
-  bottom:12px;
-  right:20px;
-  font-size:1.2rem;
-  color:rgba(212,160,23,.25);
-  transform:rotate(180deg);
-}
-
-.sig-name{
-  font-family:'UnifrakturMaguntia',serif;
-  font-size:clamp(26px,5vw,39px);
-  color:var(--sepia);
-  margin-bottom:10px;
-}
-
-.sig-desc{
-  font-size:.88rem;
-  font-style:italic;
-  color:var(--pale);
-  line-height:1.75;
-  margin-bottom:10px;
-}
-
-.sig-hint{
-  font-size:.76rem;
-  color:var(--ash);
-  font-style:italic;
-  margin-bottom:14px;
-}
-
-.sig-price{
-  font-family:'Cormorant SC',serif;
-  font-size:1.3rem;
-  color:var(--sepia);
-  margin-top:20px;
-}
-
-.sig-outcomes{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:22px;
-  text-align:left;
-}
-
-.sig-outcome{
-  border-radius:3px;
-  padding:17px;
-  background:rgba(8,6,11,.48);
-}
-
-.sig-outcome.dr{
-  border:1px solid rgba(139,127,220,.5);
-}
-
-.sig-outcome.nm{
-  border:1px solid rgba(201,76,76,.5);
-}
-
-.sig-outcome-title{
-  font-family:'Cormorant SC',serif;
-  font-size:1rem;
-  font-weight:600;
-  letter-spacing:.08em;
-  margin-bottom:6px;
-}
-
-.sig-outcome.dr .sig-outcome-title{
-  color:var(--dreaml);
-}
-
-.sig-outcome.nm .sig-outcome-title{
-  color:var(--nightl);
-}
-
-.sig-outcome-desc{
-  color:var(--ash);
-  font-size:.79rem;
-  font-style:italic;
-  line-height:1.5;
-  margin-bottom:11px;
-}
-
-.sig-outcome-ing{
-  border-top:1px dashed var(--faint);
-  padding-top:11px;
-  color:var(--pale);
-  font-size:.77rem;
-  font-style:italic;
-  line-height:1.75;
-}
-
-/* CARTES */
-
-.card{
-  border-radius:3px;
-  margin-bottom:12px;
-  overflow:hidden;
-  background:var(--parch);
-}
-
-.card.dr{
-  border:1px solid rgba(139,127,220,.4);
-}
-
-.card.nm{
-  border:1px solid rgba(201,76,76,.4);
-}
-
-.card.gd{
-  border:1px solid rgba(212,160,23,.4);
-}
-
-.card-top{
-  padding:16px 20px 6px;
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:10px;
-}
-
-.card-left{
-  flex:1;
-}
-
-.card-name{
-  font-family:'Cormorant SC',serif;
-  font-weight:600;
-  font-size:clamp(18px,3.8vw,24px);
-  letter-spacing:.07em;
-  margin-bottom:5px;
-}
-
-.dr .card-name{
-  color:#d8d4ff;
-}
-
-.nm .card-name{
-  color:#ffc8c8;
-}
-
-.gd .card-name{
-  color:var(--sepia);
-}
-
-.card-desc{
-  font-size:.84rem;
-  font-style:italic;
-  color:var(--ash);
-  line-height:1.5;
-}
-
-.card-price-row{
-  padding:4px 20px 10px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.card-vol{
-  font-size:.7rem;
-  color:var(--ash);
-  font-style:italic;
-}
-
-.card-price{
-  font-family:'Cormorant SC',serif;
-  font-size:1.1rem;
-  font-weight:600;
-}
-
-.dr .card-price{
-  color:#b6b1f5;
-}
-
-.nm .card-price{
-  color:#e38a8a;
-}
-
-.gd .card-price{
-  color:var(--sepia2);
-}
-
-.card-ing{
-  padding:8px 20px 16px;
-  border-top:1px dashed var(--faint);
-  font-size:.8rem;
-  color:var(--ash);
-  line-height:1.9;
-  font-style:italic;
-}
-
-.dr .card-ing{
-  border-color:rgba(139,127,220,.3);
-}
-
-.nm .card-ing{
-  border-color:rgba(201,76,76,.3);
-}
-
-.gd .card-ing{
-  border-color:rgba(212,160,23,.3);
-}
-
-/* CINQ GOÛTS */
-
-.taste-card{
-  border-radius:3px;
-  margin-bottom:12px;
-  overflow:hidden;
-  background:var(--parch);
-}
-
-.taste-badge{
-  display:inline-block;
-  font-family:'Cormorant SC',serif;
-  font-size:.6rem;
-  letter-spacing:.3em;
-  padding:3px 10px;
-  border-radius:1px;
-  margin-bottom:5px;
-}
-
-/* TABLEAUX */
-
-.ledger{
-  border-collapse:collapse;
-  width:100%;
-}
-
-.ledger tr{
-  border-bottom:1px solid rgba(81,68,95,.65);
-}
-
-.ledger tr:last-child{
-  border-bottom:none;
-}
-
-.ledger td{
-  padding:11px 4px;
-  font-size:.88rem;
-  vertical-align:middle;
-}
-
-.ledger td:first-child{
-  color:var(--pale);
-  padding-right:12px;
-}
-
-.ledger td:nth-child(2){
-  color:var(--ash);
-  font-style:italic;
-  font-size:.78rem;
-}
-
-.ledger td:last-child{
-  color:var(--sepia);
-  font-family:'Cormorant SC',serif;
-  text-align:right;
-  white-space:nowrap;
-  padding-left:12px;
-  font-size:.95rem;
-}
-
-.sub-head{
-  font-family:'Cormorant SC',serif;
-  font-size:.65rem;
-  letter-spacing:.45em;
-  color:var(--sepia2);
-  margin:26px 0 14px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.sub-head::after{
-  content:'';
-  flex:1;
-  height:1px;
-  background:var(--faint);
-}
-
-/* THÉS */
-
-.tea-section{
-  margin-bottom:28px;
-}
-
-.tea-section-title{
-  font-family:'Cormorant SC',serif;
-  font-size:.72rem;
-  letter-spacing:.35em;
-  color:var(--sepia2);
-  margin-bottom:12px;
-}
-
-.tea-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:baseline;
-  padding:10px 0;
-  border-bottom:1px solid rgba(81,68,95,.55);
-  gap:12px;
-}
-
-.tea-row:last-child{
-  border-bottom:none;
-}
-
-.tea-name{
-  font-size:.9rem;
-  color:var(--pale);
-  min-width:160px;
-}
-
-.tea-origin{
-  font-size:.72rem;
-  color:var(--sepia2);
-  font-style:italic;
-  white-space:nowrap;
-  padding:0 10px;
-}
-
-.tea-desc{
-  font-size:.78rem;
-  color:var(--ash);
-  font-style:italic;
-  flex:1;
-}
-
-/* RESTAURATION */
-
-.viands{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
-  gap:10px;
-}
-
-.viand{
-  border:1px solid var(--faint);
-  border-radius:3px;
-  padding:14px;
-  transition:border-color .2s;
-  background:var(--parch);
-}
-
-.viand:hover{
-  border-color:var(--sepia2);
-}
-
-.viand-name{
-  font-family:'Cormorant SC',serif;
-  font-size:.88rem;
-  color:var(--sepia);
-  margin-bottom:4px;
-}
-
-.viand-desc{
-  font-size:.76rem;
-  color:var(--ash);
-  font-style:italic;
-  line-height:1.5;
-  margin-bottom:8px;
-}
-
-.viand-price{
-  font-family:'Cormorant SC',serif;
-  font-size:.95rem;
-  color:var(--sepia);
-}
-
-/* OFFRES */
-
-.pack{
-  margin:22px 0 30px;
-  padding:18px 20px;
-  border:1px dashed rgba(212,160,23,.45);
-  border-radius:3px;
-  text-align:center;
-  background:rgba(212,160,23,.035);
-}
-
-.pack-t{
-  font-family:'Cormorant SC',serif;
-  font-size:.7rem;
-  letter-spacing:.35em;
-  color:var(--sepia);
-  margin-bottom:6px;
-}
-
-.pack-d{
-  font-size:.8rem;
-  font-style:italic;
-  color:var(--ash);
-  margin-bottom:8px;
-}
-
-.pack-p{
-  font-family:'Cormorant SC',serif;
-  font-size:1.1rem;
-  color:var(--sepia);
-}
-
-/* FOOTER */
-
-.colophon{
-  text-align:center;
-  padding:48px 0 24px;
-  border-top:1px solid var(--faint);
-  margin-top:48px;
-}
-
-.colophon-mark{
-  font-family:'UnifrakturMaguntia',serif;
-  font-size:1.5rem;
-  color:var(--sepia2);
-  display:block;
-  margin-bottom:14px;
-}
-
-.colophon p{
-  font-size:.65rem;
-  color:var(--ash);
-  line-height:2.2;
-}
-
-.colophon a{
-  color:var(--sepia2);
-  text-decoration:none;
-}
-
-::-webkit-scrollbar{
-  width:3px;
-}
-
-::-webkit-scrollbar-track{
-  background:var(--ink);
-}
-
-::-webkit-scrollbar-thumb{
-  background:var(--faint);
-  border-radius:2px;
-}
-
-@media(max-width:500px){
-  html{
-    font-size:16px;
-  }
-
-  .page{
-    padding:0 14px 70px;
-  }
-
-  .viands{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .nav-btn{
-    font-size:.58rem;
-    padding:6px 8px;
-    letter-spacing:.12em;
-  }
-
-  .tea-origin{
-    display:none;
-  }
-
-  .sig-outcomes{
-    grid-template-columns:1fr;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<div class="wax-l"></div>
-<div class="wax-r"></div>
-
-<canvas id="cvs"></canvas>
-
-<div class="page">
-
-<a
-  class="back-btn"
-  href="https://leconceptarium.github.io/morpheus.menu/index.html"
-  data-fr="Retour à l'accueil"
-  data-en="Back to home"
-  data-de="Zurück zur Startseite">
-  Retour à l'accueil
-</a>
-
-<div class="hero">
-
-  <div class="logo-wrap">
-    <img
-      src="https://leconceptarium.github.io/morpheus.menu/logo.png"
-      alt="Morpheus">
-  </div>
-
-  <div class="title-frak">Morpheus</div>
-
-  <div
-    class="hero-sub"
-    data-fr="Grimoire du Bar · Strasbourg"
-    data-en="Bar Grimoire · Strasbourg"
-    data-de="Grimoire der Bar · Straßburg">
-    Grimoire du Bar · Strasbourg
-  </div>
-
-  <div class="hero-verse">
-    <em>
-      <span
-        data-fr="« Dans le sommeil, les portes s'ouvrent.<br>Choisis ton côté. »"
-        data-en="« In sleep, the doors open.<br>Choose your side. »"
-        data-de="« Im Schlaf öffnen sich die Türen.<br>Wähle deine Seite. »">
-        « Dans le sommeil, les portes s'ouvrent.<br>
-        Choisis ton côté. »
-      </span>
-    </em>
-  </div>
-
-  <div class="lang-bar">
-    <button class="lang-btn on" onclick="setLang('fr',this)">FR</button>
-    <button class="lang-btn" onclick="setLang('en',this)">EN</button>
-    <button class="lang-btn" onclick="setLang('de',this)">DE</button>
-  </div>
-
-</div>
-
-<nav class="nav">
-
-  <button class="nav-btn on" onclick="showChap('elixirs',this)">
-    <span data-fr="Élixirs" data-en="Elixirs" data-de="Elixiere">Élixirs</span>
-  </button>
-
-  <button class="nav-btn" onclick="showChap('shooters',this)">
-    <span data-fr="Shooters" data-en="Shooters" data-de="Shooter">Shooters</span>
-  </button>
-
-  <button class="nav-btn" onclick="showChap('bieres',this)">
-    <span data-fr="Bières" data-en="Beers" data-de="Biere">Bières</span>
-  </button>
-
-  <button class="nav-btn" onclick="showChap('softs',this)">
-    <span data-fr="Softs" data-en="Softs" data-de="Softdrinks">Softs</span>
-  </button>
-
-  <button class="nav-btn" onclick="showChap('chauds',this)">
-    <span
-      data-fr="Boissons Chaudes"
-      data-en="Hot Drinks"
-      data-de="Heißgetränke">
-      Boissons Chaudes
-    </span>
-  </button>
-
-  <button class="nav-btn" onclick="showChap('thes',this)">
-    <span data-fr="Thés" data-en="Teas" data-de="Tees">Thés</span>
-  </button>
-
-  <button class="nav-btn" onclick="showChap('food',this)">
-    <span data-fr="Restauration" data-en="Food" data-de="Speisen">Restauration</span>
-  </button>
-
-</nav>
-
-<!-- ÉLIXIRS -->
-
-<div id="elixirs" class="chap on">
-
-  <div class="chap-head">
-
-    <span
-      class="chap-ornament"
-      data-fr="Chapitre Premier"
-      data-en="First Chapter"
-      data-de="Erstes Kapitel">
-      Chapitre Premier
-    </span>
-
-    <div
-      class="chap-title"
-      data-fr="Les Élixirs"
-      data-en="The Elixirs"
-      data-de="Die Elixiere">
-      Les Élixirs
-    </div>
-
-    <div class="rule">
-      <span>⁕</span>
-    </div>
-
-    <p class="chap-verse">
-      <em>
-        <span
-          data-fr="Chaque verre est un sort. Rêve ou Cauchemar — vous choisissez."
-          data-en="Each glass is a spell. Dream or Nightmare — you choose."
-          data-de="Jedes Glas ist ein Zauber. Traum oder Alptraum — du wählst.">
-          Chaque verre est un sort. Rêve ou Cauchemar — vous choisissez.
-        </span>
-      </em>
-    </p>
-
-  </div>
-
-  <!-- SORT DE MORPHEUS -->
-
-  <div class="sig-block">
-
-    <div class="sig-name">Le Sort de Morpheus</div>
-
-    <p class="sig-desc">
-      <span
-        data-fr="Lancez le dé et laissez Morpheus choisir votre sort.<br>Pair — <em>Rêve de Morpheus</em>. Impair — <em>Cauchemar de Morpheus</em>."
-        data-en="Roll the die and let Morpheus choose your fate.<br>Even — <em>Morpheus' Dream</em>. Odd — <em>Morpheus' Nightmare</em>."
-        data-de="Würfeln Sie und lassen Sie Morpheus Ihr Schicksal wählen.<br>Gerade — <em>Morpheus' Traum</em>. Ungerade — <em>Morpheus' Albtraum</em>.">
-        Lancez le dé et laissez Morpheus choisir votre sort.<br>
-        Pair — <em>Rêve de Morpheus</em>. Impair — <em>Cauchemar de Morpheus</em>.
-      </span>
-    </p>
-
-    <p class="sig-hint">
-      <span
-        data-fr="Deux créations exclusives. Une seule vous sera servie, selon le résultat du dé."
-        data-en="Two exclusive creations. Only one will be served, according to the die."
-        data-de="Zwei exklusive Kreationen. Je nach Würfelergebnis wird eine davon serviert.">
-        Deux créations exclusives. Une seule vous sera servie, selon le résultat du dé.
-      </span>
-    </p>
-
-    <div class="sig-outcomes">
-
-      <div class="sig-outcome dr">
-
-        <div class="sig-outcome-title">
-          <span
-            data-fr="Rêve de Morpheus"
-            data-en="Morpheus' Dream"
-            data-de="Morpheus' Traum">
-            Rêve de Morpheus
-          </span>
-        </div>
-
-        <div class="sig-outcome-desc">
-          <span
-            data-fr="Floral, frais et envoûtant. Ajoutez la fiole et observez l’élixir changer de couleur."
-            data-en="Floral, fresh and enchanting. Add the vial and watch the elixir change colour."
-            data-de="Blumig, frisch und bezaubernd. Geben Sie die Phiole hinzu und beobachten Sie, wie das Elixier seine Farbe verändert.">
-            Floral, frais et envoûtant. Ajoutez la fiole et observez l’élixir changer de couleur.
-          </span>
-        </div>
-
-        <div class="sig-outcome-ing">
-          Gin 4 cl ·
-          <span
-            data-fr="Sirop de lavande"
-            data-en="Lavender syrup"
-            data-de="Lavendelsirup">
-            Sirop de lavande
-          </span>
-          ·
-          <span
-            data-fr="Liqueur de litchi Soho"
-            data-en="Soho lychee liqueur"
-            data-de="Soho-Litschi-Likör">
-            Liqueur de litchi Soho
-          </span>
-          ·
-          <span
-            data-fr="Eau pétillante"
-            data-en="Sparkling water"
-            data-de="Sprudelwasser">
-            Eau pétillante
-          </span>
-          ·
-          <span
-            data-fr="Fiole de Butterfly Pea et citron"
-            data-en="Butterfly pea and lemon vial"
-            data-de="Butterfly-Pea- und Zitronenphiole">
-            Fiole de Butterfly Pea et citron
-          </span>
-        </div>
-
-      </div>
-
-      <div class="sig-outcome nm">
-
-        <div class="sig-outcome-title">
-          <span
-            data-fr="Cauchemar de Morpheus"
-            data-en="Morpheus' Nightmare"
-            data-de="Morpheus' Albtraum">
-            Cauchemar de Morpheus
-          </span>
-        </div>
-
-        <div class="sig-outcome-desc">
-          <span
-            data-fr="Fruité, épicé et brûlant. Le cauchemar laisse une trace."
-            data-en="Fruity, spicy and fiery. The nightmare leaves its mark."
-            data-de="Fruchtig, würzig und feurig. Der Albtraum hinterlässt Spuren.">
-            Fruité, épicé et brûlant. Le cauchemar laisse une trace.
-          </span>
-        </div>
-
-        <div class="sig-outcome-ing">
-          Rhum ·
-          <span
-            data-fr="Sirop de piment"
-            data-en="Chilli syrup"
-            data-de="Chilisirup">
-            Sirop de piment
-          </span>
-          ·
-          <span
-            data-fr="Jus d'orange"
-            data-en="Orange juice"
-            data-de="Orangensaft">
-            Jus d'orange
-          </span>
-          ·
-          <span
-            data-fr="Sirop de cannelle"
-            data-en="Cinnamon syrup"
-            data-de="Zimtsirup">
-            Sirop de cannelle
-          </span>
-          · Ginger beer
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="sig-price">12,90 €</div>
-
-  </div>
-
-  <!-- OFFRE SANS ALCOOL -->
-
-  <div class="pack">
-
-    <div class="pack-t">
-      <span
-        data-fr="Tous nos cocktails sont disponibles sans alcool"
-        data-en="All our cocktails are available alcohol-free"
-        data-de="Alle unsere Cocktails sind alkoholfrei erhältlich">
-        Tous nos cocktails sont disponibles sans alcool
-      </span>
-    </div>
-
-    <div class="pack-d">
-      <span
-        data-fr="Chaque recette est adaptée afin de conserver son caractère et son univers."
-        data-en="Each recipe is adapted to preserve its character and identity."
-        data-de="Jedes Rezept wird angepasst, um seinen Charakter zu bewahren.">
-        Chaque recette est adaptée afin de conserver son caractère et son univers.
-      </span>
-    </div>
-
-    <div class="pack-p">
-      <span
-        data-fr="2 € de moins que la version alcoolisée"
-        data-en="€2 less than the alcoholic version"
-        data-de="2 € günstiger als die alkoholische Variante">
-        2 € de moins que la version alcoolisée
-      </span>
-    </div>
-
-  </div>
-
-  <!-- COCKTAILS RÊVES -->
-
-  <div class
-    <!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Morpheus — Grimoire du Bar</title>
-
-<link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --ink:#0f0c14;
-  --parch:#19141f;
   --sepia:#c8a96e;
   --sepia2:#b98e4d;
   --sepia3:#76572e;
@@ -2489,7 +1232,6 @@ body::before{
     </div>
 
   </div>
-  Voici la partie 2/3, à coller directement après la partie précédente :
 
   <!-- OFFRE SANS ALCOOL -->
   <div class="pack">
@@ -2518,6 +1260,7 @@ body::before{
       </span>
     </div>
   </div>
+
   <!-- COCKTAILS RÊVES -->
   <div class="realm dr">
     <span class="realm-tag">
@@ -2619,6 +1362,7 @@ body::before{
       </span>
     </div>
   </div>
+
   <!-- COCKTAILS CAUCHEMARS -->
   <div class="realm nm">
     <span class="realm-tag">
@@ -2633,7 +1377,7 @@ body::before{
   <div class="card nm">
     <div class="card-top">
       <div class="card-left">
-        <div class="card-name">L’Insomnie</div>
+        <div class="card-name">L'Insomnie</div>
         <div class="card-desc">
           <span
             data-fr="Onctueux, intense et caféiné. Le sommeil peut attendre."
@@ -2681,6 +1425,7 @@ body::before{
       · Ginger beer
     </div>
   </div>
+
   <!-- CINQ GOÛTS -->
   <div class="split-divider">
     <span
@@ -2952,6 +1697,7 @@ body::before{
     </div>
   </div>
 </div>
+
 <!-- SHOOTERS -->
 <div id="shooters" class="chap">
   <div class="chap-head">
@@ -2992,10 +1738,10 @@ body::before{
       <div class="card-left">
         <div class="card-name">
           <span
-            data-fr="Éclat d’Aurore"
+            data-fr="Éclat d'Aurore"
             data-en="Dawn Shard"
             data-de="Morgenglanz">
-            Éclat d’Aurore
+            Éclat d'Aurore
           </span>
         </div>
         <div class="card-desc">
@@ -3044,10 +1790,10 @@ body::before{
       <div class="card-left">
         <div class="card-name">
           <span
-            data-fr="Feu de l’Enfer"
+            data-fr="Feu de l'Enfer"
             data-en="Hellfire"
             data-de="Höllenfeuer">
-            Feu de l’Enfer
+            Feu de l'Enfer
           </span>
         </div>
         <div class="card-desc">
@@ -3102,7 +1848,6 @@ body::before{
     </div>
   </div>
 </div>
-Voici la partie 3/3, à coller directement après la partie 2 :
 
 <!-- BIÈRES -->
 <div id="bieres" class="chap">
@@ -3204,6 +1949,7 @@ Voici la partie 3/3, à coller directement après la partie 2 :
     </tr>
   </table>
 </div>
+
 <!-- SOFTS -->
 <div id="softs" class="chap">
   <div class="chap-head">
@@ -3291,6 +2037,7 @@ Voici la partie 3/3, à coller directement après la partie 2 :
     </tr>
   </table>
 </div>
+
 <!-- BOISSONS CHAUDES -->
 <div id="chauds" class="chap">
   <div class="chap-head">
@@ -3454,6 +2201,7 @@ Voici la partie 3/3, à coller directement après la partie 2 :
     </tr>
   </table>
 </div>
+
 <!-- THÉS -->
 <div id="thes" class="chap">
   <div class="chap-head">
@@ -3677,6 +2425,7 @@ Voici la partie 3/3, à coller directement après la partie 2 :
     — 3,50 €
   </p>
 </div>
+
 <!-- RESTAURATION -->
 <div id="food" class="chap">
   <div class="chap-head">
@@ -3720,10 +2469,10 @@ Voici la partie 3/3, à coller directement après la partie 2 :
       </div>
       <div class="viand-desc">
         <span
-          data-fr="M&M’s, praline rose ou chocolat-praliné · servis chauds sur demande"
-          data-en="M&M’s, pink praline or chocolate-praline · served warm on request"
-          data-de="M&M’s, rosa Praline oder Schokolade-Praliné · auf Wunsch warm serviert">
-          M&M’s, praline rose ou chocolat-praliné · servis chauds sur demande
+          data-fr="M&M's, praline rose ou chocolat-praliné · servis chauds sur demande"
+          data-en="M&M's, pink praline or chocolate-praline · served warm on request"
+          data-de="M&M's, rosa Praline oder Schokolade-Praliné · auf Wunsch warm serviert">
+          M&M's, praline rose ou chocolat-praliné · servis chauds sur demande
         </span>
       </div>
       <div class="viand-price">
@@ -3746,10 +2495,10 @@ Voici la partie 3/3, à coller directement après la partie 2 :
       </div>
       <div class="viand-desc">
         <span
-          data-fr="Sans gluten · accompagné d’une boule de glace vanille"
+          data-fr="Sans gluten · accompagné d'une boule de glace vanille"
           data-en="Gluten-free · served with vanilla ice cream"
           data-de="Glutenfrei · mit Vanilleeis serviert">
-          Sans gluten · accompagné d’une boule de glace vanille
+          Sans gluten · accompagné d'une boule de glace vanille
         </span>
       </div>
       <div class="viand-price">5,20 €</div>
@@ -3758,10 +2507,10 @@ Voici la partie 3/3, à coller directement après la partie 2 :
       <div class="viand-name">Pancakes</div>
       <div class="viand-desc">
         <span
-          data-fr="Sirop d’érable · glace vanille"
+          data-fr="Sirop d'érable · glace vanille"
           data-en="Maple syrup · vanilla ice cream"
           data-de="Ahornsirup · Vanilleeis">
-          Sirop d’érable · glace vanille
+          Sirop d'érable · glace vanille
         </span>
       </div>
       <div class="viand-price">4,60 €</div>
@@ -3817,7 +2566,7 @@ Voici la partie 3/3, à coller directement après la partie 2 :
       <div class="viand-name" style="font-size:1rem;">
         <span
           data-fr="Planchette du Rêveur"
-          data-en="Dreamer’s Board"
+          data-en="Dreamer's Board"
           data-de="Träumerplatte">
           Planchette du Rêveur
         </span>
@@ -3834,6 +2583,7 @@ Voici la partie 3/3, à coller directement après la partie 2 :
     </div>
   </div>
 </div>
+
 <!-- FOOTER -->
 <div class="colophon">
   <span class="colophon-mark">Morpheus</span>
